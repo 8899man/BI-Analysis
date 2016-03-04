@@ -1,0 +1,270 @@
+<div ng-controller="DashboardSalesController" ng-init="initializeController()">
+	<div class="title-position box-shadow-1 clearfix">
+		<h1>销售仪表盘</h1>
+		<h2><a class="glyphicon glyphicon-home" ui-sref="app.dashboard"><i>首页</i></a> > 仪表盘 > 销售仪表盘</h2>
+	</div>
+
+	<div class="content">
+		<div class="content-main">
+
+			<!-- 仪表盘 - 销售 开始 -->
+			<div class="dashboard-sales clearfix" ng-show="loaded">
+				<div class="dashboard-sales-header clearfix">
+					<div class="dashboard-sales-1 fl">
+						
+						<div class="customer-header-item-outer customer-header-item-outer1">
+							<div class="customer-header-item customer-header-item1 box-shadow-1 bg-white border-radius-3 border-1 border-1-gray border-top-3">
+								<dl>
+									<dt><h2>成交金额</h2></dt>
+									<dd class="clearfix">
+										<div class="customer-header-key">昨日成交：</div>
+										<div class="customer-header-value"><b>{{dealAmount.yesterdayDeal | number}}</b>万元</div>
+									</dd>
+									<dd class="clearfix">
+										<div class="customer-header-key">本月成交：</div>
+										<div class="customer-header-value"><b>{{dealAmount.thisMonthDeal | number}}</b>亿元</div>
+									</dd>
+									<dd class="clearfix">
+										<div class="customer-header-key">本季成交：</div>
+										<div class="customer-header-value"><b>{{dealAmount.thisSeasonDeal | number}}</b>亿元</div>
+									</dd>
+									<dd class="clearfix">
+										<div class="customer-header-key">本年成交：</div>
+										<div class="customer-header-value"><b>{{dealAmount.thisYearDeal | number}}</b>亿元</div>
+									</dd>
+								</dl>
+							</div>
+						</div>
+
+
+						<div class="customer-header-item-outer customer-header-item-outer2 margin-top-30">
+							<div class="customer-header-item customer-header-item1 box-shadow-1 bg-white border-radius-3 border-1 border-1-gray border-top-3">
+								<dl>
+									<dt><h2>本月项目成交排行</h2></dt>
+									<dd class="clearfix">
+
+										<div class="dd-sort">
+											<h3>前三名</h3>
+											<div class="dd-list clearfix" ng-repeat="p in thisMonthTurnoverList.topThree">
+												<div class="dd-sort-num dd-sort-num{{p.number}}">No.{{p.number}}</div>
+												<div class="dd-list-main">
+													<div class="dd-list-l fl">{{p.name}}</div>
+													<div class="dd-list-r fr"><b>{{p.money | number}}</b>万元</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="dd-sort">
+											<h3>后三名</h3>
+											<div class="dd-list clearfix" ng-repeat="p in thisMonthTurnoverList.lastThree">
+												<div class="dd-sort-num">No.{{p.number}}</div>
+												<div class="dd-list-main">
+													<div class="dd-list-l fl">{{p.name}}</div>
+													<div class="dd-list-r fr"><b>{{p.money | number}}</b>万元</div>
+												</div>
+											</div>
+										</div>
+
+									</dd>
+								</dl>
+							</div>
+						</div>
+
+					</div>
+					<div class="dashboard-sales-2 fr">
+						
+						<div class="sales-2-header clearfix">
+							<div class="sales-2-header-l fl">
+								
+								<div class="customer-header-item-outer cjts customer-header-item-outer1">
+									<div class="customer-header-item customer-header-item1 box-shadow-1 bg-white border-radius-3 border-1 border-1-gray border-top-3">
+										<dl>
+											<dt><h2>成交套数</h2></dt>
+											<dd class="clearfix">
+												<div class="customer-header-key">本月成交套数：</div>
+												<div class="customer-header-value"><b>{{dealNumber.thisMonthDeal | number}}</b>套</div>
+											</dd>
+											<dd class="clearfix">
+												<div class="customer-header-key">本年成交套数：</div>
+												<div class="customer-header-value"><b>{{dealNumber.thisYearDeal | number}}</b>套</div>
+											</dd>
+											<dd class="clearfix">
+												<div class="customer-header-key">库存套数：</div>
+												<div class="customer-header-value"><b>{{dealNumber.stock | number}}</b>套</div>
+											</dd>
+										</dl>
+									</div>
+								</div>
+
+							</div>
+							<div class="sales-2-header-r fr">
+								
+
+								<div class="customer-header-item-outer byxmqs customer-header-item-outer2">
+									<div class="customer-header-item customer-header-item1 box-shadow-1 bg-white border-radius-3 border-1 border-1-gray border-top-3">
+										<dl>
+											<dt><h2>本月项目到访排行前三</h2></dt>
+											<dd class="clearfix">
+
+												<div class="dd-sort">
+													<div class="dd-list clearfix" ng-repeat="p in thisMonthVisitedTopThree">
+														<div class="dd-sort-num dd-sort-num{{$index+1}}">No.{{$index+1}}</div>
+														<div class="dd-list-main">
+															<div class="dd-list-l fl">{{p.name}}</div>
+															<div class="dd-list-r fr"><b>{{p.visitNumber | number}}</b>人</div>
+														</div>
+													</div>
+												</div>
+
+											</dd>
+										</dl>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+
+						<div class="customer-header-item-outer byyjrhlp customer-header-item-outer2">
+							<div class="customer-header-item customer-header-item1 box-shadow-1 bg-white border-radius-3 border-1 border-1-gray border-top-color-blue border-top-3 margin-top-30">
+								<dl>
+									<dt><h2>关键触点转化一览（住宅销售）</h2></dt>
+									<dd>
+										<div class="home-sales">
+											<div class="home-sales-main clearfix">
+												<div class="home-sales-l">
+													<h3>客户与成交</h3>
+													<div class="home-sales-l-main clearfix">
+														<div class="home-sales-table">
+															<highchart class="chart" config="chartCustomerAndDeal"></highchart>
+														</div>
+														<div class="home-sales-list">
+															<ul>
+																<li>
+																	<h4><i class="sales-f-i1"></i>到访阶段</h4>
+																	<h5>
+																		<p>{{keyContact.customerAndDeal.visitStage.persons | number}}人</p>
+																	</h5>
+																</li>
+																<li>
+																	<h4><i class="sales-f-i2"></i>认筹阶段</h4>
+																	<h5>
+																		<p>{{keyContact.customerAndDeal.planStage.persons | number}}人</p>
+																		<p class="nums">{{keyContact.customerAndDeal.planStage.houses | number}}套</p>
+																	</h5>
+																</li>
+																<li>
+																	<h4><i class="sales-f-i3"></i>认购阶段</h4>
+																	<h5>
+																		<p>{{keyContact.customerAndDeal.subscribeStage.persons | number}}人</p>
+																		<p class="nums">{{keyContact.customerAndDeal.subscribeStage.houses | number}}套</p>
+																	</h5>
+																</li>
+																<li>
+																	<h4><i class="sales-f-i4"></i>签约阶段</h4>
+																	<h5>
+																		<p>{{keyContact.customerAndDeal.signStage.persons | number}}人</p>
+																		<p class="nums">{{keyContact.customerAndDeal.signStage.houses | number}}套</p>
+																	</h5>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</div>
+												<div class="home-sales-m">
+													<h3>平均转化率</h3>
+													<div class="home-sales-transform">
+														<span class="sales-transform-1">访转筹{{keyContact.averageTrans.visitToPlan}}%</span>
+														<span class="sales-transform-2">筹转购{{keyContact.averageTrans.planToSubscribe}}%</span>
+														<span class="sales-transform-3">访转购{{keyContact.averageTrans.visitToSubscribe}}%</span>
+														<span class="sales-transform-4">购转签{{keyContact.averageTrans.SubscribeToSign}}%</span>
+														<span class="sales-transform-5">访转签{{keyContact.averageTrans.visitToSign}}%</span>
+													</div>
+												</div>
+												<div class="home-sales-r">
+													<h3>转化率周期</h3>
+													<div class="home-sales-cycle">
+														<ul>
+															<li class="clearfix">
+																<span class="cycle-1">{{keyContact.transCycle.visitToPlan}}天</span>
+															</li>
+															<li class="clearfix">
+																<span class="cycle-2">{{keyContact.transCycle.planToSubscribe}}天</span>
+																<span class="cycle-3">{{keyContact.transCycle.visitToSubscribe}}天</span>
+															</li>
+															<li class="clearfix">
+																<span class="cycle-4">{{keyContact.transCycle.SubscribeToSign}}天</span>
+																<span class="cycle-5">{{keyContact.transCycle.visitToSign}}天</span>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+											<div class="home-sales-footer">
+												<span><i class="sales-f-i1"></i>到访阶段</span>
+												<span><i class="sales-f-i2"></i>认筹阶段</span>
+												<span><i class="sales-f-i3"></i>认购阶段</span>
+												<span><i class="sales-f-i4"></i>签约阶段</span>
+											</div>
+										</div>
+									</dd>
+								</dl>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="dashboard-sales-footer margin-top-30 clearfix">
+					<div class="dashboard-sales-footer-l">
+						
+						<div class="customer-header-item-outer w100">
+							<div class="customer-header-item customer-header-item1 box-shadow-1 bg-white border-radius-3 border-1 border-1-gray border-top-color-red border-top-3">
+								<dl>
+									<dt><h2 class="text-left">本月营销趋势</h2></dt>
+									<dd class="clearfix">
+										<div class="month-sales">
+											<highchart class="chart" config="chartThisMonthSales"></highchart>
+										</div>
+									</dd>
+								</dl>
+							</div>
+						</div>
+
+					</div>
+					<div class="dashboard-sales-footer-r">
+						
+						<div class="customer-header-item-outer w100">
+							<div class="customer-header-item customer-header-item1 box-shadow-1 bg-white border-radius-3 border-1 border-1-gray border-top-3">
+								<dl>
+									<dt><h2 class="text-left">本月开盘项目</h2></dt>
+									<dd class="clearfix">
+										<div class="month-project" scroll-fix-top>
+											<div class="month-project-header scroll-header clearfix">
+												<span class="month-project-date">开盘时间</span>
+												<span class="month-project-name">项目名称</span>
+											</div>
+											<div class="month-project-main scroll-main">
+												<div class="month-project-item clearfix" ng-repeat="p in thisMonthOpened">
+													<span class="month-project-date">{{p.openTime}}</span>
+													<span class="month-project-name">{{p.projectName}}</span>
+												</div>
+											</div>
+										</div>
+									</dd>
+								</dl>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<!-- 仪表盘 - 销售 结束 -->
+
+
+
+
+
+		</div>
+	</div>
+</div>
+

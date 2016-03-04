@@ -1,0 +1,357 @@
+<div ng-controller="LabelLocalController" ng-init="initializeController()">
+	<div class="go-top-btn"></div>
+	<div class="title-position box-shadow-1 clearfix">
+		<h1>业务标签</h1>
+		<h2><a class="glyphicon glyphicon-home" ui-sref="app.dashboard"><i>首页</i></a> > 标签 > 业务标签</h2>
+	</div>
+
+	<div class="content">
+		<div class="content-main">
+			<div class="label-main box-shadow-1 border-radius-3">
+				<div class="label-title clearfix">
+					<span class="fl" ng-show="stateShow == 'list'">我的标签（{{labelList.length}}）</span>
+					<span class="fl" ng-show="stateShow == 'create'">创建标签</span>
+					<button class="btn btn-default fr" ng-class="{'active': deleteNow,'btn-primary': deleteNow}" ng-show="labelList.length>0 && stateShow == 'list'" ng-click="selectDelete()" id="btnCreate"><b ng-show="!deleteNow">选 择</b><b ng-show="deleteNow">取 消</b></button>
+					<button class="btn btn-default fr" ng-show="stateShow == 'list'" ng-click="changeShow('create')" id="btnCreate">创 建</button>
+					<button class="btn btn-default fr" ng-show="stateShow == 'create'" ng-click="changeShow('list')">返 回</button>
+				</div>
+
+
+				<div class="label-level" ng-show="stateShow == 'list'">
+					<!-- <div class="label-level-title">时效标签</div> -->
+					<div class="label-level-main">
+						<div class="container-fluid label-list-outer">
+							<div class="row">
+								<div class="no-labels" ng-show="labelList.length==0">暂时无数据</div>
+								<div class="col-xs-4 col-lg-3" ng-repeat="label in labelList">
+									<div class="label-list-inside">
+										<div class="label-list box-shadow-1">
+											<a href="javascript:;" ng-class="{'added': label.hasAddDelete}" class="label-delete" ng-show="deleteNow" ng-click="addLabelDelete(label)"><i></i><span></span></a>
+											<div class="label-list-header clearfix">
+												<span class="label-list-persons">{{label.persons}}人</span>
+												<div class="label-list-title text-ellipsis">{{label.title}}</div>
+											</div>
+											<div class="label-list-info">
+												<h3 class="text-ellipsis">标签描述</h3>
+												<h4>{{label.info}}</h4>
+												<h5><a href="javascript:;" ng-click="shoSelectedModal(label)" title="已选条件">已选条件</a></h5>
+											</div>
+											<div class="label-list-time"><h3><a href="javascript:;" title="提取数据" ng-click="getDataModal(label)"></a>更新时间：{{label.updateTime}}</h3></div>
+										</div>
+									</div>
+								</div>
+
+								<div class="clear label-delete-sure" ng-show="deleteNow"><button class="btn btn-default btn-danger" ng-show="labelList.length>0 && !hasAddedLabel" ng-click="deleteAll()">删除全部</button><button class="btn btn-default btn-danger" ng-show="labelList.length>0 && hasAddedLabel" ng-click="deleteAdded()">删除已选</button></div>
+								
+								
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="label-level label-level-un" ng-show="stateShow == 'list'">
+					<div class="label-level-title">他人标签（{{othersLabelList.length}}）</div>
+					<div class="label-level-main">
+						<div class="container-fluid label-list-outer">
+							<div class="row">
+								<div class="no-labels" ng-show="othersLabelList.length==0">暂时无数据</div>
+								<div class="col-xs-4 col-lg-3" ng-repeat="label in othersLabelList">
+									<div class="label-list-inside">
+										<div class="label-list box-shadow-1">
+											
+											<div class="label-list-header clearfix">
+												<span class="label-list-persons">{{label.persons}}人</span>
+												<div class="label-list-title text-ellipsis">{{label.title}}</div>
+											</div>
+											<div class="label-list-info">
+												<h3 class="text-ellipsis">标签描述</h3>
+												<h4>{{label.info}}</h4>
+												<h5><a href="javascript:;" ng-click="shoSelectedModal(label)" title="已选条件">已选条件</a></h5>
+											</div>
+											<div class="label-list-time"><h3><a href="javascript:;" title="提取数据" ng-click="getDataModal(label)"></a>更新时间：{{label.updateTime}}</h3></div>
+										</div>
+									</div>
+								</div>
+								
+								
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				
+
+
+				<div class="label-create" ng-show="stateShow == 'create'">
+					<form class="form-horizontal" name="createForm" novalidate>
+						<div class="form-group">
+							<label for="labelTitle" class="col-sm-2 control-label">标签名称</label>
+							<div class="control-input">
+							<input type="text" ng-model="labelTitle" class="form-control" id="labelTitle" required placeholder="请输入标签名称">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="labelInfo" class="col-sm-2 control-label">标签描述</label>
+							<div class="control-input">
+							<input type="text" ng-model="labelInfo" class="form-control" id="labelInfo" required placeholder="如：找出异地项目准营销客户">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">已选条件</label>
+							<div class="control-input">
+								<div class="selected-conditions clearfix">
+									<ul>
+										<!-- <li>
+											<span class="condition-title">性别</span>
+											<span class="condition-value">男<a href="javascript:;" class="icons-bg"></a></span>
+										</li>
+										<li>
+											<span class="condition-title">年龄</span>
+											<span class="condition-value">20-34<a href="javascript:;" class="icons-bg"></a></span>
+										</li> -->
+										<li ng-repeat="c in conditionSelected">
+											<span class="condition-title"><b ng-bind="c.showSupTitle?(c.supTitle + ' | ' + c.condition.title):c.condition.title"></b></span>
+											<span class="condition-value"><b ng-bind="getSelectedMessage(c)"></b><a href="javascript:;" class="icons-bg" ng-click="deleteSelected(c)"></a></span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<div class="conditions-list box-shadow-1 border-radius-3">
+							<div class="conditions-tabs tabs-nav">
+								<ul class="clearfix">
+									<li class="tab-nav"><a href="javascript:;">通用特征</a></li>
+									<li class="tab-nav"><a href="javascript:;">客户特征</a></li>
+									<!-- <li class="tab-nav"><a href="javascript:;">意向客户</a></li>
+									<li class="tab-nav"><a href="javascript:;">投资客户</a></li>
+									<li class="tab-nav"><a href="javascript:;">自住客户</a></li>
+									<li class="tab-nav"><a href="javascript:;">期房客户</a></li>
+									<li class="tab-nav"><a href="javascript:;">流失客户</a></li> -->
+								</ul>
+							</div>
+							<div class="conditions-main tabs-content">
+
+								<!-- 通用特征选项开始 -->
+								<div class="condition-container tab-inside clearfix">
+
+									<div class="condition-list clearfix" ng-repeat="c in conditionCommon.list">
+										<div class="condition-list-title">{{c.title}}</div>
+										<div class="condition-list-options">
+											<label class="btn btn-default" ng-class="{'active': option.checked}" ng-repeat="option in c['options']" ng-click="setSelected(conditionCommon, c, option)">{{option.name}}</label>
+										</div>
+									</div>
+
+									<!-- <div class="condition-list clearfix">
+										<div class="condition-list-title">{{sex.title}}</div>
+										<div class="condition-list-options">
+									<label class="btn btn-default" ng-class="{'active': sexModel == sexOption.value}" data-model="{{sex.model}}" data-sortTitle="{{sex.title}}" data-radio="{{sexOption.value}}" ng-repeat="sexOption in sex.options" ng-click="setSelected($event, sexOption)">{{sexOption.name}}</label>
+										</div>
+									</div> -->
+
+									
+								</div>
+								<!-- 通用特征选项结束 -->
+
+
+								<!-- 意向客户选项开始 -->
+								<div class="condition-container tab-inside clearfix">
+
+
+									<div class="clients-tab tabs-nav">
+										<ul class="clearfix">
+											<li class="tab-nav" ng-click="changeClientTab($event)"><a href="javascript:;">意向客户</a></li>
+											<li class="tab-nav" ng-click="changeClientTab($event)"><a href="javascript:;">投资客户</a></li>
+											<li class="tab-nav" ng-click="changeClientTab($event)"><a href="javascript:;">自住客户</a></li>
+											<li class="tab-nav" ng-click="changeClientTab($event)"><a href="javascript:;">期房客户</a></li>
+											<li class="tab-nav" ng-click="changeClientTab($event)"><a href="javascript:;">流失客户</a></li>
+										</ul>
+									</div>
+
+									<div class="tabs-content client-tab">
+										
+										<div class="tab-inside">
+											<div class="condition-list clearfix" ng-repeat="c in intentClient.list">
+												<div class="condition-list-title">{{c.title}}</div>
+												<div class="condition-list-options">
+													<label class="btn btn-default" ng-class="{'active': option.checked}" ng-repeat="option in c['options']" ng-click="setSelected(intentClient, c, option)">{{option.name}}</label>
+
+													<div class="condition-subs clear" ng-show="getScope(c.model + 'Subs').length>0">
+														<label class="btn btn-default" ng-class="{'active': s.checked}" ng-repeat="s in getScope(c.model + 'Subs')" ng-click="setSelectedSub(intentClient, c, s, true)">{{s.name}}</label>
+													</div>
+
+												</div>
+											</div>
+										</div>
+
+										<div class="tab-inside">
+											<div class="condition-list clearfix" ng-repeat="c in investClient.list">
+												<div class="condition-list-title">{{c.title}}</div>
+												<div class="condition-list-options">
+													
+													<label class="btn btn-default" ng-class="{'active': option.checked}" ng-repeat="option in c['options']" ng-click="setSelected(investClient, c, option)">{{option.name}}</label>
+
+													<div class="condition-subs clear" ng-show="getScope(c.model + 'Subs').length>0">
+														<label class="btn btn-default" ng-class="{'active': s.checked}" ng-repeat="s in getScope(c.model + 'Subs')" ng-click="setSelectedSub(investClient, c, s, true)">{{s.name}}</label>
+													</div>
+
+												</div>
+											</div>
+										</div>
+
+										<div class="tab-inside">
+											<div class="condition-list clearfix" ng-repeat="c in selfLiveClient.list">
+												<div class="condition-list-title">{{c.title}}</div>
+												<div class="condition-list-options">
+
+													<label class="btn btn-default" ng-class="{'active': option.checked}" ng-repeat="option in c['options']" ng-click="setSelected(selfLiveClient, c, option)">{{option.name}}</label>
+
+													<div class="condition-subs clear" ng-show="getScope(c.model + 'Subs').length>0">
+														<label class="btn btn-default" ng-class="{'active': s.checked}" ng-repeat="s in getScope(c.model + 'Subs')" ng-click="setSelectedSub(selfLiveClient, c, s, true)">{{s.name}}</label>
+													</div>
+
+												</div>
+											</div>
+										</div>
+
+										<div class="tab-inside">
+											<div class="condition-list clearfix" ng-repeat="c in toLiveClient.list">
+												<div class="condition-list-title">{{c.title}}</div>
+												<div class="condition-list-options">
+
+													<label class="btn btn-default" ng-class="{'active': option.checked}" ng-repeat="option in c['options']" ng-click="setSelected(toLiveClient, c, option)">{{option.name}}</label>
+
+													<div class="condition-subs clear" ng-show="getScope(c.model + 'Subs').length>0">
+														<label class="btn btn-default" ng-class="{'active': s.checked}" ng-repeat="s in getScope(c.model + 'Subs')" ng-click="setSelectedSub(toLiveClient, c, s, true)">{{s.name}}</label>
+													</div>
+
+												</div>
+											</div>
+										</div>
+
+										<div class="tab-inside">
+											<div class="condition-list clearfix" ng-repeat="c in loseClient.list">
+												<div class="condition-list-title">{{c.title}}</div>
+												<div class="condition-list-options">
+
+													<label class="btn btn-default" ng-class="{'active': option.checked}" ng-repeat="option in c['options']" ng-click="setSelected(loseClient, c, option)">{{option.name}}</label>
+
+													<div class="condition-subs clear" ng-show="getScope(c.model + 'Subs').length>0">
+														<label class="btn btn-default" ng-class="{'active': s.checked}" ng-repeat="s in getScope(c.model + 'Subs')" ng-click="setSelectedSub(loseClient, c, s, true)">{{s.name}}</label>
+													</div>
+
+													
+
+												</div>
+											</div>
+										</div>
+
+									</div>
+
+									
+								</div>
+								<!-- 意向客户选项结束 -->
+
+
+
+
+
+
+
+
+							</div>
+						</div>
+						<div class="create-label-btn">
+							<a class="btn btn-primary" ng-click="save()">提交</a>
+							<a class="btn btn-default" ng-click="reset()">重置</a>
+						</div>
+					</form>
+				</div>
+
+
+
+			</div>
+
+		</div>
+	</div>
+
+
+
+	<script type="text/ng-template" id="showSelectedModal.html" ng-controller="LabelLocalController">
+        <div>
+            <div class="modal-header create-label-header">
+                <h3 class="modal-title">已选条件 - {{labelTitle}}</h3>
+                <button type="button" class="window_closeBtn close" ng-click="cancel()" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body label-show-list">
+                <div class="selected-conditions clearfix">
+					<ul>
+						<li ng-repeat="condition in labelsSelected" data-modelName="{{condition.modelName}}" data-value="{{condition.optionValue}}">
+							<span class="condition-title">{{condition.sortTitle}}</span>
+							<span class="condition-value">{{condition.optionName}}</span>
+						</li>
+						<li class="no-border" ng-show="labelsSelected.length <= 0">暂无选中条件</li>
+					</ul>
+				</div>
+            </div>
+        </div>
+    </script>
+
+
+
+    <script type="text/ng-template" id="getDataModal.html" ng-controller="LabelLocalController">
+        <div>
+            <div class="modal-header create-label-header">
+                <h3 class="modal-title">提取数据 - {{labelTitle}}</h3>
+                <button type="button" class="window_closeBtn close" ng-click="cancel()" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body label-show-list">
+                <div class="get-data-modal">
+                	<div class="get-data-modal-header clearfix">
+                		<label><input type="checkbox" ng-model="dataModalName"/>姓名</label>
+                		<label><input type="checkbox" ng-model="dataModalTel"/>手机号</label>
+                		<label><input type="checkbox" ng-model="dataModalEmail"/>邮箱</label>
+                		<label><input type="checkbox" ng-model="dataModalAddress"/>住址</label>
+                	</div>
+                	<div class="get-data-modal-main">
+                		<h3>预览</h3>
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th class="text-center" width="8%">序号</th>
+									<th width="92%" ng-show="!dataModalName && !dataModalTel && !dataModalEmail && !dataModalAddress"></th>
+									<th class="text-center" ng-style="{'width':1/((dataModalName?1:0) + (dataModalTel?1:0) + (dataModalEmail?1:0) + (dataModalAddress?1:0))*92 + '%'  }" ng-show="dataModalName">姓名</th>
+									<th class="text-center" ng-style="{'width':1/((dataModalName?1:0) + (dataModalTel?1:0) + (dataModalEmail?1:0) + (dataModalAddress?1:0))*92 + '%'  }" ng-show="dataModalTel">手机号</th>
+									<th class="text-center" ng-style="{'width':1/((dataModalName?1:0) + (dataModalTel?1:0) + (dataModalEmail?1:0) + (dataModalAddress?1:0))*92 + '%'  }" ng-show="dataModalEmail">邮箱</th>
+									<th class="text-center" ng-style="{'width':1/((dataModalName?1:0) + (dataModalTel?1:0) + (dataModalEmail?1:0) + (dataModalAddress?1:0))*92 + '%'  }" ng-show="dataModalAddress">住址</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-show="persons.length==0">
+									<td colspan="5" class="text-center" style="padding-top:15px; padding-bottom:15px;">暂无匹配到的数据</td>
+								</tr>
+								<tr ng-repeat="p in persons">
+									<td scope="row" class="text-center">{{$index+1}}</td>
+									<td width="92%" ng-show="!dataModalName && !dataModalTel && !dataModalEmail && !dataModalAddress"></td>
+									<td class="text-center" ng-show="dataModalName">{{p.name}}</td>
+									<td class="text-center" ng-show="dataModalTel">{{p.tel}}</td>
+									<td class="text-center" ng-show="dataModalEmail">{{p.email}}</td>
+									<td class="text-center" ng-show="dataModalAddress">{{p.address}}</td>
+								</tr>
+							</tbody>
+						</table>
+                	</div>
+                	<div class="get-data-modal-footer">
+                		<a href="javascript:;" class="btn btn-primary" ng-click="ok(labelId, dataModalName, dataModalTel, dataModalEmail, dataModalAddress)">提取</a>
+                		<a href="javascript:;" class="btn btn-default" ng-click="cancel()">取消</a>
+                	</div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+
+</div>
+

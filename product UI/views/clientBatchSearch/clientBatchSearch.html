@@ -1,0 +1,396 @@
+<div ng-controller="ClientBatchSearchController" ng-init="initializeController()">
+	<div class="title-position box-shadow-1 clearfix">
+		<h1>批量查询</h1>
+		<h2><a class="glyphicon glyphicon-home" ui-sref="app.dashboard"><i>首页</i></a> > 客户 > 批量查询</h2>
+	</div>
+
+	<div class="content">
+		<div class="content-main">
+			<div class="client-search-type">
+				<select class="form-control" ng-model="clientSearchType" ng-change="changeType()">
+					<option value="1">按组织架构查询</option>
+					<option value="2">导入号码查询</option>
+				</select>
+			</div>
+			<div class="client-search-header client-batch-search-header box-shadow-1 border-radius-2">
+				
+				<ul class="clearfix" ng-show="clientSearchType==1">
+					<li class="group">
+						<div class="client-search-header-title">组织架构</div>
+						<div class="client-search-header-input">
+							<select name="area" id="area" class="form-control" ng-model="area" ng-options="a.name for a in areas" ng-change="changeArea()">
+								<option value="">集团</option>
+							</select>
+							<select name="city" id="city" class="form-control" ng-model="city" ng-show="area.child" ng-options="c.name for c in area.child" ng-change="changeCity()">
+								<option value="">所有城市</option>
+							</select>
+							<select name="project" id="project" class="form-control" ng-model="project" ng-show="city.child"  ng-options="p.name for p in city.child">
+								<option value="">所有项目</option>
+							</select>
+						</div>
+					</li>
+					<li>
+						<div class="client-search-header-title">所属业态</div>
+						<div class="client-search-header-input">
+							<select name="belongsFormat" id="belongsFormat" class="form-control no-margin" ng-model="formatChecked" ng-options="f.title for f in belongsFormat">
+								<option value="">不限</option>
+							</select>
+						</div>
+					</li>
+					<li>
+						<div class="client-search-header-title">创建时间</div>
+						<div class="client-search-header-input">
+							<input start-date-ymd type="text" class="form-control no-margin w100" ng-model="startDate">
+							<b>~</b>
+							<input end-date-ymd type="text" class="form-control no-margin w100" ng-model="endDate">	
+						</div>
+					</li>
+					<li class="no-margin ">
+						<div class="client-search-header-btn"><a ng-click="search()" href="javascript:;" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> 查询</a></div>					
+					</li>
+				</ul>
+
+				<div class="search-file-outer clearfix" ng-show="clientSearchType==2">
+					<!-- <div class="search-file-btn">
+						<a href="javascript:;" class="btn btn-default">浏览</a>
+						<a href="javascript:;" class="btn btn-default">导入文件</a>
+						<a href="javascript:;" class="btn btn-default">查询</a>
+					</div>
+					<div class="search-file-path">
+						<input type="file" ng-model="file" class="form-control">
+						file.name{{file.name}}
+					</div> -->
+
+					<div class="clearfix">
+
+						<div class="search-file-btn">
+							<a href="javascript:;" class="btn btn-danger" ng-click="importFile()" ng-show="!imported"><span class="glyphicon glyphicon-log-in"></span> 导入文件</a>
+							<a href="javascript:;"  ng-click="search()" class="btn btn-primary" ng-show="imported"><span class="glyphicon glyphicon-search"></span> 查询</a>
+						</div>
+
+
+						<!-- <div class="button" ngf-select ng-model="file" name="file" ngf-max-size="20MB" ngf-min-height="100" ngf-change="test($files)">Select</div> -->
+
+
+						<div class="search-file-path"  ngf-select ng-model="file"  ngf-change="fileChange($files)">
+							<input type="text" ng-model="fileInfo.name" class="form-control" ng-readonly="true">
+							<div class="search-file-path-btn">
+								<a href="javascript:;" class="btn btn-default">浏览</a>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="search-file-tip">* 请将手机号码在excel表的第一列填写，并导入，注意一次最多导入5,000个手机号码。</div>
+
+					
+				</div>
+
+			</div>
+
+
+			<div class="client-search-outer" ng-show="detailsLoaded">
+
+				<div class="search-file-num" ng-show="loadedByFile">
+					<p class="num1">您共导入<b>{{5000 | number}}</b>个手机号码，成功匹配<b>{{4000 | number}}</b>个客户。</p>
+					<p>在匹配不成功的<i>{{1000 | number}}</i>个客户中，格式错误<i>{{420 | number}}</i>个，无权限查看<i>{{500 | number}}</i>个。</p>
+				</div>
+				
+
+				<div class="client-search-nums bg-white margin-top-35 box-shadow-1 border-radius-2 clearfix">
+					<div class="client-search-nums-all">
+						<div class="client-search-nums-content">
+							<h3>全部</h3>
+							<h4>{{1737064 | number}}</h4>
+						</div>
+					</div>
+					<div class="client-search-nums-others">
+						<div class="client-search-nums-others-row1">
+							<div class="client-search-nums-info client-search-nums-info-1">
+								<div class="client-search-nums-content">
+									<h3>到访</h3>
+									<h4>{{70867 | number}}</h4>
+								</div>
+							</div>
+							<div class="client-search-nums-info client-search-nums-info-2">
+								<div class="client-search-nums-content">
+									<h3>认筹</h3>
+									<h4>{{20161 | number}}</h4>
+								</div>
+							</div>
+							<div class="client-search-nums-info client-search-nums-info-3">
+								<div class="client-search-nums-content">
+									<h3>认购</h3>
+									<h4>{{90161 | number}}</h4>
+								</div>
+							</div>
+						</div>
+						<div class="client-search-nums-others-row2">
+							<div class="client-search-nums-info client-search-nums-info-1">
+								<div class="client-search-nums-content">
+									<h3>签约</h3>
+									<h4>{{13161 | number}}</h4>
+								</div>
+							</div>
+							<div class="client-search-nums-info client-search-nums-info-2">
+								<div class="client-search-nums-content">
+									<h3>入住</h3>
+									<h4>{{10867 | number}}</h4>
+								</div>
+							</div>
+							<div class="client-search-nums-info client-search-nums-info-3">
+								<div class="client-search-nums-content">
+									<h3>租赁</h3>
+									<h4>{{90161 | number}}</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="client-search-info-outer margin-top-40">
+					<div class="client-search-info-row client-search-info-row1 clearfix">
+						<div class="client-search-info client-search-info-1">
+							<div class="client-search-info-details bg-white border-1 border-1-gray box-shadow-1 border-radius-2">
+								<h2>性别</h2>
+								<div class="client-search-info-content client-search-info-sex">
+
+									<div class="client-search-info-sex-{{s.type}}" ng-repeat="s in sexList">
+										<div class="client-search-info-sex-item">
+											<span class="item-bg"></span>
+											<span class="item-percent"></span>
+											<span class="item-text" ng-style="{bottom:s.percent+2+'%'}">{{s.percent}}%</span>
+										</div>
+									</div>
+									
+
+									<!-- <div class="client-search-info-sex-male">
+										<div class="client-search-info-sex-item">
+											<span class="item-bg"></span>
+											<span class="item-percent"></span>
+											<span class="item-text">80%</span>
+										</div>
+									</div>
+									
+									<div class="client-search-info-sex-unknow">
+										<div class="client-search-info-sex-item">
+											<span class="item-bg"></span>
+											<span class="item-percent"></span>
+											<span class="item-text" style="bottom:7%">5%</span>
+										</div>
+									</div>
+									
+									<div class="client-search-info-sex-female">
+										<div class="client-search-info-sex-item">
+											<span class="item-bg"></span>
+											<span class="item-percent"></span>
+											<span class="item-text" style="bottom:17%">15%</span>
+										</div>
+									</div> -->
+
+
+
+
+								</div>
+							</div>
+						</div>
+						<div class="client-search-info client-search-info-2">
+							<div class="client-search-info-details bg-white border-1 border-1-gray box-shadow-1 border-radius-2">
+								<h2>婚姻状况</h2>
+								<div class="client-search-info-content">
+
+									<div class="client-search-percent" bg-color="['#9677df','#33aedc','#4687df', '#852c9a','#ffb849','#3cc052']" progress-data="marryState" percent-progress></div>
+
+									<!-- <div class="client-search-percent">
+										<div class="client-search-percent-item" style="left:0; width:10%;">
+											<span class="percent-item-loading">未知</span>
+											<span class="percent-item-num">10%</span>
+										</div>
+										<div class="client-search-percent-item" style="left:10%; width:10%;">
+											<span class="percent-item-loading">未婚</span>
+											<span class="percent-item-num">10%</span>
+										</div>
+										<div class="client-search-percent-item" style="left:20%; width:80%;">
+											<span class="percent-item-loading">已婚</span>
+											<span class="percent-item-num">80%</span>
+										</div>
+									</div> -->
+
+
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="client-search-info-row client-search-info-row2 clearfix">
+						<div class="client-search-info client-search-info-1">
+							<div class="client-search-info-details bg-white border-1 border-1-gray box-shadow-1 border-radius-2">
+								<h2>客户类型</h2>
+								<div class="client-search-info-content">
+									<div class="client-search-percent" bg-color="['#852c9a','#ffb849','#3cc052', '#9677df','#33aedc','#4687df']" progress-data="customerType" percent-progress></div>
+								</div>
+							</div>
+						</div>
+						<div class="client-search-info client-search-info-2">
+							<div class="client-search-info-details bg-white border-1 border-1-gray box-shadow-1 border-radius-2">
+								<h2>年龄分布</h2>
+								<div class="client-search-info-content">
+									<div class="age-scatter">
+										<ul class="clearfix">
+											<li ng-repeat="age in ageList" ng-class="{'age-scatter-first': $index==0, 'age-scatter-last': $index==ageList.length-1}">
+												<div class="age-scatter-info">
+													<span class="age-scatter-title age-scatter-title-{{$index+1}}">{{age.title}}</span>
+													<span class="age-scatter-num">{{age.percent}}%</span>
+												</div>
+											</li>
+											<!-- <li class="age-scatter-first">
+												<div class="age-scatter-info">
+													<span class="age-scatter-title age-scatter-title-1"><=20</span>
+													<span class="age-scatter-num">3%</span>
+												</div>
+											</li>
+											<li>
+												<div class="age-scatter-info">
+													<span class="age-scatter-title age-scatter-title-2">21-34</span>
+													<span class="age-scatter-num">22%</span>
+												</div>
+											</li>
+											<li>
+												<div class="age-scatter-info">
+													<span class="age-scatter-title age-scatter-title-3">35-44</span>
+													<span class="age-scatter-num">51%</span>
+												</div>
+											</li>
+											<li>
+												<div class="age-scatter-info">
+													<span class="age-scatter-title age-scatter-title-4">45-54</span>
+													<span class="age-scatter-num">17%</span>
+												</div>
+											</li>
+											<li>
+												<div class="age-scatter-info">
+													<span class="age-scatter-title age-scatter-title-5">55-64</span>
+													<span class="age-scatter-num">4%</span>
+												</div>
+											</li>
+											<li>
+												<div class="age-scatter-info">
+													<span class="age-scatter-title age-scatter-title-6">>=65</span>
+													<span class="age-scatter-num">1%</span>
+												</div>
+											</li>
+											<li class="age-scatter-last">
+												<div class="age-scatter-info">
+													<span class="age-scatter-title age-scatter-title-7">未知</span>
+													<span class="age-scatter-num">2%</span>
+												</div>
+											</li> -->
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="client-search-table bg-white margin-top-20 box-shadow-1">
+					<h2 class="clearfix">
+						<span class="client-search-table-result fl">共查询到<b>{{TotalRows | number}}</b>条“普通个人”客户数据</span>
+						<span class="client-search-table-others fr">
+							<select name="pageNum" id="pageNum" class="form-control no-margin" ng-model="PageSize" ng-change="pageChanged()">
+								<option value="10">显示10条</option>
+								<option value="20">显示20条</option>
+								<option value="50">显示50条</option>
+							</select>
+							<a href="javascript:;" class="export-btn">导出</a>
+						</span>
+					</h2>
+					<h3 class="box-shadow-1 clearfix">
+						<label><input type="checkbox" ng-model="nameChecked">姓名</label>
+						<label><input type="checkbox" ng-model="sexChecked">性别</label>
+						<label><input type="checkbox" ng-model="telChecked">联系电话</label>
+						<label><input type="checkbox" ng-model="certificatesNumberChecked">证件号码</label>
+						<label><input type="checkbox" ng-model="ageGroupChecked">年龄段</label>
+						<label><input type="checkbox" ng-model="createTimeChecked">创建时间</label>
+						<label><input type="checkbox" ng-model="visitingTimeChecked">到访时间</label>
+						<label><input type="checkbox" ng-model="subscriptionTimeChecked">认购时间</label>
+						<label><input type="checkbox" ng-model="signingTimeChecked">签约时间</label>
+					</h3>
+					<div class="client-search-table-main">
+						<div class="table-responsive">
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th width="5%">序号</th>
+										<th width="8%" ng-show="nameChecked">姓名</th>
+										<th width="5%" ng-show="sexChecked">性别</th>
+										<th width="10%" ng-show="telChecked">联系电话</th>
+										<th width="16%" ng-show="certificatesNumberChecked">证件号码</th>
+										<th width="8%" ng-show="ageGroupChecked">年龄段</th>
+										<th width="12%" ng-show="createTimeChecked">创建时间</th>
+										<th width="12%" ng-show="visitingTimeChecked">到访时间</th>
+										<th width="12%" ng-show="subscriptionTimeChecked">认购时间</th>
+										<th width="12%" ng-show="signingTimeChecked">签约时间</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="customer in customerList">
+										<td>{{$index+1}}</td>
+										<td ng-show="nameChecked"><a ui-sref="app.client.details({'clientId': customer.id})">{{customer.name}}</a></td>
+										<td ng-show="sexChecked">{{customer.sex}}</td>
+										<td ng-show="telChecked">{{customer.tel}}</td>
+										<td ng-show="certificatesNumberChecked">{{customer.certificatesNumber}}</td>
+										<td ng-show="ageGroupChecked">{{customer.ageGroup}}</td>
+										<td ng-show="createTimeChecked">{{customer.createTime}}</td>
+										<td ng-show="visitingTimeChecked">{{customer.visitingTime}}</td>
+										<td ng-show="subscriptionTimeChecked">{{customer.subscriptionTime}}</td>
+										<td ng-show="signingTimeChecked">{{customer.signingTime}}</td>
+										
+									</tr>
+									<!-- <tr>
+										<td>1</td>
+										<td>GD0023</td>
+										<td><a href="javascript:;">张*</a></td>
+										<td>女</td>
+										<td>135****0001</td>
+										<td>36302362322012****</td>
+										<td>20-34</td>
+										<td>1个</td>
+										<td>小太阳家庭</td>
+										<td>博士</td>
+										<td>老客户推荐</td>
+										<td>南山区</td>
+										<td>龙华新区</td>
+										<td>银行</td>
+										<td><a href="javascript:;">鼎业花园</a></td>
+										<td><a href="javascript:;">陈玲玲</a></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td>有效</td>
+										<td>2014-11-02</td>
+										<td>admin</td>
+									</tr> -->
+								</tbody>
+							</table>
+						</div>
+
+						<div class="project-page clearfix">
+					        <pagination max-size="16" rotate="false" boundary-links="true" total-items="TotalRows" items-per-page="PageSize"
+					            ng-change="pageChanged()" ng-model="currentPage" class="pagination-default"
+					            previous-text="上一页" next-text="下一页" first-text="首页" last-text="末页" style="margin: 0; display: block;"></pagination>
+						</div>
+						
+					</div>
+				</div>
+
+			</div>
+
+			<img src="images/client-banner.png" alt="" class="client-banner" ng-hide="detailsLoaded">
+
+		</div>
+	</div>
+</div>
+

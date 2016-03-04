@@ -1,0 +1,165 @@
+<div ng-controller="DashboardCustomerController" ng-init="initializeController()">
+	<div class="title-position box-shadow-1 clearfix">
+		<h1>客服/物业仪表盘</h1>
+		<h2><a class="glyphicon glyphicon-home" ui-sref="app.dashboard"><i>首页</i></a> > 仪表盘 > 客服/物业仪表盘</h2>
+	</div>
+
+	<div class="content">
+		<div class="content-main">
+
+			
+
+			<!-- 仪表盘 - 客服/物业 开始 -->
+			<div class="dashboard-customer" ng-show="loaded">
+				<div class="customer-header clearfix">
+					
+					<div class="customer-header-item-outer customer-header-item-outer1">
+						<div class="customer-header-item customer-header-item1 box-shadow-1 bg-white border-radius-3 border-1 border-1-gray border-top-3">
+							<dl>
+								<dt><h2>业主</h2></dt>
+								<dd class="clearfix">
+									<div class="customer-header-key">昨日新增：</div>
+									<div class="customer-header-value"><b>{{owner.yesterdayAdded | number}}</b></div>
+								</dd>
+								<dd class="clearfix">
+									<div class="customer-header-key">本月新增：</div>
+									<div class="customer-header-value"><b>{{owner.thisMonthAdded | number}}</b></div>
+								</dd>
+								<dd class="clearfix">
+									<div class="customer-header-key">累计总量：</div>
+									<div class="customer-header-value"><b class="text-blue">{{owner.totalAmount | number}}</b></div>
+								</dd>
+							</dl>
+						</div>
+					</div>
+
+					<div class="customer-header-item-outer customer-header-item-outer2">
+						<div class="customer-header-item customer-header-item1 box-shadow-1 bg-white border-radius-3 border-1 border-1-gray border-top-3">
+							<dl>
+								<dt><h2>投诉</h2></dt>
+								<dd class="clearfix">
+									<div class="customer-header-key">昨日投诉：</div>
+									<div class="customer-header-value"><b class="padding-right-10">{{complaint.yesterdayComplaint | number}}</b>单</div>
+								</dd>
+								<dd class="clearfix">
+									<div class="customer-header-key">待解决单数：</div>
+									<div class="customer-header-value"><b class="padding-right-10">{{complaint.toBeSolved | number}}</b>单</div>
+								</dd>
+								<dd class="clearfix">
+									<div class="customer-header-key key-specile">投诉受理-完成平均周期：</div>
+									<div class="customer-header-value value-specile"><b class="padding-right-10">{{complaint.averageCycle | number}}</b>天</div>
+								</dd>
+							</dl>
+						</div>
+					</div>
+
+
+					<div class="customer-header-item-outer customer-header-item-outer3">
+						<div class="customer-header-item customer-header-item1 box-shadow-1 bg-white border-radius-3 border-1 border-1-gray border-top-3">
+							<dl>
+								<dt><h2>报修</h2></dt>
+								<dd class="clearfix">
+									<div class="customer-header-key">昨日投诉：</div>
+									<div class="customer-header-value"><b class="padding-right-10">{{repair.yesterdayComplaint | number}}</b>单</div>
+								</dd>
+								<dd class="clearfix">
+									<div class="customer-header-key">待解决单数：</div>
+									<div class="customer-header-value"><b class="padding-right-10">{{repair.toBeSolved | number}}</b>单</div>
+								</dd>
+								<dd class="clearfix">
+									<div class="customer-header-key key-specile">报修受理-完成平均周期：</div>
+									<div class="customer-header-value value-specile"><b class="padding-right-10">{{repair.averageCycle | number}}</b>天</div>
+								</dd>
+							</dl>
+						</div>
+					</div>
+
+
+
+				</div>
+
+				
+				<div class="customer-header customer-main clearfix margin-top-30">
+					
+					<div class="customer-header-item-outer customer-header-item-outer1">
+						<div class="customer-header-item customer-header-item1 box-shadow-1 bg-white border-radius-3 border-1 border-1-gray border-top-3">
+							<dl>
+								<dt><h2>各类型业主比例</h2></dt>
+								<dd class="clearfix">
+									<div class="type-scale">
+										<ul>
+											<li class="clearfix" ng-repeat="type in ownersAllTypes">
+												<div class="type-scale-title">{{type.name}}：</div>
+												<div class="type-scale-num">{{type.number | number}}</div>
+												<div class="type-scale-percent"><span>{{type.percent}}%</span></div>
+											</li>
+										</ul>
+									</div>
+								</dd>
+							</dl>
+						</div>
+					</div>
+
+					<div class="customer-header-item-outer customer-header-item-outer2">
+						<div class="customer-header-item customer-header-item1 box-shadow-1 bg-white border-radius-3 border-1 border-1-gray border-top-color-blue border-top-3">
+							<dl>
+								<dt><h2>本月预计入伙楼盘</h2></dt>
+								<dd>
+									
+									<div class="rhlp-outer" scroll-fix-top>
+										<div class="rhlp rhlp-header scroll-header clearfix">
+											<div class="rhlp-01">序号</div>
+											<div class="rhlp-02">项目名称</div>
+											<div class="rhlp-03">预计入伙时间</div>
+											<div class="rhlp-04">入住范围</div>
+											<div class="rhlp-05">住户数</div>
+										</div>
+										<div class="rhlp-main scroll-main">
+											<div class="rhlp clearfix" ng-repeat="build in thisMonthBuildings">
+												<div class="rhlp-01">{{$index+1}}</div>
+												<div class="rhlp-02">{{build.name}}</div>
+												<div class="rhlp-03">{{build.time}}</div>
+												<div class="rhlp-04">{{build.range}}</div>
+												<div class="rhlp-05">{{build.householdNumber | number}}</div>
+											</div>
+										</div>
+									</div>
+								</dd>
+							</dl>
+						</div>
+					</div>
+
+				</div>
+
+
+
+				<div class="customer-header customer-footer clearfix margin-top-30">
+					
+					<div class="customer-header-item-outer">
+						<div class="customer-header-item customer-header-item1 box-shadow-1 bg-white border-radius-3 border-1 border-1-gray border-top-3 border-top-color-red">
+							<dl>
+								<dt><h2>本月投诉、报修情况概览</h2></dt>
+								<dd>
+									<div class="households">
+										<highchart class="chart" config="chartThisMonthReport"></highchart>
+									</div>
+								</dd>
+							</dl>
+						</div>
+					</div>
+
+				</div>
+
+
+			</div>
+			<!-- 仪表盘 - 客服/物业 结束 -->
+
+
+			
+
+
+
+		</div>
+	</div>
+</div>
+

@@ -1,0 +1,93 @@
+{
+	"areas": [
+		{
+			"title": "集团",
+			"value": "1",
+			"subs": [
+				{
+					"title": "不限",
+					"value": "-1"
+				},
+				{
+					"title": "华东区域",
+					"value": "11"
+				},
+				{
+					"title": "华中区域",
+					"value": "12"
+				},
+				{
+					"title": "华南区域",
+					"value": "13"
+				}
+			]
+		},
+		{
+			"title": "华东区域",
+			"value": "11",
+			"subs": [
+				{
+					"title": "不限",
+					"value": "-1"
+				},
+				{
+					"title": "上海市",
+					"value": "111"
+				},
+				{
+					"title": "杭州市",
+					"value": "112"
+				},
+				{
+					"title": "苏州市",
+					"value": "113"
+				}
+			]
+		},
+		{
+			"title": "华中区域",
+			"value": "12",
+			"subs": [
+				{
+					"title": "不限",
+					"value": "-1"
+				},
+				{
+					"title": "郑州市",
+					"value": "121"
+				},
+				{
+					"title": "长沙市",
+					"value": "122"
+				},
+				{
+					"title": "武汉市",
+					"value": "123"
+				}
+			]
+		},
+		{
+			"title": "华南区域",
+			"value": "13",
+			"subs": [
+				{
+					"title": "不限",
+					"value": "-1"
+				},
+				{
+					"title": "深圳市",
+					"value": "131"
+				},
+				{
+					"title": "广州市",
+					"value": "132"
+				},
+				{
+					"title": "佛山市",
+					"value": "133"
+				}
+			]
+		}
+	],
+	"earliestDate": "2015-11-12"
+}

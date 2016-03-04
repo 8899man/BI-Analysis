@@ -1,0 +1,107 @@
+<div ng-controller="TrunoverProductController" ng-init="initializeController()">
+	<div class="title-position box-shadow-1 clearfix">
+		<h1>报表</h1>
+		<h2><a class="glyphicon glyphicon-home" ui-sref="app.dashboard"><i>首页</i></a> > 报表 > 产品/项目 > 成交产品类型分析</h2>
+	</div>
+
+	<div class="content">
+		<div class="content-main">
+			<div class="border-1 border-1-gray box-shadow-1 bg-white owner-type-statistics">
+				<div class="border-left-3 report-title"><h2>成交产品类型分析</h2></div>
+				<div class="report-search clearfix" ng-class="{'box-shadow-1': searchDataLoaded}">
+					<form action="" class="form-inline">
+						<div class="report-search-area">
+							<ul>
+								<li class="li-text no-margin">组织架构：</li>
+								<li ng-class="{error: error.area}">
+									<select name="" id="" class="form-control" ng-model="areaSelected" ng-options="area.title for area in areas" ng-change="changeArea()">
+										<option value="">请选择区域</option>
+										<!-- <option value="1">集团</option>
+										<option value="2">华东区域</option>
+										<option value="3">华中区域</option>
+										<option value="4">华南区域</option> -->
+									</select>
+								</li>
+								<li class="report-search-area-city" ng-class="{error: error.city}">
+									<select name="" id="" class="form-control" ng-model="citySelected" ng-options="city.title for city in areaSelected.subs" ng-change="changeCity()">
+										<option value="">请选择城市</option>
+										<!-- <option value="1">不限</option>
+										<option value="2">深圳市</option>
+										<option value="3">广州市</option>
+										<option value="4">佛山市</option> -->
+									</select>
+								</li>
+							</ul>
+						</div>
+						<div class="report-time-select" is-time-select earliest-date="earliestDate" newest-date="newestDate" start-date="startDate" end-date="endDate" select-radio="selectRadio" yesterday="yesterday">
+							<!-- <h3 class="fl">时间：</h3>
+							<div class="report-time-select-radio btn-group fl">
+								<label class="btn" ng-class="{'btn-default':selectRadio!='日报','btn-danger':selectRadio=='日报'}" ng-model="selectRadio" btn-radio="'日报'">日报</label>
+								<label class="btn" ng-class="{'btn-default':selectRadio!='周报','btn-danger':selectRadio=='周报'}" ng-model="selectRadio" btn-radio="'周报'">周报</label>
+								<label class="btn" ng-class="{'btn-default':selectRadio!='月报','btn-danger':selectRadio=='月报'}" ng-model="selectRadio" btn-radio="'月报'">月报</label>
+								<label class="btn" ng-class="{'btn-default':selectRadio!='总计','btn-danger':selectRadio=='总计'}" ng-model="selectRadio" btn-radio="'总计'">总计</label>
+							</div>
+							<div class="report-time-select-date fl">
+								<input is-date date-time="startTime" type="text" class="start-time data-select form-control" ng-model="dateYM">
+								<span>-</span>
+								<input is-date date-time="endTime" type="text" class="end-time data-select form-control" ng-model="dateYM">
+							</div> -->
+						</div>
+						<div class="report-search-others">
+							<!-- <p>selectRadio:{{selectRadio}}</p>
+							<p>earliestDate:{{earliestDate}}</p>
+							<p>newestDate:{{newestDate}}</p>
+							<p>startDate:{{startDate}}</p>
+							<p>endDate:{{endDate}}</p> -->
+							<ul>
+								<!-- <li>{{currentTimeInterval}}</li> -->
+								<li><a href="javascript:;" class="btn btn-primary" ng-click="search()"><span class="glyphicon glyphicon-search"></span> 查询</a></li>
+								<li><a href="javascript:;" class="export-btn">导出</a></li>
+							</ul>
+						</div>
+					</form>
+				</div>
+				
+				<div class="report-search-table turnover-product-table" ng-show="searchDataLoaded">
+					<div class="table-responsive">
+						<table class="table table-bordered table-condensed table-striped" ng-show="searchDataLoaded">
+							<tr class="no-bg">
+								<td rowspan="2" class="td-first"><div class="td-right">年龄段指标</div><div class="td-left">面积区段指标</div></td>
+								<td rowspan="2">总数量</td>
+								<td colspan="6">年龄段</td>
+							</tr>
+							<tr class="no-bg">
+								<td>20岁及以下</td>
+								<td>21-34岁</td>
+								<td>35-44岁</td>
+								<td>45-54岁</td>
+								<td>55岁及以上</td>
+								<td>未知</td>
+							</tr>
+							<tr ng-repeat="owner in OwnerType">
+								<td class="font-bold">{{owner.title}}</td>
+								<td ng-repeat="num in owner.num">{{num[0]}}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			
+			<div class="margin-top-20 box-shadow-1 bg-white owner-type-reports" ng-show="searchDataLoaded">
+				<div class="border-left-3 border-color-blue report-title"><h2>图表呈现</h2></div>
+			</div>
+
+			<div class="owner-type-reports-main clearfix" ng-show="searchDataLoaded">
+				<div class="box-shadow-1 bg-white margin-top-10 border-radius-3 border-1 border-1-gray border-top-3 border-top-color-red">
+					<div class="report-table-title"><h2>产品类型分析</h2></div>
+					<div class="report-table-main report-table-2">
+						<highchart class="chart" config="chartConfig1"></highchart>
+					</div>
+				</div>
+			</div>
+		
+
+		</div>
+	</div>
+</div>
+

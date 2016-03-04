@@ -1,0 +1,21 @@
+<div ng-controller="ClientSearchController" ng-init="initializeController()">
+	<div class="title-position box-shadow-1 clearfix">
+		<h1>精确查询</h1>
+		<h2><a class="glyphicon glyphicon-home" href="#"><i>首页</i></a> > 客户 > 精确查询</h2>
+	</div>
+
+	<div class="content">
+		<div class="client">
+			<div class="client-search">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-xs-10"><input type="text" class="form-control" id="keyword" ng-model="keyword" placeholder="输入身份证号或手机号码"></div>
+						<div class="col-xs-2 client-search-btn"><button type="submit" class="btn btn-primary" ng-click="search()">查看客户画像</button></div>
+					</div>
+				</div>
+			</div>
+			<img src="images/client-banner.jpg" alt="" class="client-banner">
+		</div>
+	</div>
+</div>
+

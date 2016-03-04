@@ -1,0 +1,149 @@
+<div ng-controller="OwnerTypeController" ng-init="initializeController()">
+	<div class="title-position box-shadow-1 clearfix">
+		<h1>报表</h1>
+		<h2><a class="glyphicon glyphicon-home" ui-sref="app.dashboard"><i>首页</i></a> > 报表 > 客户 > 业主特征分析</h2>
+	</div>
+
+	<div class="content">
+		<div class="content-main">
+			<div class="border-1 border-1-gray box-shadow-1 bg-white owner-type-statistics">
+				<div class="border-left-3 report-title"><h2>业主特征分析</h2></div>
+				<div class="report-search clearfix" ng-class="{'box-shadow-1': searchDataLoaded}">
+					<form action="" class="form-inline">
+						<div class="report-search-area">
+							<ul>
+								<li class="li-text no-margin">组织架构：</li>
+								<li ng-class="{error: error.area}">
+									<select name="" id="" class="form-control" ng-model="areaSelected" ng-options="area.title for area in areas" ng-change="changeArea()">
+										<option value="">请选择区域</option>
+										<!-- <option value="1">集团</option>
+										<option value="2">华东区域</option>
+										<option value="3">华中区域</option>
+										<option value="4">华南区域</option> -->
+									</select>
+								</li>
+								<li class="report-search-area-city" ng-class="{error: error.city}">
+									<select name="" id="" class="form-control" ng-model="citySelected" ng-options="city.title for city in areaSelected.subs" ng-change="changeCity()">
+										<option value="">请选择城市</option>
+										<!-- <option value="1">不限</option>
+										<option value="2">深圳市</option>
+										<option value="3">广州市</option>
+										<option value="4">佛山市</option> -->
+									</select>
+								</li>
+							</ul>
+						</div>
+	
+						<!-- <div month-date-select class="fl" start-month-date="startMonthDate" end-month-date="endMonthDate"></div> -->
+<!-- a
+						{{startMonthDate}}
+b
+						{{endMonthDate}} -->
+
+						<div class="report-time-select" is-time-select earliest-date="earliestDate" newest-date="newestDate" start-date="startDate" end-date="endDate" select-radio="selectRadio" yesterday="yesterday">
+						</div>
+
+
+						<div class="report-search-others">
+							<!-- <p>selectRadio:{{selectRadio}}</p>
+							<p>earliestDate:{{earliestDate}}</p>
+							<p>newestDate:{{newestDate}}</p>
+							<p>startDate:{{startDate}}</p>
+							<p>endDate:{{endDate}}</p> -->
+							<ul>
+								<!-- <li>{{currentTimeInterval}}</li> -->
+								<li><a href="javascript:;" class="btn btn-primary" ng-click="search()"><span class="glyphicon glyphicon-search"></span> 查询</a></li>
+								<li><a href="javascript:;" class="export-btn">导出</a></li>
+							</ul>
+						</div>
+					</form>
+				</div>
+				
+				<div class="report-search-table" ng-show="searchDataLoaded">
+					<div class="table-responsive">
+						<table class="table table-bordered table-condensed table-striped">
+							<tr class="no-bg">
+								<td rowspan="2" class="td-first"><div class="td-right">指标项</div><div class="td-left">业主类型</div></td>
+								<td rowspan="2">总数量</td>
+								<td colspan="3">性别</td>
+								<td colspan="6">年龄段</td>
+								<td colspan="{{liveArea.length}}">居住区域</td>
+								<td colspan="3">购房次数</td>
+							</tr>
+							<tr class="no-bg">
+								<td>男</td>
+								<td>女</td>
+								<td>未知</td>
+								<td>20岁及以下</td>
+								<td>21-34岁</td>
+								<td>35-44岁</td>
+								<td>45-54岁</td>
+								<td>55岁及以上</td>
+								<td>未知</td>
+								<td ng-repeat="area in liveArea">{{area}}</td>
+								<td>1次</td>
+								<td>2次</td>
+								<td>2次以上</td>
+							</tr>
+							<tr ng-repeat="owner in OwnerType">
+								<td class="font-bold">{{owner.title}}</td>
+								<td ng-repeat="num in owner.num">{{num[0]}}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			
+			<div class="margin-top-20 box-shadow-1 bg-white owner-type-reports" ng-show="searchDataLoaded">
+				<div class="border-left-3 border-color-yellow report-title"><h2>各维度图表呈现</h2></div>
+			</div>
+
+			<div class="owner-type-reports-main clearfix" ng-show="searchDataLoaded">
+				<div class="owner-type-reports-main-l">
+
+					<div class="box-shadow-1 bg-white margin-top-10 border-radius-3 border-1 border-1-gray border-top-3">
+						<div class="report-table-title"><h2>数量统计</h2></div>
+						<div class="report-table-main report-table-1">
+							<highchart class="chart" config="chartConfig1"></highchart>
+						</div>
+					</div>
+
+					<div class="box-shadow-1 bg-white margin-top-10 border-radius-3 border-1 border-1-gray border-top-3">
+						<div class="report-table-title"><h2>居住区域分布</h2></div>
+						<div class="report-table-main report-table-2">
+							<highchart class="chart" config="chartConfig2"></highchart>
+						</div>
+					</div>
+
+				</div>
+				<div class="owner-type-reports-main-r">
+					
+					<div class="box-shadow-1 bg-white margin-top-10 border-radius-3 border-1 border-1-gray border-top-3">
+						<div class="report-table-title"><h2>性别分布</h2></div>
+						<div class="report-table-main report-table-3">
+							<highchart class="chart" config="chartConfig3"></highchart>
+						</div>
+					</div>
+
+					<div class="box-shadow-1 bg-white margin-top-10 border-radius-3 border-1 border-1-gray border-top-3">
+						<div class="report-table-title"><h2>年龄段分布</h2></div>
+						<div class="report-table-main report-table-4">
+							<highchart class="chart" config="chartConfig4"></highchart>
+						</div>
+					</div>
+
+					<div class="box-shadow-1 bg-white margin-top-10 border-radius-3 border-1 border-1-gray border-top-3">
+						<div class="report-table-title report-table-title-5"><h2>购买次数分布</h2></div>
+						<div class="report-table-main report-table-5">
+							<highchart class="chart" config="chartConfig5"></highchart>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		
+
+		</div>
+	</div>
+</div>
+

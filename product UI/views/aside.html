@@ -1,0 +1,33 @@
+<nav>
+	<ul>
+		<li ng-repeat="subMenu in subMenus" level-two-menu>
+
+
+			<a ng-class="{active: $state.includes(subMenu.href) || subMenu.isActive}" href="javascript:;" ng-show="subMenu.href=='' && subMenu.target==1" ">{{subMenu.menuName}}<i ng-if="subMenu['subMenus'].length>0"></i></a>
+
+			<a ng-class="{active: $state.includes(subMenu.href) || subMenu.isActive}" ui-sref="{{(subMenu.href!=''?subMenu.href:'app.dashboard')}}" ng-show="subMenu.href!='' && subMenu.target==1"">{{subMenu.menuName}}<i ng-if="subMenu['subMenus'].length>0"></i></a>
+			
+			<a ng-class="{active: subMenu.isActive || subMenu.isActive}" ui-sref="app.embed({'menuId': subMenu.ID})" ng-show="subMenu.target==2">{{subMenu.menuName}}<i ng-if="subMenu['subs'].length>0"></i></a>
+			
+			<a ng-class="{active: subMenu.isActive}" ng-href="{{menu.href}}" target="_blank" ng-show="subMenu.target==3">{{subMenu.menuName}}<i ng-if="subMenu['subs'].length>0"></i></a>
+			
+			<ul class="nav sub3-menu" ng-if="subMenu['subMenus'].length>0">
+				<li ng-repeat="sub3 in subMenu['subMenus']" level-three-menu>
+					<a ng-class="{active: sub3.isActive}" ui-sref-active="active" ui-sref="{{(sub3.href!=''?sub3.href:'app.dashboard')}}" ng-if="sub3.target==1">{{sub3.menuName}}</a>
+					<a ng-class="{active: sub3.isActive}" ui-sref-active="active" ui-sref="app.embed({'menuId': sub3.menuId})" ng-if="sub3.target==2">{{sub3.menuName}}</a>
+					<a ng-class="{active: sub3.isActive}" ng-href="{{sub3.href}}" target="_blank" ng-show="sub3.target==3">{{sub3.menuName}}</a>
+				</li>
+			</ul>
+
+		</li>
+		<!-- <li><a href="javascript:;">角色预览</a></li>
+		<li>
+			<a href="javascript:;">用户管理<i></i></a>
+			<ul class="nav sub3-menu">
+				<li><a href="javascript:;">数据权限配置</a></li>
+				<li><a href="javascript:;">用户权限配置</a></li>
+			</ul>	
+		</li>
+		<li><a href="javascript:;">操作日志</a></li> -->
+	</ul>
+</nav>

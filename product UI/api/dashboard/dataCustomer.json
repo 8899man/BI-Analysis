@@ -1,0 +1,83 @@
+{
+	"isServices": true,
+	"owner": {
+		"yesterdayAdded": 1000,
+		"thisMonthAdded": 500138,
+		"totalAmount": 824500138
+	},
+	"complaint": {
+		"yesterdayComplaint": 1208,
+		"toBeSolved": 61208,
+		"averageCycle": 3
+	},
+	"repair": {
+		"yesterdayComplaint": 639,
+		"toBeSolved": 36200,
+		"averageCycle": 5
+	},
+	"ownersAllTypes": [
+		{
+			"name": "准业主",
+			"number": 1420800,
+			"percent": 1.8
+		},
+		{
+			"name": "磨合期业主",
+			"number": 500138,
+			"percent": 13.7
+		},
+		{
+			"name": "稳定期业主",
+			"number": 320800,
+			"percent": 24.6
+		},
+		{
+			"name": "老业主",
+			"number": 1420800,
+			"percent": 19.8
+		}
+	],
+	"thisMonthBuildings": [
+		{
+			"name": "兰溪谷一期",
+			"time": "2015年6月15日",
+			"range": "5栋、6栋",
+			"householdNumber": 3760
+		},
+		{
+			"name": "观园",
+			"time": "2015年7月25日",
+			"range": "A1、A2、A3、A4、A7栋",
+			"householdNumber": 6520
+		},
+		{
+			"name": "海滨假日",
+			"time": "2015年8月14日",
+			"range": "B栋",
+			"householdNumber": 3650
+		},
+		{
+			"name": "春天海",
+			"time": "2015年9月15日",
+			"range": "66栋",
+			"householdNumber": 5412
+		}
+	],
+	"thisMonthReport": {
+		"categories": ["6月1日", "6月4日", "6月7日", "6月10日", "6月13日", "6月16日", "6月19日", "6月22日", "6月25日", "6月28日"],
+		"columnSeries": [
+			{
+				"name": "保修次数",
+	            "data": [30, 10, 32, 21, 36, 9, 85, 53, 3, 34]
+			}
+		],
+		"splineSeries": [
+			{
+				"name": "投诉次数",
+	            "data": [41, 52, 54, 56, 47, 44, 42, 45, 21, 49]
+			}
+		]
+	}
+
+	
+}

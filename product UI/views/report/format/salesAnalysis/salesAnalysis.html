@@ -1,0 +1,83 @@
+<div ng-controller="SalesAnalysisController" ng-init="initializeController()">
+	<div class="title-position box-shadow-1 clearfix">
+		<h1>报表</h1>
+		<h2><a class="glyphicon glyphicon-home" ui-sref="app.dashboard"><i>首页</i></a> > 报表 > 业态专属 > 售后分析</h2>
+	</div>
+
+	<div class="content">
+		<div class="content-main">
+			<div class="border-1 border-1-gray box-shadow-1 bg-white owner-type-statistics">
+				<div class="border-left-3 report-title"><h2>售后分析</h2></div>
+				<div class="report-search clearfix" ng-class="{'box-shadow-1': searchDataLoaded}">
+					<form action="" class="form-inline">
+						<div class="report-time-select" is-time-select earliest-date="earliestDate" newest-date="newestDate" start-date="startDate" end-date="endDate" select-radio="selectRadio" yesterday="yesterday">
+							
+						</div>
+						<div class="report-search-others">
+							<ul>
+								<li><a href="javascript:;" class="btn btn-primary" ng-click="searchData()"><span class="glyphicon glyphicon-search"></span> 查询</a></li>
+								<li><a href="javascript:;" class="export-btn" ng-click="downloadData()">导出</a></li>
+							</ul>
+						</div>
+					</form>
+				</div>
+				
+				<div class="report-search-table turnover-product-table" ng-show="searchDataLoaded">
+					<div class="table-responsive">
+						
+
+
+						<table class="table table-bordered table-condensed table-striped" ng-show="searchDataLoaded">
+							<tr class="no-bg">
+								<td class="td-first"><div class="clearfix"><div class="td-right">指标项</div><div class="td-left">归属单位</div></div></td>
+								<td>投诉问题数</td>
+								<td>按时完成问题数</td>
+								<td>超时完成问题数</td>
+								<td>待处理问题数</td>
+							</tr>
+							<tr ng-repeat="item in list">
+								<td class="font-bold">{{item.title}}</td>
+								<td ng-repeat="i in item.num">{{i[0]}}</td>
+							</tr>
+						</table>
+
+
+
+					</div>
+				</div>
+			</div>
+			
+			<div class="margin-top-20 box-shadow-1 bg-white owner-type-reports" ng-show="searchDataLoaded">
+				<div class="border-left-3 border-color-blue report-title"><h2>各维度图表呈现</h2></div>
+			</div>
+
+			<div class="owner-type-reports-main sales-reports-main clearfix" ng-show="searchDataLoaded">
+				<!-- <div class="owner-type-reports-main-l">
+				
+					<div class="box-shadow-1 bg-white margin-top-10 border-radius-3 border-1 border-1-gray border-top-3 border-top-color-red">
+						<div class="report-table-title"><h2>问题总数及重复投诉问题数</h2></div>
+						<div class="report-table-main report-table-1">
+							<highchart class="chart" config="chartConfig1"></highchart>
+						</div>
+					</div>
+				
+					
+				
+				</div> -->
+				<div class="owner-type-reports-main-r sales-analysis-report">
+					
+					<div class="box-shadow-1 bg-white margin-top-10 border-radius-3 border-1 border-1-gray border-top-3">
+						<div class="report-table-title"><h2>问题数</h2></div>
+						<div class="report-table-main report-table-3">
+							<highchart class="chart" config="chartConfig2"></highchart>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		
+
+		</div>
+	</div>
+</div>
+

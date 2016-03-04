@@ -1,0 +1,220 @@
+{
+
+    "sexList": [
+        {
+            "type": "male",
+            "percent": 80
+        },
+        {
+            "type": "unknow",
+            "percent": 5
+        },
+        {
+            "type": "female",
+            "percent": 15
+        }
+    ],
+    "marryState": [
+        {
+            "title":"未知",
+            "percent":5
+        },
+        {
+            "title":"未婚",
+            "percent":35
+        },
+        {
+            "title":"已婚",
+            "percent":60
+        }
+    ],
+    "customerType":[
+        {
+            "title":"未知",
+            "percent":30
+        },
+        {
+            "title":"企业客户",
+            "percent":21
+        },
+        {
+            "title":"普通个人",
+            "percent":49
+        }
+    ],
+    "ageList": [
+        {
+            "title": "<=20",
+            "percent": 3
+        },
+        {
+            "title": "21-34",
+            "percent": 22
+        },
+        {
+            "title": "35-44",
+            "percent": 51
+        },
+        {
+            "title": "45-54",
+            "percent": 17
+        },
+        {
+            "title": "55-64",
+            "percent": 4
+        },
+        {
+            "title": ">=65",
+            "percent": 1
+        },
+        {
+            "title": "未知",
+            "percent": 2
+        }
+    ],
+    "customerList": [
+        {
+            "id": "1000",
+            "customerId": "GD0001",
+            "name": "张*玉",
+            "sex": "女",
+            "tel": "137****0032",
+            "certificatesNumber": "36302362322012****",
+            "ageGroup": "20-34",
+            "createTime": "2014-10-17",
+            "visitingTime": "2014-10-12",
+            "subscriptionTime": "2014-10-14",
+            "signingTime": "2014-10-15"
+            
+        },
+        {
+            "id": "1001",
+            "customerId": "GD0002",
+            "name": "张*玉",
+            "sex": "女",
+            "tel": "137****0032",
+            "certificatesNumber": "36302362322012****",
+            "ageGroup": "20-34",
+            "createTime": "2014-10-17",
+            "visitingTime": "2014-10-12",
+            "subscriptionTime": "2014-10-14",
+            "signingTime": "2014-10-15"
+            
+        },
+        {
+            "id": "1002",
+            "customerId": "GD0003",
+            "name": "张*玉",
+            "sex": "女",
+            "tel": "137****0032",
+            "certificatesNumber": "36302362322012****",
+            "ageGroup": "20-34",
+            "createTime": "2014-10-17",
+            "visitingTime": "2014-10-12",
+            "subscriptionTime": "2014-10-14",
+            "signingTime": "2014-10-15"
+            
+        },
+        {
+            "id": "1003",
+            "customerId": "GD0004",
+            "name": "张*玉",
+            "sex": "女",
+            "tel": "137****0032",
+            "certificatesNumber": "36302362322012****",
+            "ageGroup": "20-34",
+            "createTime": "2014-10-17",
+            "visitingTime": "2014-10-12",
+            "subscriptionTime": "2014-10-14",
+            "signingTime": "2014-10-15"
+            
+        },
+        {
+            "id": "1004",
+            "customerId": "GD0005",
+            "name": "张*玉",
+            "sex": "女",
+            "tel": "137****0032",
+            "certificatesNumber": "36302362322012****",
+            "ageGroup": "20-34",
+            "createTime": "2014-10-17",
+            "visitingTime": "2014-10-12",
+            "subscriptionTime": "2014-10-14",
+            "signingTime": "2014-10-15"
+            
+        },
+        {
+            "id": "1005",
+            "customerId": "GD0006",
+            "name": "张*玉",
+            "sex": "女",
+            "tel": "137****0032",
+            "certificatesNumber": "36302362322012****",
+            "ageGroup": "20-34",
+            "createTime": "2014-10-17",
+            "visitingTime": "2014-10-12",
+            "subscriptionTime": "2014-10-14",
+            "signingTime": "2014-10-15"
+            
+        },
+        {
+            "id": "1006",
+            "customerId": "GD0007",
+            "name": "张*玉",
+            "sex": "女",
+            "tel": "137****0032",
+            "certificatesNumber": "36302362322012****",
+            "ageGroup": "20-34",
+            "createTime": "2014-10-17",
+            "visitingTime": "2014-10-12",
+            "subscriptionTime": "2014-10-14",
+            "signingTime": "2014-10-15"
+            
+        },
+        {
+            "id": "1007",
+            "customerId": "GD0008",
+            "name": "张*玉",
+            "sex": "女",
+            "tel": "137****0032",
+            "certificatesNumber": "36302362322012****",
+            "ageGroup": "20-34",
+            "createTime": "2014-10-17",
+            "visitingTime": "2014-10-12",
+            "subscriptionTime": "2014-10-14",
+            "signingTime": "2014-10-15"
+            
+        },
+        {
+            "id": "1009",
+            "customerId": "GD0010",
+            "name": "张*玉",
+            "sex": "女",
+            "tel": "137****0032",
+            "certificatesNumber": "36302362322012****",
+            "ageGroup": "20-34",
+            "createTime": "2014-10-17",
+            "visitingTime": "2014-10-12",
+            "subscriptionTime": "2014-10-14",
+            "signingTime": "2014-10-15"
+            
+        },
+        {
+            "id": "1010",
+            "customerId": "GD0011",
+            "name": "张*玉",
+            "sex": "女",
+            "tel": "137****0032",
+            "certificatesNumber": "36302362322012****",
+            "ageGroup": "20-34",
+            "createTime": "2014-10-17",
+            "visitingTime": "2014-10-12",
+            "subscriptionTime": "2014-10-14",
+            "signingTime": "2014-10-15"
+            
+        }
+    ],
+    "TotalPages": 20,
+    "TotalRows": 89,
+    "PageSize": 0
+}

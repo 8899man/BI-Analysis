@@ -1,0 +1,378 @@
+<div ng-controller="ClientDetailsController" ng-init="initializeController()">
+	
+
+	<div class="title-position box-shadow-1 clearfix">
+		<h1><a href="javascript:;" class="history-back back-button"">返回</a>客户画像</h1>
+		<h2><a class="glyphicon glyphicon-home" ui-sref="app.dashboard"><i>首页</i></a> > 客户 > 客户画像</h2>
+	</div>
+
+
+
+	<div class="content">
+		<div class="content-main">
+			<div class="client-details-header clearfix">
+				<div class="client-details-info box-shadow-1 border-radius-2">
+					<div class="client-info-base clearfix">
+						<div class="client-info-header">
+							<h2><img src="images/header-male.jpg" alt=""><i></i></h2>
+						</div>
+						<div class="client-info-label">
+							<h2>刘先生</h2>
+							<h3 class="clearfix"><span>时尚新贵</span><span>换房一族</span><span>只爱别墅土豪海景房</span><span>换房一族</span><span>只爱别墅土豪海景房</span><span>换房一族</span><span>只爱别墅土豪海景房</span></h3>
+						</div>
+					</div>
+					<div class="client-info-other">
+						<dl>
+							<dt>手机号码</dt>
+							<dd class="no-padding"  dropdown keyboard-nav>
+								<span ng-class="{'toggle-link': clientDetails.baseInfo.tels.length>1}" dropdown-toggle ng-hide="clientDetails.baseInfo.tels.length == 0">{{clientDetails.baseInfo.tels[0]}}<i class="arrow" ng-hide="clientDetails.baseInfo.tels.length == 1"></i></span>
+								<ul class="dropdown-menu text-dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav" ng-if="clientDetails.baseInfo.tels.length>1">
+						            <li role="menuitem" ng-repeat-start="tel in clientDetails.baseInfo.tels">{{tel}}</li>
+						            <li ng-repeat-end class="divider" ng-hide="$last == true"></li>
+						        </ul>
+							</dd>
+						</dl>
+						<dl>
+							<dt>客户编号</dt>
+							<dd>5014273</dd>
+						</dl>
+						<dl>
+							<dt>关联房产</dt>
+							<dd class="no-padding"  dropdown keyboard-nav>
+								<span ng-class="{'toggle-link': clientDetails.baseInfo.houses.length>1}" dropdown-toggle ng-hide="clientDetails.baseInfo.houses.length == 0"><a ui-sref="app.project.houseDetails({'houseId': clientDetails.baseInfo.houses[0].houseName})">{{clientDetails.baseInfo.houses[0].houseName}}</a><i class="arrow" ng-hide="clientDetails.baseInfo.houses.length == 1"></i></span>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav" ng-if="clientDetails.baseInfo.houses.length>1">
+						            <li role="menuitem" ng-repeat-start="house in clientDetails.baseInfo.houses"><a ui-sref="app.project.houseDetails({'houseId': house.houseId})">{{house.houseName}}</a></li>
+						            <li ng-repeat-end class="divider" ng-hide="$last == true"></li>
+						        </ul>
+							</dd>
+						</dl>
+						<dl>
+							<dt>证件号码</dt>
+							<dd class="no-padding"  dropdown keyboard-nav>
+								<span ng-class="{'toggle-link': clientDetails.baseInfo.certificates.length>1}" dropdown-toggle ng-hide="clientDetails.baseInfo.certificates.length == 0">{{clientDetails.baseInfo.certificates[0]}}<i class="arrow" ng-hide="clientDetails.baseInfo.certificates.length == 1"></i></span>
+								<ul class="dropdown-menu text-dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav" ng-if="clientDetails.baseInfo.certificates.length>1">
+						            <li role="menuitem" ng-repeat-start="certificate in clientDetails.baseInfo.certificates">{{certificate}}</li>
+						            <li ng-repeat-end class="divider" ng-hide="$last == true"></li>
+						        </ul>
+							</dd>
+						</dl>
+						<dl>
+							<dt>个人生日</dt>
+							<dd>09-07</dd>
+						</dl>
+						<dl>
+							<dt>邮箱地址</dt>
+							<dd class="no-padding"  dropdown keyboard-nav>
+								<span ng-class="{'toggle-link': clientDetails.baseInfo.emails.length>1}" dropdown-toggle ng-hide="clientDetails.baseInfo.emails.length == 0">{{clientDetails.baseInfo.emails[0]}}<i class="arrow" ng-hide="clientDetails.baseInfo.emails.length == 1"></i></span>
+								<ul class="dropdown-menu text-dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav" ng-if="clientDetails.baseInfo.emails.length>1">
+						            <li role="menuitem" ng-repeat-start="email in clientDetails.baseInfo.emails">{{email}}</li>
+						            <li ng-repeat-end class="divider" ng-hide="$last == true"></li>
+						        </ul>
+							</dd>
+							<!-- <dd class="no-padding"  dropdown keyboard-nav>
+								<span class="toggle-link" dropdown-toggle>liujun2015@126.com<i class="arrow"></i></span>
+								<ul class="dropdown-menu text-dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav">
+													            <li role="menuitem">liujun2015@126.com</li>
+													            <li class="divider"></li>
+													            <li role="menuitem">liujun2015@126.com</li>
+													            <li class="divider"></li>
+													            <li role="menuitem">liujun2015@126.com</li>
+													        </ul>
+							</dd> -->
+						</dl>
+						<dl>
+							<dt>客户类别</dt>
+							<dd>意向客户 | 已购客户</dd>
+						</dl>
+						<dl>
+							<dt>会员卡号</dt>
+							<dd>66663888<i class="member-type"></i></dd>
+						</dl>
+						<dl>
+							<dt>车牌号码</dt>
+							<dd>粤B6RP99</dd>
+						</dl>
+					</div>
+				</div>
+				<div class="features-container">
+					<div class="client-details-features box-shadow-1 border-radius-3">
+						<h2>客户特征描摹</h2>
+						<div class="features-list">
+							<dl>
+								<dt>人口特征</dt>
+								<dd class="clearfix">
+									<span>年龄区段：<b>中年型（30-45岁）</b></span>
+									<span>家庭结构：<b>三口之家</b></span>
+									<span>子女：<b>未知</b></span>
+								</dd>
+							</dl>
+							<dl>
+								<dt>区域特征</dt>
+								<dd class="clearfix">
+									<span>籍贯区段：<b>武汉</b></span>
+									<span>工作区域：<b>深圳</b></span>
+									<span>居住区域：<b>深圳-南山</b></span>
+								</dd>
+							</dl>
+							<dl>
+								<dt>社会特征</dt>
+								<dd class="clearfix">
+									<span>文化程度：<b>本科</b></span>
+									<span>从事行业：<b>未知</b></span>
+									<span>工作职位：<b>未知</b></span>
+								</dd>
+							</dl>
+							<dl>
+								<dt>意向特征<select name="" id="" class="form-control" ng-model="intention" ng-options="intention.title for intention in intentions"></select></dt>
+								<dd class="clearfix">
+									<span>意向等级：<b>{{intention.grade}}</b></span>
+									<span>意向户型：<b>{{intention.layout}}</b></span>
+									<span>意向面积：<b>{{intention.area}}</b></span>
+									<span>意向类型：<b>{{intention.type}}</b></span>
+									<span>意向价格：<b>{{intention.price}}</b></span>
+									<span>意向区域：<b>{{intention.region}}</b></span>
+									<span>意向项目：<b>{{intention.project}}</b></span>
+								</dd>
+							</dl>
+							<dl>
+								<dt>房产特征<select name="" id="" class="form-control" ng-model="house" ng-options="house.title for house in houses"></select></dt>
+								<dd class="clearfix">
+									<span>房产类型：<b>{{house.type}}</b></span>
+									<span>房产户型：<b>{{house.layout}}</b></span>
+									<span>房产面积：<b>{{house.area}}</b></span>
+									<span class="clear">房产总价：<b>{{house.price}}</b></span>
+									<span>房产区域：<b>{{house.region}}</b></span>
+									<span>房产项目：<b>{{house.project}}</b></span>
+									<span>房产特色：<b>{{house.feature}}</b></span>
+								</dd>
+							</dl>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+
+			
+			<div class="margin-top-30 box-shadow-1 border-radius-3 client-track">
+				<h2>客户轨迹</h2>
+				<div class="track-list-container">
+					<div class="client-track-list">
+						<dl class="clearfix">
+							<dt><i class="icon1"></i></dt>
+							<dd>
+								<p class="time">2015-05-04 10:25</p>
+								<p class="person"><a ui-sref="app.project.details({'projectId': 111})">坪山花园城</a></p>
+								<p class="track-tip">交付，支付购买意向房源4栋A单元608单元尾款，互动关联人：置业顾问 刘XX</p>
+							</dd>
+						</dl>
+						<dl class="clearfix">
+							<dt><i class="icon4"></i></dt>
+							<dd>
+								<p class="time">2015-05-04 11:25</p>
+								<p class="person"><a ui-sref="app.project.details({'projectId': 111})">坪山花园城</a></p>
+								<p class="track-tip">回款，支付购买意向房源4栋A单元608单元尾款，互动关联人：置业顾问 刘XX 138xxxx2222</p>
+							</dd>
+						</dl>
+						<dl class="clearfix">
+							<dt><i class="icon3"></i></dt>
+							<dd>
+								<p class="time">2015-05-04 10:25</p>
+								<p class="person"><a ui-sref="app.project.details({'projectId': 111})">坪山花园城</a></p>
+								<p class="track-tip">认购，看板房【意向等级B，意向房源4栋A单元608房间】，互动关联人：置业顾问 王XX</p>
+							</dd>
+						</dl>
+						<dl class="clearfix">
+							<dt><i class="icon8"></i></dt>
+							<dd>
+								<p class="time">2015-05-04 10:25</p>
+								<p class="person"><a ui-sref="app.project.details({'projectId': 111})">坪山花园城</a></p>
+								<p class="track-tip">认筹，看板房【意向等级B，意向房源4栋A单元608房间】，互动关联人：置业顾问 王XX</p>
+							</dd>
+						</dl>
+						<dl class="last clearfix">
+							<dt><i class="icon2"></i></dt>
+							<dd>
+								<p class="time">2015-05-04 10:25</p>
+								<p class="person"><a ui-sref="app.project.details({'projectId': 111})">坪山花园城</a></p>
+								<p class="track-tip">到访，看板房【意向等级B，意向房源4栋A单元608房间】，互动关联人：置业顾问 王XX</p>
+							</dd>
+						</dl>
+					</div>
+				</div>
+				
+			</div>
+
+
+			<div class="margin-top-30 box-shadow-1 border-radius-3 relational-info">
+				<h2>关系信息</h2>
+				<div class="relational-info-main">
+
+					
+					<tabset>
+						<tab heading="房产关系">
+							<table class="table">
+								<thead>
+									<tr>
+										<th width="20%">项目名称</th>
+										<th width="16%">房号</th>
+										<th width="16%">房产关系</th>
+										<th width="16%">关系开始日期</th>
+										<th width="16%">关系结束日期</th>
+										<th width="16%">数据更新日期</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>蛇口花园城一期</td>
+										<td>5-5A</td>
+										<td>一手房产</td>
+										<td>2013-07-15</td>
+										<td>未知</td>
+										<td>2015-08-17</td>
+									</tr>
+									<tr>
+										<td>坪山花园城一期</td>
+										<td>5-5A</td>
+										<td>一手房产</td>
+										<td>2013-07-15</td>
+										<td>未知</td>
+										<td>2015-08-17</td>
+									</tr>
+								</tbody>
+							</table>
+						</tab>
+						<tab heading="家庭关系">
+							<table class="table">
+								<thead>
+									<tr>
+										<th width="20%">关系</th>
+										<th width="20%">姓名</th>
+										<th width="20%">性别</th>
+										<th width="20%">年龄</th>
+										<th width="20%">TEL</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>夫妻</td>
+										<td><a ui-sref="app.client.details({'clientId': '11'})">王丽华111</a></td>
+										<td>女</td>
+										<td>35</td>
+										<td>136****1234</td>
+									</tr>
+									<tr>
+										<td>子女</td>
+										<td>刘晓明</td>
+										<td>男</td>
+										<td>10</td>
+										<td>138****3245</td>
+									</tr>
+									<tr>
+										<td>父母</td>
+										<td><a ui-sref="app.client.details({'clientId': '12'})">刘舜</a></td>
+										<td>男</td>
+										<td>65</td>
+										<td>139****0987</td>
+									</tr>
+									<tr>
+										<td>父母</td>
+										<td><a ui-sref="app.client.details({'clientId': '13'})">李芳</a></td>
+										<td>女</td>
+										<td>60</td>
+										<td>159****0987</td>
+									</tr>
+								</tbody>
+							</table>
+						</tab>
+						<tab heading="社区关系">
+							<table class="table">
+								<thead>
+									<tr>
+										<th width="25%">项目名称</th>
+										<th width="25%">房号</th>
+										<th width="25%">邻居姓名</th>
+										<th width="25%">联系方式</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>蛇口花园城一期</td>
+										<td>5-5A</td>
+										<td><a ui-sref="app.client.details({'clientId': '15'})">刘一</a></td>
+										<td>132xxxx1212</td>
+									</tr>
+									<tr>
+										<td>蛇口花园城一期</td>
+										<td>5-5A</td>
+										<td><a ui-sref="app.client.details({'clientId': '16'})">王一</a></td>
+										<td>132xxxx1212</td>
+									</tr>
+								</tbody>
+							</table>
+						</tab>
+						<tab heading="交易关系">
+							<table class="table">
+								<thead>
+									<tr>
+										<th width="20%">项目名称</th>
+										<th width="20%">房号</th>
+										<th width="20%">交易日期</th>
+										<th width="20%">交易金额</th>
+										<th width="20%">交易类型</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>蛇口花园城一期</td>
+										<td>5-5A</td>
+										<td>2013-07-15</td>
+										<td>330万元</td>
+										<td>一手交易（买入）</td>
+									</tr>
+									<tr>
+										<td>蛇口花园城二期</td>
+										<td>5-5A</td>
+										<td>2014-08-15</td>
+										<td>450万元</td>
+										<td>二手交易（卖出）</td>
+									</tr>
+								</tbody>
+							</table>
+						</tab>
+						<tab heading="会员关系">
+							<table class="table">
+								<thead>
+									<tr>
+										<th width="25%">会员类型</th>
+										<th width="25%">会员卡号</th>
+										<th width="25%">会员等级</th>
+										<th width="25%">会员积分</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>地产会员</td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td>商业会员</td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</tbody>
+							</table>
+						</tab>
+					</tabset>
+
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+
+</div>

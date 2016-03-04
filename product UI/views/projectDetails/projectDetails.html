@@ -1,0 +1,515 @@
+<div ng-controller="ProjectDetailsController" ng-init="initializeController()">
+	
+
+	<div class="title-position box-shadow-1 clearfix">
+		<h1><a href="javascript:;" class="history-back back-button">返回</a>项目画像</h1>
+		<h2><a class="glyphicon glyphicon-home" ui-sref="app.dashboard"><i>首页</i></a> > 项目 > 项目画像</h2>
+	</div>
+
+
+	<!-- <div>
+	
+	
+		<highchart class="chart" config='chartConfig0'></highchart>
+	
+	</div> -->
+
+
+
+	<div class="content">
+		<div class="content-main">
+			<div class="client-details-header clearfix">
+
+				<div class="project-details-info">
+
+					<div class="project-photo"><img src="images/project-photo.png" class="box-shadow-1" alt=""></div>
+
+
+					<div class="btn-group project-select no-padding" dropdown keyboard-nav>
+				        <a id="project-select-btn" type="button" class="btn btn-primary box-shadow-1" dropdown-toggle>花园城一期<span class="caret"></span>
+				        </a>
+				        <ul class="dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav">
+				            <li role="menuitem"><a ui-sref="app.project.details({'projectId': '1001'})">花园城一期</a></li>
+				            <li class="divider"></li>
+				            <li role="menuitem"><a ui-sref="app.project.details({'projectId': '1002'})">花园城二期</a></li>
+				            <li class="divider"></li>
+				            <li role="menuitem"><a ui-sref="app.project.details({'projectId': '1003'})">花园城三期</a></li>
+				        </ul>
+				    </div>
+
+					
+
+					<div class="client-details-info box-shadow-1 border-radius-2">
+						<h4>基本信息</h4>
+
+
+						<div class="client-info-other">
+							<dl>
+								<dt>编号</dt>
+								<dd>0020162483</dd>
+							</dl>
+							<dl>
+								<dt>地址</dt>
+								<dd>南海大道1145号</dd>
+							</dl>
+							<dl>
+								<dt>占地面积</dt>
+								<dd>1000平方米</dd>
+							</dl>
+							<dl>
+								<dt>建筑面积</dt>
+								<dd>600平方米</dd>
+							</dl>
+							<dl>
+								<dt>产权年限</dt>
+								<dd>70年</dd>
+							</dl>
+							<dl>
+								<dt>项目公司</dt>
+								<dd>招商地产_深圳公司</dd>
+							</dl>
+							<dl>
+								<dt>物业公司</dt>
+								<dd>招商物业公司</dd>
+							</dl>
+							<dl>
+								<dt>楼栋数</dt>
+								<dd>16栋</dd>
+							</dl>
+							<dl>
+								<dt>房源量</dt>
+								<dd><a ui-sref="app.project.salesQuery({'projectId':'1001'})">1460套</a></dd>
+							</dl>
+							<dl>
+								<dt>已售</dt>
+								<dd>680套</dd>
+							</dl>
+							<dl>
+								<dt>在售</dt>
+								<dd>780套</dd>
+							</dl>
+							<dl>
+								<dt>客服户数</dt>
+								<dd><a ui-sref="app.project.customerQuery({'projectId':'1001'})">880户</a></dd>
+							</dl>
+							<dl>
+								<dt>物业户数</dt>
+								<dd><a ui-sref="app.project.propertyQuery({'projectId':'1001'})">980户</a></dd>
+							</dl>
+							<dl>
+								<dt>项目性质</dt>
+								<dd>自有</dd>
+							</dl>
+							<dl>
+								<dt>盘源数</dt>
+								<dd><a ui-sref="app.project.diskQuery({'projectId':'1001'})">1460套</a></dd>
+							</dl>
+							<dl>
+								<dt>已出售</dt>
+								<dd>680套</dd>
+							</dl>
+							<dl>
+								<dt>已租赁</dt>
+								<dd>780套</dd>
+							</dl>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="features-container">
+					<div class="project-details-feature box-shadow-1 border-radius-2">
+
+						<ul class="nav nav-tabs nav-justified">
+							<li ng-class="{active: featuresType == 'projectTarget'}" heading="项目指标" class="ng-isolate-scope active">
+								<a  ng-click="changeFeaturesType('projectTarget')" class="ng-binding">项目指标</a>
+							</li>
+							<li ng-class="{active: featuresType == 'projectDynamic'}" class="ng-isolate-scope">
+								<a  ng-click="changeFeaturesType('projectDynamic')" class="ng-binding">项目动态</a>
+							</li>
+						</ul>
+						<div class="features-content">
+							
+						
+							<div heading="项目指标" ng-show="featuresType == 'projectTarget'">
+								<div class="project-details-content box-shadow-1 project-details-quota">
+									<h2 class="clearfix">关键指标
+										<span class="pull-right">
+											<select class="form-control" name="" id="">
+												<option value="1">销售</option>
+												<option value="2">客服</option>
+												<option value="3">物业</option>
+												<option value="4">置业</option>
+											</select>
+										</span>
+									</h2>
+									<div class="project-content-main">
+										<table class="table">
+											<tbody>
+												<tr>
+													<td>跟进客户数：12</td>
+													<td>新客到访数：42</td>
+													<td>老客到访数：33</td>
+												</tr>
+												<tr>
+													<td>认筹客户数：34</td>
+													<td>认筹套数：55</td>
+													<td>认筹金额：8987万</td>
+												</tr>
+												<tr>
+													<td>认购客户数：334</td>
+													<td>认购套数：334</td>
+													<td>认购金额：8987万</td>
+												</tr>
+												<tr>
+													<td>签约客户数：23</td>
+													<td>签约套数：44</td>
+													<td>签约金额：8987万</td>
+												</tr>
+												<tr>
+													<td>回款客户数：432</td>
+													<td>回款套数：432</td>
+													<td>回款金额：8987万</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="project-details-content box-shadow-1 project-details-exponential">
+									<h2>业态指数</h2>
+									<div class="project-content-main container-fluid clearfix">
+
+										<div class="row">
+											<div class="project-content-chart col-xs-4">
+												<div class="exponential-main-inside">
+													<highchart class="chart" config="chartConfig1"></highchart>
+												</div>
+												<div class="exponential-main-list"><span><i></i>认购</span><span class="tab2"><i></i>签约</span><span class="tab3"><i></i>在售</span></div>
+											</div>
+											<div class="project-content-chart col-xs-4" ng-repeat="chart in exponential">
+												<highchart class="chart" config="chart.chartConfig"></highchart>
+												<div class="exponential-main-tip">
+													<p>{{chart.percent}}</p>
+													<p>{{chart.finished}}/{{chart.total}}</p>
+												</div>
+												<div class="exponential-main-list">{{chart.title}}</div>
+											</div>
+											<!-- <div class="project-content-chart col-xs-4">
+												<highchart class="chart" config="chartConfig3"></highchart>
+												<div class="exponential-main-tip">
+													<p>30%</p>
+													<p>60/200</p>
+												</div>
+												<div class="exponential-main-list">成交套数（套）</div>
+											</div> -->
+										</div>
+									</div>
+								</div>
+								<div class="project-details-content box-shadow-1 project-details-process">
+									<h2>关键流程分析</h2>
+									<div class="project-content-main container-fluid">
+										<div class="row">
+											<div class="col-xs-6" ng-repeat="process in projectProcesses">
+												<div project-process title="{{process.title}}" used-days="{{process.usedDays}}" baseline="{{process.baseline}}"></div>
+											</div>
+											<!-- <div class="col-xs-6">
+												<div project-process title="认购----签约时间" used-days="5" baseline="7"></div>
+											</div> -->
+										</div>
+									</div>
+								</div>
+								<div class="project-details-content box-shadow-1 project-details-fractional">
+									<h2>转化率分析</h2>
+									<div class="project-content-main container-fluid clearfix">
+
+										<div class="row">
+											<div class="project-content-chart col-xs-4" ng-repeat="chart in fractional">
+												<highchart class="chart" config="chart.chartConfig"></highchart>
+												<div class="exponential-main-tip">
+													<p>{{chart.percent}}</p>
+													<p>{{chart.finished}}/{{chart.total}}</p>
+												</div>
+												<div class="exponential-main-list">{{chart.title}}</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div heading="项目动态" select="setHeight()" ng-show="featuresType == 'projectDynamic'">
+								<div class="project-details-content project-details-dynamic">
+									<h2>动态轨迹<span class="pull-right">本项目7天内的最新动态</span></h2>
+									
+
+									<div class="track-list-container">
+										<div class="client-track-list">
+											<dl class="clearfix">
+												<dt><i class="icon1"></i></dt>
+												<dd>
+													<p class="time">2015-05-04 16:25</p>
+													<p class="person"><a ui-sref="app.client.details({'clientId': '11'})">刘宇华</a></p>
+													<p class="track-tip">收楼，房源4栋A单元608房间，互动关联人：职业顾问 张晓明</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon2"></i></dt>
+												<dd>
+													<p class="time">2015-05-04 15:00</p>
+													<p class="person"><a ui-sref="app.client.details({'clientId': '11'})">高明明</a></p>
+													<p class="track-tip">签约，房源4栋A单元608房间，互动关联人：职业顾问 李兰</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon3"></i></dt>
+												<dd>
+													<p class="time">2015-05-04 14:30</p>
+													<p class="person"><a ui-sref="app.client.details({'clientId': '11'})">杨大志</a></p>
+													<p class="track-tip">认购，看板房【意向等级B，意向房源4栋A单元608房间】，互动关联人：置业顾问 王聪</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon5"></i></dt>
+												<dd>
+													<p class="time">2015-05-04 11:30</p>
+													<p class="person"><a ui-sref="app.client.details({'clientId': '11'})">张先生</a></p>
+													<p class="track-tip">到访，看板房【意向等级B，意向房源4栋A单元608房间】，互动关联人：置业顾问 王聪</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon5"></i></dt>
+												<dd>
+													<p class="time">2015-05-04 11:30</p>
+													<p class="person"><a ui-sref="app.client.details({'clientId': '11'})">蓝晓</a></p>
+													<p class="track-tip">到访，看板房【意向等级B，意向房源4栋A单元608房间】，互动关联人：置业顾问 王聪</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon10"></i></dt>
+												<dd>
+													<p class="time">2015-05-04 11:00</p>
+													<p class="person"><a ui-sref="app.client.details({'clientId': '11'})">张高</a></p>
+													<p class="track-tip">来电，咨询项目【意向等级B，意向房源4栋A单元608房间】，互动关联人：置业顾问 王聪</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon2"></i></dt>
+												<dd>
+													<p class="time">2015-05-04 15:00</p>
+													<p class="person"><a ui-sref="app.client.details({'clientId': '11'})">明云</a></p>
+													<p class="track-tip">签约，房源4栋A单元608房间，互动关联人：职业顾问 李兰</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon3"></i></dt>
+												<dd>
+													<p class="time">2015-05-04 11:30</p>
+													<p class="person"><a ui-sref="app.client.details({'clientId': '11'})">杨仁和</a></p>
+													<p class="track-tip">认购，看板房【意向等级B，意向房源4栋A单元608房间】，互动关联人：置业顾问 王聪</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon5"></i></dt>
+												<dd>
+													<p class="time">2015-05-04 11:30</p>
+													<p class="person"><a ui-sref="app.client.details({'clientId': '11'})">周先生</a></p>
+													<p class="track-tip">到访，看板房【意向等级B，意向房源4栋A单元608房间】，互动关联人：置业顾问 王聪</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon5"></i></dt>
+												<dd>
+													<p class="time">2015-05-04 11:30</p>
+													<p class="person"><a ui-sref="app.client.details({'clientId': '11'})">王老太</a></p>
+													<p class="track-tip">到访，看板房【意向等级B，意向房源4栋A单元608房间】，互动关联人：置业顾问 王聪</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon10"></i></dt>
+												<dd>
+													<p class="time">2015-05-04 11:30</p>
+													<p class="person"><a ui-sref="app.client.details({'clientId': '11'})">高高</a></p>
+													<p class="track-tip">来电，咨询项目【意向等级B，意向房源4栋A单元608房间】，互动关联人：置业顾问 王聪</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon5"></i></dt>
+												<dd>
+													<p class="time">2015-05-04 11:30</p>
+													<p class="person"><a ui-sref="app.client.details({'clientId': '11'})">王老太</a></p>
+													<p class="track-tip">到访，看板房【意向等级B，意向房源4栋A单元608房间】，互动关联人：置业顾问 王聪</p>
+												</dd>
+											</dl>
+											<dl class="last clearfix">
+												<dt><i class="icon10"></i></dt>
+												<dd>
+													<p class="time">2015-05-04 11:30</p>
+													<p class="person"><a ui-sref="app.client.details({'clientId': '11'})">高高</a></p>
+													<p class="track-tip">来电，咨询项目【意向等级B，意向房源4栋A单元608房间】，互动关联人：置业顾问 王聪</p>
+												</dd>
+											</dl>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				
+			</div>
+
+			
+
+
+			<div class="margin-top-20 box-shadow-1 border-radius-3 relational-info customer-subdivision-info">
+				<h2>客户细分</h2>
+				<div class="customer-subdivision clearfix">
+
+					<div class="subdivision-tab tabs-nav">
+						<ul>
+							<li class="clearfix">
+								<span class="title">全部客户</span>
+								<span class="num">40,300</span>
+								<span class="range rise"><i></i>300</span>
+							</li>
+							<li class="clearfix tab-nav" ng-init="clientClassify='buyed'" ng-click="clientClassify='buyed'">
+								<a href="javascript:;">
+									<span class="title">已购客户</span>
+									<span class="num">36,300</span>
+									<span class="range fall"><i></i>300</span>
+									<i class="arrow"></i>
+								</a>
+							</li>
+							<li class="clearfix tab-nav" ng-click="clientClassify='intent'">
+								<a href="javascript:;">
+									<span class="title">意向客户</span>
+									<span class="num">10,300</span>
+									<span class="range rise"><i></i>300</span>
+									<i class="arrow"></i>
+								</a>
+							</li>
+							<li class="clearfix tab-nav" ng-click="clientClassify='lease'">
+								<a href="javascript:;">
+									<span class="title">租赁客户</span>
+									<span class="num">0</span>
+									<span class="range flat"><i></i>0</span>
+									<i class="arrow"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+
+					<div class="subdivision-content tabs-content">
+						<div class="subdivision-content-main tab-inside">
+							<h3>已购客户分类</h3>
+							<table class="table table-condensed">
+								<tr>
+									<th>投资客户</th>
+									<th>自住客户</th>
+									<th>期房客户</th>
+									<th>更换业主</th>
+								</tr>
+								<tr>
+									<td class="range rise">400<i></i></td>
+									<td class="range fall">100<i></i></td>
+									<td class="range flat">0<i></i></td>
+									<td class="range fall">10<i></i></td>
+								</tr>
+								<tr>
+									<td>35,300 </td>
+									<td>1000</td>
+									<td>0</td>
+									<td>100</td>
+								</tr>
+							</table>
+						</div>
+						<div class="subdivision-content-main tab-inside">
+							<h3>意向客户分类</h3>
+							<table class="table table-condensed">
+								<tr>
+									<th>跟进中</th>
+									<th>已逾期</th>
+									<th>已流失</th>
+								</tr>
+								<tr>
+									<td class="range rise">400<i></i></td>
+									<td class="range fall">100<i></i></td>
+									<td class="range flat">0<i></i></td>
+								</tr>
+								<tr>
+									<td>35,300 </td>
+									<td>1000</td>
+									<td>0</td>
+								</tr>
+							</table>
+						</div>
+						<div class="subdivision-content-main tab-inside">
+							<h3>租赁客户分类</h3>
+							<table class="table table-condensed">
+								<tr>
+									<th>有效租赁客户</th>
+									<th>历史租赁客户</th>
+								</tr>
+								<tr>
+									<td class="range flat">0<i></i></td>
+									<td class="range flat">0<i></i></td>
+								</tr>
+								<tr>
+									<td>0</td>
+									<td>0</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+
+
+			<div class="margin-top-20 clearfix" ng-show="clientClassify=='buyed'">
+				<div class="age-distribution">
+					<div class="box-shadow-1 border-radius-3 relational-info age-distribution-main">
+						<h2>年龄分布</h2>
+						<div class="age-distribution-content">
+							<div class="distribution-tip">
+								<ul>
+									<li class="age{{$index+1}}" ng-repeat="age in chartConfigObj4"><i></i><span>{{age[0]}}</span><b>{{age[1]}}</b></li>
+									<!-- <li class="age2"><i></i><span>20-34岁</span><b>7600</b></li>
+									<li class="age3"><i></i><span>35-44岁</span><b>2800</b></li>
+									<li class="age4"><i></i><span>45-54岁</span><b>2600</b></li>
+									<li class="age5"><i></i><span>55-64岁</span><b>2100</b></li>
+									<li class="age6"><i></i><span>64岁以上</span><b>800</b></li> -->
+								</ul>
+							</div>
+							<div class="distribution-chart">
+								<highchart class="chart" config="chartConfig4"></highchart>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				<div class="work-industry">
+					<div class="box-shadow-1 border-radius-3 relational-info work-industry-main">
+						<h2>从事行业</h2>
+						<div class="work-industry-content">
+							<highchart class="chart" config="chartConfig5"></highchart>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="margin-top-20 box-shadow-1 border-radius-3 relational-info register-area" ng-show="clientClassify=='buyed'">
+				<h2>籍贯区域</h2>
+				<div class="register-area-content">
+					<highchart class="chart" config="chartConfig6"></highchart>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+
+</div>
