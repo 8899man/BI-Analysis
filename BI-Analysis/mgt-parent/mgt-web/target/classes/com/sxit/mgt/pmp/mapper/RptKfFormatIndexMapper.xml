@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.pmp.dao.RptKfFormatIndexDao" > 
+<!-- Result Map-->
+<resultMap id="RptKfFormatIndexMap" type="com.sxit.model.pmp.RptKfFormatIndex" >
+	<result column="data_seq_id" property="data_seq_id"/>
+	<result column="proj_guid" property="proj_guid"/>
+	<result column="devel_member_num" property="devel_member_num"/>
+	<result column="cst_num" property="cst_num"/>
+	<result column="repair_satisfy_num" property="repair_satisfy_num"/>
+	<result column="repair_num" property="repair_num"/>
+	<result column="complain_satisfy_num" property="complain_satisfy_num"/>
+	<result column="complain_num" property="complain_num"/>
+	<result column="createtime" property="createtime"/>
+</resultMap>
+       
+<!-- rpt_kf_format_index table all fields -->
+<sql id="Base_Column_List" >
+	 data_seq_id,proj_guid,devel_member_num,cst_num,repair_satisfy_num,repair_num,complain_satisfy_num,complain_num,createtime
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="data_seq_id != null" >
+	    and data_seq_id =  #{data_seq_id}
+	</if>
+	 	<if test="proj_guid != null and proj_guid != ''" >
+	    and proj_guid =  #{proj_guid}
+	</if>
+	<if test="devel_member_num != null" >
+	    and devel_member_num =  #{devel_member_num}
+	</if>
+	<if test="cst_num != null" >
+	    and cst_num =  #{cst_num}
+	</if>
+	<if test="repair_satisfy_num != null" >
+	    and repair_satisfy_num =  #{repair_satisfy_num}
+	</if>
+	<if test="repair_num != null" >
+	    and repair_num =  #{repair_num}
+	</if>
+	<if test="complain_satisfy_num != null" >
+	    and complain_satisfy_num =  #{complain_satisfy_num}
+	</if>
+	<if test="complain_num != null" >
+	    and complain_num =  #{complain_num}
+	</if>
+	<if test="createtime != null" >
+	    and createtime =  #{createtime}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into rpt_kf_format_index(data_seq_id,proj_guid,devel_member_num,cst_num,repair_satisfy_num,repair_num,complain_satisfy_num,complain_num,createtime)
+ values(#{data_seq_id},#{proj_guid},#{devel_member_num},#{cst_num},#{repair_satisfy_num},#{repair_num},#{complain_satisfy_num},#{complain_num},#{createtime})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update rpt_kf_format_index set proj_guid=#{proj_guid},devel_member_num=#{devel_member_num},cst_num=#{cst_num},repair_satisfy_num=#{repair_satisfy_num},repair_num=#{repair_num},complain_satisfy_num=#{complain_satisfy_num},complain_num=#{complain_num}, where data_seq_id=#{data_seq_id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update rpt_kf_format_index set 
+	<trim  suffixOverrides="," >
+	<if test="proj_guid != null  and proj_guid != '' ">
+		proj_guid=#{proj_guid},
+	</if>
+	<if test="devel_member_num != null  ">
+		devel_member_num=#{devel_member_num},
+	</if>
+	<if test="cst_num != null  ">
+		cst_num=#{cst_num},
+	</if>
+	<if test="repair_satisfy_num != null  ">
+		repair_satisfy_num=#{repair_satisfy_num},
+	</if>
+	<if test="repair_num != null  ">
+		repair_num=#{repair_num},
+	</if>
+	<if test="complain_satisfy_num != null  ">
+		complain_satisfy_num=#{complain_satisfy_num},
+	</if>
+	<if test="complain_num != null  ">
+		complain_num=#{complain_num},
+	</if>
+	<if test="createtime != null  ">
+		createtime=#{createtime},
+	</if>
+	</trim> where data_seq_id=#{data_seq_id}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from rpt_kf_format_index where data_seq_id = #{data_seq_id}
+</delete>
+ 
+<!-- 根据id查询 rpt_kf_format_index -->
+<select id="queryById"  resultMap="RptKfFormatIndexMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from rpt_kf_format_index where proj_guid=#{proj_guid} and createtime = (select max(createtime) from rpt_kf_format_index);
+</select>
+
+<!-- rpt_kf_format_index 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from rpt_kf_format_index 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询rpt_kf_format_index列表 -->
+<select id="queryByList" resultMap="RptKfFormatIndexMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from rpt_kf_format_index 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

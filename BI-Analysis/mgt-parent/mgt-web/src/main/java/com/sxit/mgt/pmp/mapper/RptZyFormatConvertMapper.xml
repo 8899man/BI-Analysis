@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.pmp.dao.RptZyFormatConvertDao" > 
+<!-- Result Map-->
+<resultMap id="RptZyFormatConvertMap" type="com.sxit.model.pmp.RptZyFormatConvert" >
+	<result column="index_flow_id" property="index_flow_id"/>
+	<result column="proj_id" property="proj_id"/>
+	<result column="index_format_type" property="index_format_type"/>
+	<result column="buy_cst_num" property="buy_cst_num"/>
+	<result column="buy_cst_deal_num" property="buy_cst_deal_num"/>
+	<result column="rent_cst_num" property="rent_cst_num"/>
+	<result column="rent_cst_deal_num" property="rent_cst_deal_num"/>
+	<result column="tj_cst_num" property="tj_cst_num"/>
+	<result column="tj_cst_deal_num" property="tj_cst_deal_num"/>
+	<result column="dk_cst_num" property="dk_cst_num"/>
+	<result column="dk_cst_deal_num" property="dk_cst_deal_num"/>
+	<result column="Tj_rent_cst_num" property="Tj_rent_cst_num"/>
+	<result column="Tj_rent_cst_deal_num" property="Tj_rent_cst_deal_num"/>
+	<result column="dk_rent_cst_num" property="dk_rent_cst_num"/>
+	<result column="dk_rent_cst_deal_num" property="dk_rent_cst_deal_num"/>
+	<result column="create_time" property="create_time"/>
+</resultMap>
+       
+<!-- rpt_zy_format_convert table all fields -->
+<sql id="Base_Column_List" >
+	 index_flow_id,proj_id,index_format_type,buy_cst_num,buy_cst_deal_num,rent_cst_num,rent_cst_deal_num,tj_cst_num,tj_cst_deal_num,dk_cst_num,dk_cst_deal_num,Tj_rent_cst_num,Tj_rent_cst_deal_num,dk_rent_cst_num,dk_rent_cst_deal_num,create_time
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	 	<if test="index_flow_id != null and index_flow_id != ''" >
+	    and index_flow_id =  #{index_flow_id}
+	</if>
+	 	<if test="proj_id != null and proj_id != ''" >
+	    and proj_id =  #{proj_id}
+	</if>
+	 	<if test="index_format_type != null and index_format_type != ''" >
+	    and index_format_type =  #{index_format_type}
+	</if>
+	<if test="buy_cst_num != null" >
+	    and buy_cst_num =  #{buy_cst_num}
+	</if>
+	<if test="buy_cst_deal_num != null" >
+	    and buy_cst_deal_num =  #{buy_cst_deal_num}
+	</if>
+	<if test="rent_cst_num != null" >
+	    and rent_cst_num =  #{rent_cst_num}
+	</if>
+	<if test="rent_cst_deal_num != null" >
+	    and rent_cst_deal_num =  #{rent_cst_deal_num}
+	</if>
+	<if test="tj_cst_num != null" >
+	    and tj_cst_num =  #{tj_cst_num}
+	</if>
+	<if test="tj_cst_deal_num != null" >
+	    and tj_cst_deal_num =  #{tj_cst_deal_num}
+	</if>
+	<if test="dk_cst_num != null" >
+	    and dk_cst_num =  #{dk_cst_num}
+	</if>
+	<if test="dk_cst_deal_num != null" >
+	    and dk_cst_deal_num =  #{dk_cst_deal_num}
+	</if>
+	<if test="Tj_rent_cst_num != null" >
+	    and Tj_rent_cst_num =  #{Tj_rent_cst_num}
+	</if>
+	<if test="Tj_rent_cst_deal_num != null" >
+	    and Tj_rent_cst_deal_num =  #{Tj_rent_cst_deal_num}
+	</if>
+	<if test="dk_rent_cst_num != null" >
+	    and dk_rent_cst_num =  #{dk_rent_cst_num}
+	</if>
+	<if test="dk_rent_cst_deal_num != null" >
+	    and dk_rent_cst_deal_num =  #{dk_rent_cst_deal_num}
+	</if>
+	<if test="create_time != null" >
+	    and create_time =  #{create_time}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into rpt_zy_format_convert(index_flow_id,proj_id,index_format_type,buy_cst_num,buy_cst_deal_num,rent_cst_num,rent_cst_deal_num,tj_cst_num,tj_cst_deal_num,dk_cst_num,dk_cst_deal_num,Tj_rent_cst_num,Tj_rent_cst_deal_num,dk_rent_cst_num,dk_rent_cst_deal_num,create_time)
+ values(#{index_flow_id},#{proj_id},#{index_format_type},#{buy_cst_num},#{buy_cst_deal_num},#{rent_cst_num},#{rent_cst_deal_num},#{tj_cst_num},#{tj_cst_deal_num},#{dk_cst_num},#{dk_cst_deal_num},#{Tj_rent_cst_num},#{Tj_rent_cst_deal_num},#{dk_rent_cst_num},#{dk_rent_cst_deal_num},#{create_time})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update rpt_zy_format_convert set proj_id=#{proj_id},index_format_type=#{index_format_type},buy_cst_num=#{buy_cst_num},buy_cst_deal_num=#{buy_cst_deal_num},rent_cst_num=#{rent_cst_num},rent_cst_deal_num=#{rent_cst_deal_num},tj_cst_num=#{tj_cst_num},tj_cst_deal_num=#{tj_cst_deal_num},dk_cst_num=#{dk_cst_num},dk_cst_deal_num=#{dk_cst_deal_num},Tj_rent_cst_num=#{Tj_rent_cst_num},Tj_rent_cst_deal_num=#{Tj_rent_cst_deal_num},dk_rent_cst_num=#{dk_rent_cst_num},dk_rent_cst_deal_num=#{dk_rent_cst_deal_num},create_time=#{create_time} where index_flow_id=#{index_flow_id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update rpt_zy_format_convert set 
+	<trim  suffixOverrides="," >
+	<if test="proj_id != null  and proj_id != '' ">
+		proj_id=#{proj_id},
+	</if>
+	<if test="index_format_type != null  and index_format_type != '' ">
+		index_format_type=#{index_format_type},
+	</if>
+	<if test="buy_cst_num != null  ">
+		buy_cst_num=#{buy_cst_num},
+	</if>
+	<if test="buy_cst_deal_num != null  ">
+		buy_cst_deal_num=#{buy_cst_deal_num},
+	</if>
+	<if test="rent_cst_num != null  ">
+		rent_cst_num=#{rent_cst_num},
+	</if>
+	<if test="rent_cst_deal_num != null  ">
+		rent_cst_deal_num=#{rent_cst_deal_num},
+	</if>
+	<if test="tj_cst_num != null  ">
+		tj_cst_num=#{tj_cst_num},
+	</if>
+	<if test="tj_cst_deal_num != null  ">
+		tj_cst_deal_num=#{tj_cst_deal_num},
+	</if>
+	<if test="dk_cst_num != null  ">
+		dk_cst_num=#{dk_cst_num},
+	</if>
+	<if test="dk_cst_deal_num != null  ">
+		dk_cst_deal_num=#{dk_cst_deal_num},
+	</if>
+	<if test="Tj_rent_cst_num != null  ">
+		Tj_rent_cst_num=#{Tj_rent_cst_num},
+	</if>
+	<if test="Tj_rent_cst_deal_num != null  ">
+		Tj_rent_cst_deal_num=#{Tj_rent_cst_deal_num},
+	</if>
+	<if test="dk_rent_cst_num != null  ">
+		dk_rent_cst_num=#{dk_rent_cst_num},
+	</if>
+	<if test="dk_rent_cst_deal_num != null  ">
+		dk_rent_cst_deal_num=#{dk_rent_cst_deal_num},
+	</if>
+	<if test="create_time != null  ">
+		create_time=#{create_time},
+	</if>
+	</trim> where index_flow_id=#{index_flow_id}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from rpt_zy_format_convert where index_flow_id = #{index_flow_id}
+</delete>
+ 
+<!-- 根据id查询 rpt_zy_format_convert -->
+<select id="queryById"  resultMap="RptZyFormatConvertMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from rpt_zy_format_convert where proj_id=#{proj_id} and create_time = (select max(create_time) from rpt_zy_format_convert);
+</select>
+
+<!-- rpt_zy_format_convert 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from rpt_zy_format_convert 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询rpt_zy_format_convert列表 -->
+<select id="queryByList" resultMap="RptZyFormatConvertMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from rpt_zy_format_convert 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

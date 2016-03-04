@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.system.dao.IndustryDao">
+	 
+
+	 <resultMap id="IndustryMap" type="BIndustry" >
+	    <id column="industryid" property="industryid" jdbcType="VARCHAR" />
+		<result column="industryname" property="industryname" jdbcType="VARCHAR" />
+		<result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+
+	 </resultMap>
+
+	<select id="getIndustryList" resultMap="IndustryMap" parameterType="java.util.Map">
+		select
+		industryid,
+		industryname,
+		createtime
+		from
+		b_industry
+		<where>  
+	        <if test="searchTxt != null">  
+	            and 
+	            (
+	             industryid like CONCAT('%','${searchTxt}','%' )
+	             or
+	             industryname like CONCAT('%','${searchTxt}','%' )
+	            )  
+	        </if>
+        </where>
+        order by industryid 
+	</select>
+
+	<select id="getHaveIndustryList" resultMap="IndustryMap">
+		select
+		industryid,
+		industryname,
+		createtime
+		from
+		b_industry
+		where industryid in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item.industryid}
+		</foreach>
+	</select>
+
+	<select id="getIndustryById" resultMap="IndustryMap" parameterType="java.lang.String">
+		select
+		industryid,
+		industryname,
+		createtime
+		from
+		b_industry
+		where industryid =  #{industryid}
+    </select>
+
+	<insert id="insert" parameterType="BIndustry">
+		insert into
+		b_industry(
+		industryid,
+		industryname,
+		createtime
+		)
+		values
+		(
+		#{industryid},
+		#{industryname},
+		#{createtime}
+		)
+	</insert>
+
+	<insert id="insertList" parameterType="java.util.List">
+		insert into
+		b_industry(
+		industryid,
+		industryname,
+		createtime
+		)
+		values
+		<foreach collection="list" item="obj" index="index" separator=",">
+			(
+			#{obj.industryid},
+			#{obj.industryname},
+			#{obj.createtime}
+			)
+		</foreach>
+	</insert>
+
+	<update id="update" parameterType="BIndustry">
+		update b_industry
+		set
+		industryid = #{industryid},
+		industryname = #{industryname},
+		createtime = #{createtime}
+		where industryid =
+		#{industryid}
+	</update>
+
+	<update id="updateList" parameterType="List">
+		<foreach collection="list" item="obj" index="index" separator=";">
+			update b_industry
+			set
+			industryid = #{obj.industryid},
+			industryname = #{obj.industryname},
+			createtime = #{obj.createtime}
+			where industryid =
+			#{obj.industryid}
+		</foreach>
+	</update>
+
+	<select id="isHave" resultType="int" parameterType="java.lang.String">
+		select
+		count(*) from b_industry where industryid =
+		#{industryid}
+	</select>
+
+	<update id="updateToDelete" parameterType="java.lang.String">
+		update b_industry
+		set
+		state = 2
+		where industryid =
+		#{industryid}
+	</update>
+	<update id="delete" parameterType="java.lang.String">
+		delete from b_industry
+		where industryid =
+		#{industryid}
+	</update>
+
+	<select id="getIndustryCount" resultType="int">
+		select count(1)
+		from b_industry
+	</select>
+
+	<select id="getIdList" resultType="String">
+		select industryid from b_industry
+	</select>
+	
+	<select id="getOrgIdList" resultType="String" parameterType="java.lang.String">
+		select orgGUID from b_industry_org where industryID = #{industryid}
+	</select>
+
+	<insert id="addIndustryOrg" parameterType="java.util.Map">
+		insert into
+		b_industry_org(
+		industryID,
+		orgGUID
+		)
+		values
+		<foreach collection="list" item="obj" index="index" separator=",">
+			(
+			#{industryid},
+			#{obj}
+			)
+		</foreach>
+	</insert>
+
+	<update id="deleteIndustryOrg" parameterType="java.util.Map">
+		<foreach collection="list" item="obj" index="index" separator=";">
+			delete from b_industry_org where industryID =#{industryid} and
+			orgGUID=#{obj}
+		</foreach>
+	</update>
+
+</mapper>

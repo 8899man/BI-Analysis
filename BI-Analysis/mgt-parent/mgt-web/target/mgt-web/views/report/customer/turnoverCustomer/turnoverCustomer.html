@@ -1,0 +1,153 @@
+<div ng-controller="TurnoverCustomerController" ng-init="initializeController()">
+	<div class="title-position box-shadow-1 clearfix">
+		<h1>报表</h1>
+		<h2><a class="glyphicon glyphicon-home" href=""><i>首页</i></a> > 报表 > 客户 > 客户购房特征分析</h2>
+	</div>
+
+	<div class="content">
+		<div class="content-main">
+			<div class="border-1 border-1-gray box-shadow-1 bg-white owner-type-statistics">
+				<div class="border-left-3 report-title"><h2>客户购房特征分析</h2></div>
+				<div class="report-search box-shadow-1 clearfix">
+					<form action="" class="form-inline">
+						<div class="report-search-area">
+							<ul>
+								<!-- <li>{{currentTimeInterval}}</li> -->
+								<!-- <li class="date-type li-text font-bold">签约时段</li>
+								<li><label class="btn btn-default" ng-model="dateType" btn-radio="'7天'">7天</label><a href="javascript:;" class="btn btn-default">7天</a></li>
+								<li><label class="btn btn-default" ng-model="dateType" btn-radio="'30天'">30天</label><a href="javascript:;" class="btn btn-default">30天</a></li>
+								<li><input date-picker-ym type="text" class="data-select form-control" ng-model="dateYM"></li> -->
+								<li>从：<input id="d4311" start-date-ymd class="data-select form-control" type="text" ng-model="startDate" /> 
+                                                                                                至：<input id="d4312" end-date-ymd class="data-select form-control" type="text" ng-model="endDate" />
+                                </li> 
+								<li><a href="javascript:;" class="btn btn-primary" ng-click="searchData()">查询</a></li>
+							</ul>
+						</div>
+
+						<div class="report-search-others">
+							<ul>
+								
+								<li><a href="javascript:;" class="export-btn" ng-click="downloadData()">导出</a></li>
+							</ul>
+						</div>
+					</form>
+				</div>
+				
+				<div class="report-search-table">
+					<div class="table-responsive">
+						<!-- <table class="table table-bordered table-condensed table-striped" ng-show="searchDataLoaded">
+							<tr class="no-bg">
+								<td rowspan="2" class="td-first"><div class="td-right">指标项</div><div class="td-left">业主类型</div></td>
+								<td rowspan="2">总数量</td>
+								<td colspan="3">性别</td>
+								<td colspan="6">年龄段</td>
+								<td colspan="{{liveArea.length}}">居住区域</td>
+							</tr>
+							<tr class="no-bg">
+								<td>男</td>
+								<td>女</td>
+								<td>未知</td>
+								<td>20岁以下</td>
+								<td>20-34岁</td>
+								<td>35-44岁</td>
+								<td>45-54岁</td>
+								<td>55-64岁</td>
+								<td>64岁以上</td>
+								<td ng-repeat="area in liveArea">{{area}}</td>
+							</tr>
+							<tr ng-repeat="owner in OwnerType">
+								<td class="font-bold">{{owner.title}}</td>
+								<td ng-repeat="num in owner.num">{{num}}</td>
+							</tr>
+						</table> -->
+
+
+
+						<table class="table table-bordered table-condensed table-striped" ng-show="searchDataLoaded">
+							<tr class="no-bg">
+								<td rowspan="2" class="td-first"><div class="td-right">指标项</div><div class="td-left">归属单位</div></td>
+								<td rowspan="2">客户数量</td>
+								<td colspan="{{ageList.length}}">年龄段</td>
+								<td colspan="{{mianjiList.length}}">房屋面积</td>
+								<td colspan="{{huxingList.length}}">户型结构</td>
+							</tr>
+							<tr class="no-bg">
+								<td ng-repeat="age in ageList">{{age.name}}</td>
+								<td ng-repeat="mianji in mianjiList">{{mianji.name}}</td>
+								<td ng-repeat="huxing in huxingList">{{huxing.name}}</td>
+							</tr>
+							<tr ng-repeat="item in list">
+								<!-- 
+								<td class="font-bold">
+									<a href="javascript:;" class="go-back-area" title="返回" ng-click="searchBack(item)" ng-show="item.type!='area'"></a>
+									<a href="javascript:;" ng-click="search(item)" ng-show="item.type!='project'">{{item.title}}</a>
+									<span ng-show="item.type=='project'">{{item.title}}</span></td>
+								<td ng-repeat="i in item.num">{{i[0]}}</td>
+								 -->
+								
+								<td class="font-bold">
+									<a href="javascript:;" class="go-back-area" title="返回" ng-click="searchBack(item)" ng-show="item.unitType!='area'"></a>
+									<a href="javascript:;" ng-click="search(item)" ng-show="item.unitType!='project'">{{item.countType}}</a>
+									<span ng-show="item.unitType=='project'">{{item.countType}}</span>
+								</td>
+								<td >{{item.total}}</td>
+								<td ng-repeat="age in ageList">{{item[age.alisName]}}</td>
+								<td ng-repeat="mianji in mianjiList">{{item[mianji.alisName]}}</td>
+								<td ng-repeat="huxing in huxingList">{{item[huxing.alisName]}}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			
+			<div class="margin-top-20 box-shadow-1 bg-white owner-type-reports">
+				<div class="border-left-3 border-color-yellow report-title"><h2>各维度图表呈现</h2></div>
+			</div>
+
+			<div class="owner-type-reports-main clearfix" ng-show="searchDataLoaded">
+				<div class="owner-type-reports-main-l">
+
+					<div class="box-shadow-1 bg-white margin-top-10 border-radius-3 border-1 border-1-gray border-top-3">
+						<div class="report-table-title"><h2>数量统计</h2></div>
+						<div class="report-table-main report-table-1">
+							<highchart class="chart" config="chartConfig1"></highchart>
+						</div>
+					</div>
+
+					<div class="box-shadow-1 bg-white margin-top-10 border-radius-3 border-1 border-1-gray border-top-3">
+						<div class="report-table-title"><h2>产品类型分布</h2></div>
+						<div class="report-table-main report-table-2">
+							<highchart class="chart" config="chartConfig2"></highchart>
+						</div>
+					</div>
+
+				</div>
+				<div class="owner-type-reports-main-r">
+					
+					<div class="box-shadow-1 bg-white margin-top-10 border-radius-3 border-1 border-1-gray border-top-3">
+						<div class="report-table-title"><h2>性别分布</h2></div>
+						<div class="report-table-main report-table-3">
+							<highchart class="chart" config="chartConfig3"></highchart>
+						</div>
+					</div>
+
+					<div class="box-shadow-1 bg-white margin-top-10 border-radius-3 border-1 border-1-gray border-top-3">
+						<div class="report-table-title"><h2>户型结构分布</h2></div>
+						<div class="report-table-main report-table-4" style="padding-left:10px; padding-right:10px;">
+							<highchart class="chart" config="chartConfig4"></highchart>
+						</div>
+					</div>
+
+					<div class="box-shadow-1 bg-white margin-top-10 border-radius-3 border-1 border-1-gray border-top-3">
+						<div class="report-table-title report-table-title-5"><h2>面积段分布</h2></div>
+						<div class="report-table-main report-table-5">
+							<highchart class="chart" config="chartConfig5"></highchart>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

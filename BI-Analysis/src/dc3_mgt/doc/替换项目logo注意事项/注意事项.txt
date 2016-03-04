@@ -1,0 +1,4 @@
+1>  修改index.html里的title
+2>  修改内页logo图片 images/logo.png
+3>  修改登录页logo图片 images/logo-signin.png
+4>  修改加载时候loading的图片 styles/bgimg/loading_bg.png，loading图片分两块，外面旋转的圆弧，以及内部的logo

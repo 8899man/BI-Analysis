@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.pmp.dao.BProjSumDao" > 
+<!-- Result Map-->
+<resultMap id="BProjSumMap" type="BProjSum">
+	<result column="proj_sum_id" property="proj_sum_id" jdbcType="INTEGER"/>
+	<result column="proj_guid" property="proj_guid" jdbcType="VARCHAR"/>
+	<result column="proj_name" property="proj_name" jdbcType="VARCHAR"/>
+	<result column="area_id" property="area_id" jdbcType="VARCHAR"/>
+	<result column="cityCode" property="cityCode" jdbcType="VARCHAR"/>
+	<result column="sale_sum" property="sale_sum" jdbcType="INTEGER"/>
+	<result column="saleamountsum" property="saleamountsum" jdbcType="INTEGER"/>
+	<result column="sale_scale" property="sale_scale" jdbcType="INTEGER"/>
+	<result column="trade_sum" property="trade_sum" jdbcType="INTEGER"/>
+	<result column="repairs_sum" property="repairs_sum" jdbcType="INTEGER"/>
+	<result column="family_sum" property="family_sum" jdbcType="INTEGER"/>
+	<result column="status" property="status" jdbcType="INTEGER"/>
+	<result column="create_time" property="create_time" jdbcType="TIMESTAMP"/>
+	<result column="subsc_sum" property="subsc_sum" jdbcType="INTEGER"/>
+</resultMap>
+       
+<!-- b_proj_sum table all fields -->
+<sql id="Base_Column_List" >
+	 proj_sum_id,proj_guid,proj_name,area_id,cityCode,sale_sum,saleamountsum,sale_scale,trade_sum,repairs_sum,family_sum,status,create_time,subsc_sum
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="proj_sum_id != null" >
+	    and proj_sum_id =  #{proj_sum_id}
+	</if>
+	 	<if test="proj_guid != null and proj_guid != ''" >
+	    and proj_guid =  #{proj_guid}
+	</if>
+	 	<if test="proj_name != null and proj_name != ''" >
+	    and proj_name =  #{proj_name}
+	</if>
+	<if test="area_id != null" >
+	    and area_id =  #{area_id}
+	</if>
+	<if test="cityCode != null" >
+	    and cityCode =  #{cityCode}
+	</if>
+	<if test="sale_sum != null" >
+	    and sale_sum =  #{sale_sum}
+	</if>
+	<if test="saleamountsum != null" >
+	    and saleamountsum =  #{saleamountsum}
+	</if>
+	<if test="sale_scale != null" >
+	    and sale_scale =  #{sale_scale}
+	</if>
+	<if test="trade_sum != null" >
+	    and trade_sum =  #{trade_sum}
+	</if>
+	<if test="repairs_sum != null" >
+	    and repairs_sum =  #{repairs_sum}
+	</if>
+	<if test="family_sum != null" >
+	    and family_sum =  #{family_sum}
+	</if>
+	<if test="status != null" >
+	    and status =  #{status}
+	</if>
+	<if test="create_time != null" >
+	    and create_time =  #{create_time}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="insert" parameterType="BProjSum" >
+  insert into b_proj_sum(proj_sum_id,proj_guid,proj_name,area_id,cityCode,sale_sum,saleamountsum,sale_scale,trade_sum,repairs_sum,family_sum,status,create_time,subsc_sum)
+ values(#{proj_sum_id},#{proj_guid},#{proj_name},#{area_id},#{cityCode},#{sale_sum},#{saleamountsum},#{sale_scale},#{trade_sum},#{repairs_sum},#{family_sum},#{status},#{create_time},#{subsc_sum})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update b_proj_sum set proj_guid=#{proj_guid},proj_name=#{proj_name},area_id=#{area_id},cityCode=#{cityCode},sale_sum=#{sale_sum},saleamountsum=#{saleamountsum},sale_scale=#{sale_scale},trade_sum=#{trade_sum},repairs_sum=#{repairs_sum},family_sum=#{family_sum},create_time=#{create_time} where proj_sum_id=#{proj_sum_id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update b_proj_sum set 
+	<trim  suffixOverrides="," >
+	<if test="proj_guid != null  and proj_guid != '' ">
+		proj_guid=#{proj_guid},
+	</if>
+	<if test="proj_name != null  and proj_name != '' ">
+		proj_name=#{proj_name},
+	</if>
+	<if test="area_id != null  ">
+		area_id=#{area_id},
+	</if>
+	<if test="cityCode != null  ">
+		cityCode=#{cityCode},
+	</if>
+	<if test="sale_sum != null  ">
+		sale_sum=#{sale_sum},
+	</if>
+	<if test="saleamountsum != null  ">
+		saleamountsum=#{saleamountsum},
+	</if>
+	<if test="sale_scale != null  ">
+		sale_scale=#{sale_scale},
+	</if>
+	<if test="trade_sum != null  ">
+		trade_sum=#{trade_sum},
+	</if>
+	<if test="repairs_sum != null  ">
+		repairs_sum=#{repairs_sum},
+	</if>
+	<if test="family_sum != null  ">
+		family_sum=#{family_sum},
+	</if>
+	<if test="create_time != null  ">
+		create_time=#{create_time},
+	</if>
+	</trim> where proj_sum_id=#{proj_sum_id}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from b_proj_sum where proj_sum_id = #{proj_sum_id}
+</delete>
+ 
+<!-- 根据id查询 项目汇总 -->
+<select id="getBProjSumByIds"  resultMap="BProjSumMap" parameterType="java.util.Map">
+	select <include refid="Base_Column_List" /> 
+	 from rpt_b_proj_sum where area_id = #{area_id} and cityCode = #{cityCode}
+</select>
+
+<!-- 根据id查询 项目汇总 -->
+<select id="getAreas"  resultMap="BProjSumMap" parameterType="java.util.Map">
+	select distinct area_id
+	 from rpt_b_proj_sum where area_id not in (select area_id from rpt_b_proj_sum where area_id="商置公司")
+</select>
+
+<!-- 根据id查询 项目汇总 -->
+<select id="getcityCodes"  resultMap="BProjSumMap" parameterType="java.util.List">
+	select distinct area_id,cityCode
+	 from rpt_b_proj_sum where area_id not in (select area_id from rpt_b_proj_sum where area_id="商置公司")  order by area_id
+</select>
+
+<!-- 根据id查询 项目汇总 -->
+<select id="getBProjSumById"  resultMap="BProjSumMap" parameterType="java.util.Map">
+	select <include refid="Base_Column_List" /> 
+	 from rpt_b_proj_sum where proj_guid = #{proj_guid}
+</select>
+
+<!-- 项目汇总 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="BProjSum">
+	select count(1) from rpt_b_proj_sum 
+</select>
+  	
+<!-- 查询项目汇总列表 -->
+<select id="getBProjSumList" resultMap="BProjSumMap"  parameterType="BProjSum">
+	select a.proj_sum_id,a.proj_guid,a.proj_name,a.area_id,a.cityCode,
+	a.sale_sum,a.saleamountsum,a.sale_scale,a.trade_sum,a.repairs_sum,a.family_sum,
+	a.status,a.create_time,a.subsc_sum
+	from rpt_b_proj_sum a,b_proj b
+	where a.proj_guid = b.projGUID
+	order by b.bgnSaleDate desc
+</select>
+
+<!-- 查询在售项目汇总列表 -->
+<select id="getBProjSumOnList" resultMap="BProjSumMap"  parameterType="BProjSum">
+	select 
+	a.proj_sum_id,a.proj_guid,a.proj_name,a.area_id,a.cityCode,
+	a.sale_sum,a.saleamountsum,a.sale_scale,a.status,a.create_time,a.subsc_sum
+	from rpt_b_proj_sum a,b_proj b
+	where a.status='在售' and a.proj_guid = b.projGUID
+	order by b.bgnSaleDate desc
+</select>
+
+<!-- 查询在已项目汇总列表 -->
+<select id="getBProjSumEndList" resultMap="BProjSumMap"  parameterType="BProjSum">
+	select 
+	a.proj_sum_id,a.proj_guid,a.proj_name,a.area_id,a.cityCode,
+	a.trade_sum,a.repairs_sum,a.family_sum,a.status,a.create_time,a.subsc_sum
+	from rpt_b_proj_sum a,b_proj b
+	where a.status='已售' and a.proj_guid = b.projGUID
+	order by create_time desc
+</select>
+  	
+</mapper>   

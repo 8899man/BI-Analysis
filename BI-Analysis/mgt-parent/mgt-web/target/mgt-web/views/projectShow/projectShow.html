@@ -1,0 +1,490 @@
+<div ng-controller="ProjectShowController" ng-init="initializeController()">
+	<div class="title-position box-shadow-1 clearfix">
+		<h1>项目概览</h1>
+		<h2><a class="glyphicon glyphicon-home" href=""><i>首页</i></a> > 项目概览</h2>
+	</div>
+
+	<div class="content">
+		<div class="content-main" ng-show="loaded">
+			
+			<div class="project-show-header clearfix">
+				<div class="project-show-header-l">
+					
+					<div class="customer-header-item-outer customer-header-item-outer1">
+						<div class="customer-header-item customer-header-item1 box-shadow-1 bg-gray border-radius-3 border-1 border-1-gray border-top-3">
+							<dl ng-model="projComplete">
+								<dt><h2>全部项目</h2></dt>
+								<dd class="clearfix">
+									<div class="customer-header-key">昨日成交：</div>
+									<div class="customer-header-value"><b>{{projComplete.yesterday_deal}}</b>万元</div>
+								</dd>
+								<dd class="clearfix">
+									<div class="customer-header-key">本月成交：</div>
+									<div class="customer-header-value"><b>{{projComplete.month_deal}}</b>亿元</div>
+								</dd>
+								<dd class="clearfix">
+									<div class="customer-header-key">本季成交：</div>
+									<div class="customer-header-value"><b>{{projComplete.quarter_deal}}</b>亿元</div>
+								</dd>
+								<dd class="clearfix">
+									<div class="customer-header-key">本年成交：</div>
+									<div class="customer-header-value"><b class="text-red">{{projComplete.year_deal}}</b>亿元</div>
+								</dd>
+								<dd class="line"><i></i></dd>
+								<dd class="clearfix">
+									<div class="customer-header-key">在售项目：</div>
+									<div class="customer-header-value"><b>{{projComplete.onsell_deal}}</b>个</div>
+								</dd>
+								<dd class="clearfix">
+									<div class="customer-header-key">全部项目：</div>
+									<div class="customer-header-value"><b>{{projComplete.complete_deal}}</b>个</div>
+								</dd>
+							</dl>
+						</div>
+					</div>
+
+				</div>
+				<div class="project-show-header-r">
+					
+
+					
+					<div class="project-details-feature box-shadow-1 border-radius-2">
+
+						<tabset justified="true">
+ 
+							
+
+							<tab heading="住宅项目">
+								<div class="project-show-sort project-show-sort-1" ng-model="projHouse">
+									<div class="project-show-sort-header clearfix">
+										<h2>业态进展</h2>
+										<div class="project-show-sort-header-main project-show-ytjz">
+											<ul class="clearfix">
+												<li class="li-1">
+													<h3><i>在建</i><b>{{projHouse.proj_abuilding}}</b>个项目</h3>
+													<h4><b>{{projHouse.proj_abuilding_set}}</b>套</h4>
+												</li>
+												<li class="li-2">
+													<h3><i>预售</i><b>{{projHouse.proj_presell}}</b>个项目</h3>
+													<h4><b>{{projHouse.proj_presell_set}}</b>套</h4>
+												</li>
+												<li class="li-3">
+													<h3><i>在售</i><b>{{projHouse.proj_onsell}}</b>个项目</h3>
+													<h4><b>{{projHouse.proj_onsell_set}}</b>套</h4>
+												</li>
+												<li class="li-4">
+													<h3><i>售罄</i><b>{{projHouse.proj_sold}}</b>个项目</h3>
+													<h4><b>{{projHouse.proj_sold_set}}</b>套</h4>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="project-show-sort-content clearfix">
+										<div class="show-sort-content-l">
+											<h3>成交金额</h3>
+											<div class="show-sort-c-list">
+												<ul>
+													<li class="clearfix">
+														<div class="show-sort-c-l">昨日成交：</div>
+														<div class="show-sort-c-r"><b>{{projHouse.proj_deal01}}</b>万元</div>
+													</li>
+													<li class="clearfix">
+														<div class="show-sort-c-l">本月成交：</div>
+														<div class="show-sort-c-r"><b>{{projHouse.proj_deal02}}</b>亿元</div>
+													</li>
+													<li class="clearfix">
+														<div class="show-sort-c-l">本季成交：</div>
+														<div class="show-sort-c-r"><b>{{projHouse.proj_deal03}}</b>亿元</div>
+													</li>
+													<li class="clearfix">
+														<div class="show-sort-c-l">本年成交：</div>
+														<div class="show-sort-c-r"><b>{{projHouse.proj_deal04}}</b>亿元</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+										<div class="show-sort-content-m">
+											<h3>存销比</h3>
+											<div class="show-sort-c-list">
+												<ul>
+													<li class="clearfix">
+														<div class="show-sort-c-l">已售套数：</div>
+														<div class="show-sort-c-r"><b>{{projHouse.proj_set01}}</b>套数</div>
+													</li>
+													<li class="clearfix">
+														<div class="show-sort-c-l">库存套数：</div>
+														<div class="show-sort-c-r"><b>{{projHouse.proj_set02}}</b>套数</div>
+													</li>
+													<li class="clearfix">
+														<div class="show-sort-c-l">总去化率：</div>
+														<div class="show-sort-c-r"><b class="no-padding">{{projHouse.proj_rate}}%</b></div>
+													</li>
+													<li class="tip clearfix">说明：在建、预售不计算此列</li>
+												</ul>
+											</div>
+										</div>
+										<div class="show-sort-content-r">
+											<h3>项目成交排行</h3>
+											<div class="show-sort-c-list" ng-repeat="BProjSum in bProjSum">
+												<div class="dd-list clearfix">
+													<div class="dd-sort-num dd-sort-num{{$index+1}}">No.{{$index+1}}</div>
+													<div class="dd-list-main">
+														<div class="dd-list-l fl">{{BProjSum.proj_name}}</div>
+														<div class="dd-list-r fr"><b>{{BProjSum.saleamountsum}}</b>万元</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</tab>
+
+
+							<tab heading="置业项目">
+								<div class="project-show-sort project-show-sort-1">
+									<div class="project-show-sort-header clearfix" ng-molde="rptZyProjRentSale">
+										<h2>盘源状况</h2>
+										<div class="project-show-sort-header-main project-show-pyzt">
+											<ul class="clearfix">
+												<li class="li-1">
+													<h3><i>待售</i><b>{{rptZyProjRentSale.sale_proj_num}}</b>个项目</h3>
+													<h4><b>{{rptZyProjRentSale.sale_total_set}}</b>套</h4>
+												</li>
+												<li class="li-2 li-seprate">
+													<h3><i>已售</i><b>{{rptZyProjRentSale.sold_set}}</b>个项目</h3>
+													<h4><i>失效</i><b>{{rptZyProjRentSale.sale_invalid_set}}</b>套</h4>
+												</li>
+												<li class="li-3">
+													<h3><i>待租</i><b>{{rptZyProjRentSale.rent_proj_num}}</b>个项目</h3>
+													<h4><b>{{rptZyProjRentSale.rent_total_set}}</b>套</h4>
+												</li>
+												<li class="li-4 li-seprate">
+													<h3><i>已租</i><b>{{rptZyProjRentSale.rent_set}}</b>个项目</h3>
+													<h4><i>失效</i><b>{{rptZyProjRentSale.rent_invalid_set}}</b>套</h4>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="project-show-sort-content clearfix">
+										<div class="show-sort-content-l">
+											<h3>出租成交金额</h3>
+											<div class="show-sort-c-list">
+												<ul>
+													<li class="clearfix">
+														<div class="show-sort-c-l">昨日：</div>
+														<div class="show-sort-c-r"><b>{{rptZyProjRentSale.sale_yest_deal}}</b>万元</div>
+													</li>
+													<li class="clearfix">
+														<div class="show-sort-c-l">本月：</div>
+														<div class="show-sort-c-r"><b>{{rptZyProjRentSale.sale_month_deal}}</b>亿元</div>
+													</li>
+													<li class="clearfix">
+														<div class="show-sort-c-l">本季：</div>
+														<div class="show-sort-c-r"><b>{{rptZyProjRentSale.sale_season_deal}}</b>亿元</div>
+													</li>
+													<li class="clearfix">
+														<div class="show-sort-c-l">本年：</div>
+														<div class="show-sort-c-r"><b>{{rptZyProjRentSale.sale_year_deal}}</b>亿元</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+										<div class="show-sort-content-m">
+											<h3>出售成交金额</h3>
+											<div class="show-sort-c-list">
+												<ul>
+													<li class="clearfix">
+														<div class="show-sort-c-l">昨日：</div>
+														<div class="show-sort-c-r"><b>{{rptZyProjRentSale.rent_yest_deal}}</b>万元</div>
+													</li>
+													<li class="clearfix">
+														<div class="show-sort-c-l">本月：</div>
+														<div class="show-sort-c-r"><b>{{rptZyProjRentSale.rent_month_deal}}</b>亿元</div>
+													</li>
+													<li class="clearfix">
+														<div class="show-sort-c-l">本季：</div>
+														<div class="show-sort-c-r"><b>{{rptZyProjRentSale.rent_season_deal}}</b>亿元</div>
+													</li>
+													<li class="clearfix">
+														<div class="show-sort-c-l">本年：</div>
+														<div class="show-sort-c-r"><b>{{rptZyProjRentSale.rent_year_deal}}</b>亿元</div>
+													</li>
+												</ul>
+											</div>
+										</div> 
+										<div class="show-sort-content-r">
+											<h3>门店成交排行</h3>
+											<div class="show-sort-c-list" ng-repeat="rptRank in rptZyStoreRank">
+												<div class="dd-list clearfix">
+													<div class="dd-sort-num dd-sort-num{{$index+1}}">No.{{$index+1}}</div>
+													<div class="dd-list-main">
+														<div class="dd-list-l fl">{{rptRank.store_name}}</div>
+														<div class="dd-list-r fr"><b>{{rptRank.store_deal_amount}}</b>万元</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</tab>
+
+
+							<tab heading="商业项目">
+								<div class="project-show-sort project-show-sort-1">
+									<div class="project-show-sort-header clearfix" ng-model="projBusiness">
+										<h2>业态进展</h2>
+										<div class="project-show-sort-header-main project-show-syxm">
+											<ul class="clearfix">
+												<li class="li-1">
+													<h3><i>在建</i><b>{{projBusiness.proj_abuilding}}</b>个项目</h3>
+													<h4><b>{{projBusiness.proj_abuilding_set}}</b>套</h4>
+												</li>
+												<li class="li-2">
+													<h3><i>预售</i><b>{{projBusiness.proj_presell}}</b>个项目</h3>
+													<h4><b>{{projBusiness.proj_presell_set}}</b>套</h4>
+												</li>
+												<li class="li-3">
+													<h3><i>租/售</i><b>{{projBusiness.proj_onsell}}</b>个项目</h3>
+													<h4><b>{{projBusiness.proj_onsell_set}}</b>套</h4>
+												</li>
+												<li class="li-4 li-seprate">
+													<div class="syxm-houses">
+														<h3><i>预售</i><b>{{projBusiness.proj_presell_counts}}</b>套</h3>
+														<h4><i>在售</i><b>{{projBusiness.proj_onsell_counts}}</b>套</h4>
+													</div>
+												</li>
+												<li class="li-5"><b>{{projBusiness.proj_number}}</b>个项目</li>
+											</ul>
+										</div>
+									</div>
+									<div class="project-show-sort-content clearfix">
+										<div class="show-sort-content-l">
+											<h3>成交金额</h3>
+											<div class="show-sort-c-list">
+												<ul>
+													<li class="clearfix">
+														<div class="show-sort-c-l">昨日成交：</div>
+														<div class="show-sort-c-r"><b>{{projBusiness.proj_deal01}}</b>万元</div>
+													</li>
+													<li class="clearfix">
+														<div class="show-sort-c-l">本月成交：</div>
+														<div class="show-sort-c-r"><b>{{projBusiness.proj_deal02}}</b>亿元</div>
+													</li>
+													<li class="clearfix">
+														<div class="show-sort-c-l">本季成交：</div>
+														<div class="show-sort-c-r"><b>{{projBusiness.proj_deal03}}</b>亿元</div>
+													</li>
+													<li class="clearfix">
+														<div class="show-sort-c-l">本年成交：</div>
+														<div class="show-sort-c-r"><b>{{projBusiness.proj_deal04}}</b>亿元</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+										<div class="show-sort-content-m">
+											<h3>存销比</h3>
+											<div class="show-sort-c-list">
+												<ul>
+													<li class="clearfix">
+														<div class="show-sort-c-l">租售套数：</div>
+														<div class="show-sort-c-r"><b>{{projBusiness.proj_set01}}</b>套数</div>
+													</li>
+													<li class="clearfix">
+														<div class="show-sort-c-l">库存套数：</div>
+														<div class="show-sort-c-r"><b>{{projBusiness.proj_set02}}</b>套数</div>
+													</li>
+													<li class="clearfix">
+														<div class="show-sort-c-l">总去化率：</div>
+														<div class="show-sort-c-r"><b class="no-padding">{{projBusiness.proj_rate}}%</b></div>
+													</li>
+													<li class="tip clearfix">说明：在建、预售不计算此列</li>
+												</ul>
+											</div>
+										</div>
+										<div class="show-sort-content-r">
+											<h3>项目成交排行</h3>
+											<div class="show-sort-c-list">
+												<div class="dd-list clearfix">
+													<div class="dd-sort-num dd-sort-num1">No.1</div>
+													<div class="dd-list-main">
+														<div class="dd-list-l fl">园区1</div>
+														<div class="dd-list-r fr"><b>60,820</b>万元</div>
+													</div>
+												</div>
+												<div class="dd-list clearfix">
+													<div class="dd-sort-num dd-sort-num2">No.2</div>
+													<div class="dd-list-main">
+														<div class="dd-list-l fl">花园城二期</div>
+														<div class="dd-list-r fr"><b>60,820</b>万元</div>
+													</div>
+												</div>
+												<div class="dd-list clearfix">
+													<div class="dd-sort-num dd-sort-num3">No.3</div>
+													<div class="dd-list-main">
+														<div class="dd-list-l fl">花园城三期</div>
+														<div class="dd-list-r fr"><b>60,820</b>万元</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</tab>
+
+
+							
+							
+
+
+						</tabset>
+
+					</div>
+
+
+				</div>
+			</div>
+			
+			<div class="project-show-main clearfix margin-top-20">
+				<div class="customer-header-item-outer byyjrhlp">
+					<div class="customer-header-item customer-header-item1 box-shadow-1 bg-white border-radius-3 border-1 border-1-gray border-top-color-red border-top-3">
+						<dl>
+							<dt><h2>关键触点转化一览（住宅销售）</h2></dt>
+							<dd>
+								<div class="home-sales">
+									<div class="home-sales-main clearfix">
+										<div class="home-sales-l">
+											<h3>客户与成交</h3>
+											<div class="home-sales-l-main clearfix">
+												<div class="home-sales-table">
+													<highchart class="chart" config="chartConfig1"></highchart>
+												</div>
+												<div class="home-sales-list" ng-model="projSale">
+													<ul>
+														<li>
+															<h4><i class="sales-f-i1"></i>到访阶段</h4>
+															<h5>
+																<p>{{projSale.visit_number}}人</p>
+															</h5>
+														</li>
+														<li>
+															<h4><i class="sales-f-i2"></i>认筹阶段</h4>
+															<h5>
+																<p>{{projSale.recognition_number}}人</p>
+																<p class="nums">{{projSale.recognition_counts}}套</p>
+															</h5>
+														</li>
+														<li>
+															<h4><i class="sales-f-i3"></i>认购阶段</h4>
+															<h5>
+																<p>{{projSale.subscribe_number}}人</p>
+																<p class="nums">{{projSale.subscribe_counts}}套</p>
+															</h5>
+														</li>
+														<li>
+															<h4><i class="sales-f-i4"></i>签约阶段</h4>
+															<h5>
+																<p>{{projSale.contract_numner}}人</p>
+																<p class="nums">{{projSale.contract_counts}}套</p>
+															</h5>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="home-sales-m">
+											<h3>平均转化率</h3>
+											<div class="home-sales-transform">
+												<span class="sales-transform-1">访转筹{{data01}}%</span>
+												<span class="sales-transform-2">筹转购{{data02}}%</span>
+												<span class="sales-transform-3">访转购{{data03}}%</span>
+												<span class="sales-transform-4">购转签{{data04}}%</span>
+												<span class="sales-transform-5">访转签{{data05}}%</span>
+											</div>
+										</div>
+										<div class="home-sales-r">
+											<h3>转化率周期</h3>
+											<div class="home-sales-cycle">
+												<ul>
+													<li class="clearfix">
+														<span class="cycle-1">{{projSale.visit_days}}天</span>
+													</li>
+													<li class="clearfix">
+														<span class="cycle-2">{{projSale.recognition_days}}天</span>
+														<span class="cycle-3">{{projSale.subscribe_days}}天</span>
+													</li>
+													<li class="clearfix">
+														<span class="cycle-4">{{projSale.contract_days}}天</span>
+														<span class="cycle-5">{{projSale.visit_contract_days}}天</span>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<div class="home-sales-footer">
+										<span><i class="sales-f-i1"></i>到访阶段</span>
+										<span><i class="sales-f-i2"></i>认筹阶段</span>
+										<span><i class="sales-f-i3"></i>认购阶段</span>
+										<span><i class="sales-f-i4"></i>签约阶段</span>
+									</div>
+								</div>
+							</dd>
+						</dl>
+					</div>
+				</div>
+			</div>
+				
+			<div class="project-show-footer clearfix margin-top-20">
+				<div class="project-show-footer-l">
+					<div class="customer-header-item-outer byyjrhlp">
+						<div class="customer-header-item customer-header-item1 box-shadow-1 bg-white border-radius-3 border-1 border-1-gray border-top-color-zi border-top-3">
+							<dl>
+								<dt><h2>成交分布<a href="javascript:;" ng-show="showDealType=='city'" ng-click="dealBack()"><i></i>返回区域</a><a href="javascript:;" ng-show="showDealType=='project'" ng-click="dealBack()"><i></i>返回城市</a></h2></dt>
+								<dd>
+									<div class="distribution">
+										<highchart class="chart" config="chartConfig2"></highchart>
+									</div>
+								</dd>
+							</dl>
+						</div>
+					</div>
+				</div>
+				<div class="project-show-footer-r">
+					<div class="customer-header-item-outer byyjrhlp">
+						<div class="customer-header-item customer-header-item1 box-shadow-1 bg-white border-radius-3 border-1 border-1-gray border-top-color-green border-top-3">
+							<dl>
+								<dt><h2>成交客户特征</h2></dt>
+								<dd>
+									<div class="customer-feature">
+										<ul>
+											<li percent-scale feature-title="f.title" arr="f.arr" ng-repeat="f in customerFeature"></li>
+											<!-- 
+											<li class="clearfix">
+												<div class="customer-feature-title">购买房产产品类型</div>
+												<div class="customer-feature-percent">
+													<div class="customer-feature-percent-nums">
+														<span></span>
+														<span></span>
+														<span></span>
+														<span></span>
+													</div>
+													<div class="customer-feature-percent-text clearfix">
+														<span><i></i>35-44 <b>55</b>%</span>
+														<span><i></i>45-54 <b>20</b>%</span>
+														<span><i></i>20-34 <b>15</b>%</span>
+														<span><i></i>55-64 <b>8</b>%</span>
+													</div>
+												</div>
+											</li> -->
+										</ul>
+									</div>
+								</dd>
+							</dl>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+

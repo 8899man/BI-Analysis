@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.pmp.dao.RptCustomerBoughtCountDao" > 
+<!-- Result Map-->
+<resultMap id="RptCustomerBoughtCountMap" type="com.sxit.model.pmp.RptCustomerBoughtCount" >
+	<result column="customer_bought_id" property="customer_bought_id" jdbcType="INTEGER"/>
+	<result column="proj_id" property="proj_id" jdbcType="VARCHAR"/>
+	<result column="index_format_type" property="index_format_type" jdbcType="VARCHAR"/>
+	<result column="customer_type" property="customer_type" jdbcType="VARCHAR"/>
+	<result column="customer_invest_sum" property="customer_invest_sum" jdbcType="INTEGER"/>
+	<result column="customer_self_sum" property="customer_self_sum" jdbcType="INTEGER"/>
+	<result column="customer_forward_sum" property="customer_forward_sum" jdbcType="INTEGER"/>
+	<result column="customer_change_sum" property="customer_change_sum" jdbcType="INTEGER"/>
+	<result column="customer_follow_sum" property="customer_follow_sum" jdbcType="INTEGER"/>
+	<result column="customer_expect_sum" property="customer_expect_sum" jdbcType="INTEGER"/>
+	<result column="customer_away_sum" property="customer_away_sum" jdbcType="INTEGER"/>
+	<result column="create_time" property="create_time" jdbcType="INTEGER"/>
+</resultMap>
+       
+<!-- rpt_customer_bought_count table all fields -->
+<sql id="Base_Column_List" >
+	 customer_bought_id,proj_id,index_format_type,customer_type,customer_invest_sum,customer_self_sum,customer_forward_sum,customer_change_sum,customer_follow_sum,customer_expect_sum,customer_away_sum,create_time
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="customer_bought_id != null" >
+	    and customer_bought_id =  #{customer_bought_id}
+	</if>
+	 	<if test="proj_id != null and proj_id != ''" >
+	    and proj_id =  #{proj_id}
+	</if>
+	<if test="index_format_type != null" >
+	    and index_format_type =  #{index_format_type}
+	</if>
+	<if test="customer_type != null" >
+	    and customer_type =  #{customer_type}
+	</if>
+	<if test="customer_invest_sum != null" >
+	    and customer_invest_sum =  #{customer_invest_sum}
+	</if>
+	<if test="customer_self_sum != null" >
+	    and customer_self_sum =  #{customer_self_sum}
+	</if>
+	<if test="customer_forward_sum != null" >
+	    and customer_forward_sum =  #{customer_forward_sum}
+	</if>
+	<if test="customer_change_sum != null" >
+	    and customer_change_sum =  #{customer_change_sum}
+	</if>
+	<if test="customer_follow_sum != null" >
+	    and customer_follow_sum =  #{customer_follow_sum}
+	</if>
+	<if test="customer_expect_sum != null" >
+	    and customer_expect_sum =  #{customer_expect_sum}
+	</if>
+	<if test="customer_away_sum != null" >
+	    and customer_away_sum =  #{customer_away_sum}
+	</if>
+	<if test="create_time != null" >
+	    and create_time =  #{create_time}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into rpt_customer_bought_count(customer_bought_id,proj_id,index_format_type,customer_type,customer_invest_sum,customer_self_sum,customer_forward_sum,customer_change_sum,customer_follow_sum,customer_expect_sum,customer_away_sum,create_time)
+ values(#{customer_bought_id},#{proj_id},#{index_format_type},#{customer_type},#{customer_invest_sum},#{customer_self_sum},#{customer_forward_sum},#{customer_change_sum},#{customer_follow_sum},#{customer_expect_sum},#{customer_away_sum},#{create_time})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update rpt_customer_bought_count set proj_id=#{proj_id},index_format_type=#{index_format_type},customer_type=#{customer_type},customer_invest_sum=#{customer_invest_sum},customer_self_sum=#{customer_self_sum},customer_forward_sum=#{customer_forward_sum},customer_change_sum=#{customer_change_sum},customer_follow_sum=#{customer_follow_sum},customer_expect_sum=#{customer_expect_sum},customer_away_sum=#{customer_away_sum},create_time=#{create_time} where customer_bought_id=#{customer_bought_id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update rpt_customer_bought_count set 
+	<trim  suffixOverrides="," >
+	<if test="proj_id != null  and proj_id != '' ">
+		proj_id=#{proj_id},
+	</if>
+	<if test="index_format_type != null  ">
+		index_format_type=#{index_format_type},
+	</if>
+	<if test="customer_type != null  ">
+		customer_type=#{customer_type},
+	</if>
+	<if test="customer_invest_sum != null  ">
+		customer_invest_sum=#{customer_invest_sum},
+	</if>
+	<if test="customer_self_sum != null  ">
+		customer_self_sum=#{customer_self_sum},
+	</if>
+	<if test="customer_forward_sum != null  ">
+		customer_forward_sum=#{customer_forward_sum},
+	</if>
+	<if test="customer_change_sum != null  ">
+		customer_change_sum=#{customer_change_sum},
+	</if>
+	<if test="customer_follow_sum != null  ">
+		customer_follow_sum=#{customer_follow_sum},
+	</if>
+	<if test="customer_expect_sum != null  ">
+		customer_expect_sum=#{customer_expect_sum},
+	</if>
+	<if test="customer_away_sum != null  ">
+		customer_away_sum=#{customer_away_sum},
+	</if>
+	<if test="create_time != null  ">
+		create_time=#{create_time},
+	</if>
+	</trim> where customer_bought_id=#{customer_bought_id}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from rpt_customer_bought_count where customer_bought_id = #{customer_bought_id}
+</delete>
+ 
+<!-- 根据id查询 rpt_customer_bought_count -->
+<select id="RptCustomerBoughtCountById"  resultMap="RptCustomerBoughtCountMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from rpt_customer_bought_count where proj_id = #{proj_id} and
+     create_time = (select max(create_time) from rpt_customer_bought_count);
+</select>
+
+<!-- rpt_customer_bought_count 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from rpt_customer_bought_count 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询rpt_customer_bought_count列表 -->
+<select id="queryByList" resultMap="RptCustomerBoughtCountMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from rpt_customer_bought_count 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

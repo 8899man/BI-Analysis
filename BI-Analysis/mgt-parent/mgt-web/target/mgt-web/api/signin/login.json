@@ -1,0 +1,233 @@
+{
+    "menuItems": [
+        {
+            "ID": 1,
+            "menuName": "仪表盘",
+            "stateInclude": "app.dashboard",
+            "href": "app.dashboard",
+            "parentId": 0,
+            "className": "glyphicon-th",
+            "recommend": true,
+            "subMenus": []
+        },
+        {
+            "ID": 2,
+            "menuName": "报表",
+            "stateInclude": "app.report",
+            "href": "app.report.customer.ownerType",
+            "parentId": 0,
+            "className": "glyphicon-list-alt",
+            "recommend": true,
+            "subMenus": [
+                {
+                    "ID": 21,
+                    "menuName": "客户",
+                    "stateInclude": "app.report.customer",
+                    "href": "",
+                    "parentId": 2,
+                    "className": "",
+                    "recommend": false,
+                    "subMenus": [
+                        {
+                            "ID": 211,
+                            "menuName": "业主类型统计",
+                            "stateInclude": "app.report.customer.ownerType",
+                            "href": "app.report.customer.ownerType",
+                            "parentId": 21,
+                            "className": "",
+                            "recommend": false,
+                            "subMenus": []
+                        },
+                        {
+                            "ID": 212,
+                            "menuName": "成交客户数量分析",
+                            "stateInclude": "app.report.customer.turnoverCustomer",
+                            "href": "app.report.customer.turnoverCustomer",
+                            "parentId": 21,
+                            "className": "",
+                            "recommend": false,
+                            "subMenus": []
+                        },
+                        {
+                            "ID": 213,
+                            "menuName": "重复购买分析",
+                            "stateInclude": "app.report.customer.repeatBuy",
+                            "href": "app.report.customer.repeatBuy",
+                            "parentId": 21,
+                            "className": "",
+                            "recommend": false,
+                            "subMenus": []
+                        }
+                    ]
+                },
+                {
+                    "ID": 22,
+                    "menuName": "产品/项目",
+                    "stateInclude": "app.report.product",
+                    "href": "",
+                    "parentId": 2,
+                    "className": "",
+                    "recommend": false,
+                    "subMenus": [
+                        {
+                            "ID": 221,
+                            "menuName": "成交产品类型分析",
+                            "stateInclude": "app.report.product.turnoverProduct",
+                            "href": "app.report.product.turnoverProduct",
+                            "parentId": 22,
+                            "className": "",
+                            "recommend": false,
+                            "subMenus": []
+                        }
+                    ]
+                },
+                {
+                    "ID": 23,
+                    "menuName": "业态专属",
+                    "stateInclude": "app.report.format",
+                    "href": "",
+                    "parentId": 2,
+                    "className": "",
+                    "recommend": false,
+                    "subMenus": [
+                        {
+                            "ID": 231,
+                            "menuName": "售后分析",
+                            "stateInclude": "app.report.format.salesAnalysis",
+                            "href": "app.report.format.salesAnalysis",
+                            "parentId": 23,
+                            "className": "",
+                            "recommend": false,
+                            "subMenus": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "ID": 3,
+            "menuName": "客户",
+            "stateInclude": "app.client",
+            "href": "app.client.show",
+            "parentId": 0,
+            "className": "glyphicon-user",
+            "recommend": true,
+            "subMenus": [
+                {
+                    "ID": 31,
+                    "menuName": "客户概览",
+                    "stateInclude": "app.client.show",
+                    "href": "app.client.show",
+                    "parentId": 3,
+                    "className": "",
+                    "recommend": false,
+                    "subMenus": []
+                },
+                {
+                    "ID": 32,
+                    "menuName": "客户查询",
+                    "stateInclude": "app.client.search",
+                    "href": "app.client.search",
+                    "parentId": 4,
+                    "className": "",
+                    "recommend": false,
+                    "subMenus": []
+                }
+            ]
+        },
+        {
+            "ID": 4,
+            "menuName": "项目",
+            "stateInclude": "app.project",
+            "href": "app.project.show",
+            "parentId": 0,
+            "className": "glyphicon-stats",
+            "recommend": true,
+            "subMenus": [
+                {
+                    "ID": 41,
+                    "menuName": "项目概览",
+                    "stateInclude": "app.project.show",
+                    "href": "app.project.show",
+                    "parentId": 4,
+                    "className": "",
+                    "recommend": false,
+                    "subMenus": []
+                },
+                {
+                    "ID": 42,
+                    "menuName": "项目查询",
+                    "stateInclude": "app.project.list",
+                    "href": "app.project.list.houseList",
+                    "parentId": 4,
+                    "className": "",
+                    "recommend": false,
+                    "subMenus": []
+                }
+            ]
+        },
+        {
+            "ID": 5,
+            "menuName": "标签",
+            "stateInclude": "app.label",
+            "href": "app.label.network",
+            "parentId": 0,
+            "className": "glyphicon-bookmark",
+            "recommend": true,
+            "subMenus": [
+                {
+                    "ID": 51,
+                    "menuName": "全网标签",
+                    "stateInclude": "app.label.network",
+                    "href": "app.label.network",
+                    "parentId": 5,
+                    "className": "",
+                    "recommend": false,
+                    "subMenus": []
+                },
+                {
+                    "ID": 52,
+                    "menuName": "本地标签",
+                    "stateInclude": "app.label.local",
+                    "href": "app.label.local",
+                    "parentId": 5,
+                    "className": "",
+                    "recommend": false,
+                    "subMenus": []
+                }
+            ]
+        },
+        {
+            "ID": 6,
+            "menuName": "营销",
+            "stateInclude": "app.marketing",
+            "href": "app.marketing.customerClassify",
+            "parentId": 0,
+            "className": "glyphicon-globe",
+            "recommend": true,
+            "subMenus": []
+        },
+        {
+            "ID": 7,
+            "menuName": "配置",
+            "stateInclude": "app.set",
+            "href": "app.set",
+            "parentId": 0,
+            "className": "glyphicon-cog",
+            "recommend": true,
+            "subMenus": []
+        },
+        {
+            "ID": 8,
+            "menuName": "帮助",
+            "stateInclude": "app.help",
+            "href": "app.help",
+            "parentId": 0,
+            "className": "glyphicon-blackboard",
+            "recommend": true,
+            "subMenus": []
+        }
+    ],
+    "IsAuthenicated": true,
+    "userName": "Dave M."
+}

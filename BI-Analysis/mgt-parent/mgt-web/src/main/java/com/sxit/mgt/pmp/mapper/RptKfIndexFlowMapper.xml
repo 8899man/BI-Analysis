@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.pmp.dao.RptKfIndexFlowDao" > 
+<!-- Result Map-->
+<resultMap id="RptKfIndexFlowMap" type="com.sxit.model.pmp.RptKfIndexFlow" >
+	<result column="index_flow_id" property="index_flow_id"/>
+	<result column="proj_guid" property="proj_guid"/>
+	<result column="index_format_type" property="index_format_type"/>
+	<result column="repair_days" property="repair_days"/>
+	<result column="repair_average_days" property="repair_average_days"/>
+	<result column="repair_overstep_days" property="repair_overstep_days"/>
+	<result column="complaint_days" property="complaint_days"/>
+	<result column="complaint_average_days" property="complaint_average_days"/>
+	<result column="complaint_overstep_days" property="complaint_overstep_days"/>
+	<result column="createtime" property="createtime"/>
+	<result column="projSaleStatus" property="projSaleStatus"/>
+	<result column="payment_days" property="payment_days"/>
+	<result column="payment_average_days" property="payment_average_days"/>
+	<result column="payment_overstep_days" property="payment_overstep_days"/>
+</resultMap>
+       
+<!-- rpt_kf_index_flow table all fields -->
+<sql id="Base_Column_List" >
+	 index_flow_id,proj_guid,index_format_type,repair_days,repair_average_days,repair_overstep_days,complaint_days,complaint_average_days,complaint_overstep_days,createtime,projSaleStatus,payment_days,payment_average_days,payment_overstep_days
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="index_flow_id != null" >
+	    and index_flow_id =  #{index_flow_id}
+	</if>
+	 	<if test="proj_guid != null and proj_guid != ''" >
+	    and proj_guid =  #{proj_guid}
+	</if>
+	 	<if test="index_format_type != null and index_format_type != ''" >
+	    and index_format_type =  #{index_format_type}
+	</if>
+	<if test="repair_days != null" >
+	    and repair_days =  #{repair_days}
+	</if>
+	<if test="repair_average_days != null" >
+	    and repair_average_days =  #{repair_average_days}
+	</if>
+	<if test="repair_overstep_days != null" >
+	    and repair_overstep_days =  #{repair_overstep_days}
+	</if>
+	<if test="complaint_days != null" >
+	    and complaint_days =  #{complaint_days}
+	</if>
+	<if test="complaint_average_days != null" >
+	    and complaint_average_days =  #{complaint_average_days}
+	</if>
+	<if test="complaint_overstep_days != null" >
+	    and complaint_overstep_days =  #{complaint_overstep_days}
+	</if>
+	<if test="createtime != null" >
+	    and createtime =  #{createtime}
+	</if>
+	 	<if test="projSaleStatus != null and projSaleStatus != ''" >
+	    and projSaleStatus =  #{projSaleStatus}
+	</if>
+	<if test="payment_days != null" >
+	    and payment_days =  #{payment_days}
+	</if>
+	<if test="payment_average_days != null" >
+	    and payment_average_days =  #{payment_average_days}
+	</if>
+	<if test="payment_overstep_days != null" >
+	    and payment_overstep_days =  #{payment_overstep_days}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into rpt_kf_index_flow(index_flow_id,proj_guid,index_format_type,repair_days,repair_average_days,repair_overstep_days,complaint_days,complaint_average_days,complaint_overstep_days,createtime,projSaleStatus,payment_days,payment_average_days,payment_overstep_days)
+ values(#{index_flow_id},#{proj_guid},#{index_format_type},#{repair_days},#{repair_average_days},#{repair_overstep_days},#{complaint_days},#{complaint_average_days},#{complaint_overstep_days},#{createtime},#{projSaleStatus},#{payment_days},#{payment_average_days},#{payment_overstep_days})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update rpt_kf_index_flow set proj_guid=#{proj_guid},index_format_type=#{index_format_type},repair_days=#{repair_days},repair_average_days=#{repair_average_days},repair_overstep_days=#{repair_overstep_days},complaint_days=#{complaint_days},complaint_average_days=#{complaint_average_days},complaint_overstep_days=#{complaint_overstep_days},projSaleStatus=#{projSaleStatus},payment_days=#{payment_days},payment_average_days=#{payment_average_days},payment_overstep_days=#{payment_overstep_days} where index_flow_id=#{index_flow_id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update rpt_kf_index_flow set 
+	<trim  suffixOverrides="," >
+	<if test="proj_guid != null  and proj_guid != '' ">
+		proj_guid=#{proj_guid},
+	</if>
+	<if test="index_format_type != null  and index_format_type != '' ">
+		index_format_type=#{index_format_type},
+	</if>
+	<if test="repair_days != null  ">
+		repair_days=#{repair_days},
+	</if>
+	<if test="repair_average_days != null  ">
+		repair_average_days=#{repair_average_days},
+	</if>
+	<if test="repair_overstep_days != null  ">
+		repair_overstep_days=#{repair_overstep_days},
+	</if>
+	<if test="complaint_days != null  ">
+		complaint_days=#{complaint_days},
+	</if>
+	<if test="complaint_average_days != null  ">
+		complaint_average_days=#{complaint_average_days},
+	</if>
+	<if test="complaint_overstep_days != null  ">
+		complaint_overstep_days=#{complaint_overstep_days},
+	</if>
+	<if test="createtime != null  ">
+		createtime=#{createtime},
+	</if>
+	<if test="projSaleStatus != null  and projSaleStatus != '' ">
+		projSaleStatus=#{projSaleStatus},
+	</if>
+	<if test="payment_days != null  ">
+		payment_days=#{payment_days},
+	</if>
+	<if test="payment_average_days != null  ">
+		payment_average_days=#{payment_average_days},
+	</if>
+	<if test="payment_overstep_days != null  ">
+		payment_overstep_days=#{payment_overstep_days},
+	</if>
+	</trim> where index_flow_id=#{index_flow_id}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from rpt_kf_index_flow where index_flow_id = #{index_flow_id}
+</delete>
+ 
+<!-- 根据id查询 rpt_kf_index_flow -->
+<select id="queryById"  resultMap="RptKfIndexFlowMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from rpt_kf_index_flow where proj_guid=#{proj_guid} and createtime = (select max(createtime) from rpt_kf_index_flow);
+</select>
+
+<!-- rpt_kf_index_flow 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from rpt_kf_index_flow 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询rpt_kf_index_flow列表 -->
+<select id="queryByList" resultMap="RptKfIndexFlowMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from rpt_kf_index_flow 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

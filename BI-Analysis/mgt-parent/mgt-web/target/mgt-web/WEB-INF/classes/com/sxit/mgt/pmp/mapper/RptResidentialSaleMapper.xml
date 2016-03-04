@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.pmp.dao.RptResidentialSaleDao" > 
+<!-- Result Map-->
+<resultMap id="RptResidentialSaleMap" type="com.sxit.model.pmp.RptResidentialSale" >
+	<result column="residential_sale_id" property="residential_sale_id"/>
+	<result column="visit_number" property="visit_number"/>
+	<result column="recognition_number" property="recognition_number"/>
+	<result column="recognition_counts" property="recognition_counts"/>
+	<result column="subscribe_number" property="subscribe_number"/>
+	<result column="subscribe_counts" property="subscribe_counts"/>
+	<result column="contract_numner" property="contract_numner"/>
+	<result column="contract_counts" property="contract_counts"/>
+	<result column="visit_cst_num" property="visit_cst_num"/>
+	<result column="confess_cst_num" property="confess_cst_num"/>
+	<result column="subscribe_cst_num" property="subscribe_cst_num"/>
+	<result column="contract_cst_num" property="contract_cst_num"/>
+	<result column="visit_days" property="visit_days"/>
+	<result column="recognition_days" property="recognition_days"/>
+	<result column="subscribe_days" property="subscribe_days"/>
+	<result column="contract_days" property="contract_days"/>
+	<result column="visit_contract_days" property="visit_contract_days"/>
+	<result column="create_time" property="create_time"/>
+	<result column="recognition_subs_num" property="recognition_subs_num"/>
+	<result column="visit_subscribe_num" property="visit_subscribe_num"/>
+	<result column="subs_contract_num" property="subs_contract_num"/>
+	<result column="visit_contract_num" property="visit_contract_num"/>
+	<result column="visit_reco_num" property="visit_reco_num"/>
+	<result column="big_code" property="big_code"/>
+	<result column="city_code" property="city_code"/>
+</resultMap>
+       
+<!-- rpt_residential_sale table all fields -->
+<sql id="Base_Column_List" >
+	 residential_sale_id,visit_number,recognition_number,recognition_counts,subscribe_number,subscribe_counts,contract_numner,contract_counts,visit_cst_num,confess_cst_num,subscribe_cst_num,contract_cst_num,visit_days,recognition_days,subscribe_days,contract_days,visit_contract_days,create_time,
+	 recognition_subs_num,visit_subscribe_num,subs_contract_num,visit_contract_num,visit_reco_num,big_code,city_code
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="residential_sale_id != null" >
+	    and residential_sale_id =  #{residential_sale_id}
+	</if>
+	<if test="visit_number != null" >
+	    and visit_number =  #{visit_number}
+	</if>
+	<if test="recognition_number != null" >
+	    and recognition_number =  #{recognition_number}
+	</if>
+	<if test="recognition_counts != null" >
+	    and recognition_counts =  #{recognition_counts}
+	</if>
+	<if test="subscribe_number != null" >
+	    and subscribe_number =  #{subscribe_number}
+	</if>
+	<if test="subscribe_counts != null" >
+	    and subscribe_counts =  #{subscribe_counts}
+	</if>
+	<if test="contract_numner != null" >
+	    and contract_numner =  #{contract_numner}
+	</if>
+	<if test="contract_counts != null" >
+	    and contract_counts =  #{contract_counts}
+	</if>
+	<if test="visit_cst_num != null" >
+	    and visit_cst_num =  #{visit_cst_num}
+	</if>
+	<if test="confess_cst_num != null" >
+	    and confess_cst_num =  #{confess_cst_num}
+	</if>
+	<if test="subscribe_cst_num != null" >
+	    and subscribe_cst_num =  #{subscribe_cst_num}
+	</if>
+	<if test="contract_cst_num != null" >
+	    and contract_cst_num =  #{contract_cst_num}
+	</if>
+	<if test="visit_days != null" >
+	    and visit_days =  #{visit_days}
+	</if>
+	<if test="recognition_days != null" >
+	    and recognition_days =  #{recognition_days}
+	</if>
+	<if test="subscribe_days != null" >
+	    and subscribe_days =  #{subscribe_days}
+	</if>
+	<if test="contract_days != null" >
+	    and contract_days =  #{contract_days}
+	</if>
+	<if test="visit_contract_days != null" >
+	    and visit_contract_days =  #{visit_contract_days}
+	</if>
+	<if test="create_time != null" >
+	    and create_time =  #{create_time}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into rpt_residential_sale(residential_sale_id,visit_number,recognition_number,recognition_counts,subscribe_number,subscribe_counts,contract_numner,contract_counts,visit_cst_num,confess_cst_num,subscribe_cst_num,contract_cst_num,visit_days,recognition_days,subscribe_days,contract_days,visit_contract_days,create_time)
+ values(#{residential_sale_id},#{visit_number},#{recognition_number},#{recognition_counts},#{subscribe_number},#{subscribe_counts},#{contract_numner},#{contract_counts},#{visit_cst_num},#{confess_cst_num},#{subscribe_cst_num},#{contract_cst_num},#{visit_days},#{recognition_days},#{subscribe_days},#{contract_days},#{visit_contract_days},#{create_time})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update rpt_residential_sale set visit_number=#{visit_number},recognition_number=#{recognition_number},recognition_counts=#{recognition_counts},subscribe_number=#{subscribe_number},subscribe_counts=#{subscribe_counts},contract_numner=#{contract_numner},contract_counts=#{contract_counts},visit_cst_num=#{visit_cst_num},confess_cst_num=#{confess_cst_num},subscribe_cst_num=#{subscribe_cst_num},contract_cst_num=#{contract_cst_num},visit_days=#{visit_days},recognition_days=#{recognition_days},subscribe_days=#{subscribe_days},contract_days=#{contract_days},visit_contract_days=#{visit_contract_days},create_time=#{create_time} where residential_sale_id=#{residential_sale_id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update rpt_residential_sale set 
+	<trim  suffixOverrides="," >
+	<if test="visit_number != null  ">
+		visit_number=#{visit_number},
+	</if>
+	<if test="recognition_number != null  ">
+		recognition_number=#{recognition_number},
+	</if>
+	<if test="recognition_counts != null  ">
+		recognition_counts=#{recognition_counts},
+	</if>
+	<if test="subscribe_number != null  ">
+		subscribe_number=#{subscribe_number},
+	</if>
+	<if test="subscribe_counts != null  ">
+		subscribe_counts=#{subscribe_counts},
+	</if>
+	<if test="contract_numner != null  ">
+		contract_numner=#{contract_numner},
+	</if>
+	<if test="contract_counts != null  ">
+		contract_counts=#{contract_counts},
+	</if>
+	<if test="visit_cst_num != null  ">
+		visit_cst_num=#{visit_cst_num},
+	</if>
+	<if test="confess_cst_num != null  ">
+		confess_cst_num=#{confess_cst_num},
+	</if>
+	<if test="subscribe_cst_num != null  ">
+		subscribe_cst_num=#{subscribe_cst_num},
+	</if>
+	<if test="contract_cst_num != null  ">
+		contract_cst_num=#{contract_cst_num},
+	</if>
+	<if test="visit_days != null  ">
+		visit_days=#{visit_days},
+	</if>
+	<if test="recognition_days != null  ">
+		recognition_days=#{recognition_days},
+	</if>
+	<if test="subscribe_days != null  ">
+		subscribe_days=#{subscribe_days},
+	</if>
+	<if test="contract_days != null  ">
+		contract_days=#{contract_days},
+	</if>
+	<if test="visit_contract_days != null  ">
+		visit_contract_days=#{visit_contract_days},
+	</if>
+	<if test="create_time != null  ">
+		create_time=#{create_time},
+	</if>
+	</trim> where residential_sale_id=#{residential_sale_id}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from rpt_residential_sale where residential_sale_id = #{residential_sale_id}
+</delete>
+ 
+<!-- 根据id查询 rpt_residential_sale -->
+<select id="queryByAll"  resultMap="RptResidentialSaleMap" parameterType="Object">
+	select  sum(visit_number) as visit_number,
+			sum(recognition_number) as recognition_number,
+			sum(recognition_counts) as recognition_counts,
+			sum(subscribe_number) as subscribe_number,
+			sum(subscribe_counts) as subscribe_counts,
+			sum(contract_numner) as contract_numner,
+			sum(contract_counts) as contract_counts,
+			sum(visit_cst_num) as visit_cst_num,
+			sum(confess_cst_num) as confess_cst_num,
+			sum(subscribe_cst_num) as subscribe_cst_num,
+			sum(contract_cst_num) as contract_cst_num,
+			sum(visit_days)/sum(case when visit_days > 0 then 1 else 0 end) as visit_days,
+			sum(recognition_days)/sum(case when recognition_days > 0 then 1 else 0 end) as recognition_days,
+			sum(subscribe_days)/sum(case when subscribe_days > 0 then 1 else 0 end)  as subscribe_days,
+			sum(contract_days)/sum(case when contract_days > 0 then 1 else 0 end) as contract_days,
+			sum(visit_contract_days)/sum(case when visit_contract_days > 0 then 1 else 0 end)  as visit_contract_days,
+			sum(recognition_subs_num) as recognition_subs_num,
+			sum(visit_subscribe_num) as visit_subscribe_num,
+			sum(subs_contract_num) as subs_contract_num,
+			sum(visit_contract_num) as visit_contract_num,
+			sum(visit_reco_num) as visit_reco_num
+	 from rpt_residential_sale where create_time = (select max(create_time) from rpt_residential_sale) and dimension=1;
+</select>
+
+
+<select id="querySeq"  resultMap="RptResidentialSaleMap" parameterType="java.util.Map">
+	select  sum(visit_number) as visit_number,
+			sum(recognition_number) as recognition_number,
+			sum(recognition_counts) as recognition_counts,
+			sum(subscribe_number) as subscribe_number,
+			sum(subscribe_counts) as subscribe_counts,
+			sum(contract_numner) as contract_numner,
+			sum(contract_counts) as contract_counts,
+			sum(visit_cst_num) as visit_cst_num,
+			sum(confess_cst_num) as confess_cst_num,
+			sum(subscribe_cst_num) as subscribe_cst_num,
+			sum(contract_cst_num) as contract_cst_num,
+			sum(visit_days)/sum(case when visit_days > 0 then 1 else 0 end) as visit_days,
+			sum(recognition_days)/sum(case when recognition_days > 0 then 1 else 0 end) as recognition_days,
+			sum(subscribe_days)/sum(case when subscribe_days > 0 then 1 else 0 end)  as subscribe_days,
+			sum(contract_days)/sum(case when contract_days > 0 then 1 else 0 end) as contract_days,
+			sum(visit_contract_days)/sum(case when visit_contract_days > 0 then 1 else 0 end)  as visit_contract_days,
+			sum(recognition_subs_num) as recognition_subs_num,
+			sum(visit_subscribe_num) as visit_subscribe_num,
+			sum(subs_contract_num) as subs_contract_num,
+			sum(visit_contract_num) as visit_contract_num,
+			sum(visit_reco_num) as visit_reco_num
+	 from rpt_residential_sale
+	 where big_code = #{big_code} and city_code = #{city_code}
+     and create_time = (select max(create_time) from rpt_residential_sale)
+</select>
+
+
+<!-- rpt_residential_sale 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from rpt_residential_sale 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询rpt_residential_sale列表 -->
+<select id="queryByList" resultMap="RptResidentialSaleMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from rpt_residential_sale 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

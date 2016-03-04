@@ -1,0 +1,121 @@
+<div ng-controller="ProjectHouseListCtrl" ng-init="initializeController()">
+
+	<div class="project-list margin-top-30 box-shadow-1 border-radius-3">
+		<div class="project-list-header">
+			<div class="project-list-header-inside clearfix">
+				<div class="project-list-header-tab pull-left">
+					<label class="btn btn-primary" ng-model="houseType" btn-radio="'all'" ng-click="getFilterList($event)">全部</label>
+			        <label class="btn btn-primary" ng-model="houseType" btn-radio="'selling'" ng-click="getFilterList($event)">在售</label>
+			        <label class="btn btn-primary" ng-model="houseType" btn-radio="'selled'" ng-click="getFilterList($event)">已售</label>
+			        <!-- <a href="javascript:;" class="btn btn-primary">全部</a>
+			        							<a href="javascript:;" class="btn btn-default">在售</a>
+			        							<a href="javascript:;" class="btn btn-default">已售</a> -->
+				</div>
+				<div class="project-list-header-search pull-right">
+				 
+					<ul>
+						<li>
+							<select name="area" id="" class="form-control" ng-model="areaSelected" ng-options="area.areaName for area in areas" ng-change="changeArea()">
+			                       <option value="">请选择区域</option>
+			                </select>
+						</li>
+						<li>
+							<select name="city" id="" class="form-control" ng-model="citySelected" ng-options="city.companyName for city in citys" ng-change="changeCity()">
+			                       <option value="">请选择城市</option>
+			                </select>
+						</li>
+						<li><button type="submit" class="btn btn-primary" ng-click="search()">搜索</button></li>
+					</ul>
+				
+					<!-- <ul>
+						<li>
+							<select name="" id="" class="form-control">
+								<option value="">请选择区域</option>
+								<option value="">全国</option>
+								<option value="">华中区域</option>
+								<option value="">华北区域</option>
+							</select>
+						</li>
+						<li>
+							<select name="" id="" class="form-control">
+								<option value="">请选择城市</option>
+								<option value="">北京</option>
+								<option value="">上海</option>
+							</select>
+						</li>
+						<li><button type="submit" class="btn btn-primary">搜索</button></li>
+					</ul> -->
+				</div>
+			</div>
+		</div>
+		<div class="project-list-main">
+			<ul class="clearfix">
+				<li ng-repeat="BProjSum in houseList" ng-class="{'clear': $index%4 == 0}">
+					<a ui-sref="app.project.details({'projectId': BProjSum.proj_guid})" class="clearfix">
+						<h2 class="clearfix">
+						    <p class="cj" ng-if="BProjSum.status == '在售'">
+								<span class="key">成交：</span>
+								<span class="value"><b>{{BProjSum.sale_sum}}</b>套</span>
+							</p>
+							<p class="je" ng-if="BProjSum.status == '在售'">
+								<span class="key">金额：</span>
+								<span class="value"><b>{{BProjSum.saleamountsum}}</b>万</span>
+							</p>
+							<p class="bl" ng-if="BProjSum.status == '在售'">
+								<span class="key">已售比例：</span>
+								<span class="value"><b>{{BProjSum.sale_scale}}</b>%</span>
+							</p>
+						   
+							<p class="cj" ng-if="BProjSum.status == '已售'">
+								<span class="key">投诉：</span>
+								<span class="value"><b>{{BProjSum.trade_sum}}</b>单</span>
+							</p>
+							<p class="je" ng-if="BProjSum.status == '已售'">
+								<span class="key">保修：</span>
+								<span class="value"><b>{{BProjSum.repairs_sum}}</b>单</span>
+							</p>
+							<p class="bl" ng-if="BProjSum.status == '已售'">
+								<span class="key">总户数：</span>
+								<span class="value"><b>{{BProjSum.family_sum}}</b>户</span>
+                            </p>
+						</h2>
+						<h3>{{BProjSum.proj_name}}</h3>
+						<i ng-class="{'selled':BProjSum.status=='已售'}">
+						</i>
+					</a>
+				</li>
+				<!-- <li>
+					<a ui-sref="app.project.details({'projectId': 100321})" class="clearfix">
+						<h2 class="clearfix">
+							<p class="cj">
+								<span class="key">成交：</span>
+								<span class="value"><b>3200</b>套</span>
+							</p>
+							<p class="je">
+								<span class="key">金额：</span>
+								<span class="value"><b>89.9</b>亿</span>
+							</p>
+							<p class="bl">
+								<span class="key">已售比例：</span>
+								<span class="value"><b>88.8</b>%</span>
+							</p>
+						</h2>
+						<h3>蛇口语山</h3>
+						<i class="selled"></i>
+					</a>
+				</li> -->
+			</ul>
+
+
+		</div>
+	</div>
+
+	<div class="project-page clearfix">
+		<pagination max-size="16" rotate="false" boundary-links="true" total-items="TotalRows" items-per-page="PageSize"
+            ng-change="pageChanged()" ng-model="currentPage" class="pagination-default"
+            previous-text="上一页" next-text="下一页" first-text="首页" last-text="末页" style="margin: 0; display: block;"></pagination>
+	</div>
+</div>
+
+
+

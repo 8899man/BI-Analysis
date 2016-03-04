@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.marketing.dao.MarketingDao">
+
+	 <resultMap id="AreaMap" type="com.sxit.mgt.marketing.vo.Subs" >
+		<result column="id" property="value" jdbcType="VARCHAR" />
+		<result column="name" property="title" jdbcType="VARCHAR" />
+	 </resultMap>
+	 
+	  <resultMap id="CustomerNum" type="com.sxit.mgt.marketing.vo.CustomerNumDetail" >
+		<result column="value" property="value" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="amount" property="amount" jdbcType="VARCHAR" />
+	 </resultMap>
+	 
+	 <resultMap id="CustomerModelData" type="com.sxit.mgt.marketing.vo.CustomerModelData" >
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="tel" property="tel" jdbcType="VARCHAR" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+	 </resultMap>
+	
+	
+	<select id="getAreaCityProj" parameterType="java.util.Map" resultMap="AreaMap">
+		select 
+			orgGUID id,
+			orgName name
+		FROM
+			b_org
+		where
+			orgType = 3 and subType = #{subType} and status = 1
+			<if test="parentGUID != null and parentGUID != ''">
+				and parentGUID = #{parentGUID}
+			</if>
+	</select>
+	<!-- 根据userId获取大区 -->
+	<select id="getAreaByUserId" parameterType="java.util.Map" resultMap="AreaMap">
+		select
+			c.orgGUID id,
+			c.orgName name
+		from
+			b_org c,
+			(
+				select distinct a.parentGUID parentGUID
+				from
+					b_org a,
+					(select orgGUID from sys_user_org where user_id = #{userId}) b
+				where
+					a.orgGUID = b.orgGUID
+			)d
+		WHERE
+			c.orgGUID = d.parentGUID
+		AND
+			c.orgType = 3 and c.subType = 2 and c.status = 1
+	</select>
+	<!-- 根据userId和大区id获取城市 -->
+	<select id="getCompanyByUserId" parameterType="java.util.Map" resultMap="AreaMap">
+		select
+			a.orgGUID id,
+			a.orgName name
+		from
+			b_org a,
+			(select orgGUID from sys_user_org where user_id = #{userId}) b
+		where
+			a.orgGUID = b.orgGUID
+		AND
+			a.parentGUID = #{parentGUID}
+	</select>
+	
+	
+	<select id="getProjects" resultMap="AreaMap" parameterType="java.lang.String">
+    	select
+    		projGUID id,
+    		projName name
+    	from
+    		b_proj
+    	where
+    		companyGUID = #{citycode}
+    		group by projGUID
+    </select>
+    <!-- 根据userId和城市id获取项目 -->
+    <select id="getProjectsByUserId" resultMap="AreaMap" parameterType="java.util.Map">
+    	select
+    		a.projGUID id,
+    		a.projName name
+    	from
+    		b_proj a,
+    		(select distinct project_guid from sys_user_project where user_id = #{userId}) b
+    	where
+    		a.companyGUID = #{citycode}
+    		and
+    		a.projGUID = b.project_guid
+    		group by projGUID
+    </select>
+    
+    
+    <select id="getAllRptYxCstModel" parameterType="java.util.Map" resultType="java.lang.Integer">
+    	select 
+    		count(a.cstGUID) cnt 
+    	from
+    		rpt_yx_cst_model a
+    	where
+    		a.big_code = #{bigCode}
+			<if test="cityCode != null and cityCode != ''">
+				and	a.city_code = #{cityCode}
+			</if>
+			<if test="projGUID != null and projGUID != ''">
+				and	a.proj_guid = #{projGUID}
+			</if>
+			<if test="paramStr != null and paramStr != ''">
+				and <![CDATA[${paramStr}]]>
+			</if>
+    </select>
+     <!-- 根据userId获取数据 -->
+     <select id="getRptYxCstModelByUserId" parameterType="java.util.Map" resultType="java.lang.Integer">
+    	select 
+    		count(a.cstGUID) cnt
+    	from
+    		rpt_yx_cst_model a,
+			(select distinct project_guid from sys_user_project where user_id = #{userId}) b
+    	where
+    		a.proj_guid = b.project_guid
+			<![CDATA[${paramStr}]]>
+			and
+			<![CDATA[${paramStr2}]]>
+    </select>
+
+    
+    <select id="getCustomerModelNum" parameterType="java.util.Map" resultMap="CustomerNum">
+    	SELECT
+    		#{cstType} as value,
+			#{typeName} as title,
+			count(*) as amount
+		FROM 
+			rpt_yx_cst_model
+		where
+			big_code = #{bigCode}
+			and <![CDATA[${paramStr}]]>
+			<if test="cityCode != null and cityCode != ''">
+				and	city_code = #{cityCode}
+			</if>
+			<if test="projGUID != null and projGUID != ''">
+				and	proj_guid = #{projGUID}
+			</if>
+    </select>
+     <select id="getCMNumBYUserId" parameterType="java.util.Map" resultMap="CustomerNum">
+    	SELECT
+    		#{cstType} as value,
+			#{typeName} as title,
+			count(a.cstGUID) as amount
+		FROM 
+			rpt_yx_cst_model a,
+			(select distinct project_guid from sys_user_project where user_id = #{userId}) b
+		where
+			a.proj_guid=b.project_guid
+			and
+			a.big_code = #{bigCode}
+			and <![CDATA[${paramStr}]]>
+			<if test="cityCode != null and cityCode != ''">
+				and	a.city_code = #{cityCode}
+			</if>
+			<if test="projGUID != null and projGUID != ''">
+				and	a.proj_guid = #{projGUID}
+			</if>
+    </select>
+    
+    
+    <select id="getCustomerModelData" parameterType="java.util.Map" resultMap="CustomerModelData">
+    	SELECT
+			a.cstName name,
+			a.mobile_tel tel,
+			a.cst_Email email,
+			a.cst_address address
+		FROM
+			rpt_yx_cst_model a
+		WHERE
+			a.big_code = #{bigCode}
+			and <![CDATA[${paramStr}]]>
+			<if test="cityCode != null and cityCode != ''">
+				and	a.city_code = #{cityCode}
+			</if>
+			<if test="projGUID != null and projGUID != ''">
+				and	a.proj_guid = #{projGUID}
+			</if>
+			<if test="method != 'export'">
+				limit 8	
+			</if>
+    </select>
+    <select id="getCMDataByUserId" parameterType="java.util.Map" resultMap="CustomerModelData">
+    	SELECT
+			a.cstName name,
+			a.mobile_tel tel,
+			a.cst_Email email,
+			a.cst_address address
+		FROM
+			rpt_yx_cst_model a,
+			(select distinct project_guid from sys_user_project where user_id = #{userId}) b
+		WHERE
+			a.proj_guid=b.project_guid
+			and
+			a.big_code = #{bigCode}
+			and <![CDATA[${paramStr}]]>
+			<if test="cityCode != null and cityCode != ''">
+				and	a.city_code = #{cityCode}
+			</if>
+			<if test="projGUID != null and projGUID != ''">
+				and	a.proj_guid = #{projGUID}
+			</if>
+			<if test="method != 'export'">
+				limit 8	
+			</if>
+    </select>
+    
+    <!-- 定向营销 -->
+    <select id="getRptBProjSumArea" resultMap="AreaMap">
+    	SELECT
+			big_code value,
+			big_name title
+		FROM
+			rpt_b_proj_sum
+		WHERE
+			status = '在售'
+		group by
+			big_code
+    </select>
+    <!-- 
+    <select id="getRptBPSAByUserId" parameterType="java.lang.Integer" resultMap="AreaMap">
+    	select
+			c.big_code value,
+			c.big_name title
+		from
+			rpt_b_proj_sum c,
+			(select
+				distinct a.parentGUID parentGUID
+			from
+				b_org a,
+				(select orgGUID from sys_user_org where user_id = #{userId}) b
+			where
+				a.orgGUID = b.orgGUID
+			)d
+		WHERE
+			c.big_code = d.parentGUID
+			AND
+			c.status = '在售'
+		group by
+			c.big_code
+    </select>
+     -->
+    
+    <select id="getRptBProjCity" resultMap="AreaMap" parameterType="java.lang.String">
+    	SELECT
+			city_code value,
+			city_name title
+		FROM
+			rpt_b_proj_sum
+		WHERE
+			status = '在售'
+			AND
+			big_code = #{areaId}
+		group by
+			city_code
+    </select>
+    <!-- 
+     <select id="getRptBPCByUserId" resultMap="AreaMap" parameterType="java.util.Map">
+    	SELECT
+			a.city_code value,
+			a.city_name title
+		FROM
+			rpt_b_proj_sum a,
+			(select orgGUID from sys_user_org where user_id = #{userId}) b
+		WHERE
+			a.status = '在售'
+			AND
+			big_code = #{areaId}
+			and
+			a.city_code = b.orgGUID
+		group by
+			a.city_code
+    </select>
+     -->
+	
+	<select id="getRptBProjProject" resultMap="AreaMap" parameterType="java.lang.String">
+		SELECT
+			proj_guid value,
+			proj_name title
+		FROM
+			rpt_b_proj_sum
+		WHERE
+			status = '在售'
+		AND
+			city_code = #{cityId}
+		group by
+			proj_guid
+	</select>
+	<!-- 
+	<select id="getRptBPPByUserId" resultMap="AreaMap" parameterType="java.util.Map">
+		SELECT
+			a.proj_guid value,
+			a.proj_name title
+		FROM
+			rpt_b_proj_sum a,
+			(select distinct project_guid from sys_user_project where user_id = #{userId}) b
+		WHERE
+			a.status = '在售'
+			and
+			city_code = #{cityId}
+			and
+			a.proj_guid = b.project_guid
+		group by
+			a.proj_guid
+	</select>
+	 -->
+	
+	<select id="getRptYxCstModelProvince" resultMap="AreaMap" >
+		select
+			house_sheng_code value,
+			house_sheng_name title
+		from
+			rpt_yx_cst_model
+		where
+			house_sheng_code is not null and house_sheng_name is not null
+		GROUP BY house_sheng_code
+	</select>
+	<select id="getRptYCMPByUserId" resultMap="AreaMap" parameterType="java.lang.Integer">
+		select
+			a.house_sheng_code value,
+			a.house_sheng_name title
+		from
+			rpt_yx_cst_model a,
+			(select distinct project_guid from sys_user_project where user_id = #{userId}) b
+		where
+			a.house_sheng_code is not null
+			and
+			a.house_sheng_name is not null
+			and
+			a.proj_guid = b.project_guid
+		GROUP BY a.house_sheng_code
+	</select>
+	
+	
+	<select id="getRptYxCstModelCity" resultMap="AreaMap" parameterType="java.lang.String">
+		select
+			house_city_code value,
+			house_city_name title
+		from
+			rpt_yx_cst_model
+		where
+			house_city_code is not null 
+			and
+			house_city_name is not null 
+			and
+			house_sheng_code = #{provinceId}
+		GROUP BY house_city_code
+	</select>
+	<select id="getRYCMCByUserId" resultMap="AreaMap" parameterType="java.util.Map">
+		select
+			a.house_city_code value,
+			a.house_city_name title
+		from
+			rpt_yx_cst_model a,
+			(select distinct project_guid from sys_user_project where user_id = #{userId}) b
+		where
+			a.house_city_code is not null 
+			and
+			a.house_city_name is not null 
+			and
+			a.proj_guid = b.project_guid
+			and
+			a.house_sheng_code = #{provinceId}
+		GROUP BY a.house_city_code
+	</select>
+	
+	
+	<select id="getCityNameByCityName" resultType="java.lang.String" parameterType="java.lang.String">
+		select
+			DISTINCT cityName1
+		from
+			rpt_b_proj_sum
+		where
+			city_name = #{cityName}
+	</select>
+	
+	
+	<select id="getFetchDataNum" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[
+		select
+			COUNT(DISTINCT(a.cstguid)) cnt
+		from
+			rpt_yx_cst_model a
+		where
+			a.cst_type in (11, 12, 13, 14)
+			and
+			a.house_city_code = #{cityId}
+			${sqlStr}
+		]]>
+	</select>
+	<select id="getFDNumByUserId" parameterType="java.util.Map" resultType="java.lang.Integer">
+		<![CDATA[
+		select
+			COUNT(DISTINCT(a.cstguid)) cnt
+		from
+			rpt_yx_cst_model a,
+			(select distinct project_guid from sys_user_project where user_id = #{userId}) b
+		where
+			cst_type in (11, 12, 13, 14)
+			and
+			house_city_code = #{cityId}
+			and
+			a.proj_guid = b.project_guid
+			${sqlStr}
+		]]>
+	</select>
+	
+	
+	<select id="getFetchData" parameterType="java.util.Map" resultMap="CustomerModelData">
+		<![CDATA[
+		select
+			DISTINCT
+			a.cstName name,
+			a.mobile_tel tel,
+			a.cst_Email email,
+			a.cst_address address
+		from
+			rpt_yx_cst_model a
+		where
+			a.cst_type in (11, 12, 13, 14)
+			and
+			a.house_city_code = #{cityId}
+			${sqlStr}
+		]]>
+		<if test="limitIf == null">
+			limit 8
+		</if>	
+	</select>
+	<select id="getFDByUserId" parameterType="java.util.Map" resultMap="CustomerModelData">
+		<![CDATA[
+		select
+			DISTINCT
+			a.cstName name,
+			a.mobile_tel tel,
+			a.cst_Email email,
+			a.cst_address address
+		from
+			rpt_yx_cst_model a,
+			(select distinct project_guid from sys_user_project where user_id = #{userId}) b
+		where
+			a.cst_type in (11, 12, 13, 14)
+			and
+			a.house_city_code = #{cityId}
+			and
+			a.proj_guid = b.project_guid
+			${sqlStr}
+		]]>
+		<if test="limitIf == null">
+			limit 8
+		</if>	
+	</select>
+	
+	<!-- 添加提取数据日志 -->
+	<insert id="saveExportLog" parameterType="java.util.Map">
+		insert INTO rpt_data_extract_log(
+			extract_user,
+			extract_date,
+			extract_num,
+			extract_type,
+			remark,
+			proj_guid
+			)
+		VALUES
+			(
+			#{userId},
+			#{createTime},
+			#{num},
+			#{type},
+			#{remark},
+			#{projGUID}
+			)
+	</insert>
+	
+</mapper>

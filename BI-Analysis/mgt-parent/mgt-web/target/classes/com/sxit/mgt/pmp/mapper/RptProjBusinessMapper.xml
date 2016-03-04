@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.pmp.dao.RptProjBusinessDao" >
+<!-- Result Map-->
+<resultMap id="RptProjBusinessMap" type="com.sxit.model.pmp.RptProjBusiness" >
+	<result column="proj_business_id" property="proj_business_id"/>
+	<result column="proj_abuilding" property="proj_abuilding"/>
+	<result column="proj_abuilding_set" property="proj_abuilding_set"/>
+	<result column="proj_presell" property="proj_presell"/>
+	<result column="proj_presell_set" property="proj_presell_set"/>
+	<result column="proj_onsell" property="proj_onsell"/>
+	<result column="proj_onsell_set" property="proj_onsell_set"/>
+	<result column="proj_presell_counts" property="proj_presell_counts"/>
+	<result column="proj_onsell_counts" property="proj_onsell_counts"/>
+	<result column="proj_deal01" property="proj_deal01"/>
+	<result column="proj_deal02" property="proj_deal02"/>
+	<result column="proj_deal03" property="proj_deal03"/>
+	<result column="proj_deal04" property="proj_deal04"/>
+	<result column="proj_set01" property="proj_set01"/>
+	<result column="proj_set02" property="proj_set02"/>
+	<result column="proj_rate" property="proj_rate"/>
+	<result column="create_time" property="create_time"/>
+	<result column="proj_number" property="proj_number"/>
+	<result column="big_code" property="big_code"/>
+	<result column="city_code" property="city_code"/>
+</resultMap>
+       
+<!-- rpt_proj_business table all fields -->
+<sql id="Base_Column_List" >
+	 proj_business_id,proj_abuilding,proj_abuilding_set,proj_presell,proj_presell_set,proj_onsell,proj_onsell_set,proj_presell_counts,proj_onsell_counts,proj_deal01,proj_deal02,proj_deal03,proj_deal04,proj_set01,proj_set02,proj_rate,create_time,proj_number
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="proj_business_id != null" >
+	    and proj_business_id =  #{proj_business_id}
+	</if>
+	<if test="proj_abuilding != null" >
+	    and proj_abuilding =  #{proj_abuilding}
+	</if>
+	<if test="proj_abuilding_set != null" >
+	    and proj_abuilding_set =  #{proj_abuilding_set}
+	</if>
+	<if test="proj_presell != null" >
+	    and proj_presell =  #{proj_presell}
+	</if>
+	<if test="proj_presell_set != null" >
+	    and proj_presell_set =  #{proj_presell_set}
+	</if>
+	<if test="proj_onsell != null" >
+	    and proj_onsell =  #{proj_onsell}
+	</if>
+	<if test="proj_onsell_set != null" >
+	    and proj_onsell_set =  #{proj_onsell_set}
+	</if>
+	<if test="proj_presell_counts != null" >
+	    and proj_presell_counts =  #{proj_presell_counts}
+	</if>
+	<if test="proj_onsell_counts != null" >
+	    and proj_onsell_counts =  #{proj_onsell_counts}
+	</if>
+	<if test="proj_deal01 != null" >
+	    and proj_deal01 =  #{proj_deal01}
+	</if>
+	<if test="proj_deal02 != null" >
+	    and proj_deal02 =  #{proj_deal02}
+	</if>
+	<if test="proj_deal03 != null" >
+	    and proj_deal03 =  #{proj_deal03}
+	</if>
+	<if test="proj_deal04 != null" >
+	    and proj_deal04 =  #{proj_deal04}
+	</if>
+	<if test="proj_set01 != null" >
+	    and proj_set01 =  #{proj_set01}
+	</if>
+	<if test="proj_set02 != null" >
+	    and proj_set02 =  #{proj_set02}
+	</if>
+	<if test="proj_rate != null" >
+	    and proj_rate =  #{proj_rate}
+	</if>
+	<if test="create_time != null" >
+	    and create_time =  #{create_time}
+	</if>
+	<if test="proj_number != null" >
+	    and proj_number =  #{proj_number}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into rpt_proj_business(proj_business_id,proj_abuilding,proj_abuilding_set,proj_presell,proj_presell_set,proj_onsell,proj_onsell_set,proj_presell_counts,proj_onsell_counts,proj_deal01,proj_deal02,proj_deal03,proj_deal04,proj_set01,proj_set02,proj_rate,create_time,proj_number)
+ values(#{proj_business_id},#{proj_abuilding},#{proj_abuilding_set},#{proj_presell},#{proj_presell_set},#{proj_onsell},#{proj_onsell_set},#{proj_presell_counts},#{proj_onsell_counts},#{proj_deal01},#{proj_deal02},#{proj_deal03},#{proj_deal04},#{proj_set01},#{proj_set02},#{proj_rate},#{create_time},#{proj_number})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update rpt_proj_business set proj_abuilding=#{proj_abuilding},proj_abuilding_set=#{proj_abuilding_set},proj_presell=#{proj_presell},proj_presell_set=#{proj_presell_set},proj_onsell=#{proj_onsell},proj_onsell_set=#{proj_onsell_set},proj_presell_counts=#{proj_presell_counts},proj_onsell_counts=#{proj_onsell_counts},proj_deal01=#{proj_deal01},proj_deal02=#{proj_deal02},proj_deal03=#{proj_deal03},proj_deal04=#{proj_deal04},proj_set01=#{proj_set01},proj_set02=#{proj_set02},proj_rate=#{proj_rate},create_time=#{create_time},proj_number=#{proj_number} where proj_business_id=#{proj_business_id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update rpt_proj_business set 
+	<trim  suffixOverrides="," >
+	<if test="proj_abuilding != null  ">
+		proj_abuilding=#{proj_abuilding},
+	</if>
+	<if test="proj_abuilding_set != null  ">
+		proj_abuilding_set=#{proj_abuilding_set},
+	</if>
+	<if test="proj_presell != null  ">
+		proj_presell=#{proj_presell},
+	</if>
+	<if test="proj_presell_set != null  ">
+		proj_presell_set=#{proj_presell_set},
+	</if>
+	<if test="proj_onsell != null  ">
+		proj_onsell=#{proj_onsell},
+	</if>
+	<if test="proj_onsell_set != null  ">
+		proj_onsell_set=#{proj_onsell_set},
+	</if>
+	<if test="proj_presell_counts != null  ">
+		proj_presell_counts=#{proj_presell_counts},
+	</if>
+	<if test="proj_onsell_counts != null  ">
+		proj_onsell_counts=#{proj_onsell_counts},
+	</if>
+	<if test="proj_deal01 != null  ">
+		proj_deal01=#{proj_deal01},
+	</if>
+	<if test="proj_deal02 != null  ">
+		proj_deal02=#{proj_deal02},
+	</if>
+	<if test="proj_deal03 != null  ">
+		proj_deal03=#{proj_deal03},
+	</if>
+	<if test="proj_deal04 != null  ">
+		proj_deal04=#{proj_deal04},
+	</if>
+	<if test="proj_set01 != null  ">
+		proj_set01=#{proj_set01},
+	</if>
+	<if test="proj_set02 != null  ">
+		proj_set02=#{proj_set02},
+	</if>
+	<if test="proj_rate != null  ">
+		proj_rate=#{proj_rate},
+	</if>
+	<if test="create_time != null  ">
+		create_time=#{create_time},
+	</if>
+	<if test="proj_number != null  ">
+		create_time=#{proj_number},
+	</if>
+	</trim> where proj_business_id=#{proj_business_id}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from rpt_proj_business where proj_business_id = #{proj_business_id}
+</delete>
+
+<!-- 根据id查询 rpt_proj_business -->
+<select id="queryByAll"  resultMap="RptProjBusinessMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from rpt_proj_business where create_time = (select max(create_time) from rpt_proj_business);
+</select>
+
+<select id="querySeq"  resultMap="RptProjBusinessMap" parameterType="java.util.Map">
+	select <include refid="Base_Column_List" /> 
+	 from rpt_proj_business where big_code = #{big_code} and city_code = #{city_code}
+	 and create_time = (select max(create_time) from rpt_proj_business);
+</select>
+
+<!-- rpt_proj_business 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from rpt_proj_business 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询rpt_proj_business列表 -->
+<select id="queryByList" resultMap="RptProjBusinessMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from rpt_proj_business 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

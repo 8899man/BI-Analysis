@@ -1,0 +1,142 @@
+{
+	"allCustomer": {
+		"yesterdayAdded": 351208,
+		"monthAdded": 10500138,
+		"totalAmount": 10824500138
+	},
+	"customerSorts": [
+		{
+			"title": "住宅客户",
+			"yesterdayAdded": 101266,
+			"totalAmount": 10824500138,
+			"proportion": 50
+		},
+		{
+			"title": "置业客户",
+			"yesterdayAdded": 461245,
+			"totalAmount": 32824500138,
+			"proportion": 32
+		},
+		{
+			"title": "商业客户",
+			"yesterdayAdded": 561266,
+			"totalAmount": 45824500138,
+			"proportion": 56
+		},
+		{
+			"title": "置业客户",
+			"yesterdayAdded": 156208,
+			"totalAmount": 10824500138,
+			"proportion": 32
+		},
+		{
+			"title": "商业客户",
+			"yesterdayAdded": 355208,
+			"totalAmount": 10824500138,
+			"proportion": 45
+		},
+		{
+			"title": "金融客户",
+			"yesterdayAdded": 301208,
+			"totalAmount": 10824500138,
+			"proportion": 50
+		}
+	],
+	"customerFormat": [
+		{
+			"title": "住宅&置业",
+			"number": "1082450134",
+			"proportion": 10
+		},
+		{
+			"title": "住宅&商业",
+			"number": "2082450134",
+			"proportion": 76
+		},
+		{
+			"title": "商业&置业",
+			"number": "5682450134",
+			"proportion": 34
+		},
+		{
+			"title": "住宅&置业&商业",
+			"number": "5672450134",
+			"proportion": 28
+		},
+		{
+			"title": "住宅&置业",
+			"number": "17882450134",
+			"proportion": 56
+		},
+		{
+			"title": "住宅&置业",
+			"number": "45582450134",
+			"proportion": 76
+		}
+	],
+	"customerTypeProportion": [
+		{
+			"title": "再购客户",
+			"finished": 500000008,
+			"noFinished": 1500000008
+		},
+		{
+			"title": "会员",
+			"finished": 4500000008,
+			"noFinished": 500000008
+		},
+		{
+			"title": "业主",
+			"finished": 4500000008,
+			"noFinished": 3500000008
+		},
+		{
+			"title": "租客",
+			"finished": 2090700008,
+			"noFinished": 3090700008
+		},
+		{
+			"title": "企业客户",
+			"finished": 2500000008,
+			"noFinished": 1500000008
+		}
+	],
+	"chart1": {
+		"categories": ["深圳","广州","佛山","珠海","东莞","惠州","茂名","化州","梅州","增城"],
+		"data": [70, 50, 30, 20, 56, 35, 90, 100, 435, 213]
+	},
+	"chart2": {
+		"categories": ["武汉","南昌","九江","赣州","苏州","上海","北京","杭州","郑州","重庆"],
+		"data": [70, 50, 30, 20, 56, 35, 90, 56, 23, 66]
+	},
+	"labels": [
+		{
+			"title": "屌丝",
+			"percent": 78
+		},
+		{
+			"title": "僵尸客户",
+			"percent": 60
+		},
+		{
+			"title": "老投资",
+			"percent": 30
+		},
+		{
+			"title": "婚育一代",
+			"percent": 29
+		},
+		{
+			"title": "三代同堂",
+			"percent": 21
+		},
+		{
+			"title": "富豪不差钱",
+			"percent": 13
+		},
+		{
+			"title": "铁杆粉丝",
+			"percent": 10
+		}
+	]
+}

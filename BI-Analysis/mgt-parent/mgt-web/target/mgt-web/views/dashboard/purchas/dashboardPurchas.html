@@ -1,0 +1,250 @@
+<div ng-controller="DashboardPurchasController" ng-init="initializeController()">
+	<div class="title-position box-shadow-1 clearfix">
+		<h1>招商置业</h1>
+		<h2><a class="glyphicon glyphicon-home" href=""><i>首页</i></a> > 仪表盘 > 招商置业</h2>
+	</div>
+
+	<div class="content">
+		<div class="content-main">
+
+			
+
+			<!-- 仪表盘 - 置业 开始 -->
+			<div class="dashboard-purchas" ng-show="loaded">
+				<div class="purchas-header clearfix">
+					
+					<div class="purchas-header-l fl">
+						
+						<div class="customer-header-item-outer customer-header-item-outer1">
+							<div class="customer-header-item customer-header-item1 box-shadow-1 bg-white border-radius-3 border-1 border-1-gray border-top-3">
+								<dl>
+									<dt><h2>成交金额</h2></dt>
+									<dd class="clearfix">
+										<div class="dd-l fl">
+											<h3>出租</h3>
+											<div class="dd-list clearfix">
+												<div class="dd-list-l fl">昨日：</div>
+												<div class="dd-list-r fr"><b>{{dealAmount.rentYestDeal | number}}</b>万元</div>
+											</div>
+											<div class="dd-list clearfix">
+												<div class="dd-list-l fl">本月：</div>
+												<div class="dd-list-r fr"><b>{{dealAmount.rentMonthDeal | number}}</b>万元</div>
+											</div>
+											<div class="dd-list clearfix">
+												<div class="dd-list-l fl">本季：</div>
+												<div class="dd-list-r fr"><b>{{dealAmount.rentSeasonDeal | number}}</b>万元</div>
+											</div>
+											<div class="dd-list clearfix">
+												<div class="dd-list-l fl">本年：</div>
+												<div class="dd-list-r fr"><b>{{dealAmount.rentYearDeal | number}}</b>万元</div>
+											</div>
+										</div>
+										
+										<div class="dd-r fr">
+											<h3>出售</h3>
+											<div class="dd-list clearfix">
+												<div class="dd-list-l fl">昨日：</div>
+												<div class="dd-list-r fr"><b>{{dealAmount.saleYestDeal | number}}</b>万元</div>
+											</div>
+											<div class="dd-list clearfix">
+												<div class="dd-list-l fl">本月：</div>
+												<div class="dd-list-r fr"><b>{{dealAmount.saleMonthDeal | number}}</b>万元</div>
+											</div>
+											<div class="dd-list clearfix">
+												<div class="dd-list-l fl">本季：</div>
+												<div class="dd-list-r fr"><b>{{dealAmount.saleSeasonDeal | number}}</b>万元</div>
+											</div>
+											<div class="dd-list clearfix">
+												<div class="dd-list-l fl">本年：</div>
+												<div class="dd-list-r fr"><b>{{dealAmount.saleYearDeal | number}}</b>万元</div>
+											</div>
+										</div>
+
+									</dd>
+								</dl>
+							</div>
+						</div>
+
+
+						<div class="customer-header-item-outer customer-header-item-outer1 margin-top-30">
+							<div class="customer-header-item customer-header-item1 box-shadow-1 bg-white border-radius-3 border-1 border-1-gray border-top-3">
+								<dl>
+									<dt><h2>本月成交排行前三</h2></dt>
+									<dd class="clearfix">
+
+										<div class="dd-l dd-sort fl">
+											<h3>出租</h3>
+											<div class="dd-list clearfix" ng-repeat="c in rent">
+												<div class="dd-sort-num dd-sort-num{{$index+1}}">No.{{$index+1}}</div>
+												<div class="dd-list-main">
+													<div class="dd-list-l fl">{{c.name}}</div>
+													<div class="dd-list-r fr"><b>{{c.money | number}}</b>万元</div>
+												</div>
+											</div>
+										</div>
+										
+										<div class="dd-r dd-sort fr">
+											<h3>出售</h3>
+											<div class="dd-list clearfix" ng-repeat="c in sales">
+												<div class="dd-sort-num dd-sort-num{{$index+1}}">No.{{$index+1}}</div>
+												<div class="dd-list-main">
+													<div class="dd-list-l fl">{{c.name}}</div>
+													<div class="dd-list-r fr"><b>{{c.money | number}}</b>万元</div>
+												</div>
+											</div>
+										</div>
+
+									</dd>
+								</dl>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="purchas-header-r fr">
+						
+						<div class="customer-header-item-outer customer-header-item-outer1">
+							<div class="customer-header-item customer-header-item1 box-shadow-1 bg-white border-radius-3 border-1 border-1-gray border-top-3">
+								<dl>
+									<dt><h2>盘源</h2></dt>
+									<dd class="clearfix">
+										<div class="dd-l fl">
+											<h3>出租</h3>
+											<div class="dd-list clearfix">
+												<div class="dd-list-l fl">本周新增：</div>
+												<div class="dd-list-r fr"><b>{{sourceDisk.rentWeekAdd | number}}</b>套</div>
+											</div>
+											<div class="dd-list clearfix">
+												<div class="dd-list-l fl">库存量：</div>
+												<div class="dd-list-r fr"><b>{{sourceDisk.rentNum | number}}</b>套</div>
+											</div>
+										</div>
+										
+										<div class="dd-r fr">
+											<h3>出售</h3>
+											<div class="dd-list clearfix">
+												<div class="dd-list-l fl">本周新增：</div>
+												<div class="dd-list-r fr"><b>{{sourceDisk.saleWeekAdd | number}}</b>套</div>
+											</div>
+											<div class="dd-list clearfix">
+												<div class="dd-list-l fl">库存量：</div>
+												<div class="dd-list-r fr"><b>{{sourceDisk.saleNum | number}}</b>套</div>
+											</div>
+										</div>
+
+									</dd>
+								</dl>
+							</div>
+						</div>
+
+
+						<div class="customer-header-item-outer customer-header-item-outer1 margin-top-30">
+							<div class="customer-header-item customer-header-item1 box-shadow-1 bg-white border-radius-3 border-1 border-1-gray border-top-3">
+								<dl>
+									<dt><h2>客源</h2></dt>
+									<dd class="clearfix">
+										<div class="dd-l fl">
+											<h3>出租</h3>
+											<div class="dd-list clearfix">
+												<div class="dd-list-l fl">本周新增：</div>
+												<div class="dd-list-r fr"><b>{{tourists.rentWeekAdd | number}}</b>人</div>
+											</div>
+											<div class="dd-list clearfix">
+												<div class="dd-list-l fl">累计客源：</div>
+												<div class="dd-list-r fr"><b>{{tourists.rentNum | number}}</b>人</div>
+											</div>
+										</div>
+										
+										<div class="dd-r fr">
+											<h3>出售</h3>
+											<div class="dd-list clearfix">
+												<div class="dd-list-l fl">本周新增：</div>
+												<div class="dd-list-r fr"><b>{{tourists.saleWeekAdd | number}}</b>人</div>
+											</div>
+											<div class="dd-list clearfix">
+												<div class="dd-list-l fl">累计客源：</div>
+												<div class="dd-list-r fr"><b>{{tourists.saleNum | number}}</b>人</div>
+											</div>
+										</div>
+
+									</dd>
+								</dl>
+							</div>
+						</div>
+
+						<div class="customer-header-item-outer customer-transform customer-header-item-outer1 margin-top-30">
+							<div class="customer-header-item customer-header-item1 box-shadow-1 bg-white border-radius-3 border-1 border-1-gray border-top-3">
+								<dl>
+									<dt><h2>转化率与转化周期</h2></dt>
+									<dd class="clearfix">
+										<div class="dd-l fl">
+											<h3>客源转租赁</h3>
+											<div class="dd-list-outer">
+												<div class="dd-list dd-list-1 clearfix">
+													<span>转化率：</span>
+													<span><b class="no-padding">{{rateAndCycle.rentRate}}%</b></span>
+												</div>
+												<div class="dd-list dd-list-2 clearfix">
+													<span>周期：</span>
+													<span><b>{{rateAndCycle.rentWeek | number}}</b>天</span>
+												</div>
+											</div>
+										</div>
+										
+										<div class="dd-r fr">
+											<h3>客源转成交</h3>
+											<div class="dd-list-outer">
+												<div class="dd-list dd-list-1 clearfix">
+													<span>转化率：</span>
+													<span><b class="no-padding">{{rateAndCycle.saleDealRate}}%</b></span>
+												</div>
+												<div class="dd-list dd-list-2 clearfix">
+													<span>周期：</span>
+													<span><b>{{rateAndCycle.saleDealWeek | number}}</b>天</span>
+												</div>
+											</div>
+										</div>
+
+									</dd>
+								</dl>
+							</div>
+						</div>
+
+
+					</div>
+
+				</div>
+
+				
+				
+
+
+
+				<div class="customer-header customer-footer clearfix margin-top-30">
+					
+					<div class="customer-header-item-outer">
+						<div class="customer-header-item customer-header-item1 box-shadow-1 bg-white border-radius-3 border-1 border-1-gray border-top-3 border-top-color-red">
+							<dl>
+								<dt><h2>本月营销趋势</h2></dt>
+								<dd>
+									<div class="households">
+										<highchart class="chart" config="chartThisMonthSalesPurchas"></highchart>
+									</div>
+								</dd>
+							</dl>
+						</div>
+					</div>
+
+				</div>
+
+
+			</div>
+			<!-- 仪表盘 - 置业 结束 -->
+
+
+
+
+		</div>
+	</div>
+</div>
+

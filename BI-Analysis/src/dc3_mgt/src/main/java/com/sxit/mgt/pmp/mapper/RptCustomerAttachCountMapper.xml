@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.pmp.dao.RptCustomerAttachCountDao" > 
+<!-- Result Map-->
+<resultMap id="RptCustomerAttachCountMap" type="com.sxit.model.pmp.RptCustomerAttachCount" >
+	<result column="customer_attach_id" property="customer_attach_id"/>
+	<result column="proj_id" property="proj_id"/>
+	<result column="index_format_type" property="index_format_type"/>
+	<result column="customer_type" property="customer_type"/>
+	<result column="customer_age_type" property="customer_age_type"/>
+	<result column="customer_age_sum" property="customer_age_sum"/>
+	<result column="create_time" property="create_time"/>
+</resultMap>
+       
+<!-- rpt_customer_attach_count table all fields -->
+<sql id="Base_Column_List" >
+	 customer_attach_id,proj_id,index_format_type,customer_type,customer_age_type,customer_age_sum,create_time
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="customer_attach_id != null" >
+	    and customer_attach_id =  #{customer_attach_id}
+	</if>
+	 	<if test="proj_id != null and proj_id != ''" >
+	    and proj_id =  #{proj_id}
+	</if>
+	<if test="index_format_type != null" >
+	    and index_format_type =  #{index_format_type}
+	</if>
+	<if test="customer_type != null" >
+	    and customer_type =  #{customer_type}
+	</if>
+	<if test="customer_age_type != null" >
+	    and customer_age_type =  #{customer_age_type}
+	</if>
+	<if test="customer_age_sum != null" >
+	    and customer_age_sum =  #{customer_age_sum}
+	</if>
+	<if test="count_time != null" >
+	    and count_time =  #{count_time}
+	</if>
+	 	<if test="index_format_type != null and index_format_type != ''" >
+	    and index_format_type =  #{index_format_type}
+	</if>
+	 	<if test="customer_type != null and customer_type != ''" >
+	    and customer_type =  #{customer_type}
+	</if>
+	 	<if test="customer_age_type != null and customer_age_type != ''" >
+	    and customer_age_type =  #{customer_age_type}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录   -->
+<insert id="add" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into rpt_customer_attach_count(customer_attach_id,proj_id,index_format_type,customer_type,customer_age_type,customer_age_sum,count_time,index_format_type,customer_type,customer_age_type)
+ values(#{customer_attach_id},#{proj_id},#{index_format_type},#{customer_type},#{customer_age_type},#{customer_age_sum},#{count_time},#{index_format_type},#{customer_type},#{customer_age_type})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update rpt_customer_attach_count set proj_id=#{proj_id},index_format_type=#{index_format_type},customer_type=#{customer_type},customer_age_type=#{customer_age_type},customer_age_sum=#{customer_age_sum},count_time=#{count_time},index_format_type=#{index_format_type},customer_type=#{customer_type},customer_age_type=#{customer_age_type} where customer_attach_id=#{customer_attach_id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update rpt_customer_attach_count set 
+	<trim  suffixOverrides="," >
+	<if test="proj_id != null  and proj_id != '' ">
+		proj_id=#{proj_id},
+	</if>
+	<if test="index_format_type != null  ">
+		index_format_type=#{index_format_type},
+	</if>
+	<if test="customer_type != null  ">
+		customer_type=#{customer_type},
+	</if>
+	<if test="customer_age_type != null  ">
+		customer_age_type=#{customer_age_type},
+	</if>
+	<if test="customer_age_sum != null  ">
+		customer_age_sum=#{customer_age_sum},
+	</if>
+	<if test="count_time != null  ">
+		count_time=#{count_time},
+	</if>
+	<if test="index_format_type != null  and index_format_type != '' ">
+		index_format_type=#{index_format_type},
+	</if>
+	<if test="customer_type != null  and customer_type != '' ">
+		customer_type=#{customer_type},
+	</if>
+	<if test="customer_age_type != null  and customer_age_type != '' ">
+		customer_age_type=#{customer_age_type},
+	</if>
+	</trim> where customer_attach_id=#{customer_attach_id}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from rpt_customer_attach_count where customer_attach_id = #{customer_attach_id}
+</delete>
+ 
+<!-- 根据id查询 rpt_customer_attach_count -->
+<select id="RptCustomerAttachCountById"  resultMap="RptCustomerAttachCountMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from rpt_customer_attach_count where proj_id = #{proj_id} and
+     create_time = (select max(create_time) from rpt_customer_attach_count)
+	 order by customer_age_type
+</select>
+
+<!-- rpt_customer_attach_count 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from rpt_customer_attach_count 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询rpt_customer_attach_count列表 -->
+<select id="queryByList" resultMap="RptCustomerAttachCountMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from rpt_customer_attach_count 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

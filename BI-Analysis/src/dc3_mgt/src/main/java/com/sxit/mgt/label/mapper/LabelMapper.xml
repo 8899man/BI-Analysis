@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.label.dao.LabelDao">
+	 
+
+	 <resultMap id="LabelMap" type="LabellocalDetails" >
+	    <id column="labellocal_details_id" property="labellocalDetailsId" jdbcType="BIGINT" />
+		<result column="rootid" property="rootid" jdbcType="VARCHAR" />
+		<result column="rootvalue" property="rootvalue" jdbcType="VARCHAR" />
+		<result column="lablekey" property="lablekey" jdbcType="BIT" />
+		<result column="lablevalue" property="lablevalue" jdbcType="VARCHAR" />
+		<result column="roottitle" property="roottitle" jdbcType="VARCHAR" />
+		<result column="suptitle" property="suptitle" jdbcType="VARCHAR" />
+		<result column="showsuptitle" property="showsuptitle" jdbcType="VARCHAR" />
+		<result column="hassubs" property="hassubs" jdbcType="VARCHAR" />
+		<result column="model" property="model" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="optionsname" property="optionsname" jdbcType="VARCHAR" />
+		<result column="optionsvalue" property="optionsvalue" jdbcType="VARCHAR" />
+		<result column="subsname" property="subsname" jdbcType="VARCHAR" />
+		<result column="subsvalue" property="subsvalue" jdbcType="VARCHAR" />
+		<result column="rootguid" property="rootguid" jdbcType="VARCHAR" />
+		<result column="pguid" property="pguid" jdbcType="VARCHAR" />
+		<result column="isroot" property="isroot" jdbcType="BIT" />
+		<result column="isleaf" property="isleaf" jdbcType="BIT" />
+
+	 </resultMap>
+	 
+	  <resultMap id="LabelStorageMap" type="com.sxit.model.label.LableStorage" >
+	    <id column="labellocal_storage_id" property="storageId" jdbcType="BIGINT" />
+		<result column="lableKey" property="lableKey" jdbcType="TINYINT" />
+		<result column="id" property="id" jdbcType="VARCHAR" />
+		<result column="lableType" property="lableType" jdbcType="VARCHAR" />
+		<result column="lableAttr" property="lableAttr" jdbcType="VARCHAR" />
+		<result column="persons" property="persons" jdbcType="INTEGER" />
+		<result column="updateTime" property="updateTime" jdbcType="DATE" />
+		<result column="info" property="info" jdbcType="VARCHAR" />
+		<result column="sortTitle" property="sortTitle" jdbcType="VARCHAR" />
+		<result column="optionName" property="optionName" jdbcType="VARCHAR" />
+		<result column="createTime" property="createTime" jdbcType="DATE" />
+		<result column="model" property="model" jdbcType="VARCHAR" />
+		<result column="optionvalue" property="optionvalue" jdbcType="VARCHAR" />
+
+	 </resultMap>
+
+	<select id="queryTemplate" resultMap="LabelMap" parameterType="java.util.Map">
+		select 
+			labellocal_details_id,
+			rootid,
+			rootvalue,
+			lablekey,
+			lablevalue,
+			roottitle,
+			suptitle,
+			showsuptitle,
+			hassubs,
+			model,
+			title,
+			optionsname,
+			optionsvalue,
+			subsname,
+			subsvalue,
+			rootguid,
+			pguid,
+			isroot,
+			isleaf
+		from labellocal_details 
+		where lablekey = #{lablekey} and (rootvalue = #{rootvalue} || rootvalue = '0')
+		order by labellocal_details_id asc
+	</select>
+	
+	<select id="insertLabelStronge" parameterType="java.util.Map">
+		insert into labellocal_storage (
+			lableKey,
+			id,
+			labelType,
+			labelAttr,
+			info,
+			sortTitle,
+			optionName,
+			optionValue,
+			createTime,
+			model,
+			sys_user_id
+		) values (
+			#{lableKey},
+			#{id},
+			#{labelType},
+			#{labelAttr},
+			#{info},
+			#{sortTitle},
+			#{optionName},
+			#{optionValue},
+			#{createTime},
+			#{model},
+			#{sys_user_id}
+		)
+	</select>
+	
+	<!-- 列表 -->
+	<select id="getLableList" parameterType="int" resultMap="LabelStorageMap">
+		select
+		labelLocal_storage_id storageId,
+		lableKey lableKey,
+		`id` id,
+		`labelType` lableType,
+		labelAttr labelAttr,
+		persons persons,
+		updateTime updateTime,
+		info info
+		from labellocal_storage 
+		where 
+		lableKey = #{lableKey} 
+		GROUP BY id
+	</select>
+	
+	<!-- 详情 -->
+	<select id="getLable" parameterType="java.util.Map" resultMap="LabelStorageMap">
+		select
+		labelAttr,
+		sortTitle,
+		optionName
+		from labellocal_storage
+		where
+		id = #{id}
+		and
+		lableKey = #{lableKey}
+	</select>
+	
+	<!-- 删除 -->
+	<update id="deleteLable" parameterType="java.util.Map">
+			delete from labellocal_storage 
+			where
+			lableKey = #{lableKey}
+			<if test="ids != null and ids != ''">
+				and
+				<foreach collection="ids" item="idvalue" open="" close="" separator="OR">
+					id = #{idvalue}
+				</foreach>
+			</if>
+	</update>
+	
+	<update id="deleteLableAll" parameterType="java.util.Map">
+		delete from labellocal_storage 
+		where
+		lableKey = #{lableKey}
+		<if test="userId != null and userId!= ''">
+			and
+			userId = #{userId}
+		</if>
+	</update>
+</mapper>

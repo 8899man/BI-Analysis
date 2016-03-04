@@ -1,0 +1,199 @@
+<div ng-controller="ClientShowController" ng-init="initializeController()">
+	<div class="title-position box-shadow-1 clearfix">
+		<h1>客户概览</h1>
+		<h2><a class="glyphicon glyphicon-home" href=""><i>首页</i></a> > 客户概览</h2>
+	</div>
+
+	<div class="content">
+		<div class="content-main" ng-if="loaded">
+			
+			<div class="client-show-header clearfix">
+				<div class="client-show-header-l">
+					
+					<div class="customer-header-item-outer">
+						<div class="customer-header-item customer-header-item1 box-shadow-1 bg-gray border-radius-3 border-1 border-1-gray border-top-3">
+							<dl>
+								<dt><h2>全部客户</h2></dt>
+								<dd class="clearfix">
+									<div class="customer-header-key">昨日新增：</div>
+									<div class="customer-header-value"><b>{{allCustomer.yesterdayAdded | number}}</b></div>
+								</dd>
+								<dd class="clearfix">
+									<div class="customer-header-key">本月新增：</div>
+									<div class="customer-header-value"><b>{{allCustomer.monthAdded | number}}</b></div>
+								</dd>
+								<dd class="clearfix">
+									<div class="customer-header-key">累计总量：</div>
+									<div class="customer-header-value"><b class="text-red">{{allCustomer.totalAmount | number}}</b></div>
+								</dd>
+							</dl>
+						</div>
+					</div>
+
+				</div>
+				<div class="client-show-header-r list-slide" onepage="3" customer-sorts="customerSorts">
+					<a href="javascript:;" class="arrow-prev has-no"></a>
+					<div class="client-show-header-r-main">
+						<div class="client-show-header-r-outer page-container">
+							
+							<div class="client-show-header-r-item" ng-repeat="c in customerSorts">
+								
+								<div class="customer-header-item-outer">
+									<div class="customer-header-item customer-header-item1 box-shadow-1 bg-gray border-radius-3 border-1 border-1-gray">
+										<dl>
+											<dt><h2>{{c.title}}</h2></dt>
+											<dd class="clearfix">
+												<div class="customer-header-key">昨日新增：</div>
+												<div class="customer-header-value"><b>{{c.yesterdayAdded | number}}</b></div>
+											</dd>
+											<dd class="clearfix">
+												<div class="customer-header-key">累计总量：</div>
+												<div class="customer-header-value"><b>{{c.totalAmount | number}}</b></div>
+											</dd>
+											<dd class="clearfix">
+												<div class="customer-header-key">业态占比：</div>
+												<div class="customer-header-value"><b>{{c.proportion}}%</b></div>
+											</dd>
+										</dl>
+									</div>
+								</div>
+
+							</div>
+
+							<!-- <div class="client-show-header-r-item">
+								
+								<div class="customer-header-item-outer">
+									<div class="customer-header-item customer-header-item1 box-shadow-1 bg-gray border-radius-3 border-1 border-1-gray">
+										<dl>
+											<dt><h2>置业客户</h2></dt>
+											<dd class="clearfix">
+												<div class="customer-header-key">昨日新增：</div>
+												<div class="customer-header-value"><b>1,208</b></div>
+											</dd>
+											<dd class="clearfix">
+												<div class="customer-header-key">累计总量：</div>
+												<div class="customer-header-value"><b>3,824,500,138</b></div>
+											</dd>
+											<dd class="clearfix">
+												<div class="customer-header-key">业态占比：</div>
+												<div class="customer-header-value"><b>34%</b></div>
+											</dd>
+										</dl>
+									</div>
+								</div>
+							
+							</div> -->
+
+
+
+
+						</div>
+					</div>
+					<a href="javascript:;" class="arrow-next"></a>
+				</div>
+			</div>
+
+
+			<div class="client-show-formats clearfix margin-top-16">
+				<div class="customer-header-item-outer">
+					<div class="customer-header-item customer-header-item1 box-shadow-1 bg-gray border-radius-3 border-1 border-1-gray">
+						<dl class="client-show-formats-title">
+							<dt><h2>多业态客户</h2></dt>
+						</dl>
+						<div class="client-show-formats-content">
+							<dl class="clearfix">
+								<dd class="clearfix" ng-repeat="c in customerFormat">
+									<div class="customer-header-key">{{c.title}}</div>
+									<div class="customer-header-num">{{c.number | number}}</div>
+									<div class="customer-header-value"><b>{{c.proportion}}</b>%</div>
+								</dd>
+								<!-- <dd class="clearfix">
+									<div class="customer-header-key">住宅&商业</div>
+									<div class="customer-header-num">1,082,450,134</div>
+									<div class="customer-header-value"><b>76</b>%</div>
+								</dd> -->
+							</dl>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			
+			<div class="client-show-proportion margin-top-20 clearfix">
+				<div class="customer-header-item-outer w100">
+					<div class="customer-header-item customer-header-item1 box-shadow-1 bg-white border-radius-3 border-1 border-1-gray border-top-color-zi border-top-3">
+						<dl>
+							<dt><h2 class="text-left">分类客户占比</h2></dt>
+							<dd class="clearfix">
+								<div class="proportion-item" ng-repeat="chart in customerTypeProportion">
+									<div class="proportion-title">{{chart.title}}占比</div>
+									<div class="proportion-main">
+										<div class="proportion-table">
+											<highchart class="chart" config="chart.chartConfig"></highchart>
+										</div>
+										<div class="proportion-num">{{chart.percent}}</div>
+									</div>
+									<div class="proportion-info">
+										<p>{{chart.title}}</p>
+										<p>{{chart.finished | number}}</p>
+									</div>
+								</div>
+							</dd>
+						</dl>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="client-show-other margin-top-20 clearfix">
+				<div class="client-show-other-l">
+					<div class="customer-header-item-outer w100">
+						<div class="customer-header-item customer-header-item1 box-shadow-1 bg-white border-radius-3 border-1 border-1-gray border-top-color-green border-top-3">
+							<dl>
+								<dt><h2 class="text-left">城市客户分布排行</h2></dt>
+								<dd class="clearfix">
+									<div class="city-rank">
+										<div class="city-rank-title">城市公司客户排行前十位</div>
+										<div class="city-rank-table">
+											<highchart class="chart" config="chartConfig1"></highchart>
+										</div>
+									</div>
+									<div class="city-rank">
+										<div class="city-rank-title">城市公司客户排行后十位</div>
+										<div class="city-rank-table">
+											<highchart class="chart" config="chartConfig2"></highchart>
+										</div>
+									</div>
+								</dd>
+							</dl>
+						</div>
+					</div>
+				</div>
+				<div class="client-show-other-r">
+					<div class="customer-header-item-outer w100">
+						<div class="customer-header-item customer-header-item1 box-shadow-1 bg-white border-radius-3 border-1 border-1-gray border-top-color-blue border-top-3">
+							<dl>
+								<dt><h2 class="text-left">标签客户占比</h2></dt>
+								<!-- labels.length决定每个子标签高度 -->
+								<dd class="clearfix item{{labels.length}}">
+									<div class="cilent-show-lable clearfix" ng-repeat="label in labels">
+										<div class="cilent-show-lable-title">{{label.title}}</div>
+										<div class="cilent-show-lable-percent">
+											<div class="cilent-show-lable-percent-main">
+												<div class="cilent-show-lable-num" ng-style="{'left':label.percent+'%'}">{{label.percent}}%</div>
+												<div class="cilent-show-lable-bg" ng-style="{'width':label.percent+'%'}"></div>
+											</div>											
+										</div>
+									</div>
+								</dd>
+							</dl>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+</div>
+

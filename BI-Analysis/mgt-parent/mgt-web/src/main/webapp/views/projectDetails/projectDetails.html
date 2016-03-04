@@ -1,0 +1,622 @@
+<div ng-controller="ProjectDetailsController" ng-init="initializeController()">
+	
+
+	<div class="title-position box-shadow-1 clearfix">
+		<h1><a href="javascript:;" class="history-back back-button">返回</a>项目画像</h1>
+		<h2><a class="glyphicon glyphicon-home" href=""><i>首页</i></a> > 项目 > 项目画像</h2>
+	</div>
+
+
+	<!-- <div>
+	
+	
+		<highchart class="chart" config='chartConfig0'></highchart>
+	
+	</div> -->
+
+
+
+	<div class="content">
+		<div class="content-main">
+			<div class="client-details-header clearfix">
+
+				<div class="project-details-info">
+
+					<div ng-model="houseName" class="project-photo"><img src="images/project-photo.png" class="box-shadow-1" alt=""></div>
+
+
+					<div class="btn-group project-select no-padding" dropdown keyboard-nav>
+				       <a id="project-select-btn" type="button" class="btn btn-primary box-shadow-1" dropdown-toggle>
+				        {{houseName.proj_name}}</a>
+				        <!-- <ul class="dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav">
+				            <li role="menuitem"><a href="javascript:;">花园城一期</a></li>
+				            <li class="divider"></li>
+				            <li role="menuitem"><a href="javascript:;">花园城二期</a></li>
+				            <li class="divider"></li>
+				            <li role="menuitem"><a href="javascript:;">花园城三期</a></li>
+				        </ul> -->
+				    </div>
+
+					
+
+					<div class="client-details-info box-shadow-1 border-radius-2">
+						<h4>基本信息</h4>
+
+
+						<div class="client-info-other" ng-model="bproj">
+							<dl>
+								<dt>编号</dt>
+								<dd>{{bproj.projCode}}</dd>
+							</dl>
+							<dl>
+								<dt>地址</dt>
+								<dd>{{bproj.projAddress}}</dd>
+							</dl>
+							<dl>
+								<dt>占地面积</dt>
+								<dd>{{bproj.occupyArea}}平方米</dd>
+							</dl>
+							<dl>
+								<dt>建筑面积</dt>
+								<dd>{{bproj.buildArea}}平方米</dd>
+							</dl>
+							<dl>
+								<dt>产权年限</dt>
+								<dd></dd>
+							</dl> 
+							<dl>
+								<dt>项目公司</dt>
+								<dd>{{bproj.orgName}}</dd>
+							</dl>
+							<!-- <dl>
+								<dt>物业公司</dt>
+								<dd></dd>
+							</dl>-->
+							<dl>
+								<dt>楼栋数</dt>
+								<dd>{{bproj.buildNum}}</dd>
+							</dl>
+							<dl>
+								<dt>房源量</dt>
+								<dd><a ui-sref="app.project.salesQuery({'projectId': bproj.projGUID})">{{bproj.roomNum}}</a></dd>
+								<!-- <dd>{{bproj.roomNum}}</dd> -->
+							</dl>
+							<dl>
+								<dt>已售</dt>
+								<dd>{{selledNum}}套</dd>
+							</dl>
+							<dl>
+								<dt>在售</dt>
+								<dd>{{noSellNum}}套</dd>
+							</dl>
+							<!-- <dl>
+								<dt>客服户数</dt>
+								<dd><a ui-sref="app.project.customerQuery({'projectId':'1001'})">880户</a></dd>
+							</dl>
+							<dl>
+								<dt>物业户数</dt>
+								<dd><a ui-sref="app.project.propertyQuery({'projectId':'1001'})">980户</a></dd>
+							</dl>-->
+							<dl>
+								<dt>项目性质</dt>
+								<dd>自有</dd>
+							</dl>
+							<!--<dl>
+								<dt>盘源数</dt>
+								<dd><a ui-sref="app.project.diskQuery({'projectId':'1001'})">1460套</a></dd>
+							</dl>
+							<dl>
+								<dt>已出售</dt>
+								<dd>680套</dd>
+							</dl>
+							<dl>
+								<dt>已租赁</dt>
+								<dd>780套</dd>
+							</dl> -->
+						</div>
+					</div>
+
+				</div>
+
+				<div class="features-container">
+					<div class="project-details-feature box-shadow-1 border-radius-2">
+
+						<tabset justified="true">
+							<tab heading="项目指标" select="setHeight()">
+								<div class="project-details-content box-shadow-1 project-details-quota">
+									<h2 class="clearfix">关键指标--><font color="#2894FF">{{index_num==1?"销售":index_num==2?"客服":index_num==4?"置业":""}}</font>
+									<div ng-controller="LunchCtrl">
+										<span class="pull-right">
+											<select class="form-control" ng-model="selectLunch" ng-change="changeIndex()">
+												<option value="1">销售</option>
+												<option value="2">客服</option>
+												<option value="3">物业</option>
+												<option value="4">置业</option>
+											</select>
+										</span>
+										</div>
+										<span class="pull-left">
+										<div class="project-list-header-inside clearfix">
+											<div class="project-list-header-tab pull-left">
+						                            <label class="btn btn-primary" ng-model="projType" btn-radio="'day'" ng-click="getFilterList($event, 'day')">昨天</label>
+			                                        <label class="btn btn-primary" ng-model="projType" btn-radio="'week'" ng-click="getFilterList($event, 'week')">本周</label>
+			                                        <label class="btn btn-primary" ng-model="projType" btn-radio="'month'" ng-click="getFilterList($event, 'month')">本月</label>
+					                        </div>
+					                    </div>
+					                    </span>
+									</h2>
+									
+									<div class="project-content-main">
+										<table class="table">
+											<tbody>
+												<tr ng-model="houseDetails">
+													<td>
+													{{index_num==1?"跟进客户数：" + houseDetails.follow_customer_sum:
+													  index_num==2?"接待记录数：" + houseDetails.reception_record_num:
+													  index_num==3?"跟进客户数：" + houseDetails.follow_customer_sum:
+													  index_num==4?"新增租赁客源：" + houseDetails.add_lease_cst:""}}
+													</font></td>
+													<td>
+													{{index_num==1?"新客到访数：" + houseDetails.new_visitors_sum:
+													  index_num==2?"新增会员数：" + houseDetails.add_member_num:
+													  index_num==3?"跟进客户数：" + houseDetails.follow_customer_sum:
+													  index_num==4?"":""}}
+													</font></td>
+													<td>
+													{{index_num==1?"老客到访数：" + houseDetails.old_visitors_sum:
+													  index_num==2?"退出会员数：" + houseDetails.exit_member_num:
+													  index_num==3?"跟进客户数：" + houseDetails.follow_customer_sum:
+													  index_num==4?"新增销售客源：" + houseDetails.add_Sale_cst:""}}
+													</font></td>
+												</tr>
+												<tr>
+													<td>
+													{{index_num==1?"认筹客户数：" + houseDetails.confess_customer_sum:
+													  index_num==2?"交付接待数：" + houseDetails.pay_reception_num:
+													  index_num==3?"跟进客户数：" + houseDetails.follow_customer_sum:
+													  index_num==4?"新增租赁房源：" + houseDetails.add_lease_house:""}}
+													</font></td>
+													<td>
+													{{index_num==1?"认筹套数：" + houseDetails.confess_cycle_sum:
+													  index_num==2?"来访接待数：" + houseDetails.visit_reception_num:
+													  index_num==3?"跟进客户数：" + houseDetails.follow_customer_sum:
+													  index_num==4?"":""}}
+                                                    </font></td>
+													<td>
+													{{index_num==1?"认筹金额：" + houseDetails.confess_amount_sum + "万":
+													  index_num==2?"来电接待数：" + houseDetails.tele_reception_num:
+													  index_num==3?"跟进客户数：" + houseDetails.follow_customer_sum:
+													  index_num==4?"新增销售房源：" + houseDetails.add_Sale_house:""}}
+													</font></td>
+												</tr>
+												<tr>
+													<td>
+													{{index_num==1?"认购客户数：" + houseDetails.subscribe_customer_sum:
+													  index_num==2?"保修申报数：" + houseDetails.repair_apply_num:
+													  index_num==3?"跟进客户数：" + houseDetails.follow_customer_sum:
+													  index_num==4?"租赁跟进次数：" + houseDetails.lease_follow_num:""}}
+													</font></td>
+													<td>
+													{{index_num==1?"认购套数：" + houseDetails.subscribe_cycle_sum:
+													  index_num==2?"保修处理数：" + houseDetails.guar_handle_num:
+													  index_num==3?"跟进客户数：" + houseDetails.follow_customer_sum:
+													  index_num==4?"":""}}
+													</font></td>
+													<td>
+													{{index_num==1?"认购金额：" + houseDetails.subscribe_amount_sum + "万":
+													  index_num==2?"保修完成数：" + houseDetails.guar_finished_num:
+													  index_num==3?"跟进客户数：" + houseDetails.follow_customer_sum:
+													  index_num==4?"销售跟进次数：" + houseDetails.sale_follow_num:""}}
+													</font></td>
+												</tr>
+												<tr>
+													<td>
+													{{index_num==1?"签约客户数：" + houseDetails.contract_customer_sum:
+													  index_num==2?"保修总户数：" + houseDetails.repair_hs:
+													  index_num==3?"跟进客户数：" + houseDetails.follow_customer_sum:
+													  index_num==4?"房屋租赁套数：" + houseDetails.house_lease_num:""}}
+													</font></td>
+													<td>
+													{{index_num==1?"签约套数：" + houseDetails.contract_cycle_sum:
+													  index_num==2?"投诉单数：" + houseDetails.complaint_num:
+													  index_num==3?"跟进客户数：" + houseDetails.follow_customer_sum:
+													  index_num==4?"":""}}
+													</font></td>
+													<td>
+													{{index_num==1?"签约金额：" + houseDetails.contract_amount_sum + "万":
+													  index_num==2?"回访次数：" + houseDetails.visit_num:
+													  index_num==3?"跟进客户数：" + houseDetails.follow_customer_sum:
+													  index_num==4?"房屋销售套数：" + houseDetails.house_sale_num:""}}
+													</font></td>
+												</tr>
+												<tr>
+													<td>
+													{{index_num==1?"回款客户数：" + houseDetails.returned_customer_sum:
+													  index_num==2?" ":
+													  index_num==3?"跟进客户数：" + houseDetails.follow_customer_sum:
+													  index_num==4?"租赁成交金额：" + houseDetails.lease_deal_money:""}}
+													</font></td>
+													<td>
+													{{index_num==1?"回款套数：" + houseDetails.returned_cycle_sum:
+													  index_num==2?" ":
+													  index_num==3?"跟进客户数：" + houseDetails.follow_customer_sum:
+													  index_num==4?"":""}}
+													</font></td>
+													<td>
+													{{index_num==1?"回款金额：" + houseDetails.returned_amount_sum:
+													  index_num==2?" ":
+													  index_num==3?"跟进客户数：" + houseDetails.follow_customer_sum:
+													  index_num==4?"销售成交金额：" + houseDetails.sale_deal_money:""}}
+													</font></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="project-details-content box-shadow-1 project-details-exponential">
+									<h2>业态指数--><font color="#2894FF">{{index_num==1?"销售":index_num==2?"客服":index_num==4?"置业":""}}</font></h2>
+									<div class="project-content-main container-fluid clearfix">
+										<div class="row">
+											<!-- <div class="project-content-chart col-xs-4">
+												<div class="exponential-main-inside">
+													<highchart class="chart" config="chartConfig1"></highchart>
+												</div> 
+												<div class="exponential-main-list"><span><i></i>{{index_num==1?"认购":
+													  index_num==2?"会员发展数":""}}</span><span class="tab2"><i></i>{{index_num==1?"签约":
+													  index_num==2?"报修满意度":""}}</span><span class="tab3"><i></i>{{index_num==1?"在售":
+													  index_num==2?"投诉满意度":""}}</span></div>
+											</div> -->
+											<div class="project-content-chart col-xs-4" ng-repeat="chart in exponential">
+												<highchart class="chart" config="chart.chartConfig"></highchart>
+												<div class="exponential-main-tip">
+													<p>{{chart.percent}}</p>
+													<p>{{chart.finished}}/{{chart.total}}</p>
+												</div>
+												<div class="exponential-main-list">{{chart.title}}</div>
+											</div>
+											<!-- <div class="project-content-chart col-xs-4">
+												<highchart class="chart" config="chartConfig3"></highchart>
+												<div class="exponential-main-tip">
+													<p>30%</p>
+													<p>60/200</p>
+												</div>
+												<div class="exponential-main-list">成交套数（套）</div>
+											</div> -->
+										</div>
+									</div>
+								</div>
+								<div class="project-details-content box-shadow-1 project-details-process">
+									<h2>关键流程分析--><font color="#2894FF">{{index_num==1?"销售":index_num==2?"客服":index_num==4?"置业":""}}</font></h2>
+									<div class="project-content-main container-fluid">
+										<div class="row">
+											<div class="col-xs-6">
+												<div project-process title={{index_num==1?"到访----认购时间":index_num==2?"维修派单—施工完成时间":index_num==4?"房源成交周期":""}} 
+												used-days={{index_num==1?proccess.visit_days:index_num==2?proccess.repair_average_days:index_num==4?proccess.house_deal_day:""}} 
+												baseline={{index_num==1?proccess.average_baseline_days:index_num==2?proccess.complaint_days:index_num==4?proccess.house_deal_aveg_day:""}}>
+												</div>
+											</div>
+											<div class="col-xs-6">
+												<div project-process title={{index_num==1?"认购----签约时间":index_num==2?"投诉受理—处理完成时间":index_num==4?"房源租赁周期":""}} 
+												used-days={{index_num==1?proccess.confess_days:index_num==2?proccess.complaint_days:index_num==4?proccess.house_rent_day:""}} 
+												baseline={{index_num==1?proccess.average_order_baseline_days:index_num==2?proccess.complaint_average_days:index_num==4?proccess.house_rent_aveg_day:""}}>
+												</div>
+											</div>
+											<hr style="FILTER: progid:DXImageTransform.Microsoft.Glow(color=#987cb9,strength=10)" width="100%" color=#987cb9 SIZE=0 ng-show="visible">
+											<div class="col-xs-6" ng-show="visible">
+												<div project-process title={{index_num==1?"":index_num==2?"赔付周期":""}} 
+												used-days={{index_num==1?"":index_num==2?proccess.payment_days:""}} 
+												baseline={{index_num==1?"":index_num==2?proccess.payment_average_days:""}}>
+												</div>
+											</div>									
+										</div>
+									</div>
+								</div>
+								<div class="project-details-content box-shadow-1 project-details-fractional">
+									<h2>转化率分析--><font color="#2894FF">{{index_num==1?"销售":index_num==2?"客服":index_num==4?"置业":""}}</font></h2>
+									<div class="project-content-main container-fluid clearfix">
+										<div class="row">
+											<div class="project-content-chart col-xs-4" ng-repeat="chart in fractional">
+												<highchart class="chart" config="chart.chartConfig"></highchart>
+												<div class="exponential-main-tip">
+													<p>{{chart.percent}}</p>
+													<p>{{chart.finished}}/{{chart.total}}</p>
+												</div>
+												<div class="exponential-main-list">{{chart.title}}</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</tab>
+							<tab heading="项目动态" select="setHeight()">
+								<div class="project-details-content project-details-dynamic">
+									<h2>动态轨迹<span class="pull-right">本项目7天内的最新动态</span></h2>
+									<div class="track-list-container">
+										<div class="client-track-list" on-finish-render-filters>
+											<dl class="clearfix" ng-repeat="sf in sFList" ng-class="{'last' : $last}">
+												<dt><i class="icon1" ng-class="{'icon10':sf.followtype==1, 
+						 									'icon10':sf.followtype==2, 
+						 									'icon5':sf.followtype==3, 
+						 									'icon8':sf.followtype==4, 
+						 									'icon3':sf.followtype==5, 
+						 									'icon2':sf.followtype==6, 
+						 									'icon7':sf.followtype==7,
+						 									'icon7':sf.followtype==8}"></i></dt>
+												<dd>
+													<p class="time">{{sf.createtime|date:'yyyy-MM-dd HH:mm'}}</p>
+													<p>{{sf.cstName}}</p>
+													<p class="track-tip">{{sf.followtype==1?'预约':
+														sf.followtype==2?'来电':
+														sf.followtype==3?'到访':
+														sf.followtype==4?'认筹':
+														sf.followtype==5?'认购':
+														sf.followtype==6?'签约':
+														sf.followtype==7?'回款':
+														sf.followtype==8?'其它':'其它'}}
+													{{sf.followcontent!=null?'，'+sf.followcontent:""}} {{sf.consultantname!=null?"，"+"互动关联人：置业顾问 "+sf.consultantname : ''}}{{sf.consultantmobile!=null?"  " + sf.consultantmobile:''}}</p>
+												</dd>
+											</dl>
+											<!-- 
+											<dl class="clearfix">
+												<dt><i class="icon2"></i></dt>
+												<dd>
+													<p>2015-05-04 15:00</p>
+													<p>高明明</p>
+													<p class="track-tip">签约，房源4栋A单元608房间，互动关联人：职业顾问 李兰</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon3"></i></dt>
+												<dd>
+													<p>2015-05-04 14:30</p>
+													<p>杨大志</p>
+													<p class="track-tip">认购，看板房【意向等级B，意向房源4栋A单元608房间】，互动关联人：置业顾问 王聪</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon5"></i></dt>
+												<dd>
+													<p>2015-05-04 11:30</p>
+													<p>张先生</p>
+													<p class="track-tip">到访，看板房【意向等级B，意向房源4栋A单元608房间】，互动关联人：置业顾问 王聪</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon5"></i></dt>
+												<dd>
+													<p>2015-05-04 11:30</p>
+													<p>蓝晓</p>
+													<p class="track-tip">到访，看板房【意向等级B，意向房源4栋A单元608房间】，互动关联人：置业顾问 王聪</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon4"></i></dt>
+												<dd>
+													<p>2015-05-04 11:00</p>
+													<p>张高</p>
+													<p class="track-tip">来电，咨询项目【意向等级B，意向房源4栋A单元608房间】，互动关联人：置业顾问 王聪</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon2"></i></dt>
+												<dd>
+													<p>2015-05-04 15:00</p>
+													<p>明云</p>
+													<p class="track-tip">签约，房源4栋A单元608房间，互动关联人：职业顾问 李兰</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon3"></i></dt>
+												<dd>
+													<p>2015-05-04 11:30</p>
+													<p>杨仁和</p>
+													<p class="track-tip">认购，看板房【意向等级B，意向房源4栋A单元608房间】，互动关联人：置业顾问 王聪</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon5"></i></dt>
+												<dd>
+													<p>2015-05-04 11:30</p>
+													<p>周先生</p>
+													<p class="track-tip">到访，看板房【意向等级B，意向房源4栋A单元608房间】，互动关联人：置业顾问 王聪</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon5"></i></dt>
+												<dd>
+													<p>2015-05-04 11:30</p>
+													<p>王老太</p>
+													<p class="track-tip">到访，看板房【意向等级B，意向房源4栋A单元608房间】，互动关联人：置业顾问 王聪</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon4"></i></dt>
+												<dd>
+													<p>2015-05-04 11:30</p>
+													<p>高高</p>
+													<p class="track-tip">来电，咨询项目【意向等级B，意向房源4栋A单元608房间】，互动关联人：置业顾问 王聪</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon5"></i></dt>
+												<dd>
+													<p>2015-05-04 11:30</p>
+													<p>王老太</p>
+													<p class="track-tip">到访，看板房【意向等级B，意向房源4栋A单元608房间】，互动关联人：置业顾问 王聪</p>
+												</dd>
+											</dl>
+											<dl class="last clearfix">
+												<dt><i class="icon4"></i></dt>
+												<dd>
+													<p>2015-05-04 11:30</p>
+													<p>高高</p>
+													<p class="track-tip">来电，咨询项目【意向等级B，意向房源4栋A单元608房间】，互动关联人：置业顾问 王聪</p>
+												</dd>
+											</dl>
+											-->
+										</div>
+									</div>
+
+								</div>
+							</tab>
+						</tabset>
+
+					</div>
+				</div>
+				
+			</div>
+
+			
+
+
+			<div class="margin-top-20 box-shadow-1 border-radius-3 relational-info customer-subdivision-info">
+				<h2>客户细分</h2>
+				<div class="customer-subdivision clearfix">
+
+					<div class="subdivision-tab tabs-nav">
+						<ul>
+							<li class="clearfix" ng-model="houseCst">
+								<span class="title">全部客户</span>
+								<span class="num">{{houseCstSum}}</span>
+								<!-- <span class="range rise"><i></i>300</span> -->
+							</li>
+							<li class="clearfix tab-nav" ng-init="clientClassify='buyed'" ng-click="clientClassify='buyed'">
+								<a href="javascript:;">
+									<span class="title">已购客户</span>
+									<span class="num">{{houseCst.customer_bought_sum}}</span>
+									<!-- <span class="range fall"><i></i>300</span> -->
+									<i class="arrow"></i>
+								</a>
+							</li>
+							<li class="clearfix tab-nav" ng-click="clientClassify='intent'">
+								<a href="javascript:;">
+									<span class="title">意向客户</span>
+									<span class="num">{{houseCst.customer_intention_sum}}</span>
+									<!-- <span class="range rise"><i></i>300</span> -->
+									<i class="arrow"></i>
+								</a>
+							</li>
+							<li class="clearfix tab-nav" ng-click="clientClassify='lease'">
+								<a href="javascript:;">
+									<span class="title">租赁客户</span>
+									<span class="num">0</span>
+									<!-- <span class="range flat"><i></i>0</span> -->
+									<i class="arrow"></i>
+								</a>
+							</li>
+						</ul>
+					</div>
+
+					<div class="subdivision-content tabs-content">
+						<div class="subdivision-content-main tab-inside">
+							<h3>已购客户分类</h3>
+							<table class="table table-condensed">
+								<tr>
+									<th>重复购买客户</th>
+									<th>自住客户</th>
+									<th>期房客户</th>
+									<th>更换业主</th>
+								</tr>
+								<!-- <tr>
+									<td class="range rise">400<i></i></td>
+									<td class="range fall">100<i></i></td>
+									<td class="range flat">0<i></i></td>
+									<td class="range fall">10<i></i></td>
+								</tr> -->
+								<tr ng-model="houseyg">
+									<td>{{houseyg.customer_invest_sum}}</td>
+									<td>{{houseyg.customer_self_sum}}</td>
+									<td>{{houseyg.customer_forward_sum}}</td>
+									<td>{{houseyg.customer_change_sum}}</td>
+								</tr>
+							</table>
+						</div>
+						<div class="subdivision-content-main tab-inside">
+							<h3>意向客户分类</h3>
+							<table class="table table-condensed">
+								<tr>
+									<th>跟进中</th>
+									<th>已逾期</th>
+									<th>已流失</th>
+								</tr>
+								<!-- <tr>
+									<td class="range rise">400<i></i></td>
+									<td class="range fall">100<i></i></td>
+									<td class="range flat">0<i></i></td>
+								</tr> -->
+								<tr>
+									<td>{{houseyg.customer_follow_sum}}</td>
+									<td>{{houseyg.customer_expect_sum}}</td>
+									<td>{{houseyg.customer_away_sum}}</td>
+								</tr>
+							</table>
+						</div>
+						<div class="subdivision-content-main tab-inside">
+							<h3>租赁客户分类</h3>
+							<table class="table table-condensed">
+								<tr>
+									<th>有效租赁客户</th>
+									<th>历史租赁客户</th>
+								</tr>
+								<tr>
+									<td class="range flat">0<i></i></td>
+									<td class="range flat">0<i></i></td>
+								</tr>
+								<tr>
+									<td>0</td>
+									<td>0</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+
+
+			<div class="margin-top-20 clearfix" ng-show="clientClassify=='buyed'">
+				<div class="age-distribution">
+					<div class="box-shadow-1 border-radius-3 relational-info age-distribution-main">
+					    <h2>年龄分布</h2>
+						<!-- <h2>年龄分布<i >&nbsp;&nbsp;&nbsp;<span>[<font color="#2894FF">{{RptProj}}</font>]--><!-- [<font color="#2894FF">{{ageName}}</font>:<font color="red">{{ageValue!=null?" "+ageValue:"无"}}</font>]</span></i></h2> -->
+						<div class="age-distribution-content">
+							<div class="distribution-tip">
+								<ul>
+									<li class="age{{$index+1}}" ng-repeat="agevalue in age"><i></i><span>{{agevalue.customer_age_type}}</span><b>{{agevalue.customer_age_sum}}</b></li>
+									<!-- <li class="age2"><i></i><span>20-34岁</span><b>7600</b></li>
+									<li class="age3"><i></i><span>35-44岁</span><b>2800</b></li>
+									<li class="age4"><i></i><span>45-54岁</span><b>2600</b></li>
+									<li class="age5"><i></i><span>55-64岁</span><b>2100</b></li>
+									<li class="age6"><i></i><span>64岁以上</span><b>800</b></li>
+									<li class="age7"><i></i><span>未知</span><b>800</b></li> -->
+								</ul>
+							</div>
+							<div class="distribution-chart">
+								<highchart class="chart" config="chartConfig4"></highchart>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+				<div class="work-industry">
+					<div class="box-shadow-1 border-radius-3 relational-info work-industry-main">
+						<h2>从事行业</h2>
+						<div class="work-industry-content">
+							<highchart class="chart" config="chartConfig5"></highchart>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="margin-top-20 box-shadow-1 border-radius-3 relational-info register-area" ng-show="clientClassify=='buyed'">
+				<h2>籍贯区域 <i >&nbsp;&nbsp;&nbsp;<span>[<font color="#2894FF">{{RptProj}}</font>]-->[<font color="#2894FF">{{RptAreaName}}</font>:<font color="red">{{RptAreaNum!=null?" "+RptAreaNum:"无"}}</font>]</span></i></h2>
+				<div class="register-area-content">
+					<highchart class="chart" config="chartConfig6"></highchart>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+</div>

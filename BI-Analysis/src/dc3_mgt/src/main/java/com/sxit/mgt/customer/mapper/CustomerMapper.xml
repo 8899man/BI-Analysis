@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.customer.dao.CustomerDao">
+	 
+
+	 <resultMap id="CstCustomerMap" type="Customer" >
+	    <id column="cstguid" property="cstguid" jdbcType="BIGINT" />
+		<result column="cstname" property="cstname" jdbcType="VARCHAR" />
+		<result column="gender" property="gender" jdbcType="TINYINT" />
+		<result column="birthdate" property="birthdate" jdbcType="DATE" />
+		<result column="csttype" property="csttype" jdbcType="TINYINT" />
+		<result column="cardtype" property="cardtype" jdbcType="INTEGER" />
+		<result column="cardid" property="cardid" jdbcType="VARCHAR" />
+		<result column="mobiletel" property="mobiletel" jdbcType="VARCHAR" />
+		<result column="officetel" property="officetel" jdbcType="VARCHAR" />
+		<result column="hometel" property="hometel" jdbcType="VARCHAR" />
+		<result column="sourceapp" property="sourceapp" jdbcType="VARCHAR" />
+		<result column="sourcebiz" property="sourcebiz" jdbcType="VARCHAR" />
+		<result column="activitysource" property="activitysource" jdbcType="VARCHAR" />
+		<result column="ismerge" property="ismerge" jdbcType="INTEGER" />
+		<result column="ismaster" property="ismaster" jdbcType="INTEGER" />
+		<result column="contact" property="contact" jdbcType="VARCHAR" />
+		<result column="myguidlist" property="myguidlist" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="createtime" property="createtime" jdbcType="DATE" />
+		<result column="modifytime" property="modifytime" jdbcType="DATE" />
+		<result column="memCode" property="memCode" jdbcType="VARCHAR" />
+	 </resultMap>
+	 
+	<select id="getCstGUID" resultType="long" parameterType="java.util.Map">
+		<![CDATA[
+		select
+		cstGUID
+		from
+		${tablename}
+		where ${shuxingname} = #{reqData}
+		]]>
+	</select>
+	
+	<select id="getCstCustomerById" resultMap="CstCustomerMap" parameterType="java.util.Map">
+		<![CDATA[
+		select
+		cc.cstguid cstguid,
+		cc.cstname cstname,
+		cc.gender gender,
+		cc.birthdate birthdate,
+		cc.csttype csttype,
+		cc.cardtype cardtype,
+		cc.cardid cardid,
+		cc.mobiletel mobiletel,
+		cc.officetel officetel,
+		cc.hometel hometel,
+		cc.sourceapp sourceapp,
+		cc.sourcebiz sourcebiz,
+		cc.activitysource activitysource,
+		cc.ismerge ismerge,
+		cc.ismaster ismaster,
+		cc.contact contact,
+		cc.myguidlist myguidlist,
+		cc.address address,
+		cc.createtime createtime,
+		cc.modifytime modifytime,
+		cm.memCode memCode
+		from
+		${tablename} cc
+		left join
+		cst_member cm
+		on
+		cc.cstguid = cm.cstGUID
+		where cc.cstguid =  #{cstGUID}
+		]]>
+    </select>
+
+</mapper>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.pmp.dao.RptZyStoreRankDao" > 
+<!-- Result Map-->
+<resultMap id="RptZyStoreRankMap" type="com.sxit.model.pmp.RptZyStoreRank" >
+	<result column="store_code" property="store_code"/>
+	<result column="store_name" property="store_name"/>
+	<result column="store_deal_amount" property="store_deal_amount"/>
+	<result column="count_year" property="count_year"/>
+	<result column="create_time" property="create_time"/>
+</resultMap>
+       
+<!-- rpt_zy_store_rank table all fields -->
+<sql id="Base_Column_List" >
+	 store_code,store_name,store_deal_amount,count_year,create_time
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	 	<if test="store_code != null and store_code != ''" >
+	    and store_code =  #{store_code}
+	</if>
+	 	<if test="store_name != null and store_name != ''" >
+	    and store_name =  #{store_name}
+	</if>
+	<if test="store_deal_amount != null" >
+	    and store_deal_amount =  #{store_deal_amount}
+	</if>
+	 	<if test="count_year != null and count_year != ''" >
+	    and count_year =  #{count_year}
+	</if>
+	<if test="create_time != null" >
+	    and create_time =  #{create_time}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into rpt_zy_store_rank(store_code,store_name,store_deal_amount,count_year,create_time)
+ values(#{store_code},#{store_name},#{store_deal_amount},#{count_year},#{create_time})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update rpt_zy_store_rank set store_name=#{store_name},store_deal_amount=#{store_deal_amount},count_year=#{count_year},create_time=#{create_time} where store_code=#{store_code}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update rpt_zy_store_rank set 
+	<trim  suffixOverrides="," >
+	<if test="store_name != null  and store_name != '' ">
+		store_name=#{store_name},
+	</if>
+	<if test="store_deal_amount != null  ">
+		store_deal_amount=#{store_deal_amount},
+	</if>
+	<if test="count_year != null  and count_year != '' ">
+		count_year=#{count_year},
+	</if>
+	<if test="create_time != null  ">
+		create_time=#{create_time},
+	</if>
+	</trim> where store_code=#{store_code}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from rpt_zy_store_rank where store_code = #{store_code}
+</delete>
+ 
+<!-- 根据id查询 rpt_zy_store_rank -->
+<select id="queryById"  resultMap="RptZyStoreRankMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from rpt_zy_store_rank where store_code = #{store_code}
+</select>
+
+<select id="queryByTop"  resultMap="RptZyStoreRankMap" parameterType="java.util.List">
+	select store_name,max(store_deal_amount) as store_deal_amount FROM rpt_zy_store_rank  group by store_name order by store_deal_amount desc limit 0,3
+</select>
+
+<!-- rpt_zy_store_rank 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from rpt_zy_store_rank 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询rpt_zy_store_rank列表 -->
+<select id="queryByList" resultMap="RptZyStoreRankMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from rpt_zy_store_rank 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.pmp.dao.FormatConvertDao" > 
+<!-- Result Map-->
+<resultMap id="FormatConvertMap" type="FormatConvert" >
+	<result column="format_convert_id" property="format_convert_id" jdbcType="INTEGER"/>
+	<result column="proj_guid" property="proj_guid" jdbcType="VARCHAR"/>
+	<result column="index_format_type" property="index_format_type" jdbcType="VARCHAR"/>
+	<result column="incoming_visit_sum" property="incoming_visit_sum" jdbcType="INTEGER"/>
+	<result column="visit_confess_sum" property="visit_confess_sum" jdbcType="INTEGER"/>
+	<result column="visti_subscribe_sum" property="visti_subscribe_sum" jdbcType="INTEGER"/>
+	<result column="confess_subscribe_sum" property="confess_subscribe_sum" jdbcType="INTEGER"/>
+	<result column="subscribe_contract_sum" property="subscribe_contract_sum" jdbcType="INTEGER"/>
+	<result column="contract_returned_sum" property="contract_returned_sum" jdbcType="INTEGER"/>
+	<result column="create_time" property="create_time" jdbcType="TIMESTAMP"/>
+	<result column="incoming_tele_sum" property="incoming_tele_sum" jdbcType="INTEGER"/>
+	<result column="visit_cst_num" property="visit_cst_num" jdbcType="INTEGER"/>
+	<result column="confess_cst_num" property="confess_cst_num" jdbcType="INTEGER"/>
+	<result column="subscribe_cst_num" property="subscribe_cst_num" jdbcType="INTEGER"/>
+	<result column="contract_cst_num" property="contract_cst_num" jdbcType="INTEGER"/>
+</resultMap>
+       
+<!-- format_convert table all fields -->
+<sql id="Base_Column_List" >
+	 format_convert_id,proj_guid,index_format_type,
+	 incoming_visit_sum,visit_confess_sum,visti_subscribe_sum,
+	 confess_subscribe_sum,subscribe_contract_sum,contract_returned_sum,
+	 create_time,incoming_tele_sum,visit_cst_num,confess_cst_num,
+	 subscribe_cst_num,contract_cst_num
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="format_convert_id != null" >
+	    and format_convert_id =  #{format_convert_id}
+	</if>
+	 	<if test="proj_guid != null and proj_guid != ''" >
+	    and proj_guid =  #{proj_guid}
+	</if>
+	<if test="index_format_type != null" >
+	    and index_format_type =  #{index_format_type}
+	</if>
+	<if test="incoming_visit_sum != null" >
+	    and incoming_visit_sum =  #{incoming_visit_sum}
+	</if>
+	<if test="visit_confess_sum != null" >
+	    and visit_confess_sum =  #{visit_confess_sum}
+	</if>
+	<if test="visti_subscribe_sum != null" >
+	    and visti_subscribe_sum =  #{visti_subscribe_sum}
+	</if>
+	<if test="confess_subscribe_sum != null" >
+	    and confess_subscribe_sum =  #{confess_subscribe_sum}
+	</if>
+	<if test="subscribe_contract_sum != null" >
+	    and subscribe_contract_sum =  #{subscribe_contract_sum}
+	</if>
+	<if test="contract_returned_sum != null" >
+	    and contract_returned_sum =  #{contract_returned_sum}
+	</if>
+	<if test="create_time != null" >
+	    and create_time =  #{create_time}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into format_convert(format_convert_id,proj_guid,index_format_type,incoming_visit_sum,visit_confess_sum,visti_subscribe_sum,confess_subscribe_sum,subscribe_contract_sum,contract_returned_sum,create_time)
+ values(#{format_convert_id},#{proj_guid},#{index_format_type},#{incoming_visit_sum},#{visit_confess_sum},#{visti_subscribe_sum},#{confess_subscribe_sum},#{subscribe_contract_sum},#{contract_returned_sum},#{create_time})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update format_convert set proj_guid=#{proj_guid},index_format_type=#{index_format_type},incoming_visit_sum=#{incoming_visit_sum},visit_confess_sum=#{visit_confess_sum},visti_subscribe_sum=#{visti_subscribe_sum},confess_subscribe_sum=#{confess_subscribe_sum},subscribe_contract_sum=#{subscribe_contract_sum},contract_returned_sum=#{contract_returned_sum},create_time=#{create_time} where format_convert_id=#{format_convert_id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update format_convert set 
+	<trim  suffixOverrides="," >
+	<if test="proj_guid != null  and proj_guid != '' ">
+		proj_guid=#{proj_guid},
+	</if>
+	<if test="index_format_type != null  ">
+		index_format_type=#{index_format_type},
+	</if>
+	<if test="incoming_visit_sum != null  ">
+		incoming_visit_sum=#{incoming_visit_sum},
+	</if>
+	<if test="visit_confess_sum != null  ">
+		visit_confess_sum=#{visit_confess_sum},
+	</if>
+	<if test="visti_subscribe_sum != null  ">
+		visti_subscribe_sum=#{visti_subscribe_sum},
+	</if>
+	<if test="confess_subscribe_sum != null  ">
+		confess_subscribe_sum=#{confess_subscribe_sum},
+	</if>
+	<if test="subscribe_contract_sum != null  ">
+		subscribe_contract_sum=#{subscribe_contract_sum},
+	</if>
+	<if test="contract_returned_sum != null  ">
+		contract_returned_sum=#{contract_returned_sum},
+	</if>
+	<if test="create_time != null  ">
+		create_time=#{create_time},
+	</if>
+	</trim> where format_convert_id=#{format_convert_id}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from format_convert where format_convert_id = #{format_convert_id}
+</delete>
+ 
+<!-- 根据id查询 format_convert -->
+<select id="getFormatConvertById"  resultMap="FormatConvertMap" parameterType="Object">
+   select max(incoming_visit_sum) as incoming_visit_sum,
+		  max(visit_confess_sum) as visit_confess_sum,
+		  max(visti_subscribe_sum) as visti_subscribe_sum,
+		  max(confess_subscribe_sum) as confess_subscribe_sum,
+		  max(subscribe_contract_sum) as subscribe_contract_sum,
+		  max(contract_returned_sum) as contract_returned_sum, 
+		  max(incoming_tele_sum) as incoming_tele_sum, 
+		  max(visit_cst_num) as visit_cst_num,
+		  max(confess_cst_num) as confess_cst_num,
+		  max(subscribe_cst_num) as subscribe_cst_num,
+		  max(contract_cst_num) as contract_cst_num 
+   from rpt_format_convert where proj_guid = #{proj_guid} order by create_time
+</select>
+
+<!-- format_convert 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from format_convert 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询format_convert列表 -->
+<select id="queryByList" resultMap="FormatConvertMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from format_convert 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

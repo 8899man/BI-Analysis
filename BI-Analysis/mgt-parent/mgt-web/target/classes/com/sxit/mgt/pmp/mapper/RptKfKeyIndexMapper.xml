@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.pmp.dao.RptKfKeyIndexDao" > 
+<!-- Result Map-->
+<resultMap id="RptKfKeyIndexMap" type="com.sxit.model.pmp.RptKfKeyIndex" >
+	<result column="Data_seq_id" property="Data_seq_id"/>
+	<result column="proj_id" property="proj_id"/>
+	<result column="curr_member_num" property="curr_member_num"/>
+	<result column="add_member_num" property="add_member_num"/>
+	<result column="exit_member_num" property="exit_member_num"/>
+	<result column="reception_record_num" property="reception_record_num"/>
+	<result column="pay_reception_num" property="pay_reception_num"/>
+	<result column="visit_reception_num" property="visit_reception_num"/>
+	<result column="tele_reception_num" property="tele_reception_num"/>
+	<result column="repair_apply_num" property="repair_apply_num"/>
+	<result column="guar_handle_num" property="guar_handle_num"/>
+	<result column="guar_finished_num" property="guar_finished_num"/>
+	<result column="repair_hs" property="repair_hs"/>
+	<result column="complaint_num" property="complaint_num"/>
+	<result column="createTime" property="createTime"/>
+	<result column="visit_num" property="visit_num"/>
+</resultMap>
+       
+<!-- rpt_kf_key_index table all fields -->
+<sql id="Base_Column_List" >
+	 Data_seq_id,proj_id,curr_member_num,add_member_num,exit_member_num,reception_record_num,pay_reception_num,visit_reception_num,tele_reception_num,repair_apply_num,guar_handle_num,guar_finished_num,repair_hs,complaint_num,createTime,visit_num
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="Data_seq_id != null" >
+	    and Data_seq_id =  #{Data_seq_id}
+	</if>
+	 	<if test="proj_id != null and proj_id != ''" >
+	    and proj_id =  #{proj_id}
+	</if>
+	<if test="curr_member_num != null" >
+	    and curr_member_num =  #{curr_member_num}
+	</if>
+	<if test="add_member_num != null" >
+	    and add_member_num =  #{add_member_num}
+	</if>
+	<if test="exit_member_num != null" >
+	    and exit_member_num =  #{exit_member_num}
+	</if>
+	<if test="reception_record_num != null" >
+	    and reception_record_num =  #{reception_record_num}
+	</if>
+	<if test="pay_reception_num != null" >
+	    and pay_reception_num =  #{pay_reception_num}
+	</if>
+	<if test="visit_reception_num != null" >
+	    and visit_reception_num =  #{visit_reception_num}
+	</if>
+	<if test="tele_reception_num != null" >
+	    and tele_reception_num =  #{tele_reception_num}
+	</if>
+	<if test="repair_apply_num != null" >
+	    and repair_apply_num =  #{repair_apply_num}
+	</if>
+	<if test="guar_handle_num != null" >
+	    and guar_handle_num =  #{guar_handle_num}
+	</if>
+	<if test="guar_finished_num != null" >
+	    and guar_finished_num =  #{guar_finished_num}
+	</if>
+	<if test="repair_hs != null" >
+	    and repair_hs =  #{repair_hs}
+	</if>
+	<if test="complaint_num != null" >
+	    and complaint_num =  #{complaint_num}
+	</if>
+	<if test="createTime != null" >
+	    and createTime =  #{createTime}
+	</if>
+	<if test="visit_num != null" >
+	    and visit_num =  #{visit_num}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into rpt_kf_key_index(Data_seq_id,proj_id,curr_member_num,add_member_num,exit_member_num,reception_record_num,pay_reception_num,visit_reception_num,tele_reception_num,repair_apply_num,guar_handle_num,guar_finished_num,repair_hs,complaint_num,createTime,visit_num)
+ values(#{Data_seq_id},#{proj_id},#{curr_member_num},#{add_member_num},#{exit_member_num},#{reception_record_num},#{pay_reception_num},#{visit_reception_num},#{tele_reception_num},#{repair_apply_num},#{guar_handle_num},#{guar_finished_num},#{repair_hs},#{complaint_num},now(),#{visit_num})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update rpt_kf_key_index set proj_id=#{proj_id},curr_member_num=#{curr_member_num},add_member_num=#{add_member_num},exit_member_num=#{exit_member_num},reception_record_num=#{reception_record_num},pay_reception_num=#{pay_reception_num},visit_reception_num=#{visit_reception_num},tele_reception_num=#{tele_reception_num},repair_apply_num=#{repair_apply_num},guar_handle_num=#{guar_handle_num},guar_finished_num=#{guar_finished_num},repair_hs=#{repair_hs},complaint_num=#{complaint_num},visit_num=#{visit_num} where Data_seq_id=#{Data_seq_id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update rpt_kf_key_index set 
+	<trim  suffixOverrides="," >
+	<if test="proj_id != null  and proj_id != '' ">
+		proj_id=#{proj_id},
+	</if>
+	<if test="curr_member_num != null  ">
+		curr_member_num=#{curr_member_num},
+	</if>
+	<if test="add_member_num != null  ">
+		add_member_num=#{add_member_num},
+	</if>
+	<if test="exit_member_num != null  ">
+		exit_member_num=#{exit_member_num},
+	</if>
+	<if test="reception_record_num != null  ">
+		reception_record_num=#{reception_record_num},
+	</if>
+	<if test="pay_reception_num != null  ">
+		pay_reception_num=#{pay_reception_num},
+	</if>
+	<if test="visit_reception_num != null  ">
+		visit_reception_num=#{visit_reception_num},
+	</if>
+	<if test="tele_reception_num != null  ">
+		tele_reception_num=#{tele_reception_num},
+	</if>
+	<if test="repair_apply_num != null  ">
+		repair_apply_num=#{repair_apply_num},
+	</if>
+	<if test="guar_handle_num != null  ">
+		guar_handle_num=#{guar_handle_num},
+	</if>
+	<if test="guar_finished_num != null  ">
+		guar_finished_num=#{guar_finished_num},
+	</if>
+	<if test="repair_hs != null  ">
+		repair_hs=#{repair_hs},
+	</if>
+	<if test="complaint_num != null  ">
+		complaint_num=#{complaint_num},
+	</if>
+	<if test="createTime != null  ">
+		createTime=#{createTime},
+	</if>
+	<if test="visit_num != null  ">
+		visit_num=#{visit_num},
+	</if>
+	</trim> where Data_seq_id=#{Data_seq_id}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from rpt_kf_key_index where Data_seq_id = #{Data_seq_id}
+</delete>
+ 
+<!-- 根据id查询 rpt_kf_key_index -->
+<select id="queryById"  resultMap="RptKfKeyIndexMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from rpt_kf_key_index where proj_id=#{proj_id} and createTime = (select max(createTime) from rpt_kf_key_index);
+</select>
+
+<!-- rpt_kf_key_index 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from rpt_kf_key_index 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询rpt_kf_key_index列表 -->
+<select id="queryByList" resultMap="RptKfKeyIndexMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from rpt_kf_key_index 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

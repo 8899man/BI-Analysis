@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.customer.dao.CstAttachDao">
+	 
+
+	 <resultMap id="CstAttachMap" type="CstAttach" >
+	    <result column="cstguid" property="cstguid" jdbcType="VARCHAR" />
+		<result column="projguid" property="projguid" jdbcType="VARCHAR" />
+		<result column="projname" property="projname" jdbcType="VARCHAR" />
+		<result column="attachCode" property="attachCode" jdbcType="VARCHAR" /> 
+		<result column="attachName" property="attachName" jdbcType="VARCHAR" />
+		<result column="attachValue" property="attachValue" jdbcType="VARCHAR" />
+
+	 </resultMap>
+
+	<select id="getCstAttachValues" resultMap="CstAttachMap" parameterType="java.util.Map">
+		<![CDATA[
+		select
+		`values` attachValue
+		from
+		${tabname}
+		where
+		cstguid = #{cstguid}
+		]]>
+		<if test="projGUID != null">
+			and
+			projGUID = #{projGUID}
+		</if>
+		<if test="attachCode != null">
+			and
+			attachCode = #{attachCode}
+		</if>
+		
+	</select>
+	
+</mapper>

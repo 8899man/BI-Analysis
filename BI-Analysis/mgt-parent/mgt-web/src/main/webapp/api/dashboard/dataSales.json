@@ -1,0 +1,152 @@
+{
+	"isSales": true,
+	"dealAmount": {
+		"yesterdayDeal": 8320,
+		"thisMonthDeal": 30,
+		"thisSeasonDeal": 85,
+		"thisYearDeal": 123
+	},
+	"dealNumber": {
+		"thisMonthDeal": 1208,
+		"thisYearDeal": 59208,
+		"stock": 29208
+	},
+	"thisMonthVisitedTopThree":[
+		{
+			"name": "海滨假日",
+			"visitNumber": 110208
+		},
+		{
+			"name": "春天海",
+			"visitNumber": 91208
+		},
+		{
+			"name": "碧海蓝天",
+			"visitNumber": 60820
+		}
+	],
+	"thisMonthTurnoverList": {
+		"topThree": [
+			{
+				"number": 1,
+				"name": "山海雅居",
+				"money": 30320
+			},
+			{
+				"number": 2,
+				"name": "海滨假日",
+				"money": 20320
+			},
+			{
+				"number": 3,
+				"name": "碧海蓝天",
+				"money": 10320
+			}
+		],
+		"lastThree": [
+			{
+				"number": 44,
+				"name": "春天海",
+				"money": 3320
+			},
+			{
+				"number": 45,
+				"name": "幸福海",
+				"money": 2032
+			},
+			{
+				"number": 46,
+				"name": "上东湾",
+				"money": 1320
+			}
+		]
+	},
+	"keyContact": {
+        "customerAndDeal": {
+        	"visitStage": {
+        		"persons": 850000
+        	},
+        	"planStage": {
+        		"persons": 310500,
+        		"houses": 209000
+        	},
+        	"subscribeStage": {
+        		"persons": 226125,
+        		"houses": 109000
+        	},
+        	"signStage": {
+        		"persons": 198990,
+        		"houses": 107000
+        	}
+        },
+        "averageTrans": {
+        	"visitToPlan": 35,
+        	"planToSubscribe": 71,
+        	"visitToSubscribe": 26,
+        	"SubscribeToSign": 80,
+        	"visitToSign": 21
+        },
+        "transCycle": {
+        	"visitToPlan": 22,
+        	"planToSubscribe": 9,
+        	"visitToSubscribe": 19,
+        	"SubscribeToSign": 6,
+        	"visitToSign": 22
+        }
+	},
+	"thisMonthSales": {
+		"categories": ["6月1日", "6月4日", "6月7日", "6月10日", "6月13日", "6月16日", "6月19日", "6月22日", "6月25日", "6月28日"],
+		"columnSeries": [
+			{
+				"name": "签约套数",
+	            "data": [30, 10, 32, 21, 36, 9, 85, 53, 3, 34]
+			},
+			{
+				"name": "认购套数",
+	            "data": [34, 30, 10, 32, 21, 36, 9, 65, 53, 3]
+			}
+		],
+		"splineSeries": [
+			{
+				"name": "新增到访",
+	            "data": [100, 56, 92, 42, 155, 12, 25, 63, 43, 52]
+			}
+		]
+	},
+	"thisMonthOpened": [
+		{
+			"openTime": "6-15",
+			"projectName": "兰溪谷一期"
+		},
+		{
+			"openTime": "6-16",
+			"projectName": "观园"
+		},
+		{
+			"openTime": "6-17",
+			"projectName": "花园城三期"
+		},
+		{
+			"openTime": "6-18",
+			"projectName": "海滨假日"
+		},
+		{
+			"openTime": "6-19",
+			"projectName": "碧海蓝天"
+		},
+		{
+			"openTime": "6-25",
+			"projectName": "山海雅居"
+		},
+		{
+			"openTime": "6-26",
+			"projectName": "蓝天驿站"
+		},
+		{
+			"openTime": "6-27",
+			"projectName": "春天海"
+		}
+	]
+
+	
+}

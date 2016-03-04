@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.pmp.dao.SaleQueryDao" > 
+
+	<resultMap id="saleQueryMap" type="java.util.HashMap" >
+		<result column="bldId" property="bldId" jdbcType="INTEGER"/>
+		<result column="bldGUID" property="bldGUID" jdbcType="VARCHAR"/>
+		<result column="companyGUID" property="companyGUID" jdbcType="VARCHAR"/>
+		<result column="bldCode" property="bldCode" jdbcType="VARCHAR"/>
+		<result column="bldName" property="bldName" jdbcType="VARCHAR"/>
+		<result column="roomId" property="roomId" jdbcType="INTEGER"/>
+		<result column="roomGUID" property="roomGUID" jdbcType="VARCHAR"/>
+		<result column="unit" property="unit" jdbcType="VARCHAR"></result>
+		<result column="floor" property="floor" jdbcType="VARCHAR"/>
+		<result column="no" property="no" jdbcType="VARCHAR"/>
+		<result column="room" property="room" jdbcType="VARCHAR"/>
+		<result column="roomStatus" property="roomStatus" jdbcType="VARCHAR"/>
+	</resultMap>
+ 
+	
+	<select id="getHouses" resultMap="saleQueryMap" parameterType="java.lang.String">
+		select 
+			t1.bldId, 
+			t1.bldGUID, 
+			t1.companyGUID, 
+			t1.bldCode,
+			t1.bldName,
+			t2.roomId,
+			t2.roomGUID,
+			IFNULL(t2.unit, "未知") unit,
+			t2.floor,
+			t2.no,
+			t2.room,
+			t2.roomStatus 
+		from (select * from b_building
+		where projGUID = #{projGUID} 
+		AND ( NOT(bldProPerty = '地下车位' OR bldProPerty = '商铺' ) OR bldProPerty  IS NULL)) t1 
+		left join (select roomId, roomGUID, bldGUID, unit, floor, no, room, roomStatus from b_room where projGUID = #{projGUID}) t2 on t1.bldGUID = t2.bldGUID
+		order by t1.bldCode asc, floorNum desc, t2.unit, t2.floor desc, t2.no asc
+	</select>
+</mapper>   

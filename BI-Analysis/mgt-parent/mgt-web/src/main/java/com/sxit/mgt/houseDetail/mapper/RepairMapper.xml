@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.houseDetail.dao.RepairDao">
+	
+	<resultMap type="java.util.HashMap" id="repairMap">
+		<result column="repairId" property="repairId" jdbcType="INTEGER" />
+		<result column="repairRy" property="repairRy" jdbcType="VARCHAR" />
+		<result column="repairCd" property="repairCd" jdbcType="VARCHAR" />
+		<result column="repairTime" property="repairTime" jdbcType="DATE" />
+		<result column="repairXm" property="repairXm" jdbcType="VARCHAR" />
+		<result column="repairFy" property="repairFy" jdbcType="VARCHAR" />
+		<result column="repairSlr" property="repairSlr" jdbcType="VARCHAR" />
+		<result column="repairType" property="repairType" jdbcType="INTEGER" />
+		<result column="roomId" property="roomId" jdbcType="INTEGER" />
+		<result column="repairSlrLx" property="repairSlrLx" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<!-- 
+	 -->
+	<select id="getRepairFollowRecorders" resultType="java.util.HashMap" parameterType="java.lang.Integer">
+		select repairId, repairRy, repairCd, repairTime, repairXm, repairFy, repairSlr, repairType, roomId, repairSlrLx 
+		from a_tmp_repair
+		where roomId = #{roomId}
+	</select>
+</mapper>

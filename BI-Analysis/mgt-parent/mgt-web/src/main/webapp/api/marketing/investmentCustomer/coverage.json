@@ -1,0 +1,250 @@
+{
+	"areas": [
+		{
+			"title": "不限",
+			"value": "-1"
+		},
+		{
+			"title": "华东区域",
+			"value": "1",
+			"subs": [
+				{
+					"title": "不限",
+					"value":"-1"
+				},
+				{
+					"title": "上海",
+					"value": "11",
+					"subs": [
+						{
+							"title": "不限",
+							"value":"-1"
+						},
+						{
+							"title": "海滨假日",
+							"value":"111"
+						},
+						{
+							"title": "春天海",
+							"value":"112"
+						}
+					]
+				},
+				{
+					"title": "苏州",
+					"value": "12",
+					"subs": [
+						{
+							"title": "不限",
+							"value":"-1"
+						},
+						{
+							"title": "苏州园林",
+							"value":"121"
+						},
+						{
+							"title": "碧海蓝天",
+							"value":"122"
+						}
+					]
+				}
+			]
+		},
+		{
+			"title": "华南区域",
+			"value": "2",
+			"subs": [
+				{
+					"title": "不限",
+					"value":"-1"
+				},
+				{
+					"title": "深圳",
+					"value": "21",
+					"subs": [
+						{
+							"title": "不限",
+							"value":"-1"
+						},
+						{
+							"title": "幸福海",
+							"value":"211"
+						},
+						{
+							"title": "梅沙湾",
+							"value":"212"
+						}
+					]
+				},
+				{
+					"title": "广州",
+					"value": "22",
+					"subs": [
+						{
+							"title": "不限",
+							"value":"-1"
+						},
+						{
+							"title": "悦生活",
+							"value":"221"
+						},
+						{
+							"title": "碧桐湾",
+							"value":"222"
+						}
+					]
+				}
+			]
+		}
+	],
+	"layouts": [
+		{
+			"title": "不限",
+			"value": "-1"
+		},
+		{
+			"title": "一室",
+			"value": "1"
+		},
+		{
+			"title": "二室",
+			"value": "2"
+		},
+		{
+			"title": "三室",
+			"value": "3"
+		},
+		{
+			"title": "四室",
+			"value": "4"
+		},
+		{
+			"title": "五室",
+			"value": "5"
+		},
+		{
+			"title": "五室以上",
+			"value": "6"
+		}
+	],
+	"acreages": [
+		{
+			"title": "不限",
+			"value": "-1"
+		},
+		{
+			"title": "90㎡以下",
+			"value": "1"
+		},
+		{
+			"title": "90-120㎡",
+			"value": "2"
+		},
+		{
+			"title": "121-145㎡",
+			"value": "3"
+		},
+		{
+			"title": "146-200㎡",
+			"value": "4"
+		},
+		{
+			"title": "200㎡以上",
+			"value": "5"
+		}
+	],
+	"products": [
+		{
+			"title": "不限",
+			"value": "-1"
+		},
+		{
+			"title": "价格",
+			"value": "1"
+		},
+		{
+			"title": "地段",
+			"value": "2"
+		},
+		{
+			"title": "环境",
+			"value": "3"
+		},
+		{
+			"title": "品牌",
+			"value": "4"
+		},
+		{
+			"title": "园林",
+			"value": "5"
+		},
+		{
+			"title": "户型",
+			"value": "5"
+		},
+		{
+			"title": "朝向",
+			"value": "6"
+		},
+		{
+			"title": "配套",
+			"value": "7"
+		},
+		{
+			"title": "教育",
+			"value": "8"
+		}
+	],
+	"totalPrices": [
+		{
+			"title": "不限",
+			"value": "-1"
+		},
+		{
+			"title": "经济住宅",
+			"value": "1"
+		},
+		{
+			"title": "普通住宅",
+			"value": "2"
+		},
+		{
+			"title": "高级住宅",
+			"value": "3"
+		},
+		{
+			"title": "顶级住宅",
+			"value": "4"
+		}
+	],
+	"categorys": [
+		{
+			"title": "不限",
+			"value": "-1"
+		},
+		{
+			"title": "别墅",
+			"value": "1"
+		},
+		{
+			"title": "洋房",
+			"value": "2"
+		},
+		{
+			"title": "普通多层",
+			"value": "3"
+		},
+		{
+			"title": "小高层",
+			"value": "4"
+		},
+		{
+			"title": "高层",
+			"value": "4"
+		},
+		{
+			"title": "超高层",
+			"value": "4"
+		}
+	]
+}

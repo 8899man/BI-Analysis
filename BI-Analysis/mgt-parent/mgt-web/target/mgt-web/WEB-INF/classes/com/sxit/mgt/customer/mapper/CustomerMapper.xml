@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.customer.dao.CustomerDao">
+	 
+
+	 <resultMap id="CstCustomerMap" type="Customer" >
+	    <id column="cstguid" property="cstguid" jdbcType="BIGINT" />
+		<result column="cstname" property="cstname" jdbcType="VARCHAR" />
+		<result column="gender" property="gender" jdbcType="TINYINT" />
+		<result column="birthdate" property="birthdate" jdbcType="DATE" />
+		<result column="csttype" property="csttype" jdbcType="TINYINT" />
+		<result column="cardtype" property="cardtype" jdbcType="INTEGER" />
+		<result column="cardid" property="cardid" jdbcType="VARCHAR" />
+		<result column="mobiletel" property="mobiletel" jdbcType="VARCHAR" />
+		<result column="officetel" property="officetel" jdbcType="VARCHAR" />
+		<result column="hometel" property="hometel" jdbcType="VARCHAR" />
+		<result column="sourceapp" property="sourceapp" jdbcType="VARCHAR" />
+		<result column="sourcebiz" property="sourcebiz" jdbcType="VARCHAR" />
+		<result column="activitysource" property="activitysource" jdbcType="VARCHAR" />
+		<result column="ismerge" property="ismerge" jdbcType="INTEGER" />
+		<result column="ismaster" property="ismaster" jdbcType="INTEGER" />
+		<result column="contact" property="contact" jdbcType="VARCHAR" />
+		<result column="myguidlist" property="myguidlist" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+		<result column="createtime" property="createtime" jdbcType="DATE" />
+		<result column="modifytime" property="modifytime" jdbcType="DATE" />
+		<result column="memCode" property="memCode" jdbcType="VARCHAR" />
+	 </resultMap>
+	 
+	 <resultMap id="RptCstNumberMap" type="com.sxit.model.customer.RptCstNumber" >
+	 	<result column="title" property="title" jdbcType="VARCHAR" />
+	 	<result column="yesterdayAdded" property="yesterdayAdded" jdbcType="BIGINT" />
+	 	<result column="monthAdded" property="monthAdded" jdbcType="BIGINT" />
+	 	<result column="totalAmount" property="totalAmount" jdbcType="BIGINT" />
+	 	<result column="proportion" property="proportion" jdbcType="DOUBLE" />
+	 </resultMap>
+	 
+	 <resultMap id="RptMutipleFormatsMap" type="com.sxit.model.customer.RptMutipleFormats" >
+	 	<result column="title" property="title" jdbcType="VARCHAR" />
+	 	<result column="number" property="number" jdbcType="BIGINT" />
+	 	<result column="percent" property="percent" jdbcType="DOUBLE" />
+	 </resultMap>
+	 
+	 <resultMap id="RptClassificationMap" type="com.sxit.model.customer.RptClassification" >
+	 	<result column="title" property="title" jdbcType="VARCHAR" />
+	 	<result column="finished" property="finished" jdbcType="BIGINT" />
+	 	<result column="allTotal" property="allTotal" jdbcType="BIGINT" />
+	 	<result column="proportion" property="proportion" jdbcType="DOUBLE" />
+	 </resultMap>
+	 
+	 <resultMap id="RptCstLabelMap" type="com.sxit.model.customer.RptCstLabel" >
+	 	<result column="title" property="title" jdbcType="VARCHAR" />
+	 	<result column="percent" property="percent" jdbcType="DOUBLE" />
+	 </resultMap>
+	 
+	 <resultMap id="RptCityDistributedMap" type="com.sxit.model.customer.RptCityDistributed" >
+	 	<result column="title" property="title" jdbcType="VARCHAR" />
+	 	<result column="percent" property="percent" jdbcType="DOUBLE" />
+	 </resultMap>
+	  
+	 <resultMap id="BAreaCompanyMap" type="com.sxit.mgt.reports.dto.BAreaCompany" >
+	 	<result column="id" property="id" jdbcType="VARCHAR" />
+	 	<result column="name" property="name" jdbcType="VARCHAR" />
+	 </resultMap>
+			 
+	 <resultMap id="ClientListMap" type="com.sxit.model.customer.ClientList" >
+	 	<result column="cstGUID" property="cstGUID" jdbcType="BIGINT" />
+	 	<result column="cstName" property="cstName" jdbcType="VARCHAR" />
+	 	<result column="gender" property="gender" jdbcType="BIGINT" />
+	 	<result column="mobileTel" property="mobileTel" jdbcType="VARCHAR" />
+	 	<result column="cardID" property="cardID" jdbcType="VARCHAR" />
+	 	<result column="ageGroup" property="ageGroup" jdbcType="VARCHAR" />
+	 	<result column="formats" property="formats" jdbcType="BIGINT" />
+	 	<result column="contractDate" property="contractDate" jdbcType="DATE" />
+	 	<result column="areaID" property="areaID" jdbcType="VARCHAR" />
+	 	<result column="cityID" property="cityID" jdbcType="VARCHAR" />
+	 	<result column="projGUID" property="projGUID" jdbcType="VARCHAR" />
+	 </resultMap>
+	 
+	 <resultMap type="com.sxit.mgt.customer.vo.CustomerLable" id="CustomerLable">
+	 	<result column="labelName" property="labelName" jdbcType="VARCHAR" />
+	 </resultMap>
+	 
+	 
+	 
+	<select id="getCstGUID" resultType="long" parameterType="java.util.Map">
+		<![CDATA[
+		select
+		cstGUID
+		from
+		${tablename}
+		where ${shuxingname} = #{reqData}
+		]]>
+	</select>
+	
+	<select id="getCstCustomerById" resultMap="CstCustomerMap" parameterType="java.util.Map">
+		<![CDATA[
+		select
+		cc.cstguid cstguid,
+		cc.cstname cstname,
+		cc.gender gender,
+		cc.birthdate birthdate,
+		cc.csttype csttype,
+		cc.cardtype cardtype,
+		cc.cardid cardid,
+		cc.mobiletel mobiletel,
+		cc.officetel officetel,
+		cc.hometel hometel,
+		cc.sourceapp sourceapp,
+		cc.sourcebiz sourcebiz,
+		cc.activitysource activitysource,
+		cc.ismerge ismerge,
+		cc.ismaster ismaster,
+		cc.contact contact,
+		cc.myguidlist myguidlist,
+		cc.address address,
+		cc.createtime createtime,
+		cc.modifytime modifytime,
+		cm.memCode memCode
+		from
+		${tablename} cc
+		left join
+		cst_member cm
+		on
+		cc.cstguid = cm.cstGUID
+		where cc.cstguid =  #{cstGUID}
+		]]>
+    </select>
+    
+    <select id="getAllCustomerVo" resultMap="RptCstNumberMap">
+    	select
+			yesterdayAdded,
+			monthAdded,
+			totalAmount
+    	from
+			rpt_cst_number
+		where
+			cstType = 0
+	</select>
+    
+    <select id="getRptCstNumber" resultMap="RptCstNumberMap">
+    	select
+			title,
+    		yesterdayAdded,
+    		totalAmount,
+			proportion
+    	from
+			rpt_cst_number
+		where
+			cstType != 0
+    </select>
+    
+    <select id="getRptMutipleFormats" resultMap="RptMutipleFormatsMap">
+    	select
+			title,
+    		number,
+			proportion
+    	from
+			rpt_mutiple_formats
+		order by
+			cstType asc
+    </select>
+    
+    <select id="getRptClassification" resultMap="RptClassificationMap">
+    	select
+			title,
+    		finished,
+    		allTotal,
+			proportion
+    	from
+			rpt_classification
+    </select>
+    
+    <select id="getRptCstLabel" resultMap="RptCstLabelMap">
+    	select
+    		rsrp.lable_name title,
+    		rsrp.lable_cst_rate percent
+    	from
+    		rpt_cst_lable_count rsrp
+    	order by rsrp.lable_cst_rate desc
+    	limit 10
+    </select>
+    
+    <select id="getRptCityDistributedFirst" resultMap="RptCityDistributedMap">
+    	select
+    		cityName,
+    		amount
+    	from
+    		rpt_city_distributed
+    	group by cityId
+    	order by amount desc
+    	limit 10		
+    </select>
+    
+    <select id="getRptCityDistributedLast" resultMap="RptCityDistributedMap">
+    	select
+			rcd.cityName cityName,
+			rcd.amount amount
+		from
+		(
+			select
+    			cityName,
+    			amount
+    		from
+    			rpt_city_distributed
+    		group by cityId
+    		order by amount asc
+    		limit 10
+		) rcd
+		order by rcd.amount desc
+    </select>
+    <select id="getProjects" resultMap="BAreaCompanyMap" parameterType="java.lang.String">
+    	select
+    	projGUID id,
+    	projName name
+    	from
+    	b_proj
+    	where
+    	companyGUID = #{citycode}
+    	group by projGUID
+    </select>
+    
+    <!-- 
+    <select id="getClientListCount" resultType="int" parameterType="java.util.Map">
+    	select
+    		count(*) cnt
+    	from
+    		rpt_cst_customer_basic
+    	<where>
+    		<if test="project != null and project !=''">
+    			and projGUID = #{project}
+    		</if>
+    		<if test="city != null and city != '' and (project == null or project =='')">
+    			and cityID = #{city}
+    		</if>
+    		<if test="area != null and area != '' and (city == null or city =='')">
+    			and areaID = #{area}
+    		</if>
+    		<if test="yetai != null and yetai !=''">
+    			and formats = #{yetai}
+    		</if>
+    		<if test="startDate != null and startDate != '' and endDate != null and endDate != ''">
+    			<![CDATA[
+    			and createTime >= #{startDate} and createTime <= #{endDate}
+    			]]>
+    		</if>
+    		<if test="startDate != null and startDate != '' and (endDate == null or endDate == '')">
+    			<![CDATA[
+    			and createTime >= #{startDate}
+    			]]>
+    		</if>
+    		<if test="(startDate == null or startDate == '') and endDate != null and endDate != ''">
+    			<![CDATA[
+    			and createTime <= #{endDate}
+    			]]>
+    		</if>
+    	</where>
+    </select>
+    
+    <select id="getClientList" resultMap="ClientListMap" parameterType="java.util.Map">
+    	select
+    		cstGUID,
+    		cstName,
+    		gender,
+    		mobileTel,
+    		cardID,
+    		ageGroup,
+    		formats,
+    		contractDate
+    	from
+    		rpt_cst_customer_basic
+    	where 
+    		contractDate is not null
+    		<if test="project != null and project !=''">
+    			and projGUID = #{project}
+    		</if>
+    		<if test="city != null and city != '' and (project == null or project =='')">
+    			and cityID = #{city}
+    		</if>
+    		<if test="area != null and area != '' and (city == null or city =='')">
+    			and areaID = #{area}
+    		</if>
+    		<if test="yetai != null and yetai !=''">
+    			and formats = #{yetai}
+    		</if>
+    		<if test="startDate != null and startDate != '' and endDate != null and endDate != ''">
+    			<![CDATA[
+    			and createTime >= #{startDate} and createTime <= #{endDate}
+    			]]>
+    		</if>
+    		<if test="startDate != null and startDate != '' and (endDate == null or endDate == '')">
+    			<![CDATA[
+    			and createTime >= #{startDate}
+    			]]>
+    		</if>
+    		<if test="(startDate == null or startDate == '') and endDate != null and endDate != ''">
+    			<![CDATA[
+    			and createTime <= #{endDate}
+    			]]>
+    		</if>
+    </select>
+     -->    
+    <select id="getCustomerLables" resultMap="CustomerLable" parameterType="java.lang.Long">
+    	select distinct labelName from rpt_l_cst_stand_label_storage where cstGUID = #{cstGUID}
+    </select>
+
+</mapper>

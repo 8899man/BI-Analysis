@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.pmp.dao.IndexFlowDao" > 
+<!-- Result Map-->
+<resultMap id="IndexFlowMap" type="IndexFlow" >
+	<result column="index_flow_id" property="index_flow_id" jdbcType="INTEGER"/>
+	<result column="proj_guid" property="proj_guid" jdbcType="VARCHAR"/>
+	<result column="index_format_type" property="index_format_type" jdbcType="VARCHAR"/>
+	<result column="visit_days" property="visit_days" jdbcType="INTEGER"/>
+	<result column="average_baseline_days" property="average_baseline_days" jdbcType="INTEGER"/>
+	<result column="overstep_days" property="overstep_days" jdbcType="INTEGER"/>
+	<result column="confess_days" property="confess_days" jdbcType="INTEGER"/>
+	<result column="average_order_baseline_days" property="average_order_baseline_days" jdbcType="INTEGER"/>
+	<result column="createtime" property="createtime" jdbcType="TIMESTAMP"/>
+</resultMap>
+       
+<!-- index_flow table all fields -->
+<sql id="Base_Column_List" >
+	 index_flow_id,proj_guid,index_format_type,visit_days,average_baseline_days,overstep_days,confess_days,average_order_baseline_days,createtime
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="index_flow_id != null" >
+	    and index_flow_id =  #{index_flow_id}
+	</if>
+	 	<if test="proj_guid != null and proj_guid != ''" >
+	    and proj_guid =  #{proj_guid}
+	</if>
+	<if test="index_format_type != null" >
+	    and index_format_type =  #{index_format_type}
+	</if>
+	<if test="visit_days != null" >
+	    and visit_days =  #{visit_days}
+	</if>
+	<if test="average_baseline_days != null" >
+	    and average_baseline_days =  #{average_baseline_days}
+	</if>
+	<if test="overstep_days != null" >
+	    and overstep_days =  #{overstep_days}
+	</if>
+	<if test="confess_days != null" >
+	    and confess_days =  #{confess_days}
+	</if>
+	<if test="createtime != null" >
+	    and createtime =  #{createtime}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="insert" parameterType="IndexFlow" >
+  insert into index_flow(index_flow_id,proj_guid,index_format_type,visit_days,average_baseline_days,overstep_days,confess_days,createtime)
+ values(#{index_flow_id},#{proj_guid},#{index_format_type},#{visit_days},#{average_baseline_days},#{overstep_days},#{confess_days},#{createtime})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update index_flow set proj_guid=#{proj_guid},index_format_type=#{index_format_type},visit_days=#{visit_days},average_baseline_days=#{average_baseline_days},overstep_days=#{overstep_days},confess_days=#{confess_days}, where index_flow_id=#{index_flow_id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update index_flow set 
+	<trim  suffixOverrides="," >
+	<if test="proj_guid != null  and proj_guid != '' ">
+		proj_guid=#{proj_guid},
+	</if>
+	<if test="index_format_type != null  ">
+		index_format_type=#{index_format_type},
+	</if>
+	<if test="visit_days != null  ">
+		visit_days=#{visit_days},
+	</if>
+	<if test="average_baseline_days != null  ">
+		average_baseline_days=#{average_baseline_days},
+	</if>
+	<if test="overstep_days != null  ">
+		overstep_days=#{overstep_days},
+	</if>
+	<if test="confess_days != null  ">
+		confess_days=#{confess_days},
+	</if>
+	<if test="createtime != null  ">
+		createtime=#{createtime},
+	</if>
+	</trim> where index_flow_id=#{index_flow_id}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from index_flow where index_flow_id = #{index_flow_id}
+</delete>
+ 
+<!-- 根据id查询 index_flow -->
+<select id="getIndexFlowById"  resultMap="IndexFlowMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from rpt_index_flow where proj_guid = #{proj_guid}
+</select>
+
+<!-- index_flow 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from index_flow 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询index_flow列表 -->
+<select id="getIndexFlowList" resultMap="IndexFlowMap"  parameterType="IndexFlow">
+	select 
+	<include refid="Base_Column_List"/>
+	from index_flow
+	order by createtime desc
+</select>
+  	
+</mapper>   

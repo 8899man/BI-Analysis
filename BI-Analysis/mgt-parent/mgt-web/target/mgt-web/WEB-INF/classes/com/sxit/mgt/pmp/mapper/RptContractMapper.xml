@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.pmp.dao.RptContractDao" > 
+<!-- Result Map-->
+<resultMap id="RptContractMap" type="com.sxit.model.pmp.RptContract" >
+	<result column="contract_id" property="contract_id"/>
+	<result column="type_id" property="type_id"/>
+	<result column="index_code" property="index_code"/>
+	<result column="index_name" property="index_name"/>
+	<result column="index_value" property="index_value"/>
+	<result column="create_time" property="create_time"/>
+	<result column="dimension" property="dimension"/>
+	<result column="dime_value" property="dime_value"/>
+</resultMap>
+       
+<!-- rpt_contract table all fields -->
+<sql id="Base_Column_List" >
+	 contract_id,type_id,index_code,index_name,index_value,create_time,dimension,dime_value
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="contract_id != null" >
+	    and contract_id =  #{contract_id}
+	</if>
+	 	<if test="type_id != null and type_id != ''" >
+	    and type_id =  #{type_id}
+	</if>
+	 	<if test="index_code != null and index_code != ''" >
+	    and index_code =  #{index_code}
+	</if>
+	 	<if test="index_name != null and index_name != ''" >
+	    and index_name =  #{index_name}
+	</if>
+	 	<if test="index_value != null and index_value != ''" >
+	    and index_value =  #{index_value}
+	</if>
+	<if test="create_time != null" >
+	    and create_time =  #{create_time}
+	</if>
+	 	<if test="dimension != null and dimension != ''" >
+	    and dimension =  #{dimension}
+	</if>
+	 	<if test="dime_value != null and dime_value != ''" >
+	    and dime_value =  #{dime_value}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into rpt_contract(contract_id,type_id,index_code,index_name,index_value,create_time,dimension,dime_value)
+ values(#{contract_id},#{type_id},#{index_code},#{index_name},#{index_value},#{create_time},#{dimension},#{dime_value})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update rpt_contract set type_id=#{type_id},index_code=#{index_code},index_name=#{index_name},index_value=#{index_value},create_time=#{create_time},dimension=#{dimension},dime_value=#{dime_value} where contract_id=#{contract_id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update rpt_contract set 
+	<trim  suffixOverrides="," >
+	<if test="type_id != null  and type_id != '' ">
+		type_id=#{type_id},
+	</if>
+	<if test="index_code != null  and index_code != '' ">
+		index_code=#{index_code},
+	</if>
+	<if test="index_name != null  and index_name != '' ">
+		index_name=#{index_name},
+	</if>
+	<if test="index_value != null  and index_value != '' ">
+		index_value=#{index_value},
+	</if>
+	<if test="create_time != null  ">
+		create_time=#{create_time},
+	</if>
+	<if test="dimension != null  and dimension != '' ">
+		dimension=#{dimension},
+	</if>
+	<if test="dime_value != null  and dime_value != '' ">
+		dime_value=#{dime_value},
+	</if>
+	</trim> where contract_id=#{contract_id}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from rpt_contract where contract_id = #{contract_id}
+</delete>
+ 
+<!-- 根据id查询 rpt_contract -->
+<select id="queryByList"  resultMap="RptContractMap" parameterType="java.util.Map">
+select case when a.type_id='YL' then'年龄段'
+            when a.type_id='MJ' then '面积'
+            when a.type_id='DKFS' then '贷款方式' 
+            when a.type_id='SF' then '首付比例'
+            when a.type_id='CFGM' then '购买套数'  end type_id,a.index_name,a.city_code                        
+        ,a.index_value,convert(((a.index_value/b.dime_value)*100),decimal ) as dime_value from
+        (select type_id,index_name,index_value,city_code from rpt_contract where city_code = #{city_code} group by type_id,index_name) a,
+        (select type_id,sum(index_value) dime_value from rpt_contract  where city_code = #{city_code} group by type_id order by type_id) b
+where a.type_id=b.type_id and a.type_id=#{type_id} ORDER BY CONVERT(((a.index_value/b.dime_value)*100),DECIMAL ) DESC 
+</select>
+
+
+<select id="queryByDistinct"  resultMap="RptContractMap" parameterType="java.util.List">
+select distinct type_id,(case when type_id='YL' then'年龄段'
+                                   when type_id='MJ' then '面积'
+                                   when type_id='DKFS' then '贷款方式' 
+                                   when type_id='SF' then '首付比例'
+                                   when type_id='CFGM' then '购买套数' end) index_name from rpt_contract
+</select>
+
+<!-- rpt_contract 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from rpt_contract 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询rpt_contract列表 -->
+<select id="queryByList1" resultMap="RptContractMap"  parameterType="Object">
+	<include refid="Base_Column_List"/>
+	from rpt_contract 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

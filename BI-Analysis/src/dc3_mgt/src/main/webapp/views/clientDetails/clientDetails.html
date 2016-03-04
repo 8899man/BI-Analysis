@@ -1,0 +1,439 @@
+<div ng-controller="ClientDetailsController" ng-init="initializeController()" ng-show="initShow">
+	
+
+	<div class="title-position box-shadow-1 clearfix">
+		<h1><a href="javascript:;" class="history-back back-button"">返回</a>客户画像</h1>
+		<h2><a class="glyphicon glyphicon-home" href=""><i>首页</i></a> > 客户 > 客户画像</h2>
+	</div>
+
+
+
+	<div class="content">
+		<div class="content-main">
+			<div class="client-details-header clearfix">
+				<div class="client-details-info box-shadow-1 border-radius-2">
+					<div class="client-info-base clearfix">
+						<div class="client-info-header">
+							<h2><img src="images/header-male.jpg" alt=""><i></i></h2>
+						</div>
+						<div class="client-info-label">
+							<h2>{{customer.cstname}}</h2>
+						</div>
+					</div>
+					<div class="client-info-other">
+						<dl>
+							<dt>手机号码</dt>
+							<!--
+							<dd class="no-padding"  dropdown keyboard-nav>
+								<span ng-class="{'toggle-link': clientDetails.baseInfo.tels.length>1}" dropdown-toggle ng-hide="clientDetails.baseInfo.tels.length == 0">{{clientDetails.baseInfo.tels[0]}}<i class="arrow" ng-hide="clientDetails.baseInfo.tels.length == 1"></i></span>
+								<ul class="dropdown-menu text-dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav" ng-if="clientDetails.baseInfo.tels.length>1">
+						            <li role="menuitem" ng-repeat-start="tel in clientDetails.baseInfo.tels">{{tel}}</li>
+						            <li ng-repeat-end class="divider" ng-hide="$last == true"></li>
+						        </ul>
+							</dd>
+							-->
+							<dd>{{customer.mobiletel}}</dd>
+						</dl>
+						<dl>
+							<dt>客户编号</dt>
+							<dd>{{customer.cstguid}}</dd>
+						</dl>
+						<dl>
+							<dt>关联房产</dt>
+							
+							<dd class="no-padding"  dropdown keyboard-nav>
+								<span ng-class="{'toggle-link': unionTradeList.length>1}" dropdown-toggle ng-hide="unionTradeList.length == 0 || unionTradeList == null"><a ui-sref="app.project.houseDetails({'houseId': unionTradeList[0].roomId})">{{unionTradeList[0].projName + unionTradeList[0].bldName + unionTradeList[0].room}}</a><i class="arrow" ng-hide="unionTradeList.length == 1"></i></span>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav" ng-if="unionTradeList.length>1">
+						            <li role="menuitem" ng-repeat-start="unionTrade in unionTradeList"><a ui-sref="app.project.houseDetails({'houseId': unionTrade.roomId})">{{unionTrade.projName + unionTrade.bldName + unionTrade.room}}</a></li>
+						            <li ng-repeat-end class="divider" ng-hide="$last == true"></li>
+						        </ul>
+							</dd>
+							<!--
+							<dd><a ui-sref="app.project.houseDetails({'houseId': 100321})">花园城-8栋8A</a></dd>-->
+						</dl>
+						<dl>
+							<dt>证件号码</dt>
+							<!--
+							<dd class="no-padding"  dropdown keyboard-nav>
+								<span ng-class="{'toggle-link': clientDetails.baseInfo.houses.length>1}" dropdown-toggle ng-hide="clientDetails.baseInfo.houses.length == 0"><a ui-sref="app.project.houseDetails({'houseId': clientDetails.baseInfo.houses[0].houseName})">{{clientDetails.baseInfo.houses[0].houseName}}</a><i class="arrow" ng-hide="clientDetails.baseInfo.houses.length == 1"></i></span>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav" ng-if="clientDetails.baseInfo.houses.length>1">
+						            <li role="menuitem" ng-repeat-start="house in clientDetails.baseInfo.houses"><a ui-sref="app.project.houseDetails({'houseId': house.houseId})">{{house.houseName}}</a></li>
+						            <li ng-repeat-end class="divider" ng-hide="$last == true"></li>
+						        </ul>
+							</dd>
+							-->
+							<dd>{{customer.cardid}}</dd>
+						</dl>
+						<dl>
+							<dt>个人生日</dt>
+							<dd>{{customer.birthStr}}</dd>
+						</dl>
+						<dl>
+							<dt>邮箱地址</dt>
+							<dd class="no-padding"  dropdown keyboard-nav>
+								<span ng-class="{'toggle-link': mailList.length>1}" dropdown-toggle ng-hide="mailList.length == 0 || mailList == null">{{mailList[0].attachValue}}<i class="arrow" ng-hide="mailList.length == 1"></i></span>
+								<ul class="dropdown-menu text-dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav" ng-if="mailList.length > 1">
+						            <li role="menuitem" ng-repeat-start="mail in mailList">{{mail.attachValue}}</li>
+						            <li ng-repeat-end class="divider" ng-hide="$last == true"></li>
+						        </ul>
+							</dd>
+							
+							<!--<dd>{{customer.cardid}}</dd>-->
+						</dl>
+						<dl>
+							<dt>客户类别</dt>
+							<dd>
+								<span ng-if="customer.customerType==0">未知</span>
+								<span ng-if="customer.customerType==1">意向客户</span>
+								<span ng-if="customer.customerType==2">已购客户</span>
+								<span ng-if="customer.customerType==3">意向客户 | 已购客户</span>
+							</dd>
+							
+						</dl>
+						<dl>
+							<dt>会员卡号</dt>
+							<dd>{{customer.memCode}}</dd>
+							<!-- 
+							<dd>{{customer.memCode}}<i class="member-type"></i></dd> -->
+						</dl>
+						<!-- 
+						<dl>
+							<dt>车牌号码</dt>
+							<dd ng-if="customer.carNo == null">未知</dd>
+							<dd ng-if="customer.carNo != null">{{customer.carNo}}</dd>
+						</dl>
+						 -->
+					</div>
+				</div>
+				<div class="features-container">
+					<div class="client-details-features box-shadow-1 border-radius-3">
+						<h2>客户特征描摹</h2>
+						<div class="features-list">
+							<dl>
+								<dt>人口特征</dt>
+								<dd class="clearfix">
+									<span>年龄：<b>{{customer.ageStr}}</b></span>
+									<span>家庭结构：<b>未知</b></span>
+									<span>子女：<b>未知</b></span>
+								</dd>
+							</dl>
+							<dl>
+								<dt>区域特征</dt>
+								<dd class="clearfix">
+									<span>籍贯区段：<b>{{hometown}}</b></span>
+									<span>工作区域：<b>{{address}}</b></span>
+									<span>居住区域：<b>{{lifeArea}}</b></span>
+								</dd>
+							</dl>
+							<dl>
+								<dt>社会特征</dt>
+								<dd class="clearfix">
+									<span>文化程度：<b>{{degree}}</b></span>
+									<span>从事行业：<b>{{job}}</b></span>
+									<span>工作职位：<b>{{position}}</b></span>
+								</dd>
+							</dl>
+							<dl>
+								<dt>意向特征<select class="form-control" ng-model="oppSelected" ng-options="oppIntention.projName for oppIntention in oppList"></select></dt>
+								<dd class="clearfix">
+									<span>意向等级：<b>{{oppSelected.oppIntentLevel}}</b></span>
+									<span>意向户型：<b>{{oppSelected.oppHuxingIntent}}</b></span>
+									<span>意向面积：<b>{{oppSelected.oppRoomAreaIntent}}</b></span>
+									<span>意向类型：<b>{{oppSelected.oppTypeIntent}}</b></span>
+									<span>意向价格：<b>{{oppSelected.oppTotalIntent}}</b></span>
+									<span>意向区域：<b>{{oppSelected.oppAreaIntent}}</b></span>
+									<span>意向项目：<b>{{oppSelected.oppProjectIntent}}</b></span>
+								</dd>
+							</dl>
+							<dl>
+								<dt>房产特征<select class="form-control" ng-model="tradeSelected" ng-options="tradeIntention.projName for tradeIntention in tradeList"></select></dt>
+								<dd class="clearfix">
+									<span>房产类型：<b>{{tradeSelected.bldProPerty}}</b></span>
+									<span>房产户型：<b>{{tradeSelected.roomStru}}</b></span>
+									<span>房产面积：<b>{{tradeSelected.bldArea>0?tradeSelected.bldArea+"平":""}}</b></span>
+									<span class="clear">房产总价：<b>{{tradeSelected.price>0?tradeSelected.price+"万元":""}}</b></span>
+									<span>房产区域：<b>{{tradeSelected.projArea}}</b></span>
+									<span>房产项目：<b>{{tradeSelected.projName}}</b></span>
+									<!-- 
+									<span>房产特色：<b>{{house.feature}}</b></span>
+									 -->
+								</dd>
+							</dl>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+
+			
+			<div class="margin-top-30 box-shadow-1 border-radius-3 client-track">
+				<h2>客户轨迹</h2>
+				<div class="track-list-container">
+					<div class="client-track-list" on-finish-render-filters>
+						<dl class="clearfix" ng-repeat="sFollowRecord in sFollowRecordList" ng-class="{'last' : $last}">
+						 	<dt><i class="icon1" ng-class="{'icon10':sFollowRecord.followtype==1, 
+						 									'icon10':sFollowRecord.followtype==2, 
+						 									'icon5':sFollowRecord.followtype==3, 
+						 									'icon8':sFollowRecord.followtype==4, 
+						 									'icon3':sFollowRecord.followtype==5, 
+						 									'icon2':sFollowRecord.followtype==6, 
+						 									'icon7':sFollowRecord.followtype==7,
+						 									'icon7':sFollowRecord.followtype==8}"></i></dt>
+							<dd>
+								<p class="time">{{sFollowRecord.createtime|strToDate|date:'yyyy-MM-dd HH:mm'}}</p>
+								<p class="person"><a ui-sref="app.project.details({'projectId': sFollowRecord.projguid})">{{sFollowRecord.projname}}</a></p>
+								<p class="track-tip">{{sFollowRecord.followtype==1?'预约':
+										sFollowRecord.followtype==2?'来电':
+										sFollowRecord.followtype==3?'到访':
+										sFollowRecord.followtype==4?'认筹':
+										sFollowRecord.followtype==5?'认购':
+										sFollowRecord.followtype==6?'签约':
+										sFollowRecord.followtype==7?'回款':
+										sFollowRecord.followtype==8?'其它':'其它'}}
+								{{sFollowRecord.followcontent!=null?"，"+sFollowRecord.followcontent:""}} {{sFollowRecord.consultantname!=null?"，"+"互动关联人：置业顾问 "+sFollowRecord.consultantname : ''}}{{sFollowRecord.consultantmobile!=null?"  " + sFollowRecord.consultantmobile:''}}</p>
+							</dd>
+                		</dl>
+						<!-- 
+						<dl class="clearfix">
+							<dt><i class="icon1"></i></dt>
+							<dd>
+								<p class="time">2015-05-04 10:25</p>
+								<p class="person"><a ui-sref="app.project.details({'projectId': 111})">坪山花园城</a></p>
+								<p class="track-tip">交付，支付购买意向房源4栋A单元608单元尾款，互动关联人：置业顾问 刘XX</p>
+							</dd>
+						</dl>
+						<dl class="clearfix">
+							<dt><i class="icon3"></i></dt>
+							<dd>
+								<p class="time">2015-05-04 11:25</p>
+								<p class="person"><a ui-sref="app.project.details({'projectId': 111})">坪山花园城</a></p>
+								<p class="track-tip">回款，支付购买意向房源4栋A单元608单元尾款，互动关联人：置业顾问 刘XX 138xxxx2222</p>
+							</dd>
+						</dl>
+						<dl class="clearfix">
+							<dt><i class="icon3"></i></dt>
+							<dd>
+								<p class="time">2015-05-04 10:25</p>
+								<p class="person"><a ui-sref="app.project.details({'projectId': 111})">坪山花园城</a></p>
+								<p class="track-tip">认购，看板房【意向等级B，意向房源4栋A单元608房间】，互动关联人：置业顾问 王XX</p>
+							</dd>
+						</dl>
+						<dl class="clearfix">
+							<dt><i class="icon3"></i></dt>
+							<dd>
+								<p class="time">2015-05-04 10:25</p>
+								<p class="person"><a ui-sref="app.project.details({'projectId': 111})">坪山花园城</a></p>
+								<p class="track-tip">认筹，看板房【意向等级B，意向房源4栋A单元608房间】，互动关联人：置业顾问 王XX</p>
+							</dd>
+						</dl>
+						<dl class="last clearfix">
+							<dt><i class="icon2"></i></dt>
+							<dd>
+								<p class="time">2015-05-04 10:25</p>
+								<p class="person"><a ui-sref="app.project.details({'projectId': 111})">坪山花园城</a></p>
+								<p class="track-tip">到访，看板房【意向等级B，意向房源4栋A单元608房间】，互动关联人：置业顾问 王XX</p>
+							</dd>
+						</dl>
+						 -->
+					</div>
+				</div>
+				
+			</div>
+
+
+			<div class="margin-top-30 box-shadow-1 border-radius-3 relational-info">
+				<h2>关系信息</h2>
+				<div class="relational-info-main">
+
+					
+					<tabset>
+						<tab heading="房产关系">
+							<table class="table">
+								<thead>
+									<tr>
+										<th width="20%">项目名称</th>
+										<th width="20%">房号</th>
+										<th width="20%">房产关系</th>
+										<th width="20%">买房日期</th>
+										<th width="20%">卖房日期</th>
+									</tr>
+								</thead>
+								<tbody>
+								<!-- 
+									<tr>
+										<td>蛇口花园城一期</td>
+										<td>5-5A</td>
+										<td>一手房产</td>
+										<td>2013-07-15</td>
+										<td>未知</td>
+										<td>2015-08-17</td>
+									</tr>
+									<tr>
+										<td>坪山花园城一期</td>
+										<td>5-5A</td>
+										<td>一手房产</td>
+										<td>2013-07-15</td>
+										<td>未知</td>
+										<td>2015-08-17</td>
+									</tr>
+								 -->
+								 	<tr ng-if="tContractRoomList != null && tContractRoomList.length > 0" ng-repeat="tContractRoom in tContractRoomList" on-finish-render-filters>
+                						<td class="text-center"> {{tContractRoom.projName}} </td>
+                						<td class="text-center"> {{tContractRoom.bldFullName + tContractRoom.room}} </td>
+                						<td class="text-center"> 一手房产  </td>
+                						<td class="text-center"> {{tContractRoom.qsDateStr}} </td>
+                						<td class="text-center"></td>
+                					</tr>
+                					<tr ng-if="tContractRoomList == null || tContractRoomList.length == 0">
+                						<td></td>
+                						<td></td>
+                						<td></td>
+                						<td></td>
+                						<td></td>
+                					</tr>
+                					<tr ng-if="tContractRoomList == null || tContractRoomList.length == 0">
+                						<td></td>
+                						<td></td>
+                						<td></td>
+                						<td></td>
+                						<td></td>
+                					</tr>
+								</tbody>
+							</table>
+						</tab>
+						<tab heading="家庭关系">
+							<table class="table">
+								<thead>
+									<tr>
+										<th width="20%">关系</th>
+										<th width="20%">姓名</th>
+										<th width="20%">性别</th>
+										<th width="20%">年龄</th>
+										<th width="20%">TEL</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<!--
+									<tr>
+										<td>子女</td>
+										<td>刘晓明</td>
+										<td>男</td>
+										<td>10</td>
+										<td>138****3245</td>
+									</tr>
+									<tr>
+										<td>父母</td>
+										<td><a ui-sref="app.client.details({'clientId': '12'})">刘舜</a></td>
+										<td>男</td>
+										<td>65</td>
+										<td>139****0987</td>
+									</tr>
+									<tr>
+										<td>父母</td>
+										<td><a ui-sref="app.client.details({'clientId': '13'})">李芳</a></td>
+										<td>女</td>
+										<td>60</td>
+										<td>159****0987</td>
+									</tr>
+									 -->
+								</tbody>
+							</table>
+						</tab>
+						<tab heading="交易关系">
+							<table class="table">
+								<thead>
+									<tr>
+										<th width="20%">项目名称</th>
+										<th width="20%">房号</th>
+										<th width="20%">交易日期</th>
+										<th width="20%">交易金额</th>
+										<th width="20%">交易类型</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-if="tContractList != null && tContractList.length > 0" ng-repeat="tContract in tContractList" on-finish-render-filters>
+                						<td class="text-center"> {{tContract.projName}} </td>
+                						<td class="text-center"> {{tContract.bldFullName + tContract.room}} </td>
+                						<td class="text-center"> {{tContract.qsDateStr}}  </td>
+                						<td class="text-center"> {{tContract.htTotal!=null||tContract.htTotal > 0?tContract.htTotal + '万元':''}} </td>
+                						<td class="text-center"> 一手交易 </td>
+                					</tr>
+                					<tr ng-if="tContractList == null || tContractList.length == 0">
+                						<td></td>
+                						<td></td>
+                						<td></td>
+                						<td></td>
+                						<td></td>
+                					</tr>
+                					<tr ng-if="tContractList == null || tContractList.length == 0">
+                						<td></td>
+                						<td></td>
+                						<td></td>
+                						<td></td>
+                						<td></td>
+                					</tr>
+								</tbody>
+							</table>
+						</tab>
+						<tab heading="会员关系">
+							<table class="table">
+								<thead>
+									<tr>
+										<th width="25%">会员类型</th>
+										<th width="25%">会员卡号</th>
+										<th width="25%">会员等级</th>
+										<th width="25%">会员积分</th>
+									</tr>
+								</thead>
+								<tbody>
+									 <tr ng-if="cstMemberList != null && cstMemberList.length > 0" ng-repeat="cstMember in cstMemberList" on-finish-render-filters>
+                						<td class="text-center"> 地产会员 </td>
+                						<td class="text-center" ng-if="cstMember.memcode != null"> {{cstMember.memcode}} </td>
+                						<td class="text-center" ng-if="cstMember.memcode == null"> 未知 </td>
+                						<td class="text-center" ng-if="cstMember.memlevel != null"> {{cstMember.memlevel}}  </td>
+                						<td class="text-center" ng-if="cstMember.memlevel == null"> 未知 </td>
+                						<td class="text-center" ng-if="cstMember.ljpoint != null"> {{cstMember.ljpoint}} </td>
+                						<td class="text-center" ng-if="cstMember.ljpoint == null"> 未知 </td>
+                					</tr>
+                					<tr ng-if="cstMemberList == null || cstMemberList.length == 0">
+                						<td></td>
+                						<td></td>
+                						<td></td>
+                						<td></td>
+                						<td></td>
+                					</tr>
+                					<tr ng-if="cstMemberList == null || cstMemberList.length == 0">
+                						<td></td>
+                						<td></td>
+                						<td></td>
+                						<td></td>
+                						<td></td>
+                					</tr>
+								</tbody>
+							</table>
+						</tab>
+					</tabset>
+
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+
+</div>

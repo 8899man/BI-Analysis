@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.label.dao.LabelDao">
+
+	<!-- 2015-11-22 标签修改 -->
+	<resultMap id="IFeatrueTemplateMap" type="LFeatureTemplate">
+		<id column="fea_template_id" property="feaTemplateId" jdbcType="BIGINT" />
+		<result column="fea_template_guid" property="feaTemplateGuid" jdbcType="VARCHAR" />
+		<result column="roottitle" property="roottitle" jdbcType="VARCHAR" />
+		<result column="rootvalue" property="rootvalue" jdbcType="VARCHAR" />
+		<result column="suptitle" property="suptitle" jdbcType="VARCHAR" />
+		<result column="lablekey" property="lablekey" jdbcType="TINYINT" />
+		<result column="fea_template_value" property="feaTemplateValue" jdbcType="VARCHAR" />
+		<result column="showsuptitle" property="showsuptitle" jdbcType="VARCHAR" />
+		<result column="hassubs" property="hassubs" jdbcType="VARCHAR" />
+		<result column="model" property="model" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="optionsname" property="optionsname" jdbcType="VARCHAR" />
+		<result column="optionsvalue" property="optionsvalue" jdbcType="VARCHAR" />
+		<result column="subsname" property="subsname" jdbcType="VARCHAR" />
+		<result column="subsvalue" property="subsvalue" jdbcType="VARCHAR" />
+		<result column="parentguid" property="parentguid" jdbcType="VARCHAR" />
+		<result column="isroot" property="isroot" jdbcType="INTEGER" />
+		<result column="isleaf" property="isleaf" jdbcType="INTEGER" />
+		<result column="t_tablename" property="tTablename" jdbcType="VARCHAR" />
+		<result column="t_featureexpress" property="tFeatureexpress" jdbcType="VARCHAR" />
+		<result column="t_sourcechannel" property="tSourcechannel" jdbcType="VARCHAR" />
+		<result column="t_sourceapp" property="tSourceapp" jdbcType="VARCHAR" />
+		<result column="isdel" property="isdel" jdbcType="INTEGER" />
+		<result column="isdisabled" property="isdisabled" jdbcType="INTEGER" />
+		<result column="tableType" property="tableType" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<!-- 2015-11-22 标签修改 -->
+	<resultMap id="IFeatureStorageMap" type="com.sxit.model.label.LFeatureStorage">
+		<id column="storage_id" property="storageId" jdbcType="BIGINT" />
+		<result column="featureType" property="featureType" jdbcType="TINYINT" />
+		<result column="labelguid" property="labelguid" jdbcType="VARCHAR" />
+		
+		<result column="featureTitle" property="featureTitle" jdbcType="VARCHAR" />
+		<result column="optionName" property="optionName" jdbcType="VARCHAR" />
+		<result column="optionvalue" property="optionvalue" jdbcType="VARCHAR" />
+		<result column="createTime" property="createTime" jdbcType="DATE" />
+		<result column="updateTime" property="updateTime" jdbcType="DATE" />
+		
+		<result column="model" property="model" jdbcType="VARCHAR" />
+		<result column="tableName" property="tableName" jdbcType="VARCHAR" />
+		<result column="featureExpress" property="featureExpress" jdbcType="VARCHAR" />
+		<result column="templateguid" property="templateguid" jdbcType="VARCHAR" />
+		<result column="sys_user_id" property="sys_user_id" jdbcType="VARCHAR" />
+		<result column="sourceChannel" property="sourceChannel" jdbcType="VARCHAR" />
+		<result column="sourceApp" property="sourceApp" jdbcType="VARCHAR" />
+		<result column="isdel" property="isdel" jdbcType="INTEGER" />
+		<result column="isdisabled" property="isdisabled" jdbcType="INTEGER" />
+		<result column="tableType" property="" jdbcType="INTEGER" />
+	</resultMap>
+
+	<!-- 2015-11-22 标签修改 private int label_id; private String label_guid; private 
+		Date createTime; private String label_name; private String label_info; private 
+		String querySql; private Date execTime; private String creatorguid; private 
+		String label_type; -->
+	<resultMap id="LabeMap" type="com.sxit.model.label.Label">
+		<id column="label_id" property="label_id" jdbcType="INTEGER" />
+		<result column="label_guid" property="label_guid" jdbcType="VARCHAR" />
+		<result column="createTime" property="createTime" jdbcType="DATE" />
+		<result column="label_name" property="label_name" jdbcType="VARCHAR" />
+		<result column="label_info" property="label_info" jdbcType="VARCHAR" />
+		<result column="querySql" property="querySql" jdbcType="VARCHAR" />
+		<result column="execTime" property="execTime" jdbcType="TIMESTAMP" />
+		<result column="creatorguid" property="creatorguid" jdbcType="VARCHAR" />
+		<result column="label_type" property="label_type" jdbcType="VARCHAR" />
+		<result column="isNet" property="isNet" jdbcType="VARCHAR" />
+		<result column="label_cst_num" property="label_cst_num" jdbcType="INTEGER"/>
+	</resultMap>
+	
+	
+	<resultMap id="CstLabelMap" type="CstLabel">
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="tel" property="tel" jdbcType="VARCHAR" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="address" property="address" jdbcType="VARCHAR" />
+	</resultMap>
+	
+
+	<select id="queryLabelList" resultMap="LabeMap" parameterType="java.util.Map">
+		select  
+			label_id, 
+			label_guid, 
+			createTime, 
+			label_name, 
+			label_info, 
+			querySql, 
+			execTime, 
+			creatorguid, 
+			label_type,
+			isNet,
+			label_cst_num
+		from rpt_l_label_storge 
+		<where>
+			1=1
+			<if test="isNet!=null">
+				and isNet = #{isNet}
+			</if>
+			<if test="isNet!=1">
+				and creatorguid = #{creatorguid}
+			</if>
+		</where>
+		order by createTime desc
+	</select>
+	
+	<insert id="saveLabel" parameterType="java.util.Map">
+		insert into rpt_l_label_storge (
+			label_guid, 
+			createTime, 
+			label_name, 
+			label_info, 
+			querySql, 
+			execTime, 
+			creatorguid, 
+			label_type,
+			isNet
+		) values (
+			#{label_guid}, 
+			#{createTime}, 
+			#{label_name}, 
+			#{label_info}, 
+			#{querySql}, 
+			#{execTime}, 
+			#{creatorguid}, 
+			#{label_type},
+			#{isNet}
+		)
+	</insert>
+
+	<select id="queryTemplate" resultMap="IFeatrueTemplateMap" parameterType="java.util.Map">
+		select
+			fea_template_id,
+			fea_template_guid,
+			roottitle,
+			rootvalue,
+			suptitle,
+			lablekey,
+			fea_template_value,
+			showsuptitle,
+			hassubs,
+			model,
+			title,
+			optionsname,
+			optionsvalue,
+			subsname,
+			subsvalue,
+			parentguid,
+			isroot,
+			isleaf,
+			t_tablename,
+			t_featureexpress,
+			t_sourcechannel,
+			t_sourceapp,
+			isdel,
+			isdisabled,
+			tableType
+		from rpt_l_feature_template
+		where lablekey = #{lablekey} and (rootvalue = #{rootvalue} || rootvalue =
+		'0')
+		order by fea_template_id asc
+	</select>
+	<!-- 
+	<select id="insertLabelStronge" parameterType="java.util.Map">
+		insert into
+		labellocal_storage (
+		lableKey,
+		id,
+		labelType,
+		labelAttr,
+		info,
+		sortTitle,
+		optionName,
+		optionValue,
+		createTime,
+		model,
+		sys_user_id
+		) values (
+		#{lableKey},
+		#{id},
+		#{labelType},
+		#{labelAttr},
+		#{info},
+		#{sortTitle},
+		#{optionName},
+		#{optionValue},
+		#{createTime},
+		#{model},
+		#{sys_user_id}
+		)
+	</select>
+	 -->
+	
+	<!-- 
+	<id column="storage_id" property="storageId" jdbcType="BIGINT" />
+		<result column="featureType" property="featureType" jdbcType="TINYINT" />
+		<result column="labelguid" property="labelguid" jdbcType="VARCHAR" />
+		
+		<result column="featureTitle" property="featureTitle" jdbcType="VARCHAR" />
+		<result column="optionName" property="optionName" jdbcType="VARCHAR" />
+		<result column="optionvalue" property="optionvalue" jdbcType="VARCHAR" />
+		<result column="createTime" property="createTime" jdbcType="DATE" />
+		<result column="updateTime" property="updateTime" jdbcType="DATE" />
+		
+		<result column="model" property="model" jdbcType="VARCHAR" />
+		<result column="tableName" property="tableName" jdbcType="VARCHAR" />
+		<result column="featureExpress" property="featureExpress" jdbcType="VARCHAR" />
+		<result column="templateguid" property="templateguid" jdbcType="VARCHAR" />
+		<result column="sys_user_id" property="sys_user_id" jdbcType="VARCHAR" />
+		<result column="sourceChannel" property="sourceChannel" jdbcType="VARCHAR" />
+		<result column="sourceApp" property="sourceApp" jdbcType="VARCHAR" />
+	 -->
+	<insert id="insertFeature" parameterType="java.util.Map">
+		insert into rpt_l_feature_storage (
+			featureType,
+			labelguid,
+			labelname,
+			labelinfo,
+			featureTitle,
+			optionName,
+			optionValue,
+			createTime,
+			model,
+			tableName,
+			featureExpress,
+			templateguid,
+			sys_user_id,
+			sourceChannel,
+			sourceApp
+		) values (
+			#{featureType},
+			#{labelguid},
+			#{labelname},
+			#{labelinfo},
+			#{featureTitle},
+			#{optionName},
+			#{optionValue},
+			#{createTime},
+			#{model},
+			#{tableName},
+			#{featureExpress},
+			#{templateguid},
+			#{sys_user_id},
+			#{sourceChannel},
+			#{sourceApp}
+		)
+	</insert>
+
+	<!-- 列表
+	<select id="getLableList" parameterType="int" resultMap="LabelStorageMap">
+		select
+		labelLocal_storage_id storageId,
+		lableKey lableKey,
+		`id` id,
+		`labelType`
+		lableType,
+		labelAttr labelAttr,
+		persons persons,
+		updateTime updateTime,
+		info info
+		from labellocal_storage
+		where
+		lableKey = #{lableKey}
+		GROUP BY id
+	</select>
+	 -->
+	
+	<!-- 详情
+	<select id="getLable" parameterType="java.util.Map" resultMap="LabelStorageMap">
+		select
+		labelAttr,
+		sortTitle,
+		optionName
+		from labellocal_storage
+		where
+		id =
+		#{id}
+		and
+		lableKey = #{lableKey}
+	</select>
+	 -->
+	 
+	<!-- 2015-11-22 标签修改  -->
+	<select id="queryLabelDetail" parameterType="java.util.Map" resultMap="IFeatureStorageMap">
+		select featureTitle, optionName from rpt_l_feature_storage 
+		where labelguid = #{labelguid}
+		order by createTime asc
+	</select>
+
+	<!-- 删除
+	<update id="deleteLable" parameterType="java.util.Map">
+		delete from labellocal_storage
+		where
+		lableKey = #{lableKey}
+		<if test="ids != null and ids != ''">
+			and
+			<foreach collection="ids" item="idvalue" open="" close=""
+				separator="OR">
+				id = #{idvalue}
+			</foreach>
+		</if>
+	</update>
+ -->
+ <!-- 
+	<update id="deleteLableAll" parameterType="java.util.Map">
+		delete from labellocal_storage
+		where
+		lableKey = #{lableKey}
+		<if test="userId != null and userId!= ''">
+			and
+			userId = #{userId}
+		</if>
+	</update>
+ -->
+ 	
+	<delete id="deleteFeatures" parameterType="java.util.Map">
+		delete from rpt_l_feature_storage
+			where labelguid in 
+		<foreach collection="ids" item="id" index="id_index" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<delete id="deleteAllFeaturesByUser" parameterType="java.util.Map">
+		delete from rpt_l_feature_storage
+			where labelguid in (
+				select label_guid from l_label_storge
+				where isNet = #{isNet}
+				<if test="isNet==0">
+					and creatorguid = #{creatorguid}
+				</if>
+			)
+	</delete>
+	
+	<delete id="deleteLables" parameterType="java.util.Map">
+		delete from rpt_l_label_storge
+		where 
+		isNet = #{isNet}
+		<if test="ids != null and ids != ''">
+			and
+			<foreach collection="ids" item="idvalue" open="" close=""
+				separator="OR">
+				label_id = #{idvalue}
+			</foreach>
+		</if>
+	</delete>
+	
+	<delete id="deleteAllLables" parameterType="java.util.Map">
+		delete from rpt_l_label_storge
+			where 
+			isNet = #{isNet}
+			<if test="isNet==0">
+				and creatorguid = #{creatorguid}
+			</if>
+	</delete>
+	
+	<select id="labeQuerySql" parameterType="java.util.Map">
+		select 
+			${tables[0].tableName}.cstGUID, 
+			'' as cstName,
+			#{label_guid} as label_guid,
+			#{label_name} as label_name
+		from 
+		<foreach collection="tables" item="table" index="table_index" open="" separator="," close=""><![CDATA[${table.tableName}]]></foreach>
+		<where>
+			1=1
+			<foreach collection="tables" item="table1" index="table1_index" open="" separator="" close="">
+				<foreach collection="table1.conditions" item="condition" index="condition_index" open="and" separator="and" close="">
+					<choose>
+						<when test="condition.tableType==2">
+							${tables[0].tableName}.cstGUID in (select cstGUID from ${table.tableName} where <![CDATA[${condition.featureExpress}]]>)
+						</when>
+						<when test="condition.tableType==1">
+							<![CDATA[${condition.featureExpress}]]>
+						</when>
+					</choose>
+					<if test="table1_index!=tablesLength-1">
+					  and ${tables[0].tableName}.cstGUID = ${tables[table1_index+1].tableName}.cstGUID
+					</if>
+				</foreach>
+			</foreach>
+		</where>
+		group by ${tables[0].tableName}.cstGUID
+	</select>
+	
+	<update id="updateLabelQuerysql" parameterType="java.util.Map">
+		update rpt_l_label_storge set querySql=#{querySql}
+		where label_guid = #{label_guid}
+	</update>
+	
+	
+	<select id="getCustomerByLabel" resultMap="CstLabelMap" parameterType="java.util.Map">
+		SELECT
+		  cstName as name,
+		  cst_mobile as tel,
+          CONCAT(cst_mobile,'@163.com')  as email,
+		  cst_address as address
+		FROM
+			rpt_l_cst_label_storage
+		WHERE
+			labelGUID = #{labelGUID}
+	</select>
+</mapper>

@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>mgt</groupId>
+    <artifactId>mgt-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <groupId>mgt-api</groupId>
+  <artifactId>mgt-api</artifactId>
+  <packaging>jar</packaging>
+  <dependencies>
+  	<dependency>
+  		<groupId>mgt-util</groupId>
+  		<artifactId>mgt-util</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>mgt-auth</groupId>
+  		<artifactId>mgt-auth</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
+</project>

@@ -1,0 +1,50 @@
+<div ng-controller="ProjectListController" ng-init="initializeController()">
+	<div class="title-position box-shadow-1 clearfix">
+		<h1>项目</h1>
+		<h2><a class="glyphicon glyphicon-home" href=""><i>首页</i></a> > 项目</h2>
+	</div>
+
+
+	<div class="content">
+		<div class="content-main">
+			<div class="project-tab">
+				<ul class="clearfix">
+					<li>
+						<a ui-sref="app.project.list.houseList" ng-class="{'active':tabSelected.tab=='tab1'}" class="box-shadow-1 clearfix tab1">
+							<i></i>
+							<span>
+								<b class="num">276</b>
+								<b>住宅项目</b>
+							</span>
+							<span class="unit">个</span>
+						</a>
+					</li>
+					<li>
+						<a ui-sref="app.project.list.homeList" ng-class="{'active':tabSelected.tab=='tab2'}" class="box-shadow-1 clearfix tab2">
+							<!-- <a href="javascript:;" class="box-shadow-1 clearfix tab3">  -->
+							<i></i>
+							<span>
+								<b class="num">0</b>
+								<b>置业项目</b>
+							</span>
+							<span class="unit">个</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:;" class="box-shadow-1 clearfix tab3">
+							<i></i>
+							<span>
+								<b class="num">0</b>
+								<b>商置项目</b>
+							</span>
+							<span class="unit">个</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			
+			<div ui-view></div>
+
+		</div>
+	</div>
+</div>

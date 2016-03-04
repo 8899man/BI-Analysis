@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.pmp.dao.RptCustomerCountMainDao" > 
+<!-- Result Map-->
+<resultMap id="RptCustomerCountMainMap" type="RptCustomerCountMain" > 
+	<result column="customer_count_id" property="customer_count_id" jdbcType="INTEGER"/>
+	<result column="proj_id" property="proj_id" jdbcType="VARCHAR"/>
+	<result column="index_format_type" property="index_format_type" jdbcType="VARCHAR"/>
+	<result column="customer_type" property="customer_type" jdbcType="VARCHAR"/>
+	<result column="customer_bought_sum" property="customer_bought_sum" jdbcType="INTEGER"/>
+	<result column="customer_intention_sum" property="customer_intention_sum" jdbcType="INTEGER"/>
+	<result column="create_time" property="create_time" jdbcType="TIMESTAMP"/>
+</resultMap>
+       
+<!-- rpt_customer_count_main table all fields -->
+<sql id="Base_Column_List" >
+	 customer_count_id,proj_id,index_format_type,customer_type,customer_bought_sum,customer_intention_sum,create_time
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="customer_count_id != null" >
+	    and customer_count_id =  #{customer_count_id}
+	</if>
+	 	<if test="proj_id != null and proj_id != ''" >
+	    and proj_id =  #{proj_id}
+	</if>
+	<if test="index_format_type != null" >
+	    and index_format_type =  #{index_format_type}
+	</if>
+	<if test="customer_type != null" >
+	    and customer_type =  #{customer_type}
+	</if>
+	<if test="customer_bought_sum != null" >
+	    and customer_bought_sum =  #{customer_bought_sum}
+	</if>
+	<if test="customer_intention_sum != null" >
+	    and customer_intention_sum =  #{customer_intention_sum}
+	</if>
+	<if test="create_time != null" >
+	    and create_time =  #{create_time}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into rpt_customer_count_main(customer_count_id,proj_id,index_format_type,customer_type,customer_bought_sum,customer_intention_sum,create_time)
+ values(#{customer_count_id},#{proj_id},#{index_format_type},#{customer_type},#{customer_bought_sum},#{customer_intention_sum},#{create_time})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update rpt_customer_count_main set proj_id=#{proj_id},index_format_type=#{index_format_type},customer_type=#{customer_type},customer_bought_sum=#{customer_bought_sum},customer_intention_sum=#{customer_intention_sum},create_time=#{create_time} where customer_count_id=#{customer_count_id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update rpt_customer_count_main set 
+	<trim  suffixOverrides="," >
+	<if test="proj_id != null  and proj_id != '' ">
+		proj_id=#{proj_id},
+	</if>
+	<if test="index_format_type != null  ">
+		index_format_type=#{index_format_type},
+	</if>
+	<if test="customer_type != null  ">
+		customer_type=#{customer_type},
+	</if>
+	<if test="customer_bought_sum != null  ">
+		customer_bought_sum=#{customer_bought_sum},
+	</if>
+	<if test="customer_intention_sum != null  ">
+		customer_intention_sum=#{customer_intention_sum},
+	</if>
+	<if test="create_time != null  ">
+		create_time=#{create_time},
+	</if>
+	</trim> where customer_count_id=#{customer_count_id}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from rpt_customer_count_main where customer_count_id = #{customer_count_id}
+</delete>
+ 
+<!-- 根据id查询 rpt_customer_count_main -->
+<select id="getRptCustomerCountMainById"  resultMap="RptCustomerCountMainMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from rpt_customer_count_main where proj_id = #{proj_id} and
+     create_time = (select max(create_time) from rpt_customer_count_main);
+</select>
+
+<!-- rpt_customer_count_main 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from rpt_customer_count_main 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询rpt_customer_count_main列表 -->
+<select id="queryByList" resultMap="RptCustomerCountMainMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from rpt_customer_count_main 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

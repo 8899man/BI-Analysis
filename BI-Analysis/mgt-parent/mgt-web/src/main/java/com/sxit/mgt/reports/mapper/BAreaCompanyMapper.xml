@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.reports.dao.BAreaCompanyDao">
+	 
+	 <!-- 
+	 <resultMap id="AreaMap" type="com.sxit.mgt.reports.dto.BAreaCompany" >
+		<result column="companyCode" property="companyCode" jdbcType="VARCHAR" />
+		<result column="companyName" property="companyName" jdbcType="VARCHAR" />
+		<result column="areaCode" property="areaCode" jdbcType="VARCHAR" />
+		<result column="areaName" property="areaName" jdbcType="VARCHAR" />
+	 </resultMap>
+	 --> 
+	 <resultMap id="ProductProjectDataMap" type="com.sxit.mgt.reports.dto.ProductProjectData" >
+	 	<result column="roomAcreSegment" property="roomAcreSegment" jdbcType="VARCHAR" />
+		<result column="tweentyLess" property="tweentyLess" jdbcType="INTEGER" />
+		<result column="twToThirth" property="twToThirth" jdbcType="INTEGER" />
+		<result column="thiToForth" property="thiToForth" jdbcType="INTEGER" />
+		<result column="fouToFifty" property="fouToFifty" jdbcType="INTEGER" />
+		<result column="fifToSixty" property="fifToSixty" jdbcType="INTEGER" />
+		<result column="sixtyMore" property="sixtyMore" jdbcType="INTEGER" />
+		<result column="notKnow" property="notKnow" jdbcType="INTEGER" />
+	 </resultMap>
+	 
+	 <resultMap id="YeTaiZhuanShuDataMap" type="com.sxit.mgt.reports.dto.YeTaiZhuanShuDataDto" >
+	 	<result column="cityName" property="cityName" jdbcType="VARCHAR" />
+		<result column="compPromNum" property="compPromNum" jdbcType="INTEGER" />
+		<result column="timeoFinishedNum" property="timeoFinishedNum" jdbcType="INTEGER" />
+		<result column="waitDealPromble" property="waitDealPromble" jdbcType="INTEGER" />
+	 </resultMap>
+
+	<!-- 
+	<select id="getAreaList" resultMap="AreaMap" >
+		select 
+		area.areaCode areaCode,
+		area.areaName areaName
+		FROM
+		(
+			select
+			a.companyCode, a.companyName, b.companyCode areaCode, b.companyName areaName 
+			from b_area_company a, b_area_company b 
+  			where 
+  			a.companyType=0 and a.parentGUID=b.companyGUID and b.companyCode != 'zb'
+		) area
+		group by area.areaCode, area.areaName
+	</select>
+	
+	<select id="getCompanyList" resultMap="AreaMap" parameterType="java.lang.String">
+		select 
+		area.companyCode,
+		area.companyName
+		FROM
+		(
+			select a.companyCode, a.companyName, b.companyCode areaCode, b.companyName areaName from b_area_company a,b_area_company b 
+  			where a.companyType=0 and a.parentGUID=b.companyGUID and b.companyCode != 'zb'
+		) area
+		where
+		area.areaCode = #{areaCode}
+	</select>
+	 -->
+	<select id="getProductProjectData" resultMap="ProductProjectDataMap" parameterType="java.util.Map">
+		select 
+		room_acre_segment roomAcreSegment,
+  		sum(case when cstCurYl = '20岁以下' then 1 else 0 end) as tweentyLess,
+		sum(case when cstCurYl = '21-34岁' then 1 else 0 end) as twToThirth,
+		sum(case when cstCurYl = '35-44岁' then 1 else 0 end) as thiToForth,
+		sum(case when cstCurYl = '45-54岁' then 1 else 0 end) as fouToFifty,
+		sum(case when cstCurYl = '55-64岁' then 1 else 0 end) as fifToSixty,
+		sum(case when cstCurYl = '64岁以上' then 1 else 0 end) as sixtyMore,
+  		sum(case when cstCurYl = '未知' then 1 else 0 end) as notKnow
+		from report_cst_deal_mid_own
+		where
+		<![CDATA[ deal_date >= #{startDate} and deal_date <= #{endDate} ]]>
+		<if test="areaCode != null and areaCode != ''">
+			and big_code = #{areaCode}
+			<if test="companyCode != null and companyCode != ''">
+				and city_code = #{companyCode}
+			</if>
+		</if>
+		group by room_acre_segment
+		order by mjcode asc
+	</select>
+	<select id="getPPDByUserId" resultMap="ProductProjectDataMap" parameterType="java.util.Map">
+		select 
+		a.room_acre_segment roomAcreSegment,
+  		sum(case when a.cstCurYl = '20岁以下' then 1 else 0 end) as tweentyLess,
+		sum(case when a.cstCurYl = '21-34岁' then 1 else 0 end) as twToThirth,
+		sum(case when a.cstCurYl = '35-44岁' then 1 else 0 end) as thiToForth,
+		sum(case when a.cstCurYl = '45-54岁' then 1 else 0 end) as fouToFifty,
+		sum(case when a.cstCurYl = '55-64岁' then 1 else 0 end) as fifToSixty,
+		sum(case when a.cstCurYl = '64岁以上' then 1 else 0 end) as sixtyMore,
+  		sum(case when a.cstCurYl = '未知' then 1 else 0 end) as notKnow
+		from
+			report_cst_deal_mid_own a,
+			(select distinct orgGUID from sys_user_org where user_id = #{userId}) b
+		where
+			a.city_code = b.orgGUID
+			and
+		<![CDATA[a.deal_date >= #{startDate} and a.deal_date <= #{endDate}]]>
+		<if test="areaCode != null and areaCode != ''">
+			and a.big_code = #{areaCode}
+			<if test="companyCode != null and companyCode != ''">
+				and a.city_code = #{companyCode}
+			</if>
+		</if>
+		group by a.room_acre_segment
+		order by a.mjcode asc
+	</select>
+	
+	<select id="getYeTaiZhuanShuData" resultMap="YeTaiZhuanShuDataMap" parameterType="java.util.Map">
+		<![CDATA[
+		select
+		city_name cityName,
+  		sum(case when receivedate >= #{startTime} and receivedate <= #{endTime} then 1 else 0 end) as compPromNum,
+  		sum(case when receivedate >= #{startTime} and receivedate <= #{endTime} and status=1 and rwwcSj is not null and (RwclSx is null or (RwclSx is null and RwwcSj<=RwclSx)) then 1 else 0 end) as finishedNum,
+		sum(case when receivedate >= #{startTime} and receivedate <= #{endTime} and status=1 and rwwcSj is not null and RwclSx is not null and RwwcSj>RwclSx then 1 else 0 end) as timeoFinishedNum,
+		sum(case when (rwwcSj > #{endTime} or rwwcSj is null) and status=1 and receivedate <= #{endTime} then 1 else 0 end) as waitDealPromble
+		from
+		rpt_format_sale_analyse
+		group by city_name
+		]]>
+	</select>
+	<!-- 分公司权限 -->
+	<select id="getYTZSDByCompetence" resultMap="YeTaiZhuanShuDataMap" parameterType="java.util.Map">
+		<![CDATA[
+		select
+			a.city_name cityName,
+  		sum(case when a.receivedate >= #{startTime} and a.receivedate <= #{endTime} then 1 else 0 end) as compPromNum,
+  		sum(case when a.receivedate >= #{startTime} and a.receivedate <= #{endTime} and a.status=1 and a.rwwcSj is not null and (a.RwclSx is null or (a.RwclSx is null and a.RwwcSj<=a.RwclSx)) then 1 else 0 end) as finishedNum,
+		sum(case when a.receivedate >= #{startTime} and a.receivedate <= #{endTime} and a.status=1 and a.rwwcSj is not null and a.RwclSx is not null and a.RwwcSj>a.RwclSx then 1 else 0 end) as timeoFinishedNum,
+		sum(case when (a.rwwcSj > #{endTime} or a.rwwcSj is null) and a.status=1 and a.receivedate <= #{endTime} then 1 else 0 end) as waitDealPromble
+		from
+		rpt_format_sale_analyse a,
+		(select distinct orgGUID from sys_user_org where user_id = #{userId}) b
+		where
+			a.city_code = b.orgGUID
+		group by a.city_name
+		]]>
+	</select>
+	
+
+</mapper>

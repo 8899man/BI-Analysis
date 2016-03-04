@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.pmp.dao.RptZyProjRentSaleDao" > 
+<!-- Result Map-->
+<resultMap id="RptZyProjRentSaleMap" type="com.sxit.model.pmp.RptZyProjRentSale" >
+	<result column="sale_proj_num" property="sale_proj_num"/>
+	<result column="sale_total_set" property="sale_total_set"/>
+	<result column="sold_set" property="sold_set"/>
+	<result column="sale_invalid_set" property="sale_invalid_set"/>
+	<result column="sale_yest_deal" property="sale_yest_deal"/>
+	<result column="sale_month_deal" property="sale_month_deal"/>
+	<result column="sale_season_deal" property="sale_season_deal"/>
+	<result column="sale_year_deal" property="sale_year_deal"/>
+	<result column="rent_proj_num" property="rent_proj_num"/>
+	<result column="rent_total_set" property="rent_total_set"/>
+	<result column="rent_set" property="rent_set"/>
+	<result column="rent_invalid_set" property="rent_invalid_set"/>
+	<result column="rent_yest_deal" property="rent_yest_deal"/>
+	<result column="rent_month_deal" property="rent_month_deal"/>
+	<result column="rent_season_deal" property="rent_season_deal"/>
+	<result column="rent_year_deal" property="rent_year_deal"/>
+	<result column="create_time" property="create_time"/>
+</resultMap>
+       
+<!-- rpt_zy_proj_rent_sale table all fields -->
+<sql id="Base_Column_List" >
+	 sale_proj_num,sale_total_set,sold_set,sale_invalid_set,sale_yest_deal,sale_month_deal,sale_season_deal,sale_year_deal,rent_proj_num,rent_total_set,rent_set,rent_invalid_set,rent_yest_deal,rent_month_deal,rent_season_deal,rent_year_deal,create_time
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="sale_proj_num != null" >
+	    and sale_proj_num =  #{sale_proj_num}
+	</if>
+	<if test="sale_total_set != null" >
+	    and sale_total_set =  #{sale_total_set}
+	</if>
+	<if test="sold_set != null" >
+	    and sold_set =  #{sold_set}
+	</if>
+	<if test="sale_invalid_set != null" >
+	    and sale_invalid_set =  #{sale_invalid_set}
+	</if>
+	<if test="sale_yest_deal != null" >
+	    and sale_yest_deal =  #{sale_yest_deal}
+	</if>
+	<if test="sale_month_deal != null" >
+	    and sale_month_deal =  #{sale_month_deal}
+	</if>
+	<if test="sale_season_deal != null" >
+	    and sale_season_deal =  #{sale_season_deal}
+	</if>
+	<if test="sale_year_deal != null" >
+	    and sale_year_deal =  #{sale_year_deal}
+	</if>
+	<if test="rent_proj_num != null" >
+	    and rent_proj_num =  #{rent_proj_num}
+	</if>
+	<if test="rent_total_set != null" >
+	    and rent_total_set =  #{rent_total_set}
+	</if>
+	<if test="rent_set != null" >
+	    and rent_set =  #{rent_set}
+	</if>
+	<if test="rent_invalid_set != null" >
+	    and rent_invalid_set =  #{rent_invalid_set}
+	</if>
+	<if test="rent_yest_deal != null" >
+	    and rent_yest_deal =  #{rent_yest_deal}
+	</if>
+	<if test="rent_month_deal != null" >
+	    and rent_month_deal =  #{rent_month_deal}
+	</if>
+	<if test="rent_season_deal != null" >
+	    and rent_season_deal =  #{rent_season_deal}
+	</if>
+	<if test="rent_year_deal != null" >
+	    and rent_year_deal =  #{rent_year_deal}
+	</if>
+	<if test="create_time != null" >
+	    and create_time =  #{create_time}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into rpt_zy_proj_rent_sale(sale_proj_num,sale_total_set,sold_set,sale_invalid_set,sale_yest_deal,sale_month_deal,sale_season_deal,sale_year_deal,rent_proj_num,rent_total_set,rent_set,rent_invalid_set,rent_yest_deal,rent_month_deal,rent_season_deal,rent_year_deal,create_time)
+ values(#{sale_proj_num},#{sale_total_set},#{sold_set},#{sale_invalid_set},#{sale_yest_deal},#{sale_month_deal},#{sale_season_deal},#{sale_year_deal},#{rent_proj_num},#{rent_total_set},#{rent_set},#{rent_invalid_set},#{rent_yest_deal},#{rent_month_deal},#{rent_season_deal},#{rent_year_deal},#{create_time})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update rpt_zy_proj_rent_sale set sale_total_set=#{sale_total_set},sold_set=#{sold_set},sale_invalid_set=#{sale_invalid_set},sale_yest_deal=#{sale_yest_deal},sale_month_deal=#{sale_month_deal},sale_season_deal=#{sale_season_deal},sale_year_deal=#{sale_year_deal},rent_proj_num=#{rent_proj_num},rent_total_set=#{rent_total_set},rent_set=#{rent_set},rent_invalid_set=#{rent_invalid_set},rent_yest_deal=#{rent_yest_deal},rent_month_deal=#{rent_month_deal},rent_season_deal=#{rent_season_deal},rent_year_deal=#{rent_year_deal},create_time=#{create_time} where sale_proj_num=#{sale_proj_num}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update rpt_zy_proj_rent_sale set 
+	<trim  suffixOverrides="," >
+	<if test="sale_total_set != null  ">
+		sale_total_set=#{sale_total_set},
+	</if>
+	<if test="sold_set != null  ">
+		sold_set=#{sold_set},
+	</if>
+	<if test="sale_invalid_set != null  ">
+		sale_invalid_set=#{sale_invalid_set},
+	</if>
+	<if test="sale_yest_deal != null  ">
+		sale_yest_deal=#{sale_yest_deal},
+	</if>
+	<if test="sale_month_deal != null  ">
+		sale_month_deal=#{sale_month_deal},
+	</if>
+	<if test="sale_season_deal != null  ">
+		sale_season_deal=#{sale_season_deal},
+	</if>
+	<if test="sale_year_deal != null  ">
+		sale_year_deal=#{sale_year_deal},
+	</if>
+	<if test="rent_proj_num != null  ">
+		rent_proj_num=#{rent_proj_num},
+	</if>
+	<if test="rent_total_set != null  ">
+		rent_total_set=#{rent_total_set},
+	</if>
+	<if test="rent_set != null  ">
+		rent_set=#{rent_set},
+	</if>
+	<if test="rent_invalid_set != null  ">
+		rent_invalid_set=#{rent_invalid_set},
+	</if>
+	<if test="rent_yest_deal != null  ">
+		rent_yest_deal=#{rent_yest_deal},
+	</if>
+	<if test="rent_month_deal != null  ">
+		rent_month_deal=#{rent_month_deal},
+	</if>
+	<if test="rent_season_deal != null  ">
+		rent_season_deal=#{rent_season_deal},
+	</if>
+	<if test="rent_year_deal != null  ">
+		rent_year_deal=#{rent_year_deal},
+	</if>
+	<if test="create_time != null  ">
+		create_time=#{create_time},
+	</if>
+	</trim> where sale_proj_num=#{sale_proj_num}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from rpt_zy_proj_rent_sale where sale_proj_num = #{sale_proj_num}
+</delete>
+ 
+<!-- 根据id查询 rpt_zy_proj_rent_sale -->
+<select id="queryByAll"  resultMap="RptZyProjRentSaleMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from rpt_zy_proj_rent_sale where create_time = (select max(create_time) from rpt_zy_proj_rent_sale);
+</select>
+
+<select id="querySeq"  resultMap="RptZyProjRentSaleMap" parameterType="java.util.Map">
+	select <include refid="Base_Column_List" /> 
+	 from rpt_zy_proj_rent_sale where big_code = #{big_code} and city_code = #{city_code}
+	 and create_time = (select max(create_time) from rpt_zy_proj_rent_sale);
+</select>
+
+<!-- rpt_zy_proj_rent_sale 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from rpt_zy_proj_rent_sale 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询rpt_zy_proj_rent_sale列表 -->
+<select id="queryByList" resultMap="RptZyProjRentSaleMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from rpt_zy_proj_rent_sale 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

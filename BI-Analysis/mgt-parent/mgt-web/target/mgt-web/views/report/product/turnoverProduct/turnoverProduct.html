@@ -1,0 +1,104 @@
+<div ng-controller="TrunoverProductController" ng-init="initializeController()">
+	<div class="title-position box-shadow-1 clearfix">
+		<h1>报表</h1>
+		<h2><a class="glyphicon glyphicon-home" href=""><i>首页</i></a> > 报表 > 产品/项目 > 成交产品类型分析</h2>
+	</div>
+
+	<div class="content">
+		<div class="content-main">
+			<div class="border-1 border-1-gray box-shadow-1 bg-white owner-type-statistics">
+				<div class="border-left-3 report-title"><h2>成交产品特征分析</h2></div>
+				<div class="report-search box-shadow-1 clearfix">
+					<form action="" class="form-inline">
+						<div class="report-search-area">
+							<ul>
+								<li ng-class="{error: error.area}">
+									<select name="" id="" class="form-control" ng-model="areaSelected" ng-options="area.name for area in areas" ng-change="changeArea()">
+										<!--<option value="">请选择区域</option>
+										 <option value="1">集团</option>
+										<option value="2">华东区域</option>
+										<option value="3">华中区域</option>
+										<option value="4">华南区域</option> -->
+									</select>
+								</li>
+								<li class="report-search-area-city" ng-class="{error: error.city}">
+									<select name="" id="" class="form-control" ng-model="citySelected" ng-options="city.name for city in citys" ng-change="changeCity()">
+										<option value="">请选择城市</option>
+										<!-- <option value="1">不限</option>
+										<option value="2">深圳市</option>
+										<option value="3">广州市</option>
+										<option value="4">佛山市</option> -->
+									</select>
+								</li>
+							</ul>
+						</div>
+						<div class="report-search-others">
+							<ul>
+								<!-- <li>{{currentTimeInterval}}</li> -->
+								<!-- <li class="date-type li-text font-bold">
+									签约时段
+								</li>
+								<li><label class="btn btn-default" ng-model="dateType" btn-radio="'7天'">7天</label></li>
+								<li><label class="btn btn-default" ng-model="dateType" btn-radio="'30天'">30天</label></li>
+								<li><input date-picker-ym type="text" class="data-select form-control" ng-model="dateYM"></li> -->
+								<li>从：<input id="d4311" start-date-ymd class="data-select form-control" type="text" ng-model="startDate" /> 
+                                                                                                至：<input id="d4312" end-date-ymd class="data-select form-control" type="text" ng-model="endDate" />
+                                </li>
+								<li><a href="javascript:;" class="btn btn-primary" ng-click="search()">查询</a></li>
+								<li><a href="javascript:;" class="export-btn" ng-click="exporttabledown()">导出</a></li>
+							</ul>
+						</div>
+					</form>
+				</div>
+				
+				<div class="report-search-table turnover-product-table">
+					<div id="divshow" class="table-responsive">
+						<table id="tab" class="table table-bordered table-condensed table-striped" ng-show="searchDataLoaded">
+							<tr class="no-bg">
+								<td rowspan="2" class="td-first"><div class="td-right">年龄段指标</div><div class="td-left">面积区段指标</div></td>
+								<td rowspan="2">总数量</td>
+								<td colspan="7">年龄段</td>
+							</tr>
+							<tr class="no-bg">
+								<td>20岁及以下</td>
+								<td>21-34岁</td>
+								<td>35-44岁</td>
+								<td>45-54岁</td>
+								<td>55-64岁</td>
+								<td>64岁以上</td>
+								<td>未知</td>
+							</tr>
+							<tr ng-repeat="owner in OwnerType">
+								<td class="font-bold">{{owner.roomAcreSegment}}</td>
+								<td>{{owner.total}}</td>
+								<td>{{owner.tweentyLess}}</td>
+								<td>{{owner.twToThirth}}</td>
+								<td>{{owner.thiToForth}}</td>
+								<td>{{owner.fouToFifty}}</td>
+								<td>{{owner.fifToSixty}}</td>
+								<td>{{owner.sixtyMore}}</td>
+								<td>{{owner.notKnow}}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			
+			<div class="margin-top-20 box-shadow-1 bg-white owner-type-reports">
+				<div class="border-left-3 border-color-blue report-title"><h2>图表呈现</h2></div>
+			</div>
+
+			<div class="owner-type-reports-main clearfix" ng-show="searchDataLoaded">
+				<div class="box-shadow-1 bg-white margin-top-10 border-radius-3 border-1 border-1-gray border-top-3 border-top-color-red">
+					<div class="report-table-title"><h2>产品面积段分析</h2></div>
+					<div class="report-table-main report-table-2">
+						<highchart class="chart" config="chartConfig1"></highchart>
+					</div>
+				</div>
+			</div>
+		
+
+		</div>
+	</div>
+</div>
+

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.pmp.dao.RptProjCompleteDao" > 
+<!-- Result Map-->
+<resultMap id="RptProjCompleteMap" type="com.sxit.model.pmp.RptProjComplete" >
+	<result column="proj_complete_id" property="proj_complete_id"/>
+	<result column="yesterday_deal" property="yesterday_deal"/>
+	<result column="month_deal" property="month_deal"/>
+	<result column="quarter_deal" property="quarter_deal"/>
+	<result column="year_deal" property="year_deal"/>
+	<result column="onsell_deal" property="onsell_deal"/>
+	<result column="complete_deal" property="complete_deal"/>
+	<result column="create_time" property="create_time"/>
+	<result column="big_code" property="big_code"/>
+	<result column="city_code" property="city_code"/>
+	<result column="big_name" property="big_name"/>
+	<result column="city_name" property="city_name"/>
+</resultMap>
+       
+<!-- rpt_proj_complete table all fields -->
+<sql id="Base_Column_List" >
+	 proj_complete_id,yesterday_deal,month_deal,quarter_deal,year_deal,onsell_deal,complete_deal,create_time,big_code,city_code,big_name,city_name
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="yesterday_deal != null" >
+	    and yesterday_deal =  #{yesterday_deal}
+	</if>
+	<if test="month_deal != null" >
+	    and month_deal =  #{month_deal}
+	</if>
+	<if test="quarter_deal != null" >
+	    and quarter_deal =  #{quarter_deal}
+	</if>
+	<if test="year_deal != null" >
+	    and year_deal =  #{year_deal}
+	</if>
+	<if test="onsell_deal != null" >
+	    and onsell_deal =  #{onsell_deal}
+	</if>
+	<if test="complete_deal != null" >
+	    and complete_deal =  #{complete_deal}
+	</if>
+	<if test="create_time != null" >
+	    and create_time =  #{create_time}
+	</if>
+	<if test="big_code != null" >
+	    and big_code =  #{big_code}
+	</if>
+	<if test="city_code != null" >
+	    and city_code =  #{city_code}
+	</if>
+	<if test="big_name != null" >
+	    and big_name =  #{big_name}
+	</if>
+	<if test="city_name != null" >
+	    and city_name =  #{city_name}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into rpt_proj_complete(proj_complete_id,yesterday_deal,month_deal,quarter_deal,year_deal,onsell_deal,complete_deal,create_time)
+ values(#{proj_complete_id},#{yesterday_deal},#{month_deal},#{quarter_deal},#{year_deal},#{onsell_deal},#{complete_deal},#{create_time})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update rpt_proj_complete set yesterday_deal=#{yesterday_deal},month_deal=#{month_deal},quarter_deal=#{quarter_deal},year_deal=#{year_deal},onsell_deal=#{onsell_deal},complete_deal=#{complete_deal},create_time=#{create_time} where proj_complete_id=#{proj_complete_id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update rpt_proj_complete set 
+	<trim  suffixOverrides="," >
+	<if test="yesterday_deal != null  ">
+		yesterday_deal=#{yesterday_deal},
+	</if>
+	<if test="month_deal != null  ">
+		month_deal=#{month_deal},
+	</if>
+	<if test="quarter_deal != null  ">
+		quarter_deal=#{quarter_deal},
+	</if>
+	<if test="year_deal != null  ">
+		year_deal=#{year_deal},
+	</if>
+	<if test="onsell_deal != null  ">
+		onsell_deal=#{onsell_deal},
+	</if>
+	<if test="complete_deal != null  ">
+		complete_deal=#{complete_deal},
+	</if>
+	<if test="create_time != null  ">
+		create_time=#{create_time},
+	</if>
+	</trim> where proj_complete_id=#{proj_complete_id}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from rpt_proj_complete where proj_complete_id = #{proj_complete_id}
+</delete>
+ 
+<!-- 根据id查询 rpt_proj_complete -->
+<select id="queryByAll"  resultMap="RptProjCompleteMap" parameterType="Object">
+	select sum(yesterday_deal) as yesterday_deal,sum(month_deal) as month_deal,sum(quarter_deal) as quarter_deal,sum(year_deal) as year_deal,sum(onsell_deal) as onsell_deal,sum(complete_deal) as complete_deal
+	 from rpt_proj_complete
+	 <include refid="Example_Where_Clause"/> 
+	 and create_time = (select max(create_time) from rpt_proj_complete)
+</select>
+
+<!--  数据权限查询    -->
+<select id="querySeq"  resultMap="RptProjCompleteMap" parameterType="java.util.Map">
+	select sum(yesterday_deal) as yesterday_deal,sum(month_deal) as month_deal,sum(quarter_deal) as quarter_deal,sum(year_deal) as year_deal,sum(onsell_deal) as onsell_deal,sum(complete_deal) as complete_deal
+	 from rpt_proj_complete
+	 where big_code = #{big_code} and city_code = #{city_code}
+	 and create_time = (select max(create_time) from rpt_proj_complete)
+</select>
+
+<!-- rpt_proj_complete 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from rpt_proj_complete 
+	<include refid="Example_Where_Clause"/>
+</select>
+
+<!-- 查看用户数据权限 -->
+
+<select id="queryByB_Org"  resultMap="RptProjCompleteMap" parameterType="Object">
+	select a.big_code,a.city_code from rpt_proj_complete a,
+    (select orgGUID,parentGUID from b_org where 
+    orgGUID in (select orgGUID from sys_user_org where  user_id =#{user_id}))  b
+    where a.big_code = b.parentGUID and a.city_code = b.orgGUID
+</select>
+
+<select id="queryByB_OrgAdmin"  resultMap="RptProjCompleteMap" parameterType="Object">
+select distinct a.city_code from rpt_contract a,
+    (select orgGUID from b_org where orgType= 3 and subType=1)  b
+    where a.city_code = b.orgGUID
+</select>
+
+<!-- 查询rpt_proj_complete列表 -->
+<select id="queryByList" resultMap="RptProjCompleteMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from rpt_proj_complete 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

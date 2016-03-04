@@ -1,0 +1,327 @@
+{
+    "customerList": [
+        {
+        	"id": "1000",
+        	"customerId": "GD0001",
+        	"name": "张*玉",
+        	"sex": "女",
+        	"tel": "137****0032",
+        	"certificatesNumber": "36302362322012****",
+        	"ageGroup": "20-34",
+        	"childrenNumber": "1个",
+        	"familyStructure": "小太阳家庭",
+        	"educationDegree": "博士",
+        	"sourceChannel": "老客户推荐",
+        	"workingArea": "南山区",
+        	"residentialArea": "龙华新区",
+        	"industry": "银行",
+        	"intentProject": {
+        		"name": "鼎业花园",
+        		"id": "0001"
+    		},
+        	"careerConsultant": {
+        		"name": "陈玲玲",
+        		"id": "0001"	
+    		},
+        	"visitingTime": "2014-10-12",
+        	"fromTime": "2014-10-13",
+        	"subscriptionTime": "2014-10-14",
+        	"signingTime": "2014-10-15",
+        	"leaseTime": "2014-10-16",
+        	"customerStatus": "有效",
+        	"createTime": "2014-10-17",
+        	"createPerson": "admin"
+        },
+        {
+        	"id": "1000",
+        	"customerId": "GD0002",
+        	"name": "李*婷",
+        	"sex": "女",
+        	"tel": "137****0032",
+        	"certificatesNumber": "36302362322012****",
+        	"ageGroup": "20-34",
+        	"childrenNumber": "1个",
+        	"familyStructure": "小太阳家庭",
+        	"educationDegree": "博士",
+        	"sourceChannel": "老客户推荐",
+        	"workingArea": "南山区",
+        	"residentialArea": "龙华新区",
+        	"industry": "银行",
+        	"intentProject": {
+        		"name": "鼎业花园",
+        		"id": "0001"
+    		},
+        	"careerConsultant": {
+        		"name": "陈玲玲",
+        		"id": "0001"	
+    		},
+        	"visitingTime": "2014-10-12",
+        	"fromTime": "2014-10-13",
+        	"subscriptionTime": "2014-10-14",
+        	"signingTime": "2014-10-15",
+        	"leaseTime": "2014-10-16",
+        	"customerStatus": "有效",
+        	"createTime": "2014-10-17",
+        	"createPerson": "admin"
+        },
+        {
+        	"id": "1000",
+        	"customerId": "GD0003",
+        	"name": "周*发",
+        	"sex": "男",
+        	"tel": "137****0032",
+        	"certificatesNumber": "36302362322012****",
+        	"ageGroup": "20-34",
+        	"childrenNumber": "1个",
+        	"familyStructure": "小太阳家庭",
+        	"educationDegree": "博士",
+        	"sourceChannel": "老客户推荐",
+        	"workingArea": "南山区",
+        	"residentialArea": "龙华新区",
+        	"industry": "银行",
+        	"intentProject": {
+        		"name": "鼎业花园",
+        		"id": "0001"
+    		},
+        	"careerConsultant": {
+        		"name": "陈玲玲",
+        		"id": "0001"	
+    		},
+        	"visitingTime": "2014-10-12",
+        	"fromTime": "2014-10-13",
+        	"subscriptionTime": "2014-10-14",
+        	"signingTime": "2014-10-15",
+        	"leaseTime": "2014-10-16",
+        	"customerStatus": "有效",
+        	"createTime": "2014-10-17",
+        	"createPerson": "admin"
+        },
+        {
+        	"id": "1000",
+        	"customerId": "GD0004",
+        	"name": "张*玉",
+        	"sex": "女",
+        	"tel": "137****0032",
+        	"certificatesNumber": "36302362322012****",
+        	"ageGroup": "20-34",
+        	"childrenNumber": "1个",
+        	"familyStructure": "小太阳家庭",
+        	"educationDegree": "博士",
+        	"sourceChannel": "老客户推荐",
+        	"workingArea": "南山区",
+        	"residentialArea": "龙华新区",
+        	"industry": "银行",
+        	"intentProject": {
+        		"name": "鼎业花园",
+        		"id": "0001"
+    		},
+        	"careerConsultant": {
+        		"name": "陈玲玲",
+        		"id": "0001"	
+    		},
+        	"visitingTime": "2014-10-12",
+        	"fromTime": "2014-10-13",
+        	"subscriptionTime": "2014-10-14",
+        	"signingTime": "2014-10-15",
+        	"leaseTime": "2014-10-16",
+        	"customerStatus": "有效",
+        	"createTime": "2014-10-17",
+        	"createPerson": "admin"
+        },
+        {
+        	"id": "1000",
+        	"customerId": "GD0005",
+        	"name": "张*玉",
+        	"sex": "女",
+        	"tel": "137****0032",
+        	"certificatesNumber": "36302362322012****",
+        	"ageGroup": "20-34",
+        	"childrenNumber": "1个",
+        	"familyStructure": "小太阳家庭",
+        	"educationDegree": "博士",
+        	"sourceChannel": "老客户推荐",
+        	"workingArea": "南山区",
+        	"residentialArea": "龙华新区",
+        	"industry": "银行",
+        	"intentProject": {
+        		"name": "鼎业花园",
+        		"id": "0001"
+    		},
+        	"careerConsultant": {
+        		"name": "陈玲玲",
+        		"id": "0001"	
+    		},
+        	"visitingTime": "2014-10-12",
+        	"fromTime": "2014-10-13",
+        	"subscriptionTime": "2014-10-14",
+        	"signingTime": "2014-10-15",
+        	"leaseTime": "2014-10-16",
+        	"customerStatus": "有效",
+        	"createTime": "2014-10-17",
+        	"createPerson": "admin"
+        },
+        {
+        	"id": "1000",
+        	"customerId": "GD0006",
+        	"name": "张*玉",
+        	"sex": "女",
+        	"tel": "137****0032",
+        	"certificatesNumber": "36302362322012****",
+        	"ageGroup": "20-34",
+        	"childrenNumber": "1个",
+        	"familyStructure": "小太阳家庭",
+        	"educationDegree": "博士",
+        	"sourceChannel": "老客户推荐",
+        	"workingArea": "南山区",
+        	"residentialArea": "龙华新区",
+        	"industry": "银行",
+        	"intentProject": {
+        		"name": "鼎业花园",
+        		"id": "0001"
+    		},
+        	"careerConsultant": {
+        		"name": "陈玲玲",
+        		"id": "0001"	
+    		},
+        	"visitingTime": "2014-10-12",
+        	"fromTime": "2014-10-13",
+        	"subscriptionTime": "2014-10-14",
+        	"signingTime": "2014-10-15",
+        	"leaseTime": "2014-10-16",
+        	"customerStatus": "有效",
+        	"createTime": "2014-10-17",
+        	"createPerson": "admin"
+        },
+        {
+        	"id": "1000",
+        	"customerId": "GD0007",
+        	"name": "张*玉",
+        	"sex": "女",
+        	"tel": "137****0032",
+        	"certificatesNumber": "36302362322012****",
+        	"ageGroup": "20-34",
+        	"childrenNumber": "1个",
+        	"familyStructure": "小太阳家庭",
+        	"educationDegree": "博士",
+        	"sourceChannel": "老客户推荐",
+        	"workingArea": "南山区",
+        	"residentialArea": "龙华新区",
+        	"industry": "银行",
+        	"intentProject": {
+        		"name": "鼎业花园",
+        		"id": "0001"
+    		},
+        	"careerConsultant": {
+        		"name": "陈玲玲",
+        		"id": "0001"	
+    		},
+        	"visitingTime": "2014-10-12",
+        	"fromTime": "2014-10-13",
+        	"subscriptionTime": "2014-10-14",
+        	"signingTime": "2014-10-15",
+        	"leaseTime": "2014-10-16",
+        	"customerStatus": "有效",
+        	"createTime": "2014-10-17",
+        	"createPerson": "admin"
+        },
+        {
+        	"id": "1000",
+        	"customerId": "GD0008",
+        	"name": "张*玉",
+        	"sex": "女",
+        	"tel": "137****0032",
+        	"certificatesNumber": "36302362322012****",
+        	"ageGroup": "20-34",
+        	"childrenNumber": "1个",
+        	"familyStructure": "小太阳家庭",
+        	"educationDegree": "博士",
+        	"sourceChannel": "老客户推荐",
+        	"workingArea": "南山区",
+        	"residentialArea": "龙华新区",
+        	"industry": "银行",
+        	"intentProject": {
+        		"name": "鼎业花园",
+        		"id": "0001"
+    		},
+        	"careerConsultant": {
+        		"name": "陈玲玲",
+        		"id": "0001"	
+    		},
+        	"visitingTime": "2014-10-12",
+        	"fromTime": "2014-10-13",
+        	"subscriptionTime": "2014-10-14",
+        	"signingTime": "2014-10-15",
+        	"leaseTime": "2014-10-16",
+        	"customerStatus": "有效",
+        	"createTime": "2014-10-17",
+        	"createPerson": "admin"
+        },
+        {
+        	"id": "1000",
+        	"customerId": "GD0009",
+        	"name": "周*驰",
+        	"sex": "男",
+        	"tel": "137****0032",
+        	"certificatesNumber": "36302362322012****",
+        	"ageGroup": "20-34",
+        	"childrenNumber": "1个",
+        	"familyStructure": "小太阳家庭",
+        	"educationDegree": "博士",
+        	"sourceChannel": "老客户推荐",
+        	"workingArea": "南山区",
+        	"residentialArea": "龙华新区",
+        	"industry": "银行",
+        	"intentProject": {
+        		"name": "鼎业花园",
+        		"id": "0001"
+    		},
+        	"careerConsultant": {
+        		"name": "陈玲玲",
+        		"id": "0001"	
+    		},
+        	"visitingTime": "2014-10-12",
+        	"fromTime": "2014-10-13",
+        	"subscriptionTime": "2014-10-14",
+        	"signingTime": "2014-10-15",
+        	"leaseTime": "2014-10-16",
+        	"customerStatus": "有效",
+        	"createTime": "2014-10-17",
+        	"createPerson": "admin"
+        },
+        {
+        	"id": "1000",
+        	"customerId": "GD0010",
+        	"name": "黄*玉",
+        	"sex": "女",
+        	"tel": "137****0032",
+        	"certificatesNumber": "36302362322012****",
+        	"ageGroup": "20-34",
+        	"childrenNumber": "1个",
+        	"familyStructure": "小太阳家庭",
+        	"educationDegree": "博士",
+        	"sourceChannel": "老客户推荐",
+        	"workingArea": "南山区",
+        	"residentialArea": "龙华新区",
+        	"industry": "银行",
+        	"intentProject": {
+        		"name": "鼎业花园",
+        		"id": "0001"
+    		},
+        	"careerConsultant": {
+        		"name": "陈玲玲",
+        		"id": "0001"	
+    		},
+        	"visitingTime": "2014-10-12",
+        	"fromTime": "2014-10-13",
+        	"subscriptionTime": "2014-10-14",
+        	"signingTime": "2014-10-15",
+        	"leaseTime": "2014-10-16",
+        	"customerStatus": "有效",
+        	"createTime": "2014-10-17",
+        	"createPerson": "admin"
+        }
+    ],
+    "TotalPages": 20,
+    "TotalRows": 89,
+    "PageSize": 0
+}

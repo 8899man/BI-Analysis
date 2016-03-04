@@ -1,0 +1,212 @@
+[
+	{
+		"banTitle": "1",
+		"units": [
+			{
+				"unitTitle": "A",
+				"houses": [
+					{
+						"houseId": "001",
+						"houseTitle": "1201",
+						"selled": false
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1202",
+						"selled": true
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1203",
+						"selled": false
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1204",
+						"selled": true
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1205",
+						"selled": false
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1206",
+						"selled": true
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1207",
+						"selled": false
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1208",
+						"selled": true
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1209",
+						"selled": true
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1210",
+						"selled": false
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1101",
+						"selled": true
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1102",
+						"selled": false
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1103",
+						"selled": true
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1104",
+						"selled": false
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1105",
+						"selled": true
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1106",
+						"selled": false
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1107",
+						"selled": false
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1108",
+						"selled": true
+					}
+				]
+			},
+			{
+				"unitTitle": "B",
+				"houses": [
+					{
+						"houseId": "001",
+						"houseTitle": "1001",
+						"selled": false
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1002",
+						"selled": true
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1003",
+						"selled": false
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1004",
+						"selled": true
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1005",
+						"selled": true
+					}
+				]
+			}
+		]
+	},
+	{
+		"banTitle": "2",
+		"units": [
+			{
+				"unitTitle": "A",
+				"houses": [
+					{
+						"houseId": "001",
+						"houseTitle": "1301",
+						"selled": false
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1302",
+						"selled": true
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1303",
+						"selled": false
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1304",
+						"selled": true
+					}
+				]
+			},
+			{
+				"unitTitle": "B",
+				"houses": [
+					{
+						"houseId": "001",
+						"houseTitle": "1401",
+						"selled": false
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1402",
+						"selled": true
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1403",
+						"selled": false
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1404",
+						"selled": true
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "1405",
+						"selled": true
+					}
+				]
+			},
+			{
+				"unitTitle": "C",
+				"houses": [
+					{
+						"houseId": "001",
+						"houseTitle": "901",
+						"selled": false
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "902",
+						"selled": true
+					},
+					{
+						"houseId": "001",
+						"houseTitle": "903",
+						"selled": false
+					}
+				]
+			}
+		]
+	}
+]

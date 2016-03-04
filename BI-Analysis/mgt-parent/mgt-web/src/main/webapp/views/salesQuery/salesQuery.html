@@ -1,0 +1,69 @@
+<div ng-controller="SalesQueryController" ng-init="initializeController()">
+	<div class="title-position box-shadow-1 clearfix">
+		<h1><a href="javascript:;" class="history-back back-button">返回</a>房源查询</h1>
+		<h2><a class="glyphicon glyphicon-home" href=""><i>首页</i></a> > 项目 > 项目画像 > 房源查询</h2>
+	</div>
+
+
+	<div class="content">
+		<div class="content-main">
+			<div class="sales-query box-shadow-1 border-radius-3">
+				
+				<div class="query-header clearfix">
+					<div class="query-unit">
+						<ul>
+							<li>
+								<div class="query-unit-key">楼栋</div>
+								<div class="query-unit-value">
+									<select name="" id="" class="form-control" ng-model="ban" ng-options="ban.bldCode for ban in bans" ng-change="changeBan(ban)">
+									</select>
+								</div>
+							</li>
+							<li>
+								<div class="query-unit-key">单元</div>
+								<div class="query-unit-value">
+									<select name="" id="" class="form-control" ng-model="unit" ng-options="unit.unit for unit in units" ng-change="changeUnit(unit)">
+									</select>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="query-submit">
+						<div class="query-state pull-right">
+							<span><i class="selled"></i>已售</span>
+							<span><i></i>在售</span>
+						</div>
+						<div class="query-submit-search form-inline">
+							<button type="submit" class="btn btn-primary pull-right" ng-click="search()">查询</button>
+							<div class="form-group pull-left">
+								<p class="form-control-static">房间号</p>
+							</div>
+							<div class="form-input">
+								<input type="text" class="form-control" placeholder="请输入房间号" ng-model="houseNumber">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="query-content clearfix">
+					<div class="query-content-building">
+						<ul>
+							<li ng-repeat="banShow in bans"><a href="javascript:;" ng-class="{'active': banShow==ban}" ng-click="setBanShow(banShow)">{{banShow.bldCode}}</a></li>
+						</ul>
+					</div>
+					<div class="query-content-unit">
+						<ul>
+							<li ng-repeat="unitShow in units"><a href="javascript:;" ng-class="{'active': unitShow==unit}" ng-click="setUnitShow(unitShow)">{{unitShow.unit}}</a></li>
+						</ul>
+					</div>
+					<div class="query-content-house">
+						<ul>
+							<li ng-repeat="house in houses"><a ui-sref="app.project.houseDetails({'houseId': house.roomId})" ng-class="{'active': house.roomStatus}">{{house.room}}</a></li>
+							<li ng-show="houses.length == 0">暂无符合数据</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

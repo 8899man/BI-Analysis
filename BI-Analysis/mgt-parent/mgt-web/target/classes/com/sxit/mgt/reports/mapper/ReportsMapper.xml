@@ -1,0 +1,785 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.reports.dao.ReportsDao">
+	<resultMap id="ReportsMap" type="ReportCstDealMidOwn">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="children_num" property="childrenNum" jdbcType="VARCHAR" />
+		<result column="age_segment" property="ageSegment" jdbcType="VARCHAR" />
+		<result column="proj_house_type" property="projHouseType"
+			jdbcType="VARCHAR" />
+		<result column="live_format" property="liveFormat" jdbcType="VARCHAR" />
+		<result column="room_acreage" property="roomAcreage" jdbcType="VARCHAR" />
+		<result column="cst_num" property="cstNum" jdbcType="INTEGER" />
+		<result column="owner_num" property="ownerNum" jdbcType="INTEGER" />
+		<result column="sale_acreage" property="saleAcreage" jdbcType="DECIMAL" />
+		<result column="sale_amount" property="saleAmount" jdbcType="DECIMAL" />
+		<result column="work_area" property="workArea" jdbcType="VARCHAR" />
+		<result column="live_area" property="liveArea" jdbcType="VARCHAR" />
+		<result column="deal_date" property="dealDate" jdbcType="DATE" />
+		<result column="big_area" property="bigArea" jdbcType="VARCHAR" />
+		<result column="prject_name" property="prjectName" jdbcType="VARCHAR" />
+		<result column="city_name" property="cityName" jdbcType="VARCHAR" />
+		<result column="roomguid" property="roomguid" jdbcType="VARCHAR" />
+		<result column="bldguid" property="bldguid" jdbcType="VARCHAR" />
+		<result column="cstguid" property="cstguid" jdbcType="BIGINT" />
+		<result column="birth_day" property="birthDay" jdbcType="DATE" />
+		<result column="projguid" property="projguid" jdbcType="VARCHAR" />
+		<result column="companyguid" property="companyguid" jdbcType="VARCHAR" />
+		<result column="live_format_orig" property="liveFormatOrig"
+			jdbcType="VARCHAR" />
+		<result column="proj_house_type_orig" property="projHouseTypeOrig"
+			jdbcType="VARCHAR" />
+		<result column="work_area_orig" property="workAreaOrig"
+			jdbcType="VARCHAR" />
+		<result column="live_area_orig" property="liveAreaOrig"
+			jdbcType="VARCHAR" />
+		<result column="children_num_orig" property="childrenNumOrig"
+			jdbcType="VARCHAR" />
+		<result column="cardid" property="cardid" jdbcType="VARCHAR" />
+		<result column="subtype" property="subtype" jdbcType="VARCHAR" />
+		<result column="csttype" property="csttype" jdbcType="TINYINT" />
+		<result column="cardtype" property="cardtype" jdbcType="INTEGER" />
+		<result column="room_acre_segment" property="roomAcreSegment"
+			jdbcType="VARCHAR" />
+		<result column="cstnum" property="cstnum" jdbcType="INTEGER" />
+		<result column="propertyrate" property="propertyrate" jdbcType="DOUBLE" />
+		<result column="tradeguid" property="tradeguid" jdbcType="VARCHAR" />
+		<result column="cstoriginplace" property="cstoriginplace"
+			jdbcType="VARCHAR" />
+		<result column="cstindustry" property="cstindustry" jdbcType="VARCHAR" />
+		<result column="cstcuryl" property="cstcuryl" jdbcType="VARCHAR" />
+		<result column="jfdate" property="jfdate" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<select id="getReportsList" resultMap="ReportsMap"
+		parameterType="java.util.Map">
+		select
+		children_num,
+		age_segment,
+		proj_house_type,
+		live_format,
+		room_acreage,
+		cst_num,
+		owner_num,
+		sale_acreage,
+		sale_amount,
+		work_area,
+		live_area,
+		deal_date,
+		big_area,
+		prject_name,
+		city_name,
+		roomguid,
+		bldguid,
+		cstguid,
+		birth_day,
+		projguid,
+		companyguid,
+		live_format_orig,
+		proj_house_type_orig,
+		work_area_orig,
+		live_area_orig,
+		children_num_orig,
+		cardid,
+		subtype,
+		csttype,
+		cardtype,
+		room_acre_segment,
+		cstnum,
+		propertyrate,
+		tradeguid,
+		cstoriginplace,
+		cstindustry,
+		cstcuryl,
+		jfdate,
+		id
+		from
+		report_cst_deal_mid_own
+		<where>
+			<if test="searchTxt != null">
+				and
+				(
+				reports_name like CONCAT('%','${searchTxt}','%' )
+				)
+			</if>
+		</where>
+		order by id desc
+	</select>
+
+	<select id="getHaveReportsList" resultMap="ReportsMap">
+		select
+		children_num,
+		age_segment,
+		proj_house_type,
+		live_format,
+		room_acreage,
+		cst_num,
+		owner_num,
+		sale_acreage,
+		sale_amount,
+		work_area,
+		live_area,
+		deal_date,
+		big_area,
+		prject_name,
+		city_name,
+		roomguid,
+		bldguid,
+		cstguid,
+		birth_day,
+		projguid,
+		companyguid,
+		live_format_orig,
+		proj_house_type_orig,
+		work_area_orig,
+		live_area_orig,
+		children_num_orig,
+		cardid,
+		subtype,
+		csttype,
+		cardtype,
+		room_acre_segment,
+		cstnum,
+		propertyrate,
+		tradeguid,
+		cstoriginplace,
+		cstindustry,
+		cstcuryl,
+		jfdate,
+		id
+		from
+		report_cst_deal_mid_own
+		where id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item.id}
+		</foreach>
+	</select>
+
+	<select id="getReportsById" resultMap="ReportsMap"
+		parameterType="java.lang.Long">
+		select
+		children_num,
+		age_segment,
+		proj_house_type,
+		live_format,
+		room_acreage,
+		cst_num,
+		owner_num,
+		sale_acreage,
+		sale_amount,
+		work_area,
+		live_area,
+		deal_date,
+		big_area,
+		prject_name,
+		city_name,
+		roomguid,
+		bldguid,
+		cstguid,
+		birth_day,
+		projguid,
+		companyguid,
+		live_format_orig,
+		proj_house_type_orig,
+		work_area_orig,
+		live_area_orig,
+		children_num_orig,
+		cardid,
+		subtype,
+		csttype,
+		cardtype,
+		room_acre_segment,
+		cstnum,
+		propertyrate,
+		tradeguid,
+		cstoriginplace,
+		cstindustry,
+		cstcuryl,
+		jfdate,
+		id
+		from
+		report_cst_deal_mid_own
+		where id = #{id}
+	</select>
+
+	<insert id="insert" parameterType="ReportCstDealMidOwn">
+		insert into
+		report_cst_deal_mid_own(
+		children_num,
+		age_segment,
+		proj_house_type,
+		live_format,
+		room_acreage,
+		cst_num,
+		owner_num,
+		sale_acreage,
+		sale_amount,
+		work_area,
+		live_area,
+		deal_date,
+		big_area,
+		prject_name,
+		city_name,
+		roomguid,
+		bldguid,
+		cstguid,
+		birth_day,
+		projguid,
+		companyguid,
+		live_format_orig,
+		proj_house_type_orig,
+		work_area_orig,
+		live_area_orig,
+		children_num_orig,
+		cardid,
+		subtype,
+		csttype,
+		cardtype,
+		room_acre_segment,
+		cstnum,
+		propertyrate,
+		tradeguid,
+		cstoriginplace,
+		cstindustry,
+		cstcuryl,
+		jfdate,
+		id
+		)
+		values
+		(
+		#{childrenNum},
+		#{ageSegment},
+		#{projHouseType},
+		#{liveFormat},
+		#{roomAcreage},
+		#{cstNum},
+		#{ownerNum},
+		#{saleAcreage},
+		#{saleAmount},
+		#{workArea},
+		#{liveArea},
+		#{dealDate},
+		#{bigArea},
+		#{prjectName},
+		#{cityName},
+		#{roomguid},
+		#{bldguid},
+		#{cstguid},
+		#{birthDay},
+		#{projguid},
+		#{companyguid},
+		#{liveFormatOrig},
+		#{projHouseTypeOrig},
+		#{workAreaOrig},
+		#{liveAreaOrig},
+		#{childrenNumOrig},
+		#{cardid},
+		#{subtype},
+		#{csttype},
+		#{cardtype},
+		#{roomAcreSegment},
+		#{cstnum},
+		#{propertyrate},
+		#{tradeguid},
+		#{cstoriginplace},
+		#{cstindustry},
+		#{cstcuryl},
+		#{jfdate},
+		#{id}
+		)
+	</insert>
+
+	<insert id="insertList" parameterType="java.util.List">
+		insert into
+		report_cst_deal_mid_own(
+		children_num,
+		age_segment,
+		proj_house_type,
+		live_format,
+		room_acreage,
+		cst_num,
+		owner_num,
+		sale_acreage,
+		sale_amount,
+		work_area,
+		live_area,
+		deal_date,
+		big_area,
+		prject_name,
+		city_name,
+		roomguid,
+		bldguid,
+		cstguid,
+		birth_day,
+		projguid,
+		companyguid,
+		live_format_orig,
+		proj_house_type_orig,
+		work_area_orig,
+		live_area_orig,
+		children_num_orig,
+		cardid,
+		subtype,
+		csttype,
+		cardtype,
+		room_acre_segment,
+		cstnum,
+		propertyrate,
+		tradeguid,
+		cstoriginplace,
+		cstindustry,
+		cstcuryl,
+		jfdate,
+		id
+		)
+		values
+		<foreach collection="list" item="obj" index="index" separator=",">
+			(
+			#{obj.childrenNum},
+			#{obj.ageSegment},
+			#{obj.projHouseType},
+			#{obj.liveFormat},
+			#{obj.roomAcreage},
+			#{obj.cstNum},
+			#{obj.ownerNum},
+			#{obj.saleAcreage},
+			#{obj.saleAmount},
+			#{obj.workArea},
+			#{obj.liveArea},
+			#{obj.dealDate},
+			#{obj.bigArea},
+			#{obj.prjectName},
+			#{obj.cityName},
+			#{obj.roomguid},
+			#{obj.bldguid},
+			#{obj.cstguid},
+			#{obj.birthDay},
+			#{obj.projguid},
+			#{obj.companyguid},
+			#{obj.liveFormatOrig},
+			#{obj.projHouseTypeOrig},
+			#{obj.workAreaOrig},
+			#{obj.liveAreaOrig},
+			#{obj.childrenNumOrig},
+			#{obj.cardid},
+			#{obj.subtype},
+			#{obj.csttype},
+			#{obj.cardtype},
+			#{obj.roomAcreSegment},
+			#{obj.cstnum},
+			#{obj.propertyrate},
+			#{obj.tradeguid},
+			#{obj.cstoriginplace},
+			#{obj.cstindustry},
+			#{obj.cstcuryl},
+			#{obj.jfdate},
+			#{obj.id}
+			)
+		</foreach>
+	</insert>
+
+	<update id="update" parameterType="ReportCstDealMidOwn">
+		update report_cst_deal_mid_own
+		set
+		children_num = #{childrenNum},
+		age_segment = #{ageSegment},
+		proj_house_type = #{projHouseType},
+		live_format = #{liveFormat},
+		room_acreage = #{roomAcreage},
+		cst_num = #{cstNum},
+		owner_num =
+		#{ownerNum},
+		sale_acreage = #{saleAcreage},
+		sale_amount = #{saleAmount},
+		work_area = #{workArea},
+		live_area = #{liveArea},
+		deal_date =
+		#{dealDate},
+		big_area = #{bigArea},
+		prject_name = #{prjectName},
+		city_name = #{cityName},
+		roomguid = #{roomguid},
+		bldguid = #{bldguid},
+		cstguid = #{cstguid},
+		birth_day = #{birthDay},
+		projguid = #{projguid},
+		companyguid = #{companyguid},
+		live_format_orig = #{liveFormatOrig},
+		proj_house_type_orig = #{projHouseTypeOrig},
+		work_area_orig =
+		#{workAreaOrig},
+		live_area_orig = #{liveAreaOrig},
+		children_num_orig =
+		#{childrenNumOrig},
+		cardid = #{cardid},
+		subtype = #{subtype},
+		csttype =
+		#{csttype},
+		cardtype = #{cardtype},
+		room_acre_segment =
+		#{roomAcreSegment},
+		cstnum = #{cstnum},
+		propertyrate = #{propertyrate},
+		tradeguid = #{tradeguid},
+		cstoriginplace = #{cstoriginplace},
+		cstindustry = #{cstindustry},
+		cstcuryl = #{cstcuryl},
+		jfdate =
+		#{jfdate},
+		id = #{id}
+		where id =
+		#{id}
+	</update>
+
+	<update id="updateList" parameterType="List">
+		<foreach collection="list" item="obj" index="index" separator=";">
+			update report_cst_deal_mid_own
+			set
+			children_num = #{obj.childrenNum},
+			age_segment = #{obj.ageSegment},
+			proj_house_type =
+			#{obj.projHouseType},
+			live_format = #{obj.liveFormat},
+			room_acreage =
+			#{obj.roomAcreage},
+			cst_num = #{obj.cstNum},
+			owner_num =
+			#{obj.ownerNum},
+			sale_acreage = #{obj.saleAcreage},
+			sale_amount =
+			#{obj.saleAmount},
+			work_area = #{obj.workArea},
+			live_area =
+			#{obj.liveArea},
+			deal_date = #{obj.dealDate},
+			big_area =
+			#{obj.bigArea},
+			prject_name = #{obj.prjectName},
+			city_name =
+			#{obj.cityName},
+			roomguid = #{obj.roomguid},
+			bldguid = #{obj.bldguid},
+			cstguid = #{obj.cstguid},
+			birth_day = #{obj.birthDay},
+			projguid =
+			#{obj.projguid},
+			companyguid = #{obj.companyguid},
+			live_format_orig =
+			#{obj.liveFormatOrig},
+			proj_house_type_orig =
+			#{obj.projHouseTypeOrig},
+			work_area_orig = #{obj.workAreaOrig},
+			live_area_orig = #{obj.liveAreaOrig},
+			children_num_orig =
+			#{obj.childrenNumOrig},
+			cardid = #{obj.cardid},
+			subtype =
+			#{obj.subtype},
+			csttype = #{obj.csttype},
+			cardtype = #{obj.cardtype},
+			room_acre_segment = #{obj.roomAcreSegment},
+			cstnum = #{obj.cstnum},
+			propertyrate = #{obj.propertyrate},
+			tradeguid = #{obj.tradeguid},
+			cstoriginplace = #{obj.cstoriginplace},
+			cstindustry =
+			#{obj.cstindustry},
+			cstcuryl = #{obj.cstcuryl},
+			jfdate = #{obj.jfdate},
+			id = #{obj.id}
+			where id =
+			#{obj.id}
+		</foreach>
+	</update>
+
+	<select id="isHave" resultType="int" parameterType="java.lang.Long">
+		select
+		count(*) from report_cst_deal_mid_own where id =
+		#{id}
+	</select>
+
+	<update id="updateToDelete" parameterType="java.lang.Long">
+		update
+		report_cst_deal_mid_own
+		set
+		state = 2
+		where id =
+		#{id}
+	</update>
+	<update id="delete" parameterType="java.lang.Long">
+		delete from
+		report_cst_deal_mid_own
+		where id =
+		#{id}
+	</update>
+
+	<select id="getReportsCount" resultType="int">
+		select count(1)
+		from
+		report_cst_deal_mid_own
+	</select>
+
+	<select id="getIdList" resultType="String">
+		select id from
+		report_cst_deal_mid_own
+	</select>
+	
+	<select id="ownerTypeData" resultType="java.util.HashMap" parameterType="java.util.Map">
+		select 
+			CASE
+				<![CDATA[
+				when SYSDATE() > deal_date  and SYSDATE() < jFDate then '准业主'
+				when SYSDATE()-jFDate >= 0 and SYSDATE() <  date_add(jFDate, interval 1 year)  then '磨合期业主'
+				when SYSDATE() >= date_add(jFDate, interval 1 year) and  SYSDATE() < date_add(jFDate, interval 5 year) then '稳定期业主'
+				when SYSDATE() >= date_add(jFDate, interval 5 year) then '老业主' else '未知'
+				]]>
+			END ctype
+		    <foreach collection="sexList" item="sex" index="sex_index" open="," separator="," close="">
+		    	<choose>
+		    		<when test="sex.name=='未知'">
+		    			sum(case when sex = #{sex.name} or sex = null or sex = '' then 1 else 0 end) as #{sex.alisName}
+		    		</when>
+		    		<otherwise>
+		    			sum(case when sex = #{sex.name} then 1 else 0 end) as #{sex.alisName}
+		    		</otherwise>
+		    	</choose>
+		    </foreach>
+			<foreach item="age" index="age_indx" collection="ageList" open="," separator="," close="">
+			    <choose>
+		   			<when test="age.name=='未知'">
+		   				sum(case when cstCurYl = #{age.name} or cstCurYl is null or cstCurYl = '' then 1 else 0 end) as #{age.alisName}
+		   			</when>
+		   			<otherwise>
+		   				sum(case when cstCurYl = #{age.name} then 1 else 0 end) as #{age.alisName}
+		   			</otherwise>
+		   		</choose>
+			</foreach>
+			<foreach collection="cityList" item="city" index="city_index" open="," separator="," close="">
+		    	<choose>
+		    		<when test="city.name=='未知'">
+		    			sum(case when work_area = #{city.name} or work_area is null or work_area = '' then 1 else 0 end) as #{city.alisName}
+		    		</when>
+		    		<otherwise>
+		    			sum(case when work_area = #{city.name} then 1 else 0 end) as #{city.alisName}
+		    		</otherwise>
+		    	</choose>
+		    </foreach>
+		from report_cst_deal_mid_own
+		<where>
+			<if test="areaName!= null and areaName!='集团'">
+				big_code = #{areaCode}
+			</if> 
+			<if test="companyCode!=null and companyCode!=''">
+				and city_code = #{companyCode}
+			</if>
+		</where>
+		group by ctype
+	</select>
+	
+	<select id="getCompanyListByAreaCode" resultType="java.util.HashMap" parameterType="java.util.Map">
+		select DISTINCT live_area from report_cst_deal_mid_own
+		<where>
+			<if test="areaName!=null and areaName!='集团'">
+				big_code = #{areaCode}
+			</if>
+			<if test="companyCode!=null and companyCode!='' ">
+				and city_code = #{companyCode}
+			</if>
+		</where>
+	</select>
+	
+	
+	<select id="getWorkareaListByAreaCode" resultType="java.util.HashMap" parameterType="java.util.Map">
+		select DISTINCT work_area from report_cst_deal_mid_own
+		<where>
+			<if test="areaName!=null and areaName!='集团'">
+				big_code = #{areaCode}
+			</if>
+			<if test="companyCode!=null and companyCode!='' ">
+				and city_code = #{companyCode}
+			</if>
+		</where>
+	</select>
+	
+	
+	<select id="turnoverCustomerData" resultType="java.util.HashMap" parameterType="java.util.Map">
+		select 
+			CASE
+				<foreach collection="groupItems" item="item" index="item_index" open="" separator="" close="">
+					when ${fieldName} = #{item.code} then #{item.alisName}
+				</foreach>
+			END countType,
+			CASE
+				<foreach collection="groupItems" item="item" index="item_index" open="" separator="" close="">
+					when ${fieldName} = #{item.code} then #{item.code}
+				</foreach>
+			END countCode,
+			sum(1) as total,
+			#{unitType} as unitType
+			<foreach collection="sexList" item="sex" index="sex_index" open="," separator="," close="">
+		    	<choose>
+		    		<when test="sex.name=='未知'">
+		    			sum(case when sex = #{sex.name} or sex = null or sex = '' then 1 else 0 end) as #{sex.alisName}
+		    		</when>
+		    		<otherwise>
+		    			sum(case when sex = #{sex.name} then 1 else 0 end) as #{sex.alisName}
+		    		</otherwise>
+		    	</choose>
+		    </foreach>
+		    <foreach item="mianji" index="mianji_indx" collection="mianjiList" open="," separator="," close="">
+		    	<choose>
+		    		<when test="mianji.name=='未知'">
+		    			sum(case when room_acre_segment = #{mianji.name} or room_acre_segment is null or room_acre_segment = '' then 1 else 0 end) as #{mianji.alisName}
+		    		</when>
+		    		<otherwise>
+		    			sum(case when room_acre_segment = #{mianji.name} then 1 else 0 end) as #{mianji.alisName}
+		    		</otherwise>
+		    	</choose>
+			</foreach>
+			<foreach item="age" index="age_indx" collection="ageList" open="," separator="," close="">
+		   		<choose>
+		   			<when test="age.name=='未知'">
+		   				sum(case when cstCurYl = #{age.name} or cstCurYl is null or cstCurYl = '' then 1 else 0 end) as #{age.alisName}
+		   			</when>
+		   			<otherwise>
+		   				sum(case when cstCurYl = #{age.name} then 1 else 0 end) as #{age.alisName}
+		   			</otherwise>
+		   		</choose>
+			</foreach>
+			<foreach collection="productList" item="product" index="product_index" open="," separator="," close="">
+				<choose>
+			    	<when test="product.name=='未知'">
+			    		sum(case when product_type = #{product.name} or product_type is null or product_type = '' then 1 else 0 end) as #{product.alisName}
+			    	</when>
+			    	<otherwise>
+			    		sum(case when product_type = #{product.name} then 1 else 0 end) as #{product.alisName}
+			    	</otherwise>
+			    </choose>
+			</foreach>
+			<foreach collection="huxingList" item="huxing" index="huxing_index" open="," separator="," close="">
+			    <choose>
+			    	<when test="huxing.name=='未知'">
+			    		sum(case when proj_house_type = #{huxing.name} or proj_house_type is null or proj_house_type = '' then 1 else 0 end) as #{huxing.alisName}
+			    	</when>
+			    	<otherwise>
+			    		sum(case when proj_house_type = #{huxing.name} then 1 else 0 end) as #{huxing.alisName}
+			    	</otherwise>
+			    </choose>
+		    </foreach>
+		from report_cst_deal_mid_own
+		<where>
+			<if test="areaName!= null and areaName!='集团'">
+				big_code = #{areaCode}
+			</if> 
+			<if test="companyCode!=null and companyCode!=''">
+				and city_code = #{companyCode}
+			</if>
+			<if test="startDate!=null and endDate!=null">
+				and deal_date between #{startDate} and #{endDate}
+			</if>
+		</where>
+		group by countType HAVING countType is not null
+	</select>
+	
+	
+	<select id="getPorjects" resultType="java.util.HashMap" parameterType="java.lang.String">
+		select DISTINCT prject_name, projGUID FROM report_cst_deal_mid_own where citycode = #{citycode} order by prject_name
+	</select>
+	
+	<select id="getBuyTimesData" resultType="java.util.HashMap" parameterType="java.util.Map">
+		select
+			CASE
+			<foreach collection="yezhuList" item="yezhu" index="yezhu_index" open="" separator="" close="">
+				when owner_type = #{yezhu.name} then #{yezhu.alisName}
+			</foreach>
+			END owner_type
+			<foreach collection="buycountList" item="buycount" index="buycount_index" open="," separator="," close="">
+				sum(case when buy_num = #{buycount.name} then Owner_num end) as #{buycount.alisName}
+			</foreach>
+		from rpt_owner_buynum_analyse
+		group by owner_type
+	</select>
+	
+	
+	<select id="getRepeatBuyTiems" resultType="java.util.HashMap" parameterType="java.util.Map">
+		select 
+			CASE
+				<foreach collection="groupItems" item="item" index="item_index" open="" separator="" close="">
+					when ${fieldName} = #{item.code} then #{item.alisName}
+				</foreach>
+			END countType,
+			CASE
+				<foreach collection="groupItems" item="item" index="item_index" open="" separator="" close="">
+					when ${fieldName} = #{item.code} then #{item.code}
+				</foreach>
+			END countCode,
+			sum(1) as total,
+			#{unitType} as unitType
+			<foreach collection="sexList" item="sex" index="sex_index" open="," separator="," close="">
+		    	<choose>
+		    		<when test="sex.name=='未知'">
+		    			sum(case when sex = #{sex.name} or sex = null or sex = '' then 1 else 0 end) as #{sex.alisName}
+		    		</when>
+		    		<otherwise>
+		    			sum(case when sex = #{sex.name} then 1 else 0 end) as #{sex.alisName}
+		    		</otherwise>
+		    	</choose>
+		    </foreach>
+		    <foreach item="mianji" index="mianji_indx" collection="mianjiList" open="," separator="," close="">
+		    	<choose>
+		    		<when test="mianji.name=='未知'">
+		    			sum(case when room_acre_segment = #{mianji.name} or room_acre_segment is null or room_acre_segment = '' then 1 else 0 end) as #{mianji.alisName}
+		    		</when>
+		    		<otherwise>
+		    			sum(case when room_acre_segment = #{mianji.name} then 1 else 0 end) as #{mianji.alisName}
+		    		</otherwise>
+		    	</choose>
+			</foreach>
+			<foreach item="age" index="age_indx" collection="ageList" open="," separator="," close="">
+		   		<choose>
+		   			<when test="age.name=='未知'">
+		   				sum(case when cstCurYl = #{age.name} or cstCurYl is null or cstCurYl = '' then 1 else 0 end) as #{age.alisName}
+		   			</when>
+		   			<otherwise>
+		   				sum(case when cstCurYl = #{age.name} then 1 else 0 end) as #{age.alisName}
+		   			</otherwise>
+		   		</choose>
+			</foreach>
+			<foreach collection="productList" item="product" index="product_index" open="," separator="," close="">
+				<choose>
+			    	<when test="product.name=='未知'">
+			    		sum(case when product_type = #{product.name} or product_type is null or product_type = '' then 1 else 0 end) as #{product.alisName}
+			    	</when>
+			    	<otherwise>
+			    		sum(case when product_type = #{product.name} then 1 else 0 end) as #{product.alisName}
+			    	</otherwise>
+			    </choose>
+			</foreach>
+			<foreach collection="huxingList" item="huxing" index="huxing_index" open="," separator="," close="">
+			    <choose>
+			    	<when test="huxing.name=='未知'">
+			    		sum(case when proj_house_type = #{huxing.name} or proj_house_type is null or proj_house_type = '' then 1 else 0 end) as #{huxing.alisName}
+			    	</when>
+			    	<otherwise>
+			    		sum(case when proj_house_type = #{huxing.name} then 1 else 0 end) as #{huxing.alisName}
+			    	</otherwise>
+			    </choose>
+		    </foreach>
+		from rpt_cst_repeat_buy_detail
+		<where>
+			<if test="areaName!= null and areaName!='集团'">
+				big_code = #{areaCode}
+			</if> 
+			<if test="companyCode!=null and companyCode!=''">
+				and city_code = #{companyCode}
+			</if>
+			<if test="startDate!=null and endDate!=null">
+				and deal_date between #{startDate} and #{endDate}
+			</if>
+		</where>
+		group by countType HAVING countType is not null
+	</select>
+</mapper>

@@ -1,0 +1,25 @@
+<nav>
+	<ul>
+		<li ng-repeat="subMenu in SubMenuItems" level-two-menu>
+
+
+			<a ng-class="{active: $state.includes(subMenu.stateInclude)}" href="javascript:;" ng-show="subMenu.Href==''">{{subMenu.MenuName}}<i ng-if="subMenu['subs'].length>0"></i></a>
+
+			<a ng-class="{active: $state.includes(subMenu.stateInclude)}" ui-sref="{{(subMenu.Href!=''?subMenu.Href:'app.client.search')}}" ng-show="subMenu.Href!=''">{{subMenu.MenuName}}<i ng-if="subMenu['subs'].length>0"></i></a>
+
+			<ul class="nav sub3-menu" ng-if="subMenu['subs'].length>0">
+				<li ng-repeat="sub3 in subMenu['subs']" level-three-menu><a ui-sref-active="active" ui-sref="{{(sub3.Href!=''?sub3.Href:'app.client.search')}}">{{sub3.MenuName}}</a></li>
+			</ul>
+
+		</li>
+		<!-- <li><a href="javascript:;">角色预览</a></li>
+		<li>
+			<a href="javascript:;">用户管理<i></i></a>
+			<ul class="nav sub3-menu">
+				<li><a href="javascript:;">数据权限配置</a></li>
+				<li><a href="javascript:;">用户权限配置</a></li>
+			</ul>	
+		</li>
+		<li><a href="javascript:;">操作日志</a></li> -->
+	</ul>
+</nav>

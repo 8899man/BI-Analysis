@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.pmp.dao.IndexBaseDao" > 
+<!-- Result Map-->
+<resultMap id="IndexBaseMap" type="IndexBase" >
+	<result column="index_base_id" property="index_base_id" jdbcType="INTEGER"/>
+	<result column="proj_guid" property="proj_guid" jdbcType="VARCHAR"/>
+	<result column="index_format_type" property="index_format_type" jdbcType="VARCHAR"/>
+	<result column="follow_customer_sum" property="follow_customer_sum" jdbcType="INTEGER"/>
+	<result column="new_visitors_sum" property="new_visitors_sum" jdbcType="INTEGER"/>
+	<result column="old_visitors_sum" property="old_visitors_sum" jdbcType="INTEGER"/>
+	<result column="confess_customer_sum" property="confess_customer_sum" jdbcType="INTEGER"/>
+	<result column="confess_cycle_sum" property="confess_cycle_sum" jdbcType="INTEGER"/>
+	<result column="confess_amount_sum" property="confess_amount_sum" jdbcType="DOUBLE"/>
+	<result column="subscribe_customer_sum" property="subscribe_customer_sum" jdbcType="INTEGER"/>
+	<result column="subscribe_cycle_sum" property="subscribe_cycle_sum" jdbcType="INTEGER"/>
+	<result column="subscribe_amount_sum" property="subscribe_amount_sum" jdbcType="DOUBLE"/>
+	<result column="contract_customer_sum" property="contract_customer_sum" jdbcType="INTEGER"/>
+	<result column="contract_cycle_sum" property="contract_cycle_sum" jdbcType="INTEGER"/>
+	<result column="contract_amount_sum" property="contract_amount_sum" jdbcType="DOUBLE"/>
+	<result column="returned_customer_sum" property="returned_customer_sum" jdbcType="INTEGER"/>
+	<result column="returned_cycle_sum" property="returned_cycle_sum" jdbcType="TIMESTAMP"/>
+	<result column="returned_amount_sum" property="returned_amount_sum" jdbcType="INTEGER"/>
+	<result column="create_time" property="create_time" jdbcType="TIMESTAMP"/>
+</resultMap>
+
+<!-- index_base table all fields -->
+<sql id="Base_Column_List" >
+	 index_base_id,proj_guid,index_format_type,follow_customer_sum,new_visitors_sum,old_visitors_sum,confess_customer_sum,confess_cycle_sum,confess_amount_sum,subscribe_customer_sum,subscribe_cycle_sum,subscribe_amount_sum,contract_customer_sum,contract_cycle_sum,contract_amount_sum,returned_customer_sum,returned_cycle_sum,returned_amount_sum,create_time
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="index_base_id != null" >
+	    and index_base_id =  #{index_base_id}
+	</if>
+	 	<if test="proj_guid != null and proj_guid != ''" >
+	    and proj_guid =  #{proj_guid}
+	</if>
+	<if test="index_format_type != null" >
+	    and index_format_type =  #{index_format_type}
+	</if>
+	<if test="follow_customer_sum != null" >
+	    and follow_customer_sum =  #{follow_customer_sum}
+	</if>
+	<if test="new_visitors_sum != null" >
+	    and new_visitors_sum =  #{new_visitors_sum}
+	</if>
+	<if test="old_visitors_sum != null" >
+	    and old_visitors_sum =  #{old_visitors_sum}
+	</if>
+	<if test="confess_customer_sum != null" >
+	    and confess_customer_sum =  #{confess_customer_sum}
+	</if>
+	<if test="confess_cycle_sum != null" >
+	    and confess_cycle_sum =  #{confess_cycle_sum}
+	</if>
+	<if test="confess_amount_sum != null" >
+	    and confess_amount_sum =  #{confess_amount_sum}
+	</if>
+	<if test="subscribe_customer_sum != null" >
+	    and subscribe_customer_sum =  #{subscribe_customer_sum}
+	</if>
+	<if test="subscribe_cycle_sum != null" >
+	    and subscribe_cycle_sum =  #{subscribe_cycle_sum}
+	</if>
+	<if test="subscribe_amount_sum != null" >
+	    and subscribe_amount_sum =  #{subscribe_amount_sum}
+	</if>
+	<if test="contract_customer_sum != null" >
+	    and contract_customer_sum =  #{contract_customer_sum}
+	</if>
+	<if test="contract_cycle_sum != null" >
+	    and contract_cycle_sum =  #{contract_cycle_sum}
+	</if>
+	<if test="contract_amount_sum != null" >
+	    and contract_amount_sum =  #{contract_amount_sum}
+	</if>
+	<if test="returned_customer_sum != null" >
+	    and returned_customer_sum =  #{returned_customer_sum}
+	</if>
+	<if test="returned_cycle_sum != null" >
+	    and returned_cycle_sum =  #{returned_cycle_sum}
+	</if>
+	<if test="returned_amount_sum != null" >
+	    and returned_amount_sum =  #{returned_amount_sum}
+	</if>
+	<if test="create_time != null" >
+	    and create_time =  #{create_time}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="insert" parameterType="IndexBase" >
+  insert into index_base(index_base_id,proj_guid,index_format_type,follow_customer_sum,new_visitors_sum,old_visitors_sum,confess_customer_sum,confess_cycle_sum,confess_amount_sum,subscribe_customer_sum,subscribe_cycle_sum,subscribe_amount_sum,contract_customer_sum,contract_cycle_sum,contract_amount_sum,returned_customer_sum,returned_cycle_sum,returned_amount_sum,create_time)
+ values(#{index_base_id},#{proj_guid},#{index_format_type},#{follow_customer_sum},#{new_visitors_sum},#{old_visitors_sum},#{confess_customer_sum},#{confess_cycle_sum},#{confess_amount_sum},#{subscribe_customer_sum},#{subscribe_cycle_sum},#{subscribe_amount_sum},#{contract_customer_sum},#{contract_cycle_sum},#{contract_amount_sum},#{returned_customer_sum},#{returned_cycle_sum},#{returned_amount_sum},#{create_time})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update index_base set proj_guid=#{proj_guid},index_format_type=#{index_format_type},follow_customer_sum=#{follow_customer_sum},new_visitors_sum=#{new_visitors_sum},old_visitors_sum=#{old_visitors_sum},confess_customer_sum=#{confess_customer_sum},confess_cycle_sum=#{confess_cycle_sum},confess_amount_sum=#{confess_amount_sum},subscribe_customer_sum=#{subscribe_customer_sum},subscribe_cycle_sum=#{subscribe_cycle_sum},subscribe_amount_sum=#{subscribe_amount_sum},contract_customer_sum=#{contract_customer_sum},contract_cycle_sum=#{contract_cycle_sum},contract_amount_sum=#{contract_amount_sum},returned_customer_sum=#{returned_customer_sum},returned_cycle_sum=#{returned_cycle_sum},returned_amount_sum=#{returned_amount_sum},create_time=#{create_time} where index_base_id=#{index_base_id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update index_base set 
+	<trim  suffixOverrides="," >
+	<if test="proj_guid != null  and proj_guid != '' ">
+		proj_guid=#{proj_guid},
+	</if>
+	<if test="index_format_type != null  ">
+		index_format_type=#{index_format_type},
+	</if>
+	<if test="follow_customer_sum != null  ">
+		follow_customer_sum=#{follow_customer_sum},
+	</if>
+	<if test="new_visitors_sum != null  ">
+		new_visitors_sum=#{new_visitors_sum},
+	</if>
+	<if test="old_visitors_sum != null  ">
+		old_visitors_sum=#{old_visitors_sum},
+	</if>
+	<if test="confess_customer_sum != null  ">
+		confess_customer_sum=#{confess_customer_sum},
+	</if>
+	<if test="confess_cycle_sum != null  ">
+		confess_cycle_sum=#{confess_cycle_sum},
+	</if>
+	<if test="confess_amount_sum != null  ">
+		confess_amount_sum=#{confess_amount_sum},
+	</if>
+	<if test="subscribe_customer_sum != null  ">
+		subscribe_customer_sum=#{subscribe_customer_sum},
+	</if>
+	<if test="subscribe_cycle_sum != null  ">
+		subscribe_cycle_sum=#{subscribe_cycle_sum},
+	</if>
+	<if test="subscribe_amount_sum != null  ">
+		subscribe_amount_sum=#{subscribe_amount_sum},
+	</if>
+	<if test="contract_customer_sum != null  ">
+		contract_customer_sum=#{contract_customer_sum},
+	</if>
+	<if test="contract_cycle_sum != null  ">
+		contract_cycle_sum=#{contract_cycle_sum},
+	</if>
+	<if test="contract_amount_sum != null  ">
+		contract_amount_sum=#{contract_amount_sum},
+	</if>
+	<if test="returned_customer_sum != null  ">
+		returned_customer_sum=#{returned_customer_sum},
+	</if>
+	<if test="returned_cycle_sum != null  ">
+		returned_cycle_sum=#{returned_cycle_sum},
+	</if>
+	<if test="returned_amount_sum != null  ">
+		returned_amount_sum=#{returned_amount_sum},
+	</if>
+	<if test="create_time != null  ">
+		create_time=#{create_time},
+	</if>
+	</trim> where index_base_id=#{index_base_id}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from index_base where index_base_id = #{index_base_id}
+</delete>
+ 
+<!-- 根据id查询 关键指标汇总 -->
+<select id="getIndexBaseById"  resultMap="IndexBaseMap" parameterType="Object">
+    select follow_customer_sum,new_visitors_sum,old_visitors_sum,confess_customer_sum,
+    confess_cycle_sum,confess_amount_sum,subscribe_customer_sum,subscribe_cycle_sum,
+    subscribe_amount_sum,contract_customer_sum,contract_cycle_sum,contract_amount_sum,
+    returned_customer_sum,returned_cycle_sum,returned_amount_sum
+    from rpt_index_base where proj_guid=#{proj_guid} and create_time = (select max(create_time) from rpt_index_base);
+</select>
+
+<!-- 本周的  -->
+<select id="getIndexWeekBaseById"  resultMap="IndexBaseMap" parameterType="Object">
+    select
+	max(follow_customer_sum) as follow_customer_sum,sum(new_visitors_sum) as new_visitors_sum,
+	sum(old_visitors_sum) as old_visitors_sum,sum(confess_customer_sum) as confess_customer_sum,
+	sum(confess_cycle_sum) as confess_cycle_sum,sum(confess_amount_sum) as confess_amount_sum,
+	sum(subscribe_customer_sum) as subscribe_customer_sum,sum(subscribe_cycle_sum) as subscribe_cycle_sum,
+	sum(subscribe_amount_sum) as subscribe_amount_sum,sum(contract_customer_sum) as contract_customer_sum,
+	sum(contract_cycle_sum) as contract_cycle_sum,sum(contract_amount_sum) as contract_amount_sum,
+	sum(returned_customer_sum) as returned_customer_sum,sum(returned_cycle_sum) as returned_cycle_sum,
+	sum(returned_amount_sum) as returned_amount_sum
+    from rpt_index_base where proj_guid=#{proj_guid} and date_format(create_time,'%X-%V') = (select  max(date_format(create_time,'%X-%V')) from rpt_index_base);
+</select>
+
+<!-- 本月的  -->
+<select id="getIndexMonthBaseById"  resultMap="IndexBaseMap" parameterType="Object">
+    select
+	max(follow_customer_sum) as follow_customer_sum,sum(new_visitors_sum) as new_visitors_sum,
+	sum(old_visitors_sum) as old_visitors_sum,sum(confess_customer_sum) as confess_customer_sum,
+	sum(confess_cycle_sum) as confess_cycle_sum,sum(confess_amount_sum) as confess_amount_sum,
+	sum(subscribe_customer_sum) as subscribe_customer_sum,sum(subscribe_cycle_sum) as subscribe_cycle_sum,
+	sum(subscribe_amount_sum) as subscribe_amount_sum,sum(contract_customer_sum) as contract_customer_sum,
+	sum(contract_cycle_sum) as contract_cycle_sum,sum(contract_amount_sum) as contract_amount_sum,
+	sum(returned_customer_sum) as returned_customer_sum,sum(returned_cycle_sum) as returned_cycle_sum,
+	sum(returned_amount_sum) as returned_amount_sum
+    from rpt_index_base where proj_guid=#{proj_guid} and date_format(create_time,'%X-%m') = (select  max(date_format(create_time,'%X-%m')) from rpt_index_base);
+</select>
+
+<!-- 关键指标汇总 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from index_base 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询关键指标汇总列表 -->
+<select id="getIndexBaseList" resultMap="IndexBaseMap"  parameterType="IndexBase">
+	select 
+	<include refid="Base_Column_List"/>
+	from index_base 
+	order by create_time desc
+</select>
+  	
+</mapper>   

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.pmp.dao.SFProjRecordDao">
+
+	<resultMap id="BProjMap" type="com.sxit.mgt.pmp.dto.BProjModel" >
+		<result column="projGUID" property="projGUID" jdbcType="VARCHAR" />
+		<result column="projCode" property="projCode" jdbcType="VARCHAR" />
+		<result column="projAddress" property="projAddress" jdbcType="VARCHAR" />
+		<result column="occupyArea" property="occupyArea" jdbcType="VARCHAR" />
+		<result column="buildArea" property="buildArea" jdbcType="VARCHAR" />
+		<result column="orgName" property="orgName" jdbcType="VARCHAR" />
+	</resultMap>
+	 
+	 <resultMap id="SFProjRecordMap" type="com.sxit.mgt.pmp.dto.SFProjModel" >
+	 	<result column="cstGUID" property="cstGUID" jdbcType="BIGINT" />
+		<result column="followtype" property="followtype" jdbcType="INTEGER" />
+		<result column="followcontent" property="followcontent" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="createtime" property="createtime" jdbcType="DATE" />
+		<result column="projguid" property="projguid" jdbcType="VARCHAR" />
+		<result column="projname" property="projname" jdbcType="VARCHAR" />
+		<result column="consultantname" property="consultantname" jdbcType="VARCHAR" />
+		<result column="consultantmobile" property="consultantmobile" jdbcType="VARCHAR" />
+	 </resultMap>
+	 
+	 <!-- 项目基础信息 -->
+	 <select id="getProjById" resultMap="BProjMap" parameterType="java.lang.String">
+	 	SELECT 
+		bp.projGUID projGUID,
+		bp.projCode projCode,
+		bp.projAddress projAddress,
+		bp.occupyArea occupyArea,
+		bp.buildArea buildArea,
+		bo.orgName orgName
+		from
+		(
+			select projGUID, projCode, projAddress, occupyArea, buildArea,companyGUID  from b_proj where projGUID =  #{projGUID}
+		) bp
+		LEFT JOIN
+		b_org bo
+		ON
+		bp.companyGUID = bo.orgGUID
+	 </select>
+	 
+	 <select id="getSelledNum" resultType="int" parameterType="java.lang.String">
+	 	select count(*) cnt from b_room where projGUID = #{projGUID} and roomStatus in (2,3,4,5);
+	 </select>
+	 
+	 <select id="getNoSellNum" resultType="int" parameterType="java.lang.String">
+	 	select count(*) cnt from b_room where projGUID = #{projGUID}
+	 </select>
+	 
+	 <!-- 根据projGUID获取楼栋数 -->
+	 <select id="getBuildCountByProjGUID" resultType="int" parameterType="java.lang.String">
+	 	select count(*) from b_building where projGUID = #{projGUID}
+	 </select>
+	 
+	<!-- 根据projGUID获取房源量 -->
+	<select id="getRoomCountByProjGUID" resultType="int" parameterType="java.lang.String">
+		select count(*) cnt from b_room where projGUID = #{projGUID}
+	 </select>
+	 
+	 
+	<!-- 项目轨迹 -->
+	<select id="getSFollowRecordByProjId" resultMap="SFProjRecordMap" parameterType="java.lang.String">
+		select
+		sf.cstGUID cstGUID,
+		sf.createTime createtime, 
+		sf.projGUID projguid,
+		bp.projName projname, 
+		sf.followType followtype, 
+		sf.followContent followcontent, 
+		sf.remark remark,
+		cc.consultantName consultantname,
+		cc.consultantMobile consultantmobile
+		from
+		(
+			select
+			cstGUID,
+			userGUID,
+			projGUID,
+			createTime,
+			followType,
+			followContent,
+			remark
+			from
+			s_followrecord
+			where
+			projGUID = #{projGUID}
+			order by createTime DESC
+			limit 0, 20
+		) sf 
+		LEFT JOIN b_proj bp 
+		on sf.projGUID = bp.projGUID 
+		left join
+		cst_consultant cc
+		on
+		sf.userGUID = cc.consultantId
+    </select>
+    
+    <!-- 根据cstGUID查询名称 -->
+    <select id="getCstNameById" resultType="String" parameterType="java.util.Map">
+		<![CDATA[
+		select
+		cstname
+		from
+		${tablename}
+		where cstGUID = #{cstGUID}
+		]]>
+	</select>
+
+</mapper>

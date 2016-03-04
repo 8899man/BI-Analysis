@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.pmp.dao.RptProjCstAreaDao" > 
+<!-- Result Map-->
+<resultMap id="RptProjCstAreaMap" type="com.sxit.model.pmp.RptProjCstArea" >
+	<result column="cst_area_id" property="cst_area_id" jdbcType="INTEGER"/>
+	<result column="proj_id" property="proj_id" jdbcType="INTEGER"/>
+	<result column="area_id" property="area_id" jdbcType="VARCHAR"/>
+	<result column="cst_num" property="cst_num" jdbcType="INTEGER"/>
+	<result column="create_time" property="create_time" jdbcType="TIMESTAMP"/>
+</resultMap>
+       
+<!-- rpt_proj_cst_area table all fields -->
+<sql id="Base_Column_List" >
+	 cst_area_id,proj_id,area_id,cst_num,create_time
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="cst_area_id != null" >
+	    and cst_area_id =  #{cst_area_id}
+	</if>
+	 	<if test="proj_id != null and proj_id != ''" >
+	    and proj_id =  #{proj_id}
+	</if>
+	 	<if test="area_id != null and area_id != ''" >
+	    and area_id =  #{area_id}
+	</if>
+	<if test="cst_num != null" >
+	    and cst_num =  #{cst_num}
+	</if>
+	<if test="create_time != null" >
+	    and create_time =  #{create_time}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into rpt_proj_cst_area(cst_area_id,proj_id,area_id,cst_num,create_time)
+ values(#{cst_area_id},#{proj_id},#{area_id},#{cst_num},#{create_time})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update rpt_proj_cst_area set proj_id=#{proj_id},area_id=#{area_id},cst_num=#{cst_num},create_time=#{create_time} where cst_area_id=#{cst_area_id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update rpt_proj_cst_area set 
+	<trim  suffixOverrides="," >
+	<if test="proj_id != null  and proj_id != '' ">
+		proj_id=#{proj_id},
+	</if>
+	<if test="area_id != null  and area_id != '' ">
+		area_id=#{area_id},
+	</if>
+	<if test="cst_num != null  ">
+		cst_num=#{cst_num},
+	</if>
+	<if test="create_time != null  ">
+		create_time=#{create_time},
+	</if>
+	</trim> where cst_area_id=#{cst_area_id}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from rpt_proj_cst_area where cst_area_id = #{cst_area_id}
+</delete>
+ 
+<!-- 根据id查询 rpt_proj_cst_area -->
+<select id="RptProjCstAreaById"  resultMap="RptProjCstAreaMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from rpt_proj_cst_area where proj_id = #{proj_id} and area_id not in('未知')
+	 and create_time = (select max(create_time) from rpt_customer_attach_count) 
+	 order by cst_num DESC limit 15;
+</select>
+
+<!-- rpt_proj_cst_area 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from rpt_proj_cst_area 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询rpt_proj_cst_area列表 -->
+<select id="queryByList" resultMap="RptProjCstAreaMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from rpt_proj_cst_area 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

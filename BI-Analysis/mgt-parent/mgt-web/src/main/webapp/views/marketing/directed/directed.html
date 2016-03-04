@@ -1,0 +1,132 @@
+<div ng-controller="DirectedController" ng-init="initializeController()">
+	<div class="box-shadow-1 border-radius-3 client-track marketing-box" id="step1">
+		<!-- <h2 class="clearfix"><a href="javascript:;" class="btn btn-default step-btn" ng-click="reset()">重置</a><a href="javascript:;" class="btn btn-primary step-btn" ng-click="nextStep()" ng-disabled="toStep2">下一步</a>step1：确定分析范围</h2> -->
+		<h2 class="clearfix"><a href="javascript:;" class="btn btn-primary step-btn" ng-click="nextStep()" ng-disabled="toStep2">下一步</a>step1：确定分析范围<a href="javascript:;" class="btn btn-default step-btn" ng-click="reset()">重置</a></h2>
+		<div class="step-content">
+
+			<div class="step-condition-list">
+				<h3>1：确定分析类型</h3>
+				<div class="step-condition-list-items">
+					<div class="analysis-type">
+						<label ng-repeat="type in analysisTypes"><input type="radio" name="analysis" ng-disabled="toStep2" ng-value="type" ng-model="analysisTypes.analysisTypeCurrent" ng-change="changeRadio(analysisTypes.analysisTypeCurrent.value)" ng-checked="analysisTypes.analysisTypeCurrent.value == type.value">{{type.title}}</label>
+					</div>
+				</div>
+			</div>
+
+			<div class="step-condition-list">
+				<h3>2：确定【{{addressName}}】</h3>
+				<div class="step-condition-list-items">
+					<div class="step-condition-list-item clearfix">
+						<div class="step-condition-item-title">区域</div>
+						<div class="step-condition-tiem-main">
+							<ul class="clearfix">
+								<li ng-repeat="area in marketingAreas"><a href="javascript:;" class="btn" ng-click="changeMarketingArea(area)" ng-class="{'active': marketingAreaCurrent == area}" ng-disabled="toStep2">{{area.title}}</a></li>
+								<!-- <li><a href="javascript:;" class="active">华东区域</a></li> -->
+							</ul>
+						</div>
+					</div>
+					<div class="step-condition-list-item clearfix" ng-if="!!marketingCityCurrent">
+						<div class="step-condition-item-title">城市</div>
+						<div class="step-condition-tiem-main">
+							<ul class="clearfix">
+								<li ng-repeat="city in marketingCities"><a href="javascript:;" class="btn" ng-click="changeMarketingCity(city)" ng-class="{'active': marketingCityCurrent == city}" ng-disabled="toStep2">{{city.title}}</a>
+								<!-- <li><a href="javascript:;">不限</a></li>
+								<li><a href="javascript:;">深圳</a></li> -->
+							</ul>
+						</div>
+					</div>
+					<div class="step-condition-list-item clearfix" ng-if="!!marketingProjectCurrent">
+						<div class="step-condition-item-title">项目</div>
+						<div class="step-condition-tiem-main">
+							<ul class="clearfix">
+								<li ng-repeat="project in marketingProjects"><a href="javascript:;" class="btn" ng-click="changeMarketingProject(project)" ng-class="{'active': marketingProjectCurrent == project}" ng-disabled="toStep2">{{project.title}}</a>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="step-condition-list">
+				<h3>3：确定【已购房产所在地】</h3>
+				<div class="step-condition-list-items">
+					<div class="step-condition-list-item clearfix">
+						<div class="step-condition-item-title">省份</div>
+						<div class="step-condition-tiem-main">
+							<ul class="clearfix">
+								<li ng-repeat="area in analysisAreas"><a href="javascript:;" class="btn" ng-click="changeAnalysisArea(area)" ng-class="{'active': analysisAreaCurrent == area}" ng-disabled="toStep2">{{area.title}}</a></li>
+								<!-- <li><a href="javascript:;" class="active">华东区域</a></li> -->
+							</ul>
+						</div>
+					</div>
+					<div class="step-condition-list-item clearfix" ng-if="!!analysisCityCurrent">
+						<div class="step-condition-item-title">城市</div>
+						<div class="step-condition-tiem-main">
+							<ul class="clearfix">
+								<li ng-repeat="city in analysisCities"><a href="javascript:;" class="btn" ng-click="changeAnalysisCity(city)" ng-class="{'active': analysisCityCurrent == city}" ng-disabled="toStep2">{{city.title}}</a>
+								<!-- <li><a href="javascript:;">不限</a></li>
+								<li><a href="javascript:;">深圳</a></li> -->
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+		
+	</div>
+
+	
+	<div class="margin-top-20 box-shadow-1 border-radius-3 client-track marketing-box animated" ng-class="{'fadeInUp':toStep2, 'fadeOutUp':!toStep2}" ng-show="toStep2" id="step2">
+		<h2>step2：确定数据提取范围</h2>
+		<div class="step-content">
+			<div class="step-condition-selected step2-condition-selected">
+				<h3>1：勾选数据提取项</h3>
+				<div class="step2-main">
+					<ul class="clearfix">
+						<li><label><input type="checkbox" ng-model="dataModalName">姓名</label></li>
+						<li><label><input type="checkbox" ng-model="dataModalTel">手机号</label></li>
+						<li><label><input type="checkbox" ng-model="dataModalEmail">邮箱</label></li>
+						<li><label><input type="checkbox" ng-model="dataModalAddress">住址</label></li>
+					</ul>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+
+
+	<div class="margin-top-20 box-shadow-1 border-radius-3 client-track marketing-box clearfix animated" ng-class="{'fadeInUp':toStep3, 'fadeOutUp':!toStep3}" ng-show="toStep3">
+		<h2><a href="javascript:;" class="btn btn-primary step-btn" ng-click="downloadData()">提取数据</a>step3：预览及数据提取</h2>
+		<div class="step-data-main">
+			<h3>共计<b>{{fetchDataTotal}}</b>条数据</h3>
+			<table class="table">
+				<thead>
+					<tr>
+						<th class="text-center" width="8%">序号</th>
+						<th width="92%" ng-show="!dataModalName && !dataModalTel && !dataModalEmail && !dataModalAddress"></th>
+						<th class="text-center" ng-style="{'width':1/((dataModalName?1:0) + (dataModalTel?1:0) + (dataModalEmail?1:0) + (dataModalAddress?1:0))*92 + '%'  }" ng-show="dataModalName">姓名</th>
+						<th class="text-center" ng-style="{'width':1/((dataModalName?1:0) + (dataModalTel?1:0) + (dataModalEmail?1:0) + (dataModalAddress?1:0))*92 + '%'  }" ng-show="dataModalTel">手机号</th>
+						<th class="text-center" ng-style="{'width':1/((dataModalName?1:0) + (dataModalTel?1:0) + (dataModalEmail?1:0) + (dataModalAddress?1:0))*92 + '%'  }" ng-show="dataModalEmail">邮箱</th>
+						<th class="text-center" ng-style="{'width':1/((dataModalName?1:0) + (dataModalTel?1:0) + (dataModalEmail?1:0) + (dataModalAddress?1:0))*92 + '%'  }" ng-show="dataModalAddress">住址</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-show="persons.length==0">
+						<td colspan="5" class="text-center" style="padding-top:15px; padding-bottom:15px;">暂无匹配到的数据</td>
+					</tr>
+					<tr ng-repeat="p in persons">
+						<th class="text-center" scope="row">{{$index+1}}</th>
+						<td width="92%" ng-show="!dataModalName && !dataModalTel && !dataModalEmail && !dataModalAddress"></td>
+						<td class="text-center" ng-show="dataModalName">{{p.name}}</td>
+						<td class="text-center" ng-show="dataModalTel">{{p.tel}}</td>
+						<td class="text-center" ng-show="dataModalEmail">{{p.email}}</td>
+						<td class="text-center" ng-show="dataModalAddress">{{p.address}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
+</div>

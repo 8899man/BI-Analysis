@@ -1,0 +1,136 @@
+<div ng-controller="OwnerTypeController" ng-init="initializeController()">
+	<div class="title-position box-shadow-1 clearfix">
+		<h1>报表</h1>
+		<h2><a class="glyphicon glyphicon-home" href=""><i>首页</i></a> > 报表 > 客户 > 业主特征分析</h2>
+	</div>
+	<div class="content">
+		<div class="content-main">
+			<div class="border-1 border-1-gray box-shadow-1 bg-white owner-type-statistics">
+				<div class="border-left-3 report-title"><h2>业主特征分析</h2></div>
+				<div class="report-search box-shadow-1 clearfix">
+					<form action="" class="form-inline">
+						<div class="report-search-area">
+							<ul>
+								<li ng-class="{error: error.area}">
+									<select name="" id="" class="form-control" ng-model="areaSelected" ng-options="area.name for area in areas" ng-change="changeArea()">
+										<option value="">请选择区域</option>
+										<!-- <option value="1">集团</option>
+										<option value="2">华东区域</option>
+										<option value="3">华中区域</option>
+										<option value="4">华南区域</option> -->
+									</select>
+								</li>
+								<li class="report-search-area-city" ng-class="{error: error.city}">
+									<select name="" id="" class="form-control" ng-model="citySelected" ng-options="city.name for city in areaSelected.subs" ng-change="changeCity()">
+										<option value="">请选择城市</option>
+										<!-- <option value="1">不限</option>
+										<option value="2">深圳市</option>
+										<option value="3">广州市</option>
+										<option value="4">佛山市</option> -->
+									</select>
+								</li>
+							</ul>
+						</div>
+						<div class="report-search-others">
+							<ul>
+								<!-- <li>{{currentTimeInterval}}</li> -->
+								<!-- <li class="date-type">
+									<select name="" id="" class="form-control" ng-model="currentTimeInterval" ng-options="interval.title for interval in timeIntervals">
+									</select>
+								</li>
+								<li><label class="btn btn-default" ng-model="dateType" btn-radio="'7天'">7天</label></li>
+								<li><label class="btn btn-default" ng-model="dateType" btn-radio="'30天'">30天</label></li>
+								<li><input date-picker-ym type="text" class="data-select form-control" ng-model="dateYM"></li> 
+								<li>从：<input id="d4311" class="data-select form-control" type="text" ng-model="getFirstMonthDay" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'d4312\')||\'%y-%M-%d\'}'})"/> 
+                                                                                                至：<input id="d4312" class="data-select form-control" type="text" ng-model="dateYM" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'d4311\')}',maxDate:'%y-%M-%d'})"/>
+                                </li> -->
+								<li><a href="javascript:;" class="btn btn-primary" ng-click="search()">查询</a></li>
+								<li><a href="javascript:;" class="export-btn">导出</a></li>
+							</ul>
+						</div>
+					</form>
+				</div>
+				
+				<div class="report-search-table">
+					<div class="table-responsive">
+						<table class="table table-bordered table-condensed table-striped" ng-show="searchDataLoaded">
+							<tr class="no-bg">
+								<td rowspan="2" class="td-first"><div class="td-right">指标项</div><div class="td-left">业主类型</div></td>
+								<td rowspan="2">总数量</td>
+								<td colspan="{{sexs.length}}">性别</td>
+								<td colspan="{{ages.length}}">年龄段</td>
+								<td colspan="{{liveArea.length}}">工作区域</td>
+							</tr>
+							<tr class="no-bg">
+								<td ng-repeat="sex in sexs">{{sex.name}}</td>
+                                <td ng-repeat="age in ages">{{age.name}}</td>
+								<td ng-repeat="area in liveArea">{{area.name}}</td>
+							</tr>
+							<tr ng-repeat="owner in OwnerType">
+								<td class="font-bold">{{owner.ctype}}</td>
+								<!-- 
+								<td ng-repeat="num in owner.num">{{num[0]}}</td>
+								 -->
+								<td >{{owner.count}}</td>
+								<td ng-repeat="sex in sexs">{{owner[sex.alisName]}}</td>
+								<td ng-repeat="age in ages">{{owner[age.alisName]}}</td>
+								<td ng-repeat="area in liveArea">{{owner[area.alisName]}}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			
+			<div class="margin-top-20 box-shadow-1 bg-white owner-type-reports">
+				<div class="border-left-3 border-color-yellow report-title"><h2>各维度图表呈现</h2></div>
+			</div>
+
+			<div class="owner-type-reports-main clearfix" ng-show="searchDataLoaded">
+				<div class="owner-type-reports-main-l">
+
+					<div class="box-shadow-1 bg-white margin-top-10 border-radius-3 border-1 border-1-gray border-top-3">
+						<div class="report-table-title"><h2>数量统计</h2></div>
+						<div class="report-table-main report-table-1">
+							<highchart class="chart" config="chartConfig1"></highchart>
+						</div>
+					</div>
+
+					<div class="box-shadow-1 bg-white margin-top-10 border-radius-3 border-1 border-1-gray border-top-3">
+						<div class="report-table-title"><h2>居住区域分布</h2></div>
+						<div class="report-table-main report-table-2">
+							<highchart class="chart" config="chartConfig2"></highchart>
+						</div>
+					</div>
+
+				</div>
+				<div class="owner-type-reports-main-r">
+					
+					<div class="box-shadow-1 bg-white margin-top-10 border-radius-3 border-1 border-1-gray border-top-3">
+						<div class="report-table-title"><h2>性别分布</h2></div>
+						<div class="report-table-main report-table-3">
+							<highchart class="chart" config="chartConfig3"></highchart>
+						</div>
+					</div>
+
+					<div class="box-shadow-1 bg-white margin-top-10 border-radius-3 border-1 border-1-gray border-top-3">
+						<div class="report-table-title"><h2>年龄段分布</h2></div>
+						<div class="report-table-main report-table-4">
+							<highchart class="chart" config="chartConfig4"></highchart>
+						</div>
+					</div>
+
+					<div class="box-shadow-1 bg-white margin-top-10 border-radius-3 border-1 border-1-gray border-top-3">
+						<div class="report-table-title report-table-title-5"><h2>购买次数分布</h2></div>
+						<div class="report-table-main report-table-5">
+							<highchart class="chart" config="chartConfig5"></highchart>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		
+
+		</div>
+	</div>
+</div>
+

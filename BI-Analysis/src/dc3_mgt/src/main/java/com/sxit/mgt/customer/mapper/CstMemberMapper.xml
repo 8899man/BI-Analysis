@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.customer.dao.CstMemberDao">
+
+	 <resultMap id="CstMemberMap" type="CstMember" >
+		<result column="memcode" property="memcode" jdbcType="VARCHAR" />
+		<result column="ljpoint" property="ljpoint" jdbcType="DOUBLE" />
+		<result column="memlevel" property="memlevel" jdbcType="VARCHAR" />
+		<result column="maxmemlevel" property="maxmemlevel" jdbcType="VARCHAR" />
+	 </resultMap>
+	 
+	 <resultMap id="bprojectMap" type="com.sxit.mgt.customer.vo.BProjectModel">
+	 	<result column="projGUID" property="projGUID" jdbcType="VARCHAR" />
+	 	<result column="projName" property="projName" jdbcType="VARCHAR" />
+	 	<result column="projArea" property="projArea" jdbcType="VARCHAR" />
+	 	<result column="price" property="price" jdbcType="DOUBLE" />
+	 	<result column="roomStu" property="roomStu" jdbcType="VARCHAR" />
+	 	<result column="bldGUID" property="bldGUID" jdbcType="VARCHAR" />
+	 	<result column="bldArea" property="bldArea" jdbcType="DOUBLE" />
+	 	<result column="bldProPerty" property="bldProPerty" jdbcType="VARCHAR" />
+	 </resultMap>
+	 
+	 <resultMap id="UnionTradeMap" type="com.sxit.mgt.customer.vo.UnionTrade">
+	 	<result column="room" property="room" jdbcType="VARCHAR" />
+	 	<result column="roomGUID" property="roomGUID" jdbcType="VARCHAR" />
+	 	<result column="projName" property="projName" jdbcType="VARCHAR" />
+	 	<result column="bldName" property="bldName" jdbcType="VARCHAR" />
+	 </resultMap>
+	 
+	<select id="getCstMember" resultMap="CstMemberMap" parameterType="java.lang.Long">
+		SELECT
+		memCode,
+		memLevel,
+		maxMemlevel,
+		ljPoint
+		FROM
+		cst_member
+		WHERE
+		cstGUID = #{cstGUID}
+		
+	</select>
+	
+	<!-- 查询房产特征的list -->
+	<select id="getTradeRoomList" resultMap="bprojectMap" parameterType="java.lang.String">
+		select
+		br.projGUID projGUID,
+		br.bldGUID bldGUID,
+		br.roomStru roomStru,
+		br.bldArea bldArea
+		from
+		b_room br
+		where
+		br.roomGUID = #{productCode}
+	</select>
+	
+	<select id="getTradeProjList" resultMap="bprojectMap" parameterType="java.lang.String">
+		select
+		bp.projGUID projGUID,
+		bp.projName projName,
+		bp.projArea projArea
+		from
+		b_proj bp
+		where
+		bp.projGUID = #{projGUID}
+	</select>
+	
+	<select id="getTradeBBuilding" resultMap="bprojectMap" parameterType="java.lang.String">
+		select
+		bb.bldProPerty bldProPerty
+		from
+		b_building bb
+		where
+		bb.bldGUID = #{bldGUID}
+	</select>
+	
+	<!-- 获取意向特征的list -->
+	<select id="getOppList" resultMap="bprojectMap" parameterType="java.lang.Long">
+		SELECT
+		bp.projGUID projGUID,
+		bp.projName projName
+		from
+		(
+		select
+		oppGUID
+		from
+		s_cst_opp
+		where
+		cstGUID = #{cstGUID}
+		and
+		oppGUID != ''
+		group by
+		oppGUID
+		) cso
+		LEFT JOIN
+		s_opp so
+		ON
+		cso.oppGUID = so.oppGUID
+		LEFT JOIN
+		b_proj bp
+		on
+		so.projGUID = bp.projGUID
+	</select>
+	
+	<!-- 客户关联房产 -->
+	<select id="getUnionTradeBuilding" resultMap="UnionTradeMap" parameterType="java.lang.String">
+		select
+		bb.bldName bldName
+		from
+		b_building bb
+		where
+		bb.bldGUID = #{bldGUID}
+	</select>
+	
+	<!-- 用作计算客户类型 -->
+	<select id="getSProductOrderCount" resultType="int" parameterType="java.lang.Long">
+		select count(*) cnt from s_product_order where cstGUID = #{cstGUID}
+	</select>
+	
+</mapper>

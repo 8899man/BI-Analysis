@@ -1,0 +1,164 @@
+<div ng-controller="industryListController" ng-init="initializeController()">
+  <div class="btn-toolbar">
+    <input type="hidden" name="hidIsReLoad" id="hidIsReLoad" />
+    <div class="btn-group"></div>
+  </div>
+  <div class="well" style="min-height:450px;">
+      <div class="top_search form-inline">
+        <div class="row">
+          <div class="col-md-9">
+            <div class="form-group">
+              <input type="text" name="title" placeholder="请输入检索内容"
+               ng-keypress="enter($event)"
+               ng-model="searchTxt" maxlength="100" class="input-xlarge form-control">
+            </div>
+            <a sysUser="button" ng-click="getIndustrys('search');" class="btn btn-success"><i class="glyphicon glyphicon-search"></i> 查询</a> <a class="btn purple" sysUser="button" ng-click="addModal();"><i class="glyphicon glyphicon-plus"></i> 添加</a> </div>
+          <div class="col-md-3 "> <a class="btn grey-salt pull-right" sysUser="button" ng-click="exportExcel();"><i class="glyphicon glyphicon-share-alt"></i> 导出</a> </div>
+        </div>
+      </div>
+
+    <table class="table table-striped table-hover table-bordered">
+      <thead>
+        <tr>
+	                <th>业态ID</th>
+                    <th>业态名称</th>
+                    
+	 	    
+	 <th class="text-center" width="16%"> 操作 </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="industry in Industrys" ng-class="{'tableTrColor':industry.IsCurrent==1}" on-finish-render-filters>
+                <td> {{industry.industryid}} </td>
+                <td> {{industry.industryname}} </td>
+                
+
+          <td class="text-center">
+             <button class="btn btn-info btn-xs" type="button" href="#" data-toggle="modal" ng-click="orgModal(industry.industryid);" title="组织"><span class="glyphicon glyphicon-certificate"></span> 组织 </button>
+          	<button class="btn btn-info btn-xs" type="button" href="#" data-toggle="modal" ng-click="editModal(industry.industryid);" title="修改"> <span class="glyphicon glyphicon-edit"></span> 修改 </button>
+            <button class="btn btn-danger btn-xs" type="button" href="#basic" data-toggle="modal" ng-click="deleteOne(industry.industryid);"> <span class="glyphicon glyphicon-trash"  title="删除"></span> 删除 </button></td>
+        </tr>
+      </tbody>
+    </table>
+    <pagination max-size="10" rotate="false" boundary-links="true" total-items="TotalRows" items-per-page="pageSize"
+                    ng-change="pageChanged()" ng-model="currentPage" class="pagination-sm"
+                    previous-text="上一页" next-text="下一页" first-text="首页" last-text="末页" style="margin: 0; display: block;"></pagination>
+    <span class="pagination_span">共{{TotalRows}}条,每页{{pageSize}}条,第{{currentPage}}页</span>
+    </div>
+
+    <script type="text/ng-template" id="addModal.html">
+        <div>
+            <form class="form-horizontal" industry="form" name="myForm" novalidate>
+                <div class="modal-header">
+                    <h3 class="modal-title">{{HeaderText}}业态</h3>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" ng-model="industryid" />
+                    <table class="table table-striped table-bordered table-hover">
+
+		         <input type="hidden" ng-model="industryid" />
+				 <tr>
+                  <td width="20%">业态Id:</td>
+                  <td width="80%">
+                   <input type="text" name="industryid"  required ng-model="industryModal.industryid" ng-minlength="2" ng-maxlength="100" class="input-xlarge">
+                   <span style="color:red">
+                    <span ng-show="myForm.industryid.$error.required">必填</span>
+                    <span ng-show="myForm.industryid.$error.minlength">太短</span>
+                    <span ng-show="myForm.industryid.$error.maxlength">太长</span>
+                   </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="20%">业态名称:</td>
+                  <td width="80%">
+                   <input type="text" name="industryname"  required ng-model="industryModal.industryname" ng-minlength="2" ng-maxlength="100" class="input-xlarge">
+                   <span style="color:red">
+                    <span ng-show="myForm.industryname.$error.required">必填</span>
+                    <span ng-show="myForm.industryname.$error.minlength">太短</span>
+                    <span ng-show="myForm.industryname.$error.maxlength">太长</span>
+                   </span>
+                  </td>
+                </tr>
+                
+
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" ng-disabled="myForm.$invalid" ng-click="ok(industryid,thisIndustryNameToEdit,thisDescriptionToEdit)">提交</button>
+                    <button class="btn btn-warning" ng-click="cancel()">取消</button>
+                </div>
+            </form>
+        </div>
+    </script> 
+    <script type="text/ng-template" id="editModal.html">
+        <div>
+            <form class="form-horizontal" industry="form" name="myForm" novalidate>
+                <div class="modal-header">
+                    <h3 class="modal-title">{{HeaderText}}业态</h3>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" ng-model="industryid" />
+                    <table class="table table-striped table-bordered table-hover">
+		                       <input type="hidden" ng-model="industryid" />
+                				 <tr>
+                  <td width="20%">业态Id:</td>
+                  <td width="80%">
+                   <input type="text" name="industryid"  required ng-model="industryModal.industryid" ng-minlength="2" ng-maxlength="100" class="input-xlarge">
+                   <span style="color:red">
+                    <span ng-show="myForm.industryid.$error.required">必填</span>
+                    <span ng-show="myForm.industryid.$error.minlength">太短</span>
+                    <span ng-show="myForm.industryid.$error.maxlength">太长</span>
+                   </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="20%">业态名称:</td>
+                  <td width="80%">
+                   <input type="text" name="industryname"  required ng-model="industryModal.industryname" ng-minlength="2" ng-maxlength="100" class="input-xlarge">
+                   <span style="color:red">
+                    <span ng-show="myForm.industryname.$error.required">必填</span>
+                    <span ng-show="myForm.industryname.$error.minlength">太短</span>
+                    <span ng-show="myForm.industryname.$error.maxlength">太长</span>
+                   </span>
+                  </td>
+                </tr>
+
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" ng-disabled="myForm.$invalid" ng-click="ok(industryid,thisIndustryNameToEdit,thisDescriptionToEdit)">提交</button>
+                    <button class="btn btn-warning" ng-click="cancel()">取消</button>
+                </div>
+            </form>
+        </div>
+    </script> 
+    <script type="text/ng-template" id="orgModal.html">
+        <div>
+            <form class="form-horizontal" role="form" name="myForm" novalidate>
+                <div class="modal-header">
+                    <h3 class="modal-title">组织</h3>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" ng-model="roleId" />
+                    <table class="table table-striped table-bordered table-hover">
+					    <tr>
+							<td style=" padding-left:20px;text-align:left">
+							业态:{{industryModal.industryname}}</td>
+						</tr>
+                        <tr>
+                            <td>
+								<div style="max-height:400px; overflow:auto;">
+                                	<div id="powerTree" isTree class="demo" style="padding-left:20px;text-align:left; margin-top:1em; min-height:200px;"  ng-init="initTree()"></div>
+								</div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" ng-disabled="myForm.$invalid" ng-click="ok()">提交</button>
+                    <button class="btn btn-warning" ng-click="cancel()">取消</button>
+                </div>
+            </form>
+        </div>
+    </script> 
+</div>

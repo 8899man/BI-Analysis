@@ -1,0 +1,101 @@
+{
+	"isPurchas": true,
+	"dealAmount": {
+		"lease":{
+			"yesterdayDeal": 5.8,
+			"thisMonthDeal": 88,
+			"thisSeasonDeal": 320,
+			"thisYearDeal": 812
+		},
+		"sell":{
+			"yesterdayDeal": 15.8,
+			"thisMonthDeal": 288,
+			"thisSeasonDeal": 1320,
+			"thisYearDeal": 2812
+		}
+	},
+	"sourceDisk": {
+		"lease": {
+			"thisWeekAdded": 13,
+			"stockBalance": 1036
+		},
+		"sell": {
+			"thisWeekAdded": 23,
+			"stockBalance": 2960
+		}
+	},
+	"thisMonthTurnoverList": {
+		"lease": [
+			{
+				"name": "山海雅居",
+				"money": 30320
+			},
+			{
+				"name": "海滨假日",
+				"money": 20320
+			},
+			{
+				"name": "碧海蓝天",
+				"money": 10320
+			}
+		],
+		"sell": [
+			{
+				"name": "春天海",
+				"money": 3320
+			},
+			{
+				"name": "幸福海",
+				"money": 2032
+			},
+			{
+				"name": "上东湾",
+				"money": 1320
+			}
+		]
+	},
+	"tourists": {
+		"lease": {
+			"thisWeekAdded": 33,
+			"totalTourists": 4556
+		},
+		"sell": {
+			"thisWeekAdded": 34,
+			"totalTourists": 5663
+		}
+	},
+	"rateAndCycle": {
+		"sourceTransferLease": {
+			"rate": 12,
+			"cycle": 36
+		},
+		"sourceTransferSell": {
+			"rate": 6,
+			"cycle": 42
+		}
+	},
+	"thisMonthSales": {
+		"categories": ["6月1日", "6月4日", "6月7日", "6月10日", "6月13日", "6月16日", "6月19日", "6月22日", "6月25日", "6月28日"],
+		"columnSeries": [
+			{
+				"name": "出售套数",
+	            "data": [30, 10, 32, 21, 36, 9, 85, 53, 3, 34]
+			},
+			{
+				"name": "出租套数",
+	            "data": [34, 30, 10, 32, 21, 36, 9, 65, 53, 3]
+			}
+		],
+		"splineSeries": [
+			{
+				"name": "出售代理费",
+	            "data": [100, 56, 92, 42, 155, 12, 25, 63, 43, 52]
+			},
+			{
+				"name": "出租中介收入",
+	            "data": [86, 32, 60, 36, 46, 24, 63, 25, 70, 69]
+			}
+		]
+	}
+	
+}

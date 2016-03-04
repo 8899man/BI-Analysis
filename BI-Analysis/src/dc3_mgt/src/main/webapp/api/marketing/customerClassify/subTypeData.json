@@ -1,0 +1,69 @@
+{
+	"total": 20000,
+	"purchasedCustomer": {
+		"value": "1",
+		"title": "已购客户",
+		"amount": 7000,
+		"list": [
+			{
+				"value": "11",
+				"title": "投资客户",
+				"amount": 4000
+			},
+			{
+				"value": "12",
+				"title": "自住客户",
+				"amount": 1000
+			},
+			{
+				"value": "13",
+				"title": "期房客户",
+				"amount": 1000
+			},
+			{
+				"value": "14",
+				"title": "流失业主",
+				"amount": 1000
+			}
+		]
+	},
+	"intentCustomer": {
+		"value": "2",
+		"title": "意向客户",
+		"amount": 6000,
+		"list": [
+			{
+				"value": "21",
+				"title": "跟进中意向客户",
+				"amount": 3000
+			},
+			{
+				"value": "22",
+				"title": "已逾期意向客户",
+				"amount": 1500
+			},
+			{
+				"value": "23",
+				"title": "已流失意向客户",
+				"amount": 1500
+			}
+		]
+	},
+	"rentalCustomer": {
+		"value": "3",
+		"title": "租赁客户",
+		"amount": 5000,
+		"list": [
+			{
+				"value": "31",
+				"title": "有效租赁客户",
+				"amount": 2500
+			},
+			{
+				"value": "32",
+				"title": "历史租赁客户",
+				"amount": 2500
+			}
+		]
+	}
+}

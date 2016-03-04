@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.dashboard.dao.DashBoardDao">
+	<!-- 销售仪表盘 -->
+	<resultMap type="com.sxit.mgt.dashboard.vo.SalesMoneyModel" id="SalesMoneyModelMap">
+		<result column="yesterdayDeal" property="yesterdayDeal" jdbcType="VARCHAR" />
+		<result column="thisMonthDeal" property="thisMonthDeal" jdbcType="VARCHAR" />
+		<result column="thisSeasonDeal" property="thisSeasonDeal" jdbcType="VARCHAR" />
+		<result column="thisYearDeal" property="thisYearDeal" jdbcType="VARCHAR" />
+		<result column="stock" property="stock" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap type="com.sxit.mgt.dashboard.vo.TMonTopThreeModel" id="TMonTopThreeModelMap">
+		<result column="projName" property="name" jdbcType="VARCHAR" />
+		<result column="number" property="number" jdbcType="BIGINT" />
+		<result column="money" property="money" jdbcType="DOUBLE" />
+	</resultMap>
+	<resultMap type="com.sxit.mgt.dashboard.vo.MonthOpenedModel" id="MonthOpenedModelMap">
+		<result column="projName" property="projName" jdbcType="VARCHAR" />
+		<result column="projGUID" property="projGUID" jdbcType="VARCHAR" />
+		<result column="openDate" property="openDate" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap type="com.sxit.mgt.dashboard.vo.MonthSalesModel" id="MonthSalesModelMap">
+		<result column="dataDate" property="dataDate" jdbcType="VARCHAR" />
+		<result column="dealSet" property="dealSet" jdbcType="VARCHAR" />
+		<result column="orderSet" property="orderSet" jdbcType="VARCHAR" />
+		<result column="newNum" property="newNum" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<!-- 客户仪表盘 -->
+	<resultMap type="com.sxit.mgt.dashboard.vo.CustonerAnalysModel" id="CustonerAnalysMap">
+		<result column="complainyest" property="complainyest" jdbcType="BIGINT" />
+		<result column="complainno" property="complainno" jdbcType="BIGINT" />
+		<result column="complaincomp" property="complaincomp" jdbcType="BIGINT" />
+		<result column="repairyest" property="repairyest" jdbcType="BIGINT" />
+		<result column="repairno" property="repairno" jdbcType="BIGINT" />
+		<result column="repaircomp" property="repaircomp" jdbcType="BIGINT" />
+	</resultMap>
+	
+	<resultMap type="com.sxit.mgt.dashboard.vo.CustomerOwnerAnalysModel" id="CustomerOwnerAnalysMap">
+		<result column="ownerType" property="name" jdbcType="VARCHAR" />
+		<result column="ownerNum" property="number" jdbcType="BIGINT" />
+	</resultMap>
+	
+	<resultMap type="com.sxit.mgt.dashboard.vo.RYKMonthRuhuoModel" id="RYKMonthRuhuoMap">
+		<result column="currSeq" property="currSeq" jdbcType="BIGINT" />
+		<result column="projGUID" property="projGUID" jdbcType="VARCHAR" />
+		<result column="projName" property="projName" jdbcType="VARCHAR" />
+		<result column="ruhuoDate" property="ruhuoDate" jdbcType="VARCHAR" />
+		<result column="checkinRange" property="checkinRange" jdbcType="VARCHAR" />
+		<result column="houseHoldNum" property="houseHoldNum" jdbcType="BIGINT" />
+	</resultMap>
+	
+	<resultMap type="com.sxit.mgt.dashboard.vo.RYKMonthAnalyseModel" id="RYKMonthAnalyseMap">
+		<result column="repairNum" property="repairNum" jdbcType="BIGINT" />
+		<result column="complainNum" property="complainNum" jdbcType="BIGINT" />
+		<result column="dataDate" property="dataDate" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<!-- 置业仪表盘 -->
+	<resultMap type="com.sxit.mgt.dashboard.vo.RZPRentSaleModel" id="RZPRentSaleMap">
+		<result column="rentYestDeal" property="rentYestDeal" jdbcType="DOUBLE" />
+		<result column="rentMonthDeal" property="rentMonthDeal" jdbcType="DOUBLE" />
+		<result column="rentSeasonDeal" property="rentSeasonDeal" jdbcType="DOUBLE" />
+		<result column="rentYearDeal" property="rentYearDeal" jdbcType="DOUBLE" />
+		<result column="saleYestDeal" property="saleYestDeal" jdbcType="DOUBLE" />
+		<result column="saleMonthDeal" property="saleMonthDeal" jdbcType="DOUBLE" />
+		<result column="saleSeasonDeal" property="saleSeasonDeal" jdbcType="DOUBLE" />
+		<result column="saleYearDeal" property="saleYearDeal" jdbcType="DOUBLE" />
+	</resultMap>
+	
+	<resultMap type="com.sxit.mgt.dashboard.vo.RYZBuildInfoModel" id="RYZBuildInfoMap">
+		<result column="rentWeekAdd" property="rentWeekAdd" jdbcType="BIGINT" />
+		<result column="rentNum" property="rentNum" jdbcType="BIGINT" />
+		<result column="saleWeekAdd" property="saleWeekAdd" jdbcType="BIGINT" />
+		<result column="saleNum" property="saleNum" jdbcType="BIGINT" />
+	</resultMap>
+	
+	<resultMap type="com.sxit.mgt.dashboard.vo.RYProjSalesInfoModel" id="RYProjSalesInfoMap">
+		<result column="projGUID" property="projGUID" jdbcType="VARCHAR" />
+		<result column="projName" property="name" jdbcType="VARCHAR" />
+		<result column="dealAmount" property="money" jdbcType="DOUBLE" />
+	</resultMap>
+	
+	<resultMap type="com.sxit.mgt.dashboard.vo.RYTransAnalyseModel" id="RYTransAnalyseMap">
+		<result column="rentRate" property="rentRate" jdbcType="DOUBLE" />
+		<result column="rentWeek" property="rentWeek" jdbcType="VARCHAR" />
+		<result column="saleDealRate" property="saleDealRate" jdbcType="DOUBLE" />
+		<result column="saleDealWeek" property="saleDealWeek" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap type="com.sxit.mgt.dashboard.vo.RYZProjInfoModel" id="RYZProjInfoMap">
+		<result column="dataDate" property="dataDate" jdbcType="VARCHAR" />
+		<result column="saleNum" property="saleNum" jdbcType="BIGINT" />
+		<result column="rentNum" property="rentNum" jdbcType="BIGINT" />
+		<result column="saleAmount" property="saleAmount" jdbcType="DOUBLE" />
+		<result column="rentAmount" property="rentAmount" jdbcType="DOUBLE" />
+	</resultMap>
+	
+	
+	<!-- 销售仪表盘 -->
+	<!-- 取最大的日期 -->
+	<select id="getMaxDate" resultType="java.lang.String">
+		SELECT
+			DATE_FORMAT(max(create_time), '%Y-%m-%d') date
+		FROM
+			rpt_proj_house
+	</select>
+	
+	<select id="getDealAmount" parameterType="java.lang.String" resultMap="SalesMoneyModelMap">
+		SELECT
+			SUM(proj_deal01) yesterdayDeal,
+			SUM(proj_deal02) thisMonthDeal,
+			SUM(proj_deal03) thisSeasonDeal,
+			SUM(proj_deal04) thisYearDeal
+		FROM
+			rpt_proj_house
+		WHERE
+			create_time = #{createTime}
+	</select>
+	
+	<select id="getDealNumber" parameterType="java.lang.String" resultMap="SalesMoneyModelMap">
+		SELECT
+			SUM(proj_deal02_set) thisMonthDeal,
+			SUM(proj_deal04_set) thisYearDeal,
+			SUM(proj_set02) stock
+		FROM
+			rpt_proj_house
+		WHERE
+			create_time = #{createTime}
+	</select>
+	
+	<select id="getThisMonthVisitedTopThree" parameterType="java.lang.String" resultMap="TMonTopThreeModelMap">
+		SELECT
+			proj_name projName,
+			SUM(vist_num) number
+		FROM
+			rpt_proj_vist_rank
+		where
+			count_month = #{month}
+		GROUP BY
+			proj_guid
+		ORDER BY
+			number desc
+		limit 3
+	</select>
+	
+	<select id="getTopThree" parameterType="java.lang.String" resultMap="TMonTopThreeModelMap">
+		SELECT
+			proj_name projName,
+			SUM(deal_amount) money
+		FROM
+			rpt_proj_vist_rank
+		where
+			count_month = #{month}
+		GROUP BY
+			proj_guid
+		ORDER BY
+			money desc
+		limit 3
+	</select>
+	
+	<select id="getLastThree" parameterType="java.lang.String" resultMap="TMonTopThreeModelMap">
+		SELECT
+			a.projName projName,
+			a.money money
+		FROM
+		(
+			SELECT
+			proj_name projName,
+			SUM(deal_amount) money
+			FROM
+			rpt_proj_vist_rank
+			where
+			count_month = #{month}
+			GROUP BY
+			proj_guid
+			ORDER BY
+			money
+			asc
+			limit 3
+		) a
+		order by
+			a.money desc
+	</select>
+	
+	<select id="getProjCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+		SELECT
+			count(a.proj_guid) total
+		FROM
+		(
+			SELECT
+			proj_guid
+			FROM
+			rpt_proj_vist_rank
+			where
+			count_month = #{month}
+			GROUP BY
+			proj_guid
+		) a
+	</select>
+	
+	<select id="getThisMonthOpened" parameterType="java.util.Map" resultMap="MonthOpenedModelMap">
+		<![CDATA[
+		SELECT
+			DATE_FORMAT(bgnSaleDate, '%c-%e') openDate,
+			projName projName,
+			projGUID projGUID
+		FROM
+			b_proj
+		where
+			bgnSaleDate >= #{startDate}
+			and
+			bgnSaleDate <= #{endDate}
+		order by
+			bgnSaleDate asc	
+		]]>	
+	</select>
+	
+	<select id="getThisMonthSales" parameterType="java.util.Map" resultMap="MonthSalesModelMap">
+		<![CDATA[
+		SELECT
+			DATE_FORMAT(data_date, '%c月%e日') dataDate,
+			sum(deal_set) dealSet,
+			sum(order_set) orderSet,
+			sum(new_vist_num) newNum
+		FROM
+			rpt_month_sale_trend
+		where
+			data_date >= #{startDate}
+			and
+			data_date <= #{endDate}
+		GROUP BY
+			data_date
+		order by
+			data_date asc
+		]]>	
+	</select>
+	
+	<!-- 客户仪表盘 -->
+	<select id="getMaxDateFromRptYKWA" resultType="java.lang.String">
+		SELECT
+			DATE_FORMAT(max(create_time), '%Y-%m-%d') date
+		FROM
+			rpt_ybp_kf_wy_analyse
+	</select>
+	
+	<select id="getCustonerAnalyse" parameterType="java.lang.String" resultMap="CustonerAnalysMap">
+		select
+			sum(complain_yest_add) complainyest,
+			sum(complain_no_solve) complainno,
+			sum(complain_comp_cycle)/sum(case when complain_comp_cycle >0 then 1 else 0 end) complaincomp,
+			sum(repair_yest_add) repairyest,
+			sum(repair_no_solve) repairno,
+			sum(repair_comp_cycle)/sum(case when repair_comp_cycle >0 then 1 else 0 end) repaircomp
+		from
+			rpt_ybp_kf_wy_analyse
+		where
+			create_time = #{createTime}
+	</select>
+	
+	<select id="getCustomerYezhu1" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT
+			count(DISTINCT cstguid)
+		FROM
+			report_cst_deal_mid_own
+		WHERE
+			deal_date = #{createTime}	
+	</select>
+	
+	<select id="getCustomerYezhu2" parameterType="java.util.Map" resultType="java.lang.String">
+		SELECT
+			count(DISTINCT cstguid)
+		FROM
+			report_cst_deal_mid_own
+		WHERE
+		<![CDATA[
+			deal_date >= #{startTime}
+			and
+			deal_date <= #{endTime}
+		]]>
+	</select>
+	
+	<select id="getCustomerYezhu3" resultType="java.lang.String">
+		SELECT
+			count(DISTINCT cstguid)
+		FROM
+			report_cst_deal_mid_own
+	</select>
+	
+	<select id="getCustomerOwnerAnalys" resultMap="CustomerOwnerAnalysMap">
+		SELECT 
+			owner_type ownerType,
+			sum(Owner_num) ownerNum
+		from
+			rpt_owner_feature_analyse 
+  		group by owner_type
+	</select>
+	
+	<select id="getRYKMonthRuhuo" parameterType="java.lang.String" resultMap="RYKMonthRuhuoMap">
+		SELECT
+			curr_seq currSeq,
+			projguid projGUID,
+			projname projName,
+			DATE_FORMAT(ruhuo_date, '%Y年%c月%e日') ruhuoDate,
+			checkin_range checkinRange,
+			household_num houseHoldNum
+		FROM
+			rpt_ybp_kf_month_ruhuo
+		WHERE
+			ruhuo_month = #{month}
+		order by
+			curr_seq asc
+	</select>
+	
+	<select id="getRYKMonthAnalyse" parameterType="java.lang.String" resultMap="RYKMonthAnalyseMap">
+		SELECT
+			sum(repair_num) repairNum,
+			sum(complain_num) complainNum,
+			DATE_FORMAT(data_date, '%c月%e日') dataDate
+		FROM
+			rpt_ybp_kf_month_analyse
+		WHERE
+			count_month = #{month}
+		group by
+			data_date
+		order by
+			data_date asc
+	</select>
+	
+	<!-- 置业仪表盘 -->
+	<select id="getRZPRentSale" resultMap="RZPRentSaleMap">
+		select
+			rent_yest_deal rentYestDeal,
+			rent_month_deal rentMonthDeal,
+			rent_season_deal rentSeasonDeal,
+			rent_year_deal rentYearDeal,
+			sale_yest_deal saleYestDeal,
+			sale_month_deal saleMonthDeal,
+			sale_season_deal saleSeasonDeal,
+			sale_year_deal saleYearDeal
+		from
+			rpt_zy_proj_rent_sale 
+		where 
+			create_time = (select max(create_time) from rpt_zy_proj_rent_sale)
+	</select>
+	
+	<select id="getRYZBuildInfo" resultMap="RYZBuildInfoMap">
+		select
+			rent_week_add rentWeekAdd,
+			rent_num rentNum,
+			sale_week_add saleWeekAdd,
+			sale_num saleNum
+		from
+			rpt_ybp_zy_build_info 
+		where 
+			create_time = (select max(create_time) from rpt_ybp_zy_build_info)
+	</select>
+	
+	<select id="getRYZCstInfo" resultMap="RYZBuildInfoMap">
+		select
+			rent_week_add rentWeekAdd,
+			rent_cst_num rentNum,
+			sale_week_add saleWeekAdd,
+			sale_cst_num saleNum
+		from
+			rpt_ybp_zy_cst_info 
+		where 
+			create_time = (select max(create_time) from rpt_ybp_zy_cst_info)
+	</select>
+	
+	<select id="getRYProjSalesInfo" parameterType="java.lang.String" resultMap="RYProjSalesInfoMap">
+		select 
+			proj_GUID projGUID,
+			proj_name projName,
+			SUM(deal_amount) dealAmount
+		from
+			rpt_ybp_proj_sale_info
+		where
+			count_month = #{month}
+			and
+			trade_type = 'SALE'
+		group by 
+			proj_GUID
+		order by
+			dealAmount desc
+		limit 3
+	</select>
+	
+	<select id="getRYProjRentInfo" parameterType="java.lang.String" resultMap="RYProjSalesInfoMap">
+		select 
+			proj_GUID projGUID,
+			proj_name projName,
+			SUM(deal_amount) dealAmount
+		from
+			rpt_ybp_proj_sale_info
+		where
+			count_month = #{month}
+			and
+			trade_type = 'RENT'
+		group by
+			proj_GUID
+		order by
+			dealAmount desc
+		limit 3
+	</select>
+	
+	<select id="getRYTransAnalyse" resultMap="RYTransAnalyseMap">
+		select 
+			sum(rent_rate)/count(*) rentRate,
+			sum(rent_week)/count(*) rentWeek,
+			sum(sale_deal_rate)/count(*) saleDealRate,
+			sum(sale_deal_week)/count(*)
+		from
+			rpt_ybp_translate_analyse
+		WHERE
+			create_time = (select max(create_time) from rpt_ybp_translate_analyse)
+	</select>
+	
+	<select id="getRYZProjInfo" parameterType="java.lang.String" resultMap="RYZProjInfoMap">
+		select 
+			sale_num saleNum,
+			rent_num rentNum,
+			sale_amount saleAmount,
+			rent_amount rentAmount,
+			DATE_FORMAT(data_date, '%c月%e日') dataDate
+		from
+			rpt_ybp_zy_m_sale_income
+		WHERE
+			count_month = #{month}
+		order by
+			data_date asc
+	</select>
+	
+</mapper>

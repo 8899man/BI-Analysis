@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.system.dao.BOrgDao">
+	 
+
+	 <resultMap id="BOrgMap" type="BOrg" >
+	    <id column="orgguid" property="orgguid" jdbcType="VARCHAR" />
+		<result column="parentguid" property="parentguid" jdbcType="VARCHAR" />
+		<result column="orgname" property="orgname" jdbcType="VARCHAR" />
+		<result column="orgtype" property="orgtype" jdbcType="INTEGER" />
+		<result column="subtype" property="subtype" jdbcType="INTEGER" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="path" property="path" jdbcType="VARCHAR" />
+
+	 </resultMap>
+	 
+	 <resultMap id="ProjMap" type="SysProj" >
+	    <id column="projguid" property="projguid" jdbcType="VARCHAR" />
+		<result column="projname" property="projname" jdbcType="VARCHAR" />
+		<result column="companyguid" property="companyguid" jdbcType="VARCHAR" />
+		<result column="parentguid" property="parentguid" jdbcType="VARCHAR" />
+		<result column="ifend" property="ifend" jdbcType="TINYINT" />
+	 </resultMap>
+	 
+	 <resultMap id="AreaMap" type="com.sxit.mgt.reports.dto.BAreaCompany" >
+		<result column="id" property="id" jdbcType="VARCHAR" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+	 </resultMap>
+	 
+	<select id="getBOrgList" resultMap="BOrgMap" parameterType="java.util.Map">
+		select
+		orgguid,
+		parentguid,
+		orgname,
+		orgtype,
+		subtype,
+		remark,
+		path
+		from
+		b_org
+		<where>  
+	        <if test="searchTxt != null">  
+	            and 
+	            (
+	             bOrg_name like CONCAT('%','${searchTxt}','%' )
+	            )  
+	        </if>
+        </where>
+        order by orgguid desc
+	</select>
+	
+    <select id="getAllProjList" resultMap="ProjMap" >
+		select
+		projguid,
+		projname,
+		companyguid,
+		parentguid,
+		level,
+		ifend
+		from
+		b_proj
+	</select>
+	
+	<select id="getAllBOrgList" resultMap="BOrgMap" parameterType="java.util.Map">
+		select
+		orgguid,
+		parentguid,
+		orgname,
+		orgtype,
+		subtype,
+		remark,
+		path
+		from
+		b_org
+		<where>  
+	        <if test="searchTxt != null">  
+	            and 
+	            (
+	             orgname like CONCAT('%','${searchTxt}','%' )
+	            )  
+	        </if>
+	        and orgtype = 3  and subtype in (1,2,3,4,5)
+        </where>
+	</select>
+	
+	
+	<select id="getAllBOrgListByIndustry" resultMap="BOrgMap">
+		select
+		orgguid,
+		parentguid,
+		orgname,
+		orgtype,
+		subtype,
+		remark,
+		path
+		from
+		b_org
+		where orgtype = 3 and  subtype in (1,5)
+	</select>
+	
+	
+	<select id="getAllBOrgListByPower" resultMap="BOrgMap">
+		select
+		orgguid,
+		parentguid,
+		orgname,
+		orgtype,
+		subtype,
+		remark,
+		path
+		from
+		b_org
+		where orgtype = 3  and subtype in (1,2,3,5)
+	</select>
+	
+
+	<select id="getHaveBOrgList" resultMap="BOrgMap">
+		select
+		orgguid,
+		parentguid,
+		orgname,
+		orgtype,
+		subtype,
+		remark
+		from
+		b_org
+		where orgguid in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item.orgguid}
+		</foreach>
+	</select>
+
+	<select id="getBOrgById" resultMap="BOrgMap" parameterType="java.lang.String">
+		select
+		orgguid,
+		parentguid,
+		orgname,
+		orgtype,
+		subtype,
+		remark,
+		path
+		from
+		b_org
+		where orgguid =  #{orgguid}
+    </select>
+
+	<insert id="insert" parameterType="BOrg">
+		insert into
+		b_org(
+		orgguid,
+		parentguid,
+		orgname,
+		orgtype,
+		subtype,
+		remark
+		)
+		values
+		(
+		#{orgguid},
+		#{parentguid},
+		#{orgname},
+		#{orgtype},
+		#{subtype},
+		#{remark}
+		)
+	</insert>
+
+	<insert id="insertList" parameterType="java.util.List">
+		insert into
+		b_org(
+		orgguid,
+		parentguid,
+		orgname,
+		orgtype,
+		subtype,
+		remark
+		)
+		values
+		<foreach collection="list" item="obj" index="index" separator=",">
+			(
+			#{obj.orgguid},
+			#{obj.parentguid},
+			#{obj.orgname},
+			#{obj.orgtype},
+			#{obj.subtype},
+			#{obj.remark}
+			)
+		</foreach>
+	</insert>
+
+	<update id="update" parameterType="BOrg">
+		update b_org
+		set
+		orgguid = #{orgguid},
+		parentguid = #{parentguid},
+		orgname = #{orgname},
+		orgtype = #{orgtype},
+		subtype = #{subtype},
+		remark = #{remark}
+		where orgguid =
+		#{orgguid}
+	</update>
+
+	<update id="updateList" parameterType="List">
+		<foreach collection="list" item="obj" index="index" separator=";">
+			update b_org
+			set
+			orgguid = #{obj.orgguid},
+			parentguid = #{obj.parentguid},
+			orgname = #{obj.orgname},
+			orgtype = #{obj.orgtype},
+			subtype = #{obj.subtype},
+			remark = #{obj.remark}
+			where orgguid =
+			#{obj.orgguid}
+		</foreach>
+	</update>
+
+	<select id="isHave" resultType="int" parameterType="java.lang.String">
+		select
+		count(*) from b_org where orgguid =
+		#{orgguid}
+	</select>
+
+	<update id="updateToDelete" parameterType="java.lang.String">
+		update b_org
+		set
+		state = 2
+		where orgguid =
+		#{orgguid}
+	</update>
+	<update id="delete" parameterType="java.lang.String">
+		delete from b_org
+		where orgguid =
+		#{orgguid}
+	</update>
+
+	<select id="getBOrgCount" resultType="int">
+		select count(1)
+		from b_org
+	</select>
+
+	<select id="getIdList" resultType="String">
+		select orgguid from b_org
+	</select>
+	
+	
+	<select id="getAreaOrCompany" parameterType="java.util.Map" resultMap="AreaMap">
+		select 
+			orgGUID id,
+			orgName name
+		FROM
+			b_org
+		where
+			orgType = 3 and subType = #{subType} and status = 1
+			<if test="parentGUID != null and parentGUID != ''">
+				and parentGUID = #{parentGUID}
+			</if>
+	</select>
+	<!-- 根据userId获取大区 -->
+	<select id="getAreaByUserId" parameterType="java.util.Map" resultMap="AreaMap">
+		select
+			c.orgGUID id,
+			c.orgName name
+		from
+			b_org c,
+			(
+				select distinct a.parentGUID parentGUID
+				from
+					b_org a,
+					(select orgGUID from sys_user_org where user_id = #{userId}) b
+				where
+					a.orgGUID = b.orgGUID
+			)d
+		WHERE
+			c.orgGUID = d.parentGUID
+		AND
+			c.orgType = 3 and c.subType = 2 and c.status = 1
+	</select>
+	<!-- 根据userId和大区id获取城市 -->
+	<select id="getCompanyByUserId" parameterType="java.util.Map" resultMap="AreaMap">
+		select
+			a.orgGUID id,
+			a.orgName name
+		from
+			b_org a,
+			(select orgGUID from sys_user_org where user_id = #{userId}) b
+		where
+			a.orgGUID = b.orgGUID
+		AND
+			a.parentGUID = #{parentGUID}
+	</select>
+	
+
+</mapper>

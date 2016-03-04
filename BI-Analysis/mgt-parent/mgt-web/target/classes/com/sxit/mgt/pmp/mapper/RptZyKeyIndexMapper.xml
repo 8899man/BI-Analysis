@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.pmp.dao.RptZyKeyIndexDao" > 
+<!-- Result Map-->
+<resultMap id="RptZyKeyIndexMap" type="com.sxit.model.pmp.RptZyKeyIndex" >
+	<result column="Data_seq_id" property="Data_seq_id"/>
+	<result column="proj_id" property="proj_id"/>
+	<result column="Add_lease_cst" property="Add_lease_cst"/>
+	<result column="Add_Sale_cst" property="Add_Sale_cst"/>
+	<result column="Add_lease_house" property="Add_lease_house"/>
+	<result column="Add_Sale_house" property="Add_Sale_house"/>
+	<result column="Lease_follow_num" property="Lease_follow_num"/>
+	<result column="Sale_follow_num" property="Sale_follow_num"/>
+	<result column="House_lease_num" property="House_lease_num"/>
+	<result column="House_sale_num" property="House_sale_num"/>
+	<result column="Lease_deal_money" property="Lease_deal_money"/>
+	<result column="Sale_deal_money" property="Sale_deal_money"/>
+	<result column="create_time" property="create_time"/>
+</resultMap>
+       
+<!-- rpt_zy_key_index table all fields -->
+<sql id="Base_Column_List" >
+	 Data_seq_id,proj_id,Add_lease_cst,Add_Sale_cst,Add_lease_house,Add_Sale_house,Lease_follow_num,Sale_follow_num,House_lease_num,House_sale_num,Lease_deal_money,Sale_deal_money,create_time
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	 	<if test="Data_seq_id != null and Data_seq_id != ''" >
+	    and Data_seq_id =  #{Data_seq_id}
+	</if>
+	 	<if test="proj_id != null and proj_id != ''" >
+	    and proj_id =  #{proj_id}
+	</if>
+	<if test="Add_lease_cst != null" >
+	    and Add_lease_cst =  #{Add_lease_cst}
+	</if>
+	<if test="Add_Sale_cst != null" >
+	    and Add_Sale_cst =  #{Add_Sale_cst}
+	</if>
+	<if test="Add_lease_house != null" >
+	    and Add_lease_house =  #{Add_lease_house}
+	</if>
+	<if test="Add_Sale_house != null" >
+	    and Add_Sale_house =  #{Add_Sale_house}
+	</if>
+	<if test="Lease_follow_num != null" >
+	    and Lease_follow_num =  #{Lease_follow_num}
+	</if>
+	<if test="Sale_follow_num != null" >
+	    and Sale_follow_num =  #{Sale_follow_num}
+	</if>
+	<if test="House_lease_num != null" >
+	    and House_lease_num =  #{House_lease_num}
+	</if>
+	<if test="House_sale_num != null" >
+	    and House_sale_num =  #{House_sale_num}
+	</if>
+	<if test="Lease_deal_money != null" >
+	    and Lease_deal_money =  #{Lease_deal_money}
+	</if>
+	<if test="Sale_deal_money != null" >
+	    and Sale_deal_money =  #{Sale_deal_money}
+	</if>
+	<if test="create_time != null" >
+	    and create_time =  #{create_time}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into rpt_zy_key_index(Data_seq_id,proj_id,Add_lease_cst,Add_Sale_cst,Add_lease_house,Add_Sale_house,Lease_follow_num,Sale_follow_num,House_lease_num,House_sale_num,Lease_deal_money,Sale_deal_money,create_time)
+ values(#{Data_seq_id},#{proj_id},#{Add_lease_cst},#{Add_Sale_cst},#{Add_lease_house},#{Add_Sale_house},#{Lease_follow_num},#{Sale_follow_num},#{House_lease_num},#{House_sale_num},#{Lease_deal_money},#{Sale_deal_money},#{create_time})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update rpt_zy_key_index set proj_id=#{proj_id},Add_lease_cst=#{Add_lease_cst},Add_Sale_cst=#{Add_Sale_cst},Add_lease_house=#{Add_lease_house},Add_Sale_house=#{Add_Sale_house},Lease_follow_num=#{Lease_follow_num},Sale_follow_num=#{Sale_follow_num},House_lease_num=#{House_lease_num},House_sale_num=#{House_sale_num},Lease_deal_money=#{Lease_deal_money},Sale_deal_money=#{Sale_deal_money},create_time=#{create_time} where Data_seq_id=#{Data_seq_id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update rpt_zy_key_index set 
+	<trim  suffixOverrides="," >
+	<if test="proj_id != null  and proj_id != '' ">
+		proj_id=#{proj_id},
+	</if>
+	<if test="Add_lease_cst != null  ">
+		Add_lease_cst=#{Add_lease_cst},
+	</if>
+	<if test="Add_Sale_cst != null  ">
+		Add_Sale_cst=#{Add_Sale_cst},
+	</if>
+	<if test="Add_lease_house != null  ">
+		Add_lease_house=#{Add_lease_house},
+	</if>
+	<if test="Add_Sale_house != null  ">
+		Add_Sale_house=#{Add_Sale_house},
+	</if>
+	<if test="Lease_follow_num != null  ">
+		Lease_follow_num=#{Lease_follow_num},
+	</if>
+	<if test="Sale_follow_num != null  ">
+		Sale_follow_num=#{Sale_follow_num},
+	</if>
+	<if test="House_lease_num != null  ">
+		House_lease_num=#{House_lease_num},
+	</if>
+	<if test="House_sale_num != null  ">
+		House_sale_num=#{House_sale_num},
+	</if>
+	<if test="Lease_deal_money != null  ">
+		Lease_deal_money=#{Lease_deal_money},
+	</if>
+	<if test="Sale_deal_money != null  ">
+		Sale_deal_money=#{Sale_deal_money},
+	</if>
+	<if test="create_time != null  ">
+		create_time=#{create_time},
+	</if>
+	</trim> where Data_seq_id=#{Data_seq_id}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from rpt_zy_key_index where Data_seq_id = #{Data_seq_id}
+</delete>
+ 
+<!-- 根据id查询 rpt_zy_key_index -->
+<select id="queryById"  resultMap="RptZyKeyIndexMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from rpt_zy_key_index where proj_id=#{proj_id} and create_time = (select max(create_time) from rpt_zy_key_index);
+</select>
+
+<!-- rpt_zy_key_index 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from rpt_zy_key_index 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询rpt_zy_key_index列表 -->
+<select id="queryByList" resultMap="RptZyKeyIndexMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from rpt_zy_key_index 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

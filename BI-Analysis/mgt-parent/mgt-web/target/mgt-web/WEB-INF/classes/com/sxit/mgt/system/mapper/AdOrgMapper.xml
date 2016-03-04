@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.system.dao.AdOrgDao">
+
+
+	<resultMap id="AdOrgMap" type="SysAdOrg">
+		<id column="ad_guid" property="adGuid" jdbcType="VARCHAR" />
+		<result column="parent_guid" property="parentGuid" jdbcType="VARCHAR" />
+		<result column="org_guid" property="orgGuid" jdbcType="VARCHAR" />
+		<result column="org_name" property="orgName" jdbcType="VARCHAR" />
+		<result column="state" property="state" jdbcType="INTEGER" />
+		<result column="check_state" property="checkState" jdbcType="INTEGER" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+		<result column="path" property="path" jdbcType="VARCHAR" />
+		<result column="dsStr" property="dsStr" jdbcType="VARCHAR" />
+		<result column="objectclass" property="objectclass" jdbcType="VARCHAR" />
+		<result column="distinguishedname" property="distinguishedname" jdbcType="VARCHAR" />
+		<result column="objectcategory" property="objectcategory" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<select id="getAdOrgList" resultMap="AdOrgMap" parameterType="java.util.Map">
+		select
+		ad_guid,
+		parent_guid,
+		org_guid,
+		org_name,
+		dsStr,
+		objectclass,
+		distinguishedname,
+		objectcategory,	
+		state,
+		check_state,
+		create_time,
+		modify_time,
+		path
+		from
+		sys_ad_org
+		<where>
+			<if test="searchTxt != null">
+				and
+				(
+				org_name like CONCAT('%','${searchTxt}','%' )
+				)
+			</if>
+		</where>
+		order by org_name  
+	</select>
+
+	<select id="getHaveAdOrgList" resultMap="AdOrgMap">
+		select
+		ad_guid,
+		parent_guid,
+		org_guid,
+		org_name,
+		dsStr,
+		objectclass,
+		distinguishedname,
+		objectcategory,	
+		state,
+		check_state,
+		create_time,
+		modify_time,
+		path
+		from
+		sys_ad_org
+		where ad_guid in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item.adGuid}
+		</foreach>
+	</select>
+
+	<select id="getAdOrgById" resultMap="AdOrgMap" parameterType="java.lang.String">
+		select
+		ad_guid,
+		parent_guid,
+		org_guid,
+		org_name,
+		dsStr,
+		objectclass,
+		distinguishedname,
+		objectcategory,	
+		state,
+		check_state,
+		create_time,
+		modify_time,
+		path
+		from
+		sys_ad_org
+		where ad_guid = #{adGuid}
+	</select>
+
+	<insert id="insert" parameterType="SysAdOrg">
+		insert into
+		sys_ad_org(
+		ad_guid,
+		parent_guid,
+		org_guid,
+		org_name,
+		dsStr,
+		objectclass,
+		distinguishedname,
+		objectcategory,	
+		state,
+		check_state,
+		create_time,
+		modify_time
+		)
+		values
+		(
+		#{adGuid},
+		#{parentGuid},
+		#{orgGuid},
+		#{orgName},
+		#{dsStr},
+		#{objectclass},
+		#{distinguishedname},
+		#{objectcategory},
+		#{state},
+		#{checkState},
+		#{createTime},
+		#{modifyTime}
+		)
+	</insert>
+
+	<insert id="insertList" parameterType="java.util.List">
+		insert into
+		sys_ad_org(
+		ad_guid,
+		parent_guid,
+		org_guid,
+		org_name,
+		dsStr,
+		objectclass,
+		distinguishedname,
+		objectcategory,
+		state,
+		check_state,
+		create_time,
+		modify_time
+		)
+		values
+		<foreach collection="list" item="obj" index="index" separator=",">
+			(
+			#{obj.adGuid},
+			#{obj.parentGuid},
+			#{obj.orgGuid},
+			#{obj.orgName},
+			#{dsStr},
+			#{objectclass},
+			#{distinguishedname},
+			#{objectcategory},
+			#{obj.state},
+			#{obj.checkState},
+			#{obj.createTime},
+			#{obj.modifyTime}
+			)
+		</foreach>
+	</insert>
+
+	<update id="update" parameterType="SysAdOrg">
+		update sys_ad_org
+		set
+		ad_guid =
+		#{adGuid},
+		parent_guid = #{parentGuid},
+		org_guid = #{orgGuid},
+		org_name =
+		#{orgName},
+		dsStr = #{dsStr},
+		objectclass = #{objectclass},
+		distinguishedname = #{distinguishedname},
+		objectcategory = #{objectcategory},
+		state = #{state},
+		check_state = #{checkState},
+		create_time =
+		#{createTime},
+		modify_time = #{modifyTime}
+		where ad_guid =
+		#{adGuid}
+	</update>
+	<update id="updateUser" parameterType="java.util.Map">
+		update sys_user
+		set
+		org_id = #{orgguid},
+		org_name = #{orgname}
+		where ad_org_id =
+		#{adGuid}
+	</update>
+
+	<update id="updateList" parameterType="List">
+		<foreach collection="list" item="obj" index="index" separator=";">
+			update sys_ad_org
+			set
+			ad_guid = #{obj.adGuid},
+			parent_guid =
+			#{obj.parentGuid},
+			org_guid = #{obj.orgGuid},
+			org_name =
+			#{obj.orgName},
+			dsStr = #{dsStr},
+			objectclass = #{objectclass},
+			distinguishedname = #{distinguishedname},
+			objectcategory = #{objectcategory},
+			state = #{obj.state},
+			check_state = #{obj.checkState},
+			create_time = #{obj.createTime},
+			modify_time = #{obj.modifyTime}
+			where
+			ad_guid =
+			#{obj.adGuid}
+		</foreach>
+	</update>
+
+	<select id="isHave" resultType="int" parameterType="java.lang.String">
+		select
+		count(*) from sys_ad_org where ad_guid =
+		#{adGuid}
+	</select>
+
+	<update id="updateToDelete" parameterType="java.lang.String">
+		update sys_ad_org
+		set
+		state = 2
+		where ad_guid =
+		#{adGuid}
+	</update>
+	<update id="delete" parameterType="java.lang.String">
+		delete from sys_ad_org
+		where
+		ad_guid =
+		#{adGuid}
+	</update>
+
+	<select id="getAdOrgCount" resultType="int">
+		select count(1)
+		from
+		sys_ad_org
+	</select>
+
+	<select id="getIdList" resultType="String">
+		select ad_guid from sys_ad_org
+	</select>
+
+</mapper>

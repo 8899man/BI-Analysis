@@ -1,0 +1,161 @@
+﻿<div ng-controller="ClientSearchController" ng-init="initializeController()">
+	<div class="title-position box-shadow-1 clearfix">
+		<h1>客户查询</h1>
+		<h2><a class="glyphicon glyphicon-home" href=""><i>首页</i></a> > 客户查询</h2>
+	</div>
+
+	<div class="content">
+		<div class="content-main">
+			<div class="client-search-header box-shadow-1">
+				<ul class="clearfix">
+					<!-- 
+					<li>
+						<div class="client-search-header-title">所属业态</div>
+						<div class="client-search-header-input">
+							<select name="belongsFormat" id="belongsFormat" class="form-control no-margin" ng-model="formatChecked" ng-options="f.title for f in belongsFormat">
+								<option value="">不限</option>
+							</select>
+						</div>
+					</li>
+					<li class="group">
+						<div class="client-search-header-title">组织架构</div>
+						<div class="client-search-header-input">
+							<select name="area" id="area" class="form-control" ng-model="area" ng-options="a.name for a in areas" ng-change="changeArea()">
+								<option value="">总公司</option>
+							</select>
+							<select name="city" id="city" class="form-control" ng-model="city" ng-show="area.child" ng-options="c.name for c in area.child" ng-change="changeCity()">
+								<option value="">所有城市</option>
+							</select>
+							<select name="project" id="project" class="form-control" ng-model="project" ng-show="city.child"  ng-options="p.name for p in city.child">
+								<option value="">所有项目</option>
+							</select>
+						</div>
+					</li>
+					 -->
+					<!-- 
+					<li>
+						<div class="client-search-header-title">客户类别</div>
+						<div class="client-search-header-input">
+							<select name="customerType" id="customerType" class="form-control no-margin" ng-model="customerTypeChecked" ng-options="f.title for f in customerType">
+								<option value="">不限</option>
+							</select>
+						</div>
+					</li>
+					 -->
+					<!-- 
+					<li class="no-margin">
+						<div class="client-search-header-title">创建时间</div>
+						<div class="client-search-header-input">
+						 
+							<input start-date-ymd type="text" class="form-control no-margin w100" ng-model="startDate">
+							<b>~</b>
+							<input end-date-ymd type="text" class="form-control no-margin w100" ng-model="endDate">	
+						</div>
+					</li>
+					 -->
+					<li class="no-margin client-search-header-main clear">
+						<div class="client-search-header-btn"><a ng-click="search()" href="javascript:;" class="btn btn-primary">查询</a></div>
+						<div class="client-search-header-keyword"><input type="text" class="form-control" placeholder="输入身份证号或手机号码" ng-model="keyword"></div>						
+					</li>
+				</ul>
+			</div>
+
+			<div class="client-search-table bg-white margin-top-20 box-shadow-1" ng-show="detailsLoaded">
+				<h2 class="box-shadow-1 clearfix">
+					<span class="client-search-table-result fl">共查询到<b>{{totalRows | number}}</b>条数据</span>
+					<span class="client-search-table-others fr">
+						<select name="pageNum" id="pageNum" class="form-control no-margin" ng-model="PageSize" ng-change="pageChanged()">
+							<option value="10">显示10条</option>
+							<option value="20">显示20条</option>
+							<option value="50">显示50条</option>
+						</select>
+						<a href="javascript:;" class="export-btn" ng-click="exportExcel();">导出</a>
+					</span>
+				</h2>
+				<div class="client-search-table-main">
+					<div class="table-responsive">
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>序号</th>
+									<th>姓名</th>
+									<th>性别</th>
+									<th>联系电话</th>
+									<th>证件号码</th>
+									<th>年龄段</th>
+									<!-- 
+									<th>子女个数</th>
+									<th>家庭结构</th>
+									<th>文化程度</th>
+									<th>来源渠道</th>
+									<th>工作区域</th>
+									<th>居住区域</th>
+									<th>从事行业</th>
+									<th>意向项目</th>
+									<th>职业顾问</th>
+									<th>到访时间</th>
+									<th>认筹时间</th>
+									<th>认购时间</th>
+									 -->
+									<th>签约时间</th>
+									<!-- 
+									<th>租赁时间</th>
+									<th>客户状态</th>
+									<th>创建时间</th>
+									<th>创建人</th>
+									 -->
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="customer in customerList">
+									<td>{{$index+1}}</td>
+									<td><a ui-sref="app.client.details({'cstGUID': customer.cstGUID})">{{customer.cstName}}</a></td>
+									<td>{{customer.gender==1?'男':customer.gender==2?'女':'未知'}}</td>
+									<td>{{customer.mobileTel}}</td>
+									<td>{{customer.cardID}}</td>
+									<td>{{customer.ageGroup}}</td>
+									<td>{{customer.contractDate}}</td>
+								</tr>
+								<!-- <tr>
+									<td>1</td>
+									<td>GD0023</td>
+									<td><a href="javascript:;">张*</a></td>
+									<td>女</td>
+									<td>135****0001</td>
+									<td>36302362322012****</td>
+									<td>20-34</td>
+									<td>1个</td>
+									<td>小太阳家庭</td>
+									<td>博士</td>
+									<td>老客户推荐</td>
+									<td>南山区</td>
+									<td>龙华新区</td>
+									<td>银行</td>
+									<td><a href="javascript:;">鼎业花园</a></td>
+									<td><a href="javascript:;">陈玲玲</a></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td></td>
+									<td>有效</td>
+									<td>2014-11-02</td>
+									<td>admin</td>
+								</tr> -->
+							</tbody>
+						</table>
+					</div>
+
+					<div class="project-page clearfix">
+				        <pagination max-size="16" rotate="false" boundary-links="true" total-items="totalRows" items-per-page="PageSize"
+				            ng-change="pageChanged()" ng-model="currentPage" class="pagination-default"
+				            previous-text="上一页" next-text="下一页" first-text="首页" last-text="末页" style="margin: 0; display: block;"></pagination>
+					</div>
+					
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+

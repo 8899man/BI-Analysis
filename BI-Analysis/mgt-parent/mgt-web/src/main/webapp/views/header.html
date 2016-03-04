@@ -1,0 +1,75 @@
+<div class="container-fluid-xx container-main-header">
+  <div class="navbar-header" id="header-logo">
+    <a class="navbar-brand" href="javascript:;"><img src="images/logo.png" alt="" /><i class="pull-right"></i></a>
+  </div>
+
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+
+      <li ng-repeat="menu in menuItems" ng-if="menu.recommend" ng-class="{active: $state.includes(menu.href) || menu.isActive}">
+      <a ui-sref="{{(menu.href!=''?menu.href:'app.client.search')}}" ng-click="setMenu(menu)" ng-if="menu.target==1">{{menu.menuName}}</a>
+      <a ui-sref="app.embed({'menuId': menu.menuId})" ng-click="setMenu(menu)" ng-if="menu.target==2">{{menu.menuName}}{{menu.id}}</a>
+      <a ng-href="{{menu.href}}" target="_blank" ng-click="setMenu(menu)" ng-if="menu.target==3">{{menu.menuName}}</a>
+      </li>
+      <!-- 
+      <li><a href="javascript:;"><i></i>仪表盘</a></li>
+      <li><a href="javascript:;"><i></i>报表</a></li>
+      <li ng-class="{active: $state.includes('app.client')}"><a ui-sref="app.client.search"><i></i>客户</a></li>
+      <li ng-class="{active: $state.includes('app.project')}"><a ui-sref="app.project.list.houseList"><i></i>项目</a></li>
+      <li><a href="javascript:;"><i></i>标签</a></li>
+      <li><a href="javascript:;"><i></i>营销</a></li>
+      <li ng-class="{active: $state.includes('app.set')}"><a ui-sref="app.set"><i></i>配置</a></li>
+      <li><a href="javascript:;"><i></i>帮助</a></li> 
+      -->
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown no-padding">
+        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> {{userName}} <span class="caret"></span></a>
+        <ul class="dropdown-menu animated fadeInRight">
+          <li><a href="javascript:;" ng-click="exitSign()">退出登录</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="nav-pop bg-dark" id="nav-pop">
+  <a ui-sref="{{(menu.href!=''?menu.href:'app.client.search')}}" class="{{popMenuBg[$index]}}" ng-repeat="menu in menuItems" ng-click="setMenu(menu)">
+    <i class="icon glyphicon {{menu.className}} text-2x"></i>
+    <span>{{menu.menuName}}</span>
+  </a>
+  <!-- <a href="javascript:;" class="bg-info">
+    <i class="icon glyphicon glyphicon-th text-2x"></i>
+    <span>仪表盘</span>
+  </a>
+  <a href="javascript:;" class="bg-primary">
+    <i class="icon glyphicon glyphicon-list-alt text-2x"></i>
+    <span>报表</span>
+  </a>
+  <a ui-sref="app.client.search" class="bg-success">
+    <i class="icon glyphicon glyphicon-user text-2x"></i>
+    <span>客户</span>
+  </a>
+  <a ui-sref="app.project.list.houseList" class="bg-warning">
+    <i class="icon glyphicon glyphicon-stats text-2x"></i>
+    <span>项目</span>
+  </a>
+  <a href="javascript:;" class="bg-danger">
+    <i class="icon glyphicon glyphicon-bookmark text-2x"></i>
+    <span>标签</span>
+  </a>
+  <a href="javascript:;" class="bg-inverse">
+    <i class="icon glyphicon glyphicon-globe text-2x"></i>
+    <span>营销</span>
+  </a>
+  <a href="javascript:;" class="bg-primary">
+    <i class="icon glyphicon glyphicon-cog text-2x"></i>
+    <span>配置</span>
+  </a>
+  <a href="javascript:;" class="bg-success">
+    <i class="icon glyphicon glyphicon-blackboard text-2x"></i>
+    <span>帮助</span>
+  </a> -->
+</div>
+
+<div class="nav-pop-mask" id="nav-pop-mask"></div>

@@ -1,0 +1,235 @@
+{
+    "list": [
+        {
+            "id": "001",
+            "labelAttr": "时效",
+            "title": "时尚新贵",
+            "persons": 35,
+            "info": "都市小说齐梦有时候觉得自己所处的地球的世界就像是一个大型的游戏",
+            "updateTime": "2015-08-15 16:30:00",
+            "conditionSelected": [
+                {
+                    "sortTitle": "标签属性",
+                    "optionName": "时效"
+                },
+                {
+                    "sortTitle": "性别",
+                    "optionName": "男"
+                },
+                {
+                    "sortTitle": "婚姻",
+                    "optionName": "已婚"
+                },
+                {
+                    "sortTitle": "月收入",
+                    "optionName": "5-8K"
+                },
+                {
+                    "sortTitle": "年龄",
+                    "optionName": "20-34"
+                },
+                {
+                    "sortTitle": "投资客户 | 投资产品户型",
+                    "optionName": "二室"
+                },
+                {
+                    "sortTitle": "投资客户 | 投资产品类型",
+                    "optionName": "普通多层"
+                }
+            ]
+        },
+        {
+            "id": "002",
+            "labelAttr": "非时效",
+            "title": "吃货一族",
+            "persons": 324,
+            "info": "都市小说齐梦有时候觉得自己所处的地球的世界就像是一个大型的游戏",
+            "updateTime": "2015-08-15 16:30:00",
+            "conditionSelected": [
+                {
+                    "sortTitle": "标签属性",
+                    "optionName": "时效"
+                },
+                {
+                    "sortTitle": "性别",
+                    "optionName": "男"
+                },
+                {
+                    "sortTitle": "婚姻",
+                    "optionName": "已婚"
+                },
+                {
+                    "sortTitle": "月收入",
+                    "optionName": "5-8K"
+                },
+                {
+                    "sortTitle": "年龄",
+                    "optionName": "20-34"
+                },
+                {
+                    "sortTitle": "投资客户 | 投资产品户型",
+                    "optionName": "二室"
+                },
+                {
+                    "sortTitle": "投资客户 | 投资产品类型",
+                    "optionName": "普通多层"
+                }
+            ]
+        },
+        {
+            "id": "003",
+            "labelAttr": "非时效",
+            "title": "码农",
+            "persons": 56236,
+            "info": "都市小说齐梦有时候觉得自己所处的地球的世界就像是一个大型的游戏",
+            "updateTime": "2015-08-15 16:30:00",
+            "conditionSelected": [
+                {
+                    "sortTitle": "标签属性",
+                    "optionName": "时效"
+                },
+                {
+                    "sortTitle": "性别",
+                    "optionName": "男"
+                },
+                {
+                    "sortTitle": "婚姻",
+                    "optionName": "已婚"
+                },
+                {
+                    "sortTitle": "月收入",
+                    "optionName": "5-8K"
+                },
+                {
+                    "sortTitle": "年龄",
+                    "optionName": "20-34"
+                },
+                {
+                    "sortTitle": "投资客户 | 投资产品户型",
+                    "optionName": "二室"
+                },
+                {
+                    "sortTitle": "投资客户 | 投资产品类型",
+                    "optionName": "普通多层"
+                }
+            ]
+        },
+        {
+            "id": "004",
+            "title": "前端开发",
+            "labelAttr": "时效",
+            "persons": 324,
+            "info": "都市小说齐梦有时候觉得自己所处的地球的世界就像是一个大型的游戏",
+            "updateTime": "2015-08-15 16:30:00",
+            "conditionSelected": [
+                {
+                    "sortTitle": "标签属性",
+                    "optionName": "时效"
+                },
+                {
+                    "sortTitle": "性别",
+                    "optionName": "男"
+                },
+                {
+                    "sortTitle": "婚姻",
+                    "optionName": "已婚"
+                },
+                {
+                    "sortTitle": "月收入",
+                    "optionName": "5-8K"
+                },
+                {
+                    "sortTitle": "年龄",
+                    "optionName": "20-34"
+                },
+                {
+                    "sortTitle": "投资客户 | 投资产品户型",
+                    "optionName": "二室"
+                },
+                {
+                    "sortTitle": "投资客户 | 投资产品类型",
+                    "optionName": "普通多层"
+                }
+            ]
+        },
+        {
+            "id": "005",
+            "labelAttr": "时效",
+            "title": "HTML5开发",
+            "persons": 56,
+            "info": "都市小说齐梦有时候觉得自己所处的地球的世界就像是一个大型的游戏",
+            "updateTime": "2015-08-15 16:30:00",
+            "conditionSelected": [
+                {
+                    "sortTitle": "标签属性",
+                    "optionName": "时效"
+                },
+                {
+                    "sortTitle": "性别",
+                    "optionName": "男"
+                },
+                {
+                    "sortTitle": "婚姻",
+                    "optionName": "已婚"
+                },
+                {
+                    "sortTitle": "月收入",
+                    "optionName": "5-8K"
+                },
+                {
+                    "sortTitle": "年龄",
+                    "optionName": "20-34"
+                },
+                {
+                    "sortTitle": "投资客户 | 投资产品户型",
+                    "optionName": "二室"
+                },
+                {
+                    "sortTitle": "投资客户 | 投资产品类型",
+                    "optionName": "普通多层"
+                }
+            ]
+        },
+        {
+            "id": "015",
+            "labelAttr": "时效",
+            "title": "NodeJs",
+            "persons": 56,
+            "info": "都市小说齐梦有时候觉得自己所处的地球的世界就像是一个大型的游戏",
+            "updateTime": "2015-08-15 16:30:00",
+            "conditionSelected": [
+                {
+                    "sortTitle": "标签属性",
+                    "optionName": "时效"
+                },
+                {
+                    "sortTitle": "性别",
+                    "optionName": "男"
+                },
+                {
+                    "sortTitle": "婚姻",
+                    "optionName": "已婚"
+                },
+                {
+                    "sortTitle": "月收入",
+                    "optionName": "5-8K"
+                },
+                {
+                    "sortTitle": "年龄",
+                    "optionName": "20-34"
+                },
+                {
+                    "sortTitle": "投资客户 | 投资产品户型",
+                    "optionName": "二室"
+                },
+                {
+                    "sortTitle": "投资客户 | 投资产品类型",
+                    "optionName": "普通多层"
+                }
+            ]
+        }
+    ],
+    "TotalPages": 20,
+    "TotalRows": 5,
+    "PageSize": 0
+}

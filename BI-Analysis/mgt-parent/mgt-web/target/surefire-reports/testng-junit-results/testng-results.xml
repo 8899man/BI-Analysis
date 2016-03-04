@@ -1,0 +1,14 @@
+<testng-results>
+  <reporter-output>
+  </reporter-output>
+  <suite name="Command line suite">
+    <groups>
+    </groups>
+    <test name="Command line test">
+      <class name="com.dengbiao.test.Test">
+        <test-method status="PASS" signature="test1()" name="test1" duration-ms="4" started-at="2016-01-23T18:01:25Z" finished-at="2016-01-23T18:01:25Z">
+        </test-method>
+      </class>
+    </test>
+  </suite>
+</testng-results>

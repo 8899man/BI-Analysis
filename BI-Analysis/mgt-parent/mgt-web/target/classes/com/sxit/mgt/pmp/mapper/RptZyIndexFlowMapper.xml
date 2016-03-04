@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.pmp.dao.RptZyIndexFlowDao" > 
+<!-- Result Map-->
+<resultMap id="RptZyIndexFlowMap" type="com.sxit.model.pmp.RptZyIndexFlow" >
+	<result column="index_flow_id" property="index_flow_id"/>
+	<result column="proj_id" property="proj_id"/>
+	<result column="index_format_type" property="index_format_type"/>
+	<result column="house_deal_day" property="house_deal_day"/>
+	<result column="house_deal_aveg_day" property="house_deal_aveg_day"/>
+	<result column="House_deal_over" property="House_deal_over"/>
+	<result column="house_rent_day" property="house_rent_day"/>
+	<result column="house_rent_aveg_day" property="house_rent_aveg_day"/>
+	<result column="House_rent_over" property="House_rent_over"/>
+	<result column="create_time" property="create_time"/>
+</resultMap>
+       
+<!-- rpt_zy_index_flow table all fields -->
+<sql id="Base_Column_List" >
+	 index_flow_id,proj_id,index_format_type,house_deal_day,house_deal_aveg_day,House_deal_over,house_rent_day,house_rent_aveg_day,House_rent_over,create_time
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	 	<if test="index_flow_id != null and index_flow_id != ''" >
+	    and index_flow_id =  #{index_flow_id}
+	</if>
+	 	<if test="proj_id != null and proj_id != ''" >
+	    and proj_id =  #{proj_id}
+	</if>
+	<if test="index_format_type != null" >
+	    and index_format_type =  #{index_format_type}
+	</if>
+	<if test="house_deal_day != null" >
+	    and house_deal_day =  #{house_deal_day}
+	</if>
+	<if test="house_deal_aveg_day != null" >
+	    and house_deal_aveg_day =  #{house_deal_aveg_day}
+	</if>
+	<if test="House_deal_over != null" >
+	    and House_deal_over =  #{House_deal_over}
+	</if>
+	<if test="house_rent_day != null" >
+	    and house_rent_day =  #{house_rent_day}
+	</if>
+	<if test="house_rent_aveg_day != null" >
+	    and house_rent_aveg_day =  #{house_rent_aveg_day}
+	</if>
+	<if test="House_rent_over != null" >
+	    and House_rent_over =  #{House_rent_over}
+	</if>
+	<if test="create_time != null" >
+	    and create_time =  #{create_time}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into rpt_zy_index_flow(index_flow_id,proj_id,index_format_type,house_deal_day,house_deal_aveg_day,House_deal_over,house_rent_day,house_rent_aveg_day,House_rent_over,create_time)
+ values(#{index_flow_id},#{proj_id},#{index_format_type},#{house_deal_day},#{house_deal_aveg_day},#{House_deal_over},#{house_rent_day},#{house_rent_aveg_day},#{House_rent_over},#{create_time})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update rpt_zy_index_flow set proj_id=#{proj_id},index_format_type=#{index_format_type},house_deal_day=#{house_deal_day},house_deal_aveg_day=#{house_deal_aveg_day},House_deal_over=#{House_deal_over},house_rent_day=#{house_rent_day},house_rent_aveg_day=#{house_rent_aveg_day},House_rent_over=#{House_rent_over},create_time=#{create_time} where index_flow_id=#{index_flow_id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update rpt_zy_index_flow set 
+	<trim  suffixOverrides="," >
+	<if test="proj_id != null  and proj_id != '' ">
+		proj_id=#{proj_id},
+	</if>
+	<if test="index_format_type != null  ">
+		index_format_type=#{index_format_type},
+	</if>
+	<if test="house_deal_day != null  ">
+		house_deal_day=#{house_deal_day},
+	</if>
+	<if test="house_deal_aveg_day != null  ">
+		house_deal_aveg_day=#{house_deal_aveg_day},
+	</if>
+	<if test="House_deal_over != null  ">
+		House_deal_over=#{House_deal_over},
+	</if>
+	<if test="house_rent_day != null  ">
+		house_rent_day=#{house_rent_day},
+	</if>
+	<if test="house_rent_aveg_day != null  ">
+		house_rent_aveg_day=#{house_rent_aveg_day},
+	</if>
+	<if test="House_rent_over != null  ">
+		House_rent_over=#{House_rent_over},
+	</if>
+	<if test="create_time != null  ">
+		create_time=#{create_time},
+	</if>
+	</trim> where index_flow_id=#{index_flow_id}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from rpt_zy_index_flow where index_flow_id = #{index_flow_id}
+</delete>
+ 
+<!-- 根据id查询 rpt_zy_index_flow -->
+<select id="queryById"  resultMap="RptZyIndexFlowMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from rpt_zy_index_flow where proj_id=#{proj_id} and create_time = (select max(create_time) from rpt_zy_index_flow);
+</select>
+
+<!-- rpt_zy_index_flow 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from rpt_zy_index_flow 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询rpt_zy_index_flow列表 -->
+<select id="queryByList" resultMap="RptZyIndexFlowMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from rpt_zy_index_flow 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

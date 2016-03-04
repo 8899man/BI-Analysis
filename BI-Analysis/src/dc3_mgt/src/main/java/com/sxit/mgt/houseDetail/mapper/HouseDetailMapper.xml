@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.houseDetail.dao.HouseDetailDao">
+	
+	<resultMap id="houseDetail" type="HouseDetail" >
+		<id column="roomid" property="roomID" jdbcType="BIGINT" />
+		<result column="roomguid" property="roomGUID" jdbcType="VARCHAR" />
+		<result column="companyguid" property="companyGUID" jdbcType="VARCHAR" />
+		<result column="projguid" property="projGUID" jdbcType="VARCHAR" />
+		<result column="bldguid" property="bldGUID" jdbcType="VARCHAR" />
+		<result column="mainroomguid" property="mainRoomGUID" jdbcType="VARCHAR" />
+		<result column="cstguidlist" property="cstGUIDList" jdbcType="VARCHAR" />
+		<result column="cstname" property="cstname" jdbcType="VARCHAR" />
+		<result column="unit" property="unit" jdbcType="VARCHAR" />
+		<result column="floor" property="floor" jdbcType="VARCHAR" />
+		<result column="no" property="no" jdbcType="VARCHAR" />
+		<result column="room" property="room" jdbcType="VARCHAR" />
+		<result column="roomcode" property="roomCode" jdbcType="VARCHAR" />
+		<result column="huxing" property="huXing" jdbcType="VARCHAR" />
+		<result column="salestatus" property="saleStatus" jdbcType="VARCHAR" />
+		<result column="bldarea" property="bldArea" jdbcType="DOUBLE" />
+		<result column="tnarea" property="tnArea" jdbcType="DOUBLE" />
+		<result column="blrhdate" property="blRhDate" jdbcType="TIMESTAMP" />
+		<result column="yfbz" property="yFBZ" jdbcType="VARCHAR" />
+		<result column="roommemo" property="roomMemo" jdbcType="CLOB" />
+		<result column="zxbz" property="zxBz" jdbcType="VARCHAR" />
+		<result column="price" property="price" jdbcType="DOUBLE" />
+		<result column="tnprice" property="tnPrice" jdbcType="DOUBLE" />
+		<result column="zxprice" property="zxPrice" jdbcType="DOUBLE" />
+		<result column="zxtotal" property="zxTotal" jdbcType="DOUBLE" />
+		<result column="bedeckkind" property="bedeckKind" jdbcType="VARCHAR" />
+		<result column="istempletroom" property="isTempletRoom" jdbcType="TINYINT" />
+		<result column="west" property="west" jdbcType="VARCHAR" />
+		<result column="chooseroom" property="chooseRoom" jdbcType="TINYINT" />
+		<result column="chooseroomdate" property="chooseRoomDate" jdbcType="TIMESTAMP" />
+		<result column="roomstru" property="roomStru" jdbcType="VARCHAR" />
+		<result column="absolutelyfloor" property="absolutelyFloor" jdbcType="VARCHAR" />
+		<result column="statuschgguid" property="statusChgGUID" jdbcType="VARCHAR" />
+		<result column="salerentable" property="salerenTable" jdbcType="VARCHAR" />
+		<result column="producttypecode" property="productTypeCode" jdbcType="VARCHAR" />
+		<result column="htroom" property="htRoom" jdbcType="VARCHAR" />
+		<result column="dxsarea" property="dxsArea" jdbcType="DOUBLE" />
+		<result column="cararea" property="carArea" jdbcType="DOUBLE" />
+		<result column="ltarea" property="ltArea" jdbcType="DOUBLE" />
+		<result column="fpdate" property="fpDate" jdbcType="TIMESTAMP" />
+		<result column="zdfpdate" property="zdFpDate" jdbcType="TIMESTAMP" />
+		<result column="cqfznum" property="cqfzNum" jdbcType="VARCHAR" />
+		<result column="ysbldarea" property="ysBldArea" jdbcType="DOUBLE" />
+		<result column="scbldarea" property="scBldArea" jdbcType="DOUBLE" />
+		<result column="sctnarea" property="scTnArea" jdbcType="DOUBLE" />
+		<result column="ystnarea" property="ysTnArea" jdbcType="DOUBLE" />
+		<result column="hyarea" property="hyArea" jdbcType="DOUBLE" />
+		<result column="flatarea" property="flatArea" jdbcType="DOUBLE" />
+		<result column="ytarea" property="ytArea" jdbcType="DOUBLE" />
+		<result column="rhhyarea" property="rhhyArea" jdbcType="DOUBLE" />
+		<result column="ysxkzdate" property="ysxkzDate" jdbcType="TIMESTAMP" />
+		<result column="ysxkzno" property="ysxkzNo" jdbcType="VARCHAR" />
+		<result column="cqfzgetdate" property="cqfzGetDate" jdbcType="TIMESTAMP" />
+		<result column="yyjfdate" property="yyjfDate" jdbcType="TIMESTAMP" />
+		<result column="iscannotsale" property="isCannotSale" jdbcType="TINYINT" />
+		<result column="cannotsalereason" property="cannotSaleReason" jdbcType="VARCHAR" />
+		<result column="chooseroomno" property="chooseRoomNo" jdbcType="INTEGER" />
+		<result column="variety" property="variety" jdbcType="VARCHAR" />
+		<result column="productattribute" property="productAttribute" jdbcType="VARCHAR" />
+		<result column="createdon" property="createdOn" jdbcType="TIMESTAMP" />
+		<result column="parkingtype" property="parkingType" jdbcType="VARCHAR" />
+		<result column="parkingcurrenthandlemethod" property="parkingCurrentHandleMethod" jdbcType="VARCHAR" />
+		<result column="parkingsaletype" property="parkingSaleType" jdbcType="VARCHAR" />
+		<result column="parkinghandledate" property="parkingHandleDate" jdbcType="TIMESTAMP" />
+		<result column="isparkingcq" property="isParkingCq" jdbcType="TINYINT" />
+		<result column="businesscqlife" property="businessCqLife" jdbcType="VARCHAR" />
+		<result column="remarkhtml" property="remarkHTML" jdbcType="CLOB" />
+		<result column="businessmanagefee" property="businessManageFee" jdbcType="VARCHAR" />
+		<result column="buysroomno" property="buysRoomNo" jdbcType="VARCHAR" />
+		<result column="parkingpattern" property="parkingPattern" jdbcType="VARCHAR" />
+		<result column="chooseroomcstguid" property="chooseRoomCstGUID" jdbcType="VARCHAR" />
+		<result column="productformcode" property="productFormCode" jdbcType="VARCHAR" />
+		<result column="productformname" property="productFormName" jdbcType="VARCHAR" />
+		<result column="roomstatus" property="roomStatus" jdbcType="INTEGER" />
+		<result column="roomtype" property="roomType" jdbcType="INTEGER" />
+		<result column="createtime" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modifytime" property="modifyTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	
+	<resultMap type="java.util.HashMap" id="houseDetailMap">
+		<result column="roomid" property="roomID" jdbcType="BIGINT" />
+		<result column="roomguid" property="roomGUID" jdbcType="VARCHAR" />
+		<result column="companyguid" property="companyGUID" jdbcType="VARCHAR" />
+		<result column="projguid" property="projGUID" jdbcType="VARCHAR" />
+		<result column="bldguid" property="bldGUID" jdbcType="VARCHAR" />
+		<result column="mainroomguid" property="mainRoomGUID" jdbcType="VARCHAR" />
+		<result column="cstguidlist" property="cstGUIDList" jdbcType="VARCHAR" />
+		<result column="cstname" property="cstname" jdbcType="VARCHAR" />
+		<result column="unit" property="unit" jdbcType="VARCHAR" />
+		<result column="floor" property="floor" jdbcType="VARCHAR" />
+		<result column="no" property="no" jdbcType="VARCHAR" />
+		<result column="room" property="room" jdbcType="VARCHAR" />
+		<result column="roomcode" property="roomCode" jdbcType="VARCHAR" />
+		<result column="huxing" property="huXing" jdbcType="VARCHAR" />
+		<result column="salestatus" property="saleStatus" jdbcType="VARCHAR" />
+		<result column="bldarea" property="bldArea" jdbcType="DOUBLE" />
+		<result column="tnarea" property="tnArea" jdbcType="DOUBLE" />
+		<result column="blrhdate" property="blRhDate" jdbcType="TIMESTAMP" />
+		<result column="yfbz" property="yFBZ" jdbcType="VARCHAR" />
+		<result column="roommemo" property="roomMemo" jdbcType="CLOB" />
+		<result column="zxbz" property="zxBz" jdbcType="VARCHAR" />
+		<result column="price" property="price" jdbcType="DOUBLE" />
+		<result column="tnprice" property="tnPrice" jdbcType="DOUBLE" />
+		<result column="zxprice" property="zxPrice" jdbcType="DOUBLE" />
+		<result column="zxtotal" property="zxTotal" jdbcType="DOUBLE" />
+		<result column="bedeckkind" property="bedeckKind" jdbcType="VARCHAR" />
+		<result column="istempletroom" property="isTempletRoom" jdbcType="TINYINT" />
+		<result column="west" property="west" jdbcType="VARCHAR" />
+		<result column="chooseroom" property="chooseRoom" jdbcType="TINYINT" />
+		<result column="chooseroomdate" property="chooseRoomDate" jdbcType="TIMESTAMP" />
+		<result column="roomstru" property="roomStru" jdbcType="VARCHAR" />
+		<result column="absolutelyfloor" property="absolutelyFloor" jdbcType="VARCHAR" />
+		<result column="statuschgguid" property="statusChgGUID" jdbcType="VARCHAR" />
+		<result column="salerentable" property="salerenTable" jdbcType="VARCHAR" />
+		<result column="producttypecode" property="productTypeCode" jdbcType="VARCHAR" />
+		<result column="htroom" property="htRoom" jdbcType="VARCHAR" />
+		<result column="dxsarea" property="dxsArea" jdbcType="DOUBLE" />
+		<result column="cararea" property="carArea" jdbcType="DOUBLE" />
+		<result column="ltarea" property="ltArea" jdbcType="DOUBLE" />
+		<result column="fpdate" property="fpDate" jdbcType="TIMESTAMP" />
+		<result column="zdfpdate" property="zdFpDate" jdbcType="TIMESTAMP" />
+		<result column="cqfznum" property="cqfzNum" jdbcType="VARCHAR" />
+		<result column="ysbldarea" property="ysBldArea" jdbcType="DOUBLE" />
+		<result column="scbldarea" property="scBldArea" jdbcType="DOUBLE" />
+		<result column="sctnarea" property="scTnArea" jdbcType="DOUBLE" />
+		<result column="ystnarea" property="ysTnArea" jdbcType="DOUBLE" />
+		<result column="hyarea" property="hyArea" jdbcType="DOUBLE" />
+		<result column="flatarea" property="flatArea" jdbcType="DOUBLE" />
+		<result column="ytarea" property="ytArea" jdbcType="DOUBLE" />
+		<result column="rhhyarea" property="rhhyArea" jdbcType="DOUBLE" />
+		<result column="ysxkzdate" property="ysxkzDate" jdbcType="TIMESTAMP" />
+		<result column="ysxkzno" property="ysxkzNo" jdbcType="VARCHAR" />
+		<result column="cqfzgetdate" property="cqfzGetDate" jdbcType="TIMESTAMP" />
+		<result column="yyjfdate" property="yyjfDate" jdbcType="TIMESTAMP" />
+		<result column="iscannotsale" property="isCannotSale" jdbcType="TINYINT" />
+		<result column="cannotsalereason" property="cannotSaleReason" jdbcType="VARCHAR" />
+		<result column="chooseroomno" property="chooseRoomNo" jdbcType="INTEGER" />
+		<result column="variety" property="variety" jdbcType="VARCHAR" />
+		<result column="productattribute" property="productAttribute" jdbcType="VARCHAR" />
+		<result column="createdon" property="createdOn" jdbcType="TIMESTAMP" />
+		<result column="parkingtype" property="parkingType" jdbcType="VARCHAR" />
+		<result column="parkingcurrenthandlemethod" property="parkingCurrentHandleMethod" jdbcType="VARCHAR" />
+		<result column="parkingsaletype" property="parkingSaleType" jdbcType="VARCHAR" />
+		<result column="parkinghandledate" property="parkingHandleDate" jdbcType="TIMESTAMP" />
+		<result column="isparkingcq" property="isParkingCq" jdbcType="TINYINT" />
+		<result column="businesscqlife" property="businessCqLife" jdbcType="VARCHAR" />
+		<result column="remarkhtml" property="remarkHTML" jdbcType="CLOB" />
+		<result column="businessmanagefee" property="businessManageFee" jdbcType="VARCHAR" />
+		<result column="buysroomno" property="buysRoomNo" jdbcType="VARCHAR" />
+		<result column="parkingpattern" property="parkingPattern" jdbcType="VARCHAR" />
+		<result column="chooseroomcstguid" property="chooseRoomCstGUID" jdbcType="VARCHAR" />
+		<result column="productformcode" property="productFormCode" jdbcType="VARCHAR" />
+		<result column="productformname" property="productFormName" jdbcType="VARCHAR" />
+		<result column="roomstatus" property="roomStatus" jdbcType="INTEGER" />
+		<result column="roomtype" property="roomType" jdbcType="INTEGER" />
+		<result column="createtime" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="modifytime" property="modifyTime" jdbcType="TIMESTAMP" />
+		<result column="projname" property="projName" jdbcType="VARCHAR"></result>
+		<result column="httotal" property="htTotal" jdbcType="VARCHAR"></result>
+	</resultMap>
+	
+	<resultMap type="java.util.HashMap" id="getTradeFollowRecordersMap">
+		<result column="userGUID" property="userGUID" jdbcType="VARCHAR" />
+		<result column="projGUID" property="projGUID" jdbcType="VARCHAR" />
+		<result column="oppGUID" property="oppGUID" jdbcType="VARCHAR" />
+		<result column="cstId" property="cstId" jdbcType="INTEGER" />
+		<result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="followType" property="followType" jdbcType="VARCHAR" />
+		<result column="followContent" property="followContent" jdbcType="VARCHAR" />
+		<result column="remark" property="remark" jdbcType="VARCHAR" />
+		<result column="cstName" property="cstName" jdbcType="INTEGER" />
+		<result column="consultantName" property="consultantName" jdbcType="VARCHAR"></result>
+	</resultMap>
+	
+	<sql id="allColumns">
+		roomID,
+		roomGUID,
+		companyGUID,
+		projGUID,
+		bldGUID,
+		mainRoomGUID,
+		cstGUIDList,
+		unit,
+		floor,
+		no,
+		room,
+		roomCode,
+		huXing,
+		saleStatus,
+		bldArea,
+		tnArea,
+		blRhDate,
+		yFBZ,
+		roomMemo,
+		zxBz,
+		price,
+		tnPrice,
+		zxPrice,
+		zxTotal,
+		bedeckKind,
+		isTempletRoom,
+		west,
+		chooseRoom,
+		chooseRoomDate,
+		roomStru,
+		absolutelyFloor,
+		statusChgGUID,
+		saleRentable,
+		productTypeCode,
+		htRoom,
+		dxsArea,
+		carArea,
+		ltArea,
+		fpDate,
+		zdFpDate,
+		cqfzNum,
+		ysBldArea,
+		scBldArea,
+		scTnArea,
+		ysTnArea,
+		hyArea,
+		flatArea,
+		ytArea,
+		rhhyArea,
+		ysxkzDate,
+		ysxkzNo,
+		cqfzGetDate,
+		yyjfDate,
+		isCannotSale,
+		cannotSaleReason,
+		chooseRoomNo,
+		variety,
+		productAttribute,
+		createdOn,
+		parkingType,
+		parkingCurrentHandleMethod,
+		parkingSaleType,
+		parkingHandleDate,
+		isParkingCq,
+		businessCqLife,
+		remarkHTML,
+		businessManageFee,
+		buysRoomNo,
+		parkingPattern,
+		chooseRoomCstGUID,
+		productFormCode,
+		productFormName,
+		roomStatus,
+		roomType,
+		createTime,
+		modifyTime
+	</sql>
+	
+	
+	<select id="getHouseDetailByRoomId" resultMap="houseDetailMap" parameterType="java.lang.Integer">
+		select t1.*, t2.projName, FORMAT(t3.htTotal/10000, 1) htTotal from (select <include refid="allColumns"/> from b_room where roomId = #{roomId} ) t1 
+		left join b_proj t2 on t1.projGUID = t2.projGUID 
+		left join t_contract t3 on t1.roomGUID = t3.roomGUID
+	</select>
+	
+	<select id="getTradeFollowRecorders" resultMap="getTradeFollowRecordersMap" parameterType="java.util.Map">
+		<![CDATA[
+		SELECT
+			t3.userGUID,
+			t3.projGUID,
+			t3.oppGUID,
+			t3.cstGUID,
+			t3.createTime,
+			t3.followType,
+			t3.followContent,
+			t3.remark,
+			t4.cstName,
+			t5.consultantName
+		FROM
+			(
+				SELECT
+					b_room.roomGUID, t_cst_trade.oppGUID
+				FROM
+					b_room, t_cst_trade
+				WHERE
+					roomId = #{roomId} and b_room.roomGUID = t_cst_trade.roomGUID
+			) t1
+		LEFT JOIN (
+			SELECT
+				userGUID,
+				projGUID,
+				oppGUID,
+				cstGUID,
+				createTime,
+				followType,
+				followContent,
+				remark
+			FROM
+				s_followrecord
+			WHERE
+				type = 2
+			and projGUID = (SELECT
+					b_room.projGUID
+				FROM
+					b_room
+				WHERE
+					roomId = #{roomId})
+		) t3 ON t1.oppGUID = t3.oppGUID
+		LEFT JOIN ${tableName} t4 ON t3.cstGUID = t4.cstGUID
+		LEFT JOIN cst_consultant t5 ON t3.userGUID = t5.consultantGUID
+		WHERE t3.projGUID is not null
+		]]>
+	</select>
+</mapper>

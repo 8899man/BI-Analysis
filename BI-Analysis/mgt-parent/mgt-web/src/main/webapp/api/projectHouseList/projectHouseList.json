@@ -1,0 +1,151 @@
+{
+    "houseList": [
+        {
+            "id": "001",
+            "title": "海滨假日",
+            "selling": true,
+            "selled": false,
+            "deal": 3200,
+            "money": 89.9,
+            "percent": 89.9
+        },
+        {
+            "id": "002",
+            "title": "海滨假日",
+            "selling": false,
+            "selled": true,
+            "deal": 3200,
+            "money": 89.9,
+            "percent": 89.9
+        },
+        {
+            "id": "003",
+            "title": "海滨假日",
+            "selling": false,
+            "selled": true,
+            "deal": 3200,
+            "money": 89.9,
+            "percent": 89.9
+        },
+        {
+            "id": "004",
+            "title": "海滨假日",
+            "selling": true,
+            "selled": false,
+            "deal": 3200,
+            "money": 89.9,
+            "percent": 89.9
+        },
+        {
+            "id": "005",
+            "title": "海滨假日",
+            "selling": true,
+            "selled": false,
+            "deal": 3200,
+            "money": 89.9,
+            "percent": 89.9
+        },
+        {
+            "id": "006",
+            "title": "海滨假日",
+            "selling": false,
+            "selled": true,
+            "deal": 3200,
+            "money": 89.9,
+            "percent": 89.9
+        },
+        {
+            "id": "007",
+            "title": "海滨假日",
+            "selling": false,
+            "selled": true,
+            "deal": 3200,
+            "money": 89.9,
+            "percent": 89.9
+        },
+        {
+            "id": "008",
+            "title": "海滨假日",
+            "selling": true,
+            "selled": false,
+            "deal": 3200,
+            "money": 89.9,
+            "percent": 89.9
+        },
+        {
+            "id": "009",
+            "title": "海滨假日",
+            "selling": true,
+            "selled": false,
+            "deal": 3200,
+            "money": 89.9,
+            "percent": 89.9
+        },
+        {
+            "id": "010",
+            "title": "海滨假日",
+            "selling": false,
+            "selled": true,
+            "deal": 3200,
+            "money": 89.9,
+            "percent": 89.9
+        },
+        {
+            "id": "011",
+            "title": "海滨假日",
+            "selling": false,
+            "selled": true,
+            "deal": 3200,
+            "money": 89.9,
+            "percent": 89.9
+        },
+        {
+            "id": "012",
+            "title": "海滨假日",
+            "selling": true,
+            "selled": false,
+            "deal": 3200,
+            "money": 89.9,
+            "percent": 89.9
+        },
+        {
+            "id": "013",
+            "title": "海滨假日",
+            "selling": true,
+            "selled": false,
+            "deal": 3200,
+            "money": 89.9,
+            "percent": 89.9
+        },
+        {
+            "id": "014",
+            "title": "海滨假日",
+            "selling": false,
+            "selled": true,
+            "deal": 3200,
+            "money": 89.9,
+            "percent": 89.9
+        },
+        {
+            "id": "001",
+            "title": "海滨假日",
+            "selling": false,
+            "selled": true,
+            "deal": 3200,
+            "money": 89.9,
+            "percent": 89.9
+        },
+        {
+            "id": "001",
+            "title": "海滨假日",
+            "selling": true,
+            "selled": false,
+            "deal": 3200,
+            "money": 89.9,
+            "percent": 89.9
+        }
+    ],
+    "TotalPages": 20,
+    "TotalRows": 1400,
+    "PageSize": 0
+}

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.pmp.dao.RptXsFormatIndexDao" > 
+<!-- Result Map-->
+<resultMap id="RptXsFormatIndexMap" type="com.sxit.model.pmp.RptXsFormatIndex" >
+	<result column="Data_seq_id" property="Data_seq_id"/>
+	<result column="proj_id" property="proj_id"/>
+	<result column="Deal_money" property="Deal_money"/>
+	<result column="esti_Deal_money" property="esti_Deal_money"/>
+	<result column="Deal_house_num" property="Deal_house_num"/>
+	<result column="house_all_num" property="house_all_num"/>
+	<result column="Deal_acreage" property="Deal_acreage"/>
+	<result column="House_all_acreage" property="House_all_acreage"/>
+	<result column="createTime" property="createTime"/>
+	<result column="rg_num" property="rg_num"/>
+	<result column="qs_num" property="qs_num"/>
+	<result column="zs_num" property="zs_num"/>
+</resultMap>
+       
+<!-- rpt_xs_format_index table all fields -->
+<sql id="Base_Column_List" >
+	 Data_seq_id,proj_id,Deal_money,esti_Deal_money,Deal_house_num,house_all_num,Deal_acreage,House_all_acreage,createTime,rg_num,qs_num,zs_num
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	<if test="Data_seq_id != null" >
+	    and Data_seq_id =  #{Data_seq_id}
+	</if>
+	 	<if test="proj_id != null and proj_id != ''" >
+	    and proj_id =  #{proj_id}
+	</if>
+	<if test="Deal_money != null" >
+	    and Deal_money =  #{Deal_money}
+	</if>
+	<if test="esti_Deal_money != null" >
+	    and esti_Deal_money =  #{esti_Deal_money}
+	</if>
+	<if test="Deal_house_num != null" >
+	    and Deal_house_num =  #{Deal_house_num}
+	</if>
+	<if test="house_all_num != null" >
+	    and house_all_num =  #{house_all_num}
+	</if>
+	<if test="Deal_acreage != null" >
+	    and Deal_acreage =  #{Deal_acreage}
+	</if>
+	<if test="House_all_acreage != null" >
+	    and House_all_acreage =  #{House_all_acreage}
+	</if>
+	<if test="createTime != null" >
+	    and createTime =  #{createTime}
+	</if>
+	<if test="rg_num != null" >
+	    and rg_num =  #{rg_num}
+	</if>
+	<if test="qs_num != null" >
+	    and qs_num =  #{qs_num}
+	</if>
+	<if test="zs_num != null" >
+	    and zs_num =  #{zs_num}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into rpt_xs_format_index(Data_seq_id,proj_id,Deal_money,esti_Deal_money,Deal_house_num,house_all_num,Deal_acreage,House_all_acreage,createTime,rg_num,qs_num,zs_num)
+ values(#{Data_seq_id},#{proj_id},#{Deal_money},#{esti_Deal_money},#{Deal_house_num},#{house_all_num},#{Deal_acreage},#{House_all_acreage},now(),#{rg_num},#{qs_num},#{zs_num})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update rpt_xs_format_index set proj_id=#{proj_id},Deal_money=#{Deal_money},esti_Deal_money=#{esti_Deal_money},Deal_house_num=#{Deal_house_num},house_all_num=#{house_all_num},Deal_acreage=#{Deal_acreage},House_all_acreage=#{House_all_acreage},rg_num=#{rg_num},qs_num=#{qs_num},zs_num=#{zs_num} where Data_seq_id=#{Data_seq_id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update rpt_xs_format_index set 
+	<trim  suffixOverrides="," >
+	<if test="proj_id != null  and proj_id != '' ">
+		proj_id=#{proj_id},
+	</if>
+	<if test="Deal_money != null  ">
+		Deal_money=#{Deal_money},
+	</if>
+	<if test="esti_Deal_money != null  ">
+		esti_Deal_money=#{esti_Deal_money},
+	</if>
+	<if test="Deal_house_num != null  ">
+		Deal_house_num=#{Deal_house_num},
+	</if>
+	<if test="house_all_num != null  ">
+		house_all_num=#{house_all_num},
+	</if>
+	<if test="Deal_acreage != null  ">
+		Deal_acreage=#{Deal_acreage},
+	</if>
+	<if test="House_all_acreage != null  ">
+		House_all_acreage=#{House_all_acreage},
+	</if>
+	<if test="createTime != null  ">
+		createTime=#{createTime},
+	</if>
+	<if test="rg_num != null  ">
+		rg_num=#{rg_num},
+	</if>
+	<if test="qs_num != null  ">
+		qs_num=#{qs_num},
+	</if>
+	<if test="zs_num != null  ">
+		zs_num=#{zs_num},
+	</if>
+	</trim> where Data_seq_id=#{Data_seq_id}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from rpt_xs_format_index where Data_seq_id = #{Data_seq_id}
+</delete>
+ 
+<!-- 根据id查询 rpt_xs_format_index -->
+<select id="queryById"  resultMap="RptXsFormatIndexMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from rpt_xs_format_index where proj_id = #{proj_id} and createTime = (select max(createTime) from rpt_xs_format_index)
+</select>
+
+<!-- rpt_xs_format_index 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from rpt_xs_format_index 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询rpt_xs_format_index列表 -->
+<select id="queryByList" resultMap="RptXsFormatIndexMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from rpt_xs_format_index 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

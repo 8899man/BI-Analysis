@@ -1,0 +1,140 @@
+{
+	"clients": [
+        ["到访阶段",   850000],
+        ["认筹阶段",       310500],
+        ["认购阶段", 226125],
+        ["签约阶段",    198990]
+    ],
+    "customerFeature": [
+		{
+			"title": "年龄段",
+			"arr": [
+				{
+					"name": "35-44",
+					"percent": 50
+				},
+				{
+					"name": "45-54",
+					"percent": 10
+				},
+				{
+					"name": "20-34",
+					"percent": 15
+				},
+				{
+					"name": "55-64",
+					"percent": 25
+				}
+			]
+		},
+		{
+			"title": "家庭结构",
+			"arr": [
+				{
+					"name": "小太阳",
+					"percent": 40
+				},
+				{
+					"name": "三代同堂",
+					"percent": 30
+				},
+				{
+					"name": "夫妻俩",
+					"percent": 20
+				},
+				{
+					"name": "父母同住",
+					"percent": 10
+				}
+			]
+		},
+		{
+			"title": "置业目的",
+			"arr": [
+				{
+					"name": "首次",
+					"percent": 25
+				},
+				{
+					"name": "改善",
+					"percent": 35
+				},
+				{
+					"name": "投资",
+					"percent": 20
+				},
+				{
+					"name": "空巢",
+					"percent": 20
+				}
+			]
+		},
+		{
+			"title": "关注重点",
+			"arr": [
+				{
+					"name": "品牌",
+					"percent": 40
+				},
+				{
+					"name": "户型",
+					"percent": 30
+				},
+				{
+					"name": "地段",
+					"percent": 20
+				},
+				{
+					"name": "教育",
+					"percent": 10
+				}
+			]
+		},
+		{
+			"title": "购买房产产品类型",
+			"arr": [
+				{
+					"name": "高层",
+					"percent": 30
+				},
+				{
+					"name": "普通多层",
+					"percent": 30
+				},
+				{
+					"name": "小高层",
+					"percent": 20
+				},
+				{
+					"name": "洋房",
+					"percent": 20
+				}
+			]
+		}
+	],
+	"deal": {
+		"categories": ["华南区域","华东区域","华北区域","华中区域"],
+		"data": [
+			{
+				"type": "area",
+				"id": "1",
+				"y":100801
+			},
+			{
+				"type": "area",
+				"id": "2",
+				"y":80000
+			},
+			{
+				"type": "area",
+				"id": "3",
+				"y":60000
+			},
+			{
+				"type": "area",
+				"id": "4",
+				"y":90000
+			}
+		]
+	}
+}

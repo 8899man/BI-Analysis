@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.pmp.dao.RptZyFormatIndexDao" > 
+<!-- Result Map-->
+<resultMap id="RptZyFormatIndexMap" type="com.sxit.model.pmp.RptZyFormatIndex" >
+	<result column="data_id" property="data_id"/>
+	<result column="proj_id" property="proj_id"/>
+	<result column="Plan_rent_set" property="Plan_rent_set"/>
+	<result column="Fini_Rent_set" property="Fini_Rent_set"/>
+	<result column="Plan_rent_money" property="Plan_rent_money"/>
+	<result column="Fini_rent_money" property="Fini_rent_money"/>
+	<result column="Plan_deal_set" property="Plan_deal_set"/>
+	<result column="Fini_deal_set" property="Fini_deal_set"/>
+	<result column="Plan_deal_money" property="Plan_deal_money"/>
+	<result column="create_time" property="create_time"/>
+	<result column="Fini_deal_money" property="Fini_deal_money"/>
+</resultMap>
+       
+<!-- rpt_zy_format_index table all fields -->
+<sql id="Base_Column_List" >
+	 data_id,proj_id,Plan_rent_set,Fini_Rent_set,Plan_rent_money,Fini_rent_money,Plan_deal_set,Fini_deal_set,Plan_deal_money,create_time,Fini_deal_money
+</sql>
+   
+   
+<!-- 查询条件 -->
+<sql id="Example_Where_Clause">
+where 1=1
+<trim  suffixOverrides="," >
+	 	<if test="data_id != null and data_id != ''" >
+	    and data_id =  #{data_id}
+	</if>
+	 	<if test="proj_id != null and proj_id != ''" >
+	    and proj_id =  #{proj_id}
+	</if>
+	<if test="Plan_rent_set != null" >
+	    and Plan_rent_set =  #{Plan_rent_set}
+	</if>
+	<if test="Fini_Rent_set != null" >
+	    and Fini_Rent_set =  #{Fini_Rent_set}
+	</if>
+	<if test="Plan_rent_money != null" >
+	    and Plan_rent_money =  #{Plan_rent_money}
+	</if>
+	<if test="Fini_rent_money != null" >
+	    and Fini_rent_money =  #{Fini_rent_money}
+	</if>
+	<if test="Plan_deal_set != null" >
+	    and Plan_deal_set =  #{Plan_deal_set}
+	</if>
+	<if test="Fini_deal_set != null" >
+	    and Fini_deal_set =  #{Fini_deal_set}
+	</if>
+	<if test="Plan_deal_money != null" >
+	    and Plan_deal_money =  #{Plan_deal_money}
+	</if>
+	<if test="create_time != null" >
+	    and create_time =  #{create_time}
+	</if>
+	<if test="Fini_deal_money != null" >
+	    and Fini_deal_money =  #{Fini_deal_money}
+	</if>
+</trim>
+</sql>
+   
+
+<!-- 插入记录 -->
+<insert id="add" parameterType="Object" >
+  <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+	SELECT LAST_INSERT_ID()
+  </selectKey>
+  insert into rpt_zy_format_index(data_id,proj_id,Plan_rent_set,Fini_Rent_set,Plan_rent_money,Fini_rent_money,Plan_deal_set,Fini_deal_set,Plan_deal_money,create_time,Fini_deal_money)
+ values(#{data_id},#{proj_id},#{Plan_rent_set},#{Fini_Rent_set},#{Plan_rent_money},#{Fini_rent_money},#{Plan_deal_set},#{Fini_deal_set},#{Plan_deal_money},#{create_time},#{Fini_deal_money})
+</insert>
+
+<!-- 根据id，修改记录-->  
+ <update id="update" parameterType="Object" >
+  update rpt_zy_format_index set proj_id=#{proj_id},Plan_rent_set=#{Plan_rent_set},Fini_Rent_set=#{Fini_Rent_set},Plan_rent_money=#{Plan_rent_money},Fini_rent_money=#{Fini_rent_money},Plan_deal_set=#{Plan_deal_set},Fini_deal_set=#{Fini_deal_set},Plan_deal_money=#{Plan_deal_money},create_time=#{create_time},Fini_deal_money=#{Fini_deal_money} where data_id=#{data_id}
+ </update>
+ 
+ <!-- 修改记录，只修改只不为空的字段 -->
+<update id="updateBySelective" parameterType="Object" >
+	update rpt_zy_format_index set 
+	<trim  suffixOverrides="," >
+	<if test="proj_id != null  and proj_id != '' ">
+		proj_id=#{proj_id},
+	</if>
+	<if test="Plan_rent_set != null  ">
+		Plan_rent_set=#{Plan_rent_set},
+	</if>
+	<if test="Fini_Rent_set != null  ">
+		Fini_Rent_set=#{Fini_Rent_set},
+	</if>
+	<if test="Plan_rent_money != null  ">
+		Plan_rent_money=#{Plan_rent_money},
+	</if>
+	<if test="Fini_rent_money != null  ">
+		Fini_rent_money=#{Fini_rent_money},
+	</if>
+	<if test="Plan_deal_set != null  ">
+		Plan_deal_set=#{Plan_deal_set},
+	</if>
+	<if test="Fini_deal_set != null  ">
+		Fini_deal_set=#{Fini_deal_set},
+	</if>
+	<if test="Plan_deal_money != null  ">
+		Plan_deal_money=#{Plan_deal_money},
+	</if>
+	<if test="create_time != null  ">
+		create_time=#{create_time},
+	</if>
+	<if test="Fini_deal_money != null  ">
+		Fini_deal_money=#{Fini_deal_money},
+	</if>
+	</trim> where data_id=#{data_id}
+</update>
+
+<!-- 删除记录 -->
+<delete id="delete" parameterType="Object">
+	delete 	 from rpt_zy_format_index where data_id = #{data_id}
+</delete>
+ 
+<!-- 根据id查询 rpt_zy_format_index -->
+<select id="queryById"  resultMap="RptZyFormatIndexMap" parameterType="Object">
+	select <include refid="Base_Column_List" /> 
+	 from rpt_zy_format_index where proj_id=#{proj_id} and create_time = (select max(create_time) from rpt_zy_format_index);
+</select>
+
+<!-- rpt_zy_format_index 列表总数-->
+<select id="queryByCount" resultType="java.lang.Integer"  parameterType="Object">
+	select count(1) from rpt_zy_format_index 
+	<include refid="Example_Where_Clause"/>
+</select>
+  	
+<!-- 查询rpt_zy_format_index列表 -->
+<select id="queryByList" resultMap="RptZyFormatIndexMap"  parameterType="Object">
+	select 
+	<include refid="Base_Column_List"/>
+	from rpt_zy_format_index 
+	<include refid="Example_Where_Clause"/>
+	<if test="pager.orderCondition != null and pager.orderCondition != ''" >
+      ${pager.orderCondition}
+    </if>
+    <if test="pager.mysqlQueryCondition != null and pager.mysqlQueryCondition != ''" >
+       ${pager.mysqlQueryCondition}
+    </if>
+</select>
+  	
+</mapper>   

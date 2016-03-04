@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sxit.mgt.system.dao.FunctionDao">
+	 
+
+	 <resultMap id="FunctionMap" type="SysFunction" >
+	    <id column="function_id" property="functionId" jdbcType="INTEGER" />
+		<result column="function_name" property="functionName" jdbcType="VARCHAR" />
+		<result column="function_code" property="functionCode" jdbcType="VARCHAR" />
+		<result column="function_level" property="functionLevel" jdbcType="INTEGER" />
+		<result column="parent_id" property="parentId" jdbcType="INTEGER" />
+		<result column="sort" property="sort" jdbcType="INTEGER" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="state" property="state" jdbcType="INTEGER" />
+
+	 </resultMap>
+
+	<select id="getFunctionList" resultMap="FunctionMap" parameterType="java.util.Map">
+		select
+		function_id,
+		function_name,
+		function_code,
+		function_level,
+		parent_id,
+		sort,
+		type,
+		state
+		from
+		sys_function
+        order by function_level,sort 
+	</select>
+
+	<select id="getAllFunctionList" resultMap="FunctionMap">
+		select
+		function_id,
+		function_name,
+		function_code,
+		
+		function_level,
+		parent_id,
+		sort,
+		type,
+		state
+		from
+		sys_function
+		where state = 1
+        order by function_level,sort 
+	</select>
+	
+	<select id="getFunctionListByUser" resultMap="FunctionMap"  parameterType="java.lang.Integer">
+		select
+		a.function_id,
+		a.function_name,
+		a.function_code,
+		a.function_level,
+		a.parent_id,
+		a.sort,
+		a.type,
+		a.state
+		from
+		sys_function a
+		join (
+		   select distinct c.function_id from sys_user_role b
+		   join (
+				select * from sys_role_function
+				union 
+				select * from sys_role_function_v2
+				union 
+				select * from sys_role_function_v1
+		   ) c  on c.role_id = b.role_id  and b.user_id = #{userId}
+		) d on a.function_id = d.function_id 
+		where a.state = 1
+		order by a.function_level,a.sort 
+	</select>
+	
+
+	<select id="getFunctionById" resultMap="FunctionMap" parameterType="java.lang.Integer">
+		select
+		function_id,
+		function_name,
+		function_code,
+		
+		function_level,
+		parent_id,
+		sort,
+		type,
+		state
+		from
+		sys_function
+		where function_id =  #{functionId}
+    </select>
+    
+    
+
+	<insert id="insert" parameterType="SysFunction">
+		insert into
+		sys_function(
+		function_id,
+		function_name,
+		function_code,
+		
+		function_level,
+		parent_id,
+		sort,
+		type,
+		state
+		)
+		values
+		(
+		#{functionId},
+		#{functionName},
+		#{functionCode},
+		#{functionLevel},
+		#{parentId},
+		#{sort},
+		#{type},
+		#{state}
+		)
+	</insert>
+
+	<insert id="insertList" parameterType="java.util.List">
+		insert into
+		sys_function(
+		function_id,
+		function_name,
+		function_code,
+		
+		function_level,
+		parent_id,
+		sort,
+		type,
+		state
+		)
+		values
+		<foreach collection="list" item="obj" index="index" separator=",">
+			(
+			#{obj.functionId},
+			#{obj.functionName},
+			#{obj.functionCode},
+			#{obj.functionLevel},
+			#{obj.parentId},
+			#{obj.sort},
+			#{obj.type},
+			#{obj.state}
+			)
+		</foreach>
+	</insert>
+
+	<update id="update" parameterType="SysFunction">
+		update sys_function
+		set
+		function_id = #{functionId},
+		function_name = #{functionName},
+		function_code = #{functionCode},
+		function_level = #{functionLevel},
+		parent_id = #{parentId},
+		sort = #{sort},
+		type = #{type},
+		state = #{state}
+		where function_id =
+		#{functionId}
+	</update>
+
+	<update id="updateList" parameterType="List">
+		<foreach collection="list" item="obj" index="index" separator=";">
+			update sys_function
+			set
+			function_id = #{obj.functionId},
+			function_name = #{obj.functionName},
+			function_code = #{obj.functionCode},
+			function_level = #{obj.functionLevel},
+			parent_id = #{obj.parentId},
+			sort = #{obj.sort},
+			type = #{obj.type},
+			state = #{obj.state}
+			where function_id =
+			#{obj.functionId}
+		</foreach>
+	</update>
+
+	<select id="isHave" resultType="int" parameterType="java.lang.Integer">
+		select
+		count(*) from sys_function where function_id =
+		#{functionId}
+	</select>
+
+	<update id="updateToDelete" parameterType="java.lang.Integer">
+		update sys_function
+		set
+		state = 2
+		where function_id =
+		#{functionId}
+	</update>
+	<update id="delete" parameterType="java.lang.Integer">
+		delete from sys_function
+		where function_id =
+		#{functionId}
+	</update>
+
+	<select id="getFunctionCount" resultType="int">
+		select count(1)
+		from sys_function
+	</select>
+
+	<select id="getIdList" resultType="String">
+		select function_id from sys_function
+	</select>
+	
+	<select id="getRoleCheckboxListByMap" resultType="CheckBoxVo"
+		parameterType="java.util.Map">
+		select
+		role_id as id,
+		role_name as name,
+		role_type as roleType
+		from
+		sys_role
+		<where>
+			<if test="orgId != null">
+				and
+				(
+				org_id = #{orgId}
+				)
+			</if>
+		</where>
+		order by role_id
+	</select>
+	
+	<select id="getRoleIdListByFunction" resultType="Integer"
+		parameterType="java.util.Map">
+		select
+		a.role_id
+		from
+		sys_role_function a
+		join
+		sys_role b on
+		a.role_id =b.role_id
+		where
+		a.function_id = #{functionId}
+		and
+		b.org_id = #{orgId}
+	</select>
+	
+	
+		<insert id="addFunctionRole" parameterType="java.util.Map">
+		insert into
+		sys_role_function(
+		function_id,
+		role_id
+		)
+		values
+		<foreach collection="list" item="obj" index="index" separator=",">
+			(
+			#{functionId},
+			#{obj}
+			)
+		</foreach>
+	</insert>
+
+	<insert id="deleteFunctionRole" parameterType="java.util.Map">
+		<foreach collection="list" item="obj" index="index" separator=";">
+			delete from sys_role_function where function_id =#{functionId} and
+			role_id=#{obj}
+		</foreach>
+	</insert>
+
+</mapper>

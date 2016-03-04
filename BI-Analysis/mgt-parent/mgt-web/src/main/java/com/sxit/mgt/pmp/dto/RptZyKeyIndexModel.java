@@ -1,0 +1,14 @@
+package com.sxit.mgt.pmp.dto;
+
+
+public class RptZyKeyIndexModel{
+	
+		private String Data_seq_id;//   	private String proj_id;//   	private Integer Add_lease_cst;//   	private Integer Add_Sale_cst;//   	private Integer Add_lease_house;//   	private Integer Add_Sale_house;//   	private Integer Lease_follow_num;//   	private Integer Sale_follow_num;//   	private Integer House_lease_num;//   	private Integer House_sale_num;//   	private double Lease_deal_money;//   	private double Sale_deal_money;//
+	private java.sql.Timestamp create_time;// 
+	public java.sql.Timestamp getCreate_time() {
+	    return this.create_time;
+	}
+	public void setCreate_time(java.sql.Timestamp create_time) {
+	    this.create_time=create_time;
+	}	public String getData_seq_id() {	    return this.Data_seq_id;	}	public void setData_seq_id(String Data_seq_id) {	    this.Data_seq_id=Data_seq_id;	}	public String getProj_id() {	    return this.proj_id;	}	public void setProj_id(String proj_id) {	    this.proj_id=proj_id;	}	public Integer getAdd_lease_cst() {	    return this.Add_lease_cst;	}	public void setAdd_lease_cst(Integer Add_lease_cst) {	    this.Add_lease_cst=Add_lease_cst;	}	public Integer getAdd_Sale_cst() {	    return this.Add_Sale_cst;	}	public void setAdd_Sale_cst(Integer Add_Sale_cst) {	    this.Add_Sale_cst=Add_Sale_cst;	}	public Integer getAdd_lease_house() {	    return this.Add_lease_house;	}	public void setAdd_lease_house(Integer Add_lease_house) {	    this.Add_lease_house=Add_lease_house;	}	public Integer getAdd_Sale_house() {	    return this.Add_Sale_house;	}	public void setAdd_Sale_house(Integer Add_Sale_house) {	    this.Add_Sale_house=Add_Sale_house;	}	public Integer getLease_follow_num() {	    return this.Lease_follow_num;	}	public void setLease_follow_num(Integer Lease_follow_num) {	    this.Lease_follow_num=Lease_follow_num;	}	public Integer getSale_follow_num() {	    return this.Sale_follow_num;	}	public void setSale_follow_num(Integer Sale_follow_num) {	    this.Sale_follow_num=Sale_follow_num;	}	public Integer getHouse_lease_num() {	    return this.House_lease_num;	}	public void setHouse_lease_num(Integer House_lease_num) {	    this.House_lease_num=House_lease_num;	}	public Integer getHouse_sale_num() {	    return this.House_sale_num;	}	public void setHouse_sale_num(Integer House_sale_num) {	    this.House_sale_num=House_sale_num;	}	public double getLease_deal_money() {	    return this.Lease_deal_money;	}	public void setLease_deal_money(double Lease_deal_money) {	    this.Lease_deal_money=Lease_deal_money;	}	public double getSale_deal_money() {	    return this.Sale_deal_money;	}	public void setSale_deal_money(double Sale_deal_money) {	    this.Sale_deal_money=Sale_deal_money;	}
+}

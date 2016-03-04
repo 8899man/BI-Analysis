@@ -1,0 +1,208 @@
+<div ng-controller="menuListController" ng-init="initializeController()">
+  <div class="btn-toolbar">
+    <input type="hidden" name="hidIsReLoad" id="hidIsReLoad" />
+    <div class="btn-group"></div>
+  </div>
+  <div class="well" style="min-height:450px;">
+    <div class="top_search form-inline">
+      <a class="btn purple" role="button" ng-click="addModal();"><i class="glyphicon glyphicon-plus"></i>添加菜单</a> 
+    </div>
+
+    <table class="table table-striped table-hover table-bordered">
+      <thead>
+        <tr>
+	                 
+                    <th>菜单名称</th>
+                    <th>菜单ID</th>
+                    <th>请求路径</th>
+                    <th>功能编号</th>
+	 	    
+	 <th class="text-center" width="16%"> 操作 </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="sysMenu in menus" ng-class="{'tableTrColor':sysMenu.IsCurrent==1}" on-finish-render-filters>
+                         
+                <td> {{sysMenu.preName}} </td>
+                <td> {{sysMenu.id}} </td>
+                <td> {{sysMenu.action}} </td>
+			    <td> {{sysMenu.functionId}} </td>
+          <td class="text-center">
+            <button ng-show="sysMenu.target==1"  class="btn purple btn-xs" type="button" href="#" data-toggle="modal" ng-click="addModal(sysMenu.id,sysMenu.level);" title="添加"> <span class="glyphicon glyphicon-plus"></span> 添加 </button>
+          	<button class="btn btn-info btn-xs" type="button" href="#" data-toggle="modal" ng-click="editModal(sysMenu.id);" title="修改"> <span class="glyphicon glyphicon-edit"></span> 修改 </button>
+            <button ng-show="sysMenu.target!=1" class="btn btn-danger btn-xs" type="button" href="#" data-toggle="modal" ng-click="deleteOne(sysMenu.id);" title="删除"> <span class="glyphicon glyphicon-trash"></span> 删除 </button>
+           </td>
+        </tr> 
+      </tbody>
+    </table>
+
+    </div>
+
+    <script type="text/ng-template" id="addModal.html">
+        <div>
+            <form class="form-horizontal" sysMenu="form" name="myForm" novalidate>
+                <div class="modal-header">
+                    <h3 class="modal-title">{{HeaderText}}菜单</h3>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" ng-model="menuId" />
+                <table class="table table-striped table-bordered table-hover">
+                <tr>
+                  <td width="20%">菜单名称:</td>
+                  <td width="80%">
+                   <input type="text" name="menuName"  required ng-model="sysMenuModal.menuName" ng-minlength="2" ng-maxlength="100" class="input-xlarge">
+                   <b style="color:red; font-weight:normal;">
+                    <span ng-show="myForm.menuName.$error.required">必填</span>
+                    <span ng-show="myForm.menuName.$error.minlength">太短</span>
+                    <span ng-show="myForm.menuName.$error.maxlength">太长</span>
+                   </b>
+                  </td>
+                </tr>
+				<tr>
+                  <td width="20%">菜单ID:</td>
+                  <td width="80%">
+                   <input type="text" name="menuId"  required ng-model="sysMenuModal.menuId" ng-minlength="1" ng-maxlength="100" class="input-xlarge">
+                   <b style="color:red; font-weight:normal;">
+                    <span ng-show="myForm.menuId.$error.required">必填</span>
+                    <span ng-show="myForm.menuId.$error.minlength">太短</span>
+                    <span ng-show="myForm.menuId.$error.maxlength">太长</span>
+                   </b>
+                  </td>
+                </tr>
+				<tr>
+                  <td width="20%">父菜单Id:</td>
+                  <td width="80%">
+                   <input type="text" name="parentId"   ng-model="sysMenuModal.parentId"  class="input-xlarge">
+                  </td>
+                </tr>
+                <tr>
+                  <td width="20%">菜单级别: </td>
+                  <td width="80%">
+                   <input type="text" name="menuLevel" required ng-model="sysMenuModal.menuLevel"
+				     class="input-xlarge">
+                   <b style="color:red; font-weight:normal;">
+                    <span ng-show="myForm.menuLevel.$error.required">必填</span>
+
+                   </b>
+                  </td>
+                </tr>
+				<tr>
+                  <td width="20%">请求路径:</td>
+                  <td width="80%">
+                   <input type="text" name="action"  required ng-model="sysMenuModal.action" ng-minlength="3" ng-maxlength="1000" class="input-xlarge">
+                   <b style="color:red; font-weight:normal;">
+                    <span ng-show="myForm.action.$error.required">必填</span>
+                    <span ng-show="myForm.action.$error.minlength">太短</span>
+                    <span ng-show="myForm.action.$error.maxlength">太长</span>
+                   </b>
+                  </td>
+                </tr>
+				<tr>
+                  <td width="20%">功能编码:</td>
+                  <td width="80%">
+                   <input type="text" name="functionCode"  required ng-model="sysMenuModal.functionCode" ng-minlength="3" ng-maxlength="100" class="input-xlarge">
+                   <b style="color:red; font-weight:normal;">
+                    <span ng-show="myForm.functionCode.$error.required">必填</span>
+                    <span ng-show="myForm.functionCode.$error.minlength">太短</span>
+                    <span ng-show="myForm.functionCode.$error.maxlength">太长</span>
+                   </b>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="20%">路径类别:</td>
+                  <td width="80%">
+				   <select ng-model="sysMenuModal.target"  ng-options="o.id as o.name for o in menuTargetList" 
+				   class="form-control input-xlarge">
+				   </select>
+                  </td>
+                </tr>
+				<tr>
+                  <td width="20%">菜单样式:</td>
+                  <td width="80%">
+				  <input type="text" name="menuClass"   ng-model="sysMenuModal.menuClass"  class="input-xlarge">
+                  </td>
+                </tr>
+                <tr>
+                  <td width="20%">排序:</td>
+                  <td width="80%">
+                   <input type="text" name="sort"  required ng-model="sysMenuModal.sort"  class="input-xlarge">
+                   <b style="color:red; font-weight:normal;">
+                    <span ng-show="myForm.sort.$error.required">必填</span>
+                   </b>
+                  </td>
+                </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" ng-disabled="myForm.$invalid" ng-click="ok(menuId,thisSysFunctionNameToEdit,thisDescriptionToEdit)">提交</button>
+                    <button class="btn btn-warning" ng-click="cancel()">取消</button>
+                </div>
+            </form>
+        </div>
+    </script> 
+    <script type="text/ng-template" id="editModal.html">
+        <div>
+            <form class="form-horizontal" sysMenu="form" name="myForm" novalidate>
+                <div class="modal-header">
+                    <h3 class="modal-title">{{HeaderText}}菜单</h3>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" ng-model="menuId" />
+                    <table class="table table-striped table-bordered table-hover">
+                <tr>
+                  <td width="20%">菜单名称:</td>
+                  <td width="80%">
+                   <input type="text" name="menuName"  required ng-model="sysMenuModal.menuName" ng-minlength="1" ng-maxlength="100" class="input-xlarge">
+                   <b style="color:red; font-weight:normal;">
+                    <span ng-show="myForm.menuName.$error.required">必填</span>
+                    <span ng-show="myForm.menuName.$error.minlength">太短</span>
+                    <span ng-show="myForm.menuName.$error.maxlength">太长</span>
+                   </b>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="20%">请求路径:</td>
+                  <td width="80%">
+                   <input type="text" name="action"  required ng-model="sysMenuModal.action" ng-minlength="3" ng-maxlength="100" class="input-xlarge">
+                   <b style="color:red; font-weight:normal;">
+                    <span ng-show="myForm.action.$error.required">必填</span>
+                    <span ng-show="myForm.action.$error.minlength">太短</span>
+                    <span ng-show="myForm.action.$error.maxlength">太长</span>
+                   </b>
+                  </td>
+                </tr>
+                <tr>
+                  <td width="20%">路径类别:</td>
+                  <td width="80%">
+				  
+				   <select ng-model="sysMenuModal.target"  ng-options="o.id as o.name for o in menuTargetList" 
+				   class="form-control input-xlarge">
+				   </select>
+				  
+                  </td>
+                </tr>
+				<tr>
+                  <td width="20%">菜单样式:</td>
+                  <td width="80%">
+				  <input type="text" name="menuClass"   ng-model="sysMenuModal.menuClass"  class="input-xlarge">
+                  </td>
+                </tr>
+                <tr>
+                  <td width="20%">排序:</td>
+                  <td width="80%">
+                   <input type="text" name="sort"  required ng-model="sysMenuModal.sort"  class="input-xlarge">
+                   <b style="color:red; font-weight:normal;">
+                    <span ng-show="myForm.sort.$error.required">必填</span>
+                   </b>
+                  </td>
+                </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" ng-disabled="myForm.$invalid" ng-click="ok(menuId,thisSysFunctionNameToEdit,thisDescriptionToEdit)">提交</button>
+                    <button class="btn btn-warning" ng-click="cancel()">取消</button>
+                </div>
+            </form>
+        </div>
+    </script> 
+</div>

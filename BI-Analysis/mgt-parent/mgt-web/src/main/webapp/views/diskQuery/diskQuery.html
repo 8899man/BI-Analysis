@@ -1,0 +1,625 @@
+<div ng-controller="DiskQueryController" ng-init="initializeController()">
+	<div class="title-position box-shadow-1 clearfix">
+		<h1><a href="javascript:;" class="history-back back-button">返回</a>盘源查询</h1>
+		<h2><a class="glyphicon glyphicon-home" href=""><i>首页</i></a> > 项目 > 项目画像 > 盘源查询</h2>
+	</div>
+
+
+	<div class="content">
+		<div class="content-main">
+			
+
+			<div class="query-header disk-query-header box-shadow-1 border-radius-3 clearfix">
+				<div class="query-unit">
+					<ul>
+						<li>
+							<div class="query-unit-key">楼栋</div>
+							<div class="query-unit-value">
+								<select name="" id="" class="form-control">
+									<option value="0">所有</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select>
+							</div>
+						</li>
+						<li>
+							<div class="query-unit-key">单元</div>
+							<div class="query-unit-value">
+								<select name="" id="" class="form-control">
+									<option value="0">所有</option>
+									<option value="1">A</option>
+									<option value="2">B</option>
+									<option value="3">C</option>
+									<option value="4">D</option>
+								</select>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="query-submit query-customer-submit">
+					<div class="query-submit-search form-inline">
+						<button type="submit" class="btn btn-primary pull-right">查询</button>
+						<div class="form-group form-title pull-left">
+							<p class="form-control-static">房间号</p>
+						</div>
+						<div class="form-input">
+							<input type="text" class="form-control" placeholder="请输入房间号">
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="project-list margin-top-20 box-shadow-1 border-radius-3">
+				<div class="project-list-header">
+					<div class="project-list-header-inside clearfix">
+						<div class="project-list-header-tab pull-left">
+							<label class="btn btn-primary" ng-model="houseType" btn-radio="'all'">全部</label>
+					        <label class="btn btn-primary" ng-model="houseType" btn-radio="'selling'">在售</label>
+					        <label class="btn btn-primary" ng-model="houseType" btn-radio="'selled'">在租</label>
+						</div>
+					</div>
+				</div>
+				<div class="project-list-main disk-list-main">
+					<ul class="clearfix">
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i class="selling">售</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i>租</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i class="selling">售</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i class="selling">售</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i>租</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i class="selling">售</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i>租</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i class="selling">售</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i class="selling">售</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i>租</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i class="selling">售</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i>租</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i class="selling">售</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i class="selling">售</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i>租</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i class="selling">售</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i>租</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i class="selling">售</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i class="selling">售</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i>租</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i class="selling">售</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i>租</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i class="selling">售</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i class="selling">售</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i>租</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i class="selling">售</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i>租</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i class="selling">售</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i class="selling">售</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i>租</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i class="selling">售</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i>租</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i class="selling">售</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i class="selling">售</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i>租</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						<li>
+							<a ui-sref="app.project.houseDetails({'houseId': 100321})" class="clearfix">
+								<h4>3A-1106<i>租</i></h4>
+								<h2 class="clearfix">
+									<p class="cj">
+										<span class="key">售价：</span>
+										<span class="value"><b>3200</b>万</span>
+									</p>
+									<p class="je">
+										<span class="key">面积：</span>
+										<span class="value"><b>89.9</b>㎡</span>
+									</p>
+								</h2>
+							</a>
+						</li>
+						
+					</ul>
+
+
+				</div>
+			</div>
+
+			<div class="project-page clearfix">
+				<pagination max-size="10" rotate="false" boundary-links="true" total-items="TotalRows" items-per-page="PageSize"
+		            ng-change="pageChanged()" ng-model="CurrentPageNumber" class="pagination-default"
+		            previous-text="上一页" next-text="下一页" first-text="首页" last-text="末页" style="margin: 0; display: block;"></pagination>
+			</div>
+
+
+			
+		</div>
+	</div>
+</div>

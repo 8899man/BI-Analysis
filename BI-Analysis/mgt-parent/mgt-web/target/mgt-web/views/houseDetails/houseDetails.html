@@ -1,0 +1,234 @@
+<div ng-controller="HouseDetailsController" ng-init="initializeController()">
+	
+
+	<div class="title-position box-shadow-1 clearfix">
+		<h1><a href="javascript:;" class="history-back back-button">返回</a>房产画像</h1>
+		<h2><a class="glyphicon glyphicon-home" href=""><i>首页</i></a> > 项目 > 房产画像</h2>
+	</div>
+
+
+
+	<div class="content">
+		<div class="content-main">
+			<div class="client-details-header clearfix">
+
+				<div class="project-details-info">
+
+					
+					<div class="house-title box-shadow-1 border-radius-2">{{data.houseDetail.roomCode}}</div>
+					
+
+					<div class="client-details-info house-details-info box-shadow-1 border-radius-2">
+						<h4>基本信息</h4>
+
+
+						<div class="client-info-other">
+							<dl>
+								<dt>房产编号</dt>
+								<dd>{{data.houseDetail.roomCode}}</dd>
+							</dl>
+							<dl>
+								<dt>小区</dt>
+								<dd>{{data.houseDetail.projName}}</dd>
+							</dl>
+							<dl>
+								<dt>户型</dt>
+								<dd>{{data.houseDetail.huXing}}</dd>
+							</dl>
+							<dl>
+								<dt>建筑面积</dt>
+								<dd>{{data.houseDetail.bldArea}}平米</dd>
+							</dl>
+							<dl>
+								<dt>套内面积</dt>
+								<dd>{{data.houseDetail.tnArea}}平米</dd>
+							</dl>
+							<dl>
+								<dt>房产朝向</dt>
+								<dd>{{data.houseDetail.west}}</dd>
+							</dl>
+							<dl>
+								<dt>楼层</dt>
+								<!-- 
+								<dd>26/30层</dd>
+								 -->
+								<dd>{{data.houseDetail.floor}}层</dd>
+							</dl>
+							<dl>
+								<dt>装修</dt>
+								<dd>{{data.houseDetail.zxBz}}</dd>
+							</dl>
+							<dl>
+								<dt>总价</dt>
+								<dd>{{data.houseDetail.htTotal}}万元</dd>
+							</dl>
+							<dl>
+								<dt>交付日期</dt>
+								<dd>{{data.houseDetail.blRhDate}}</dd>
+							</dl>
+							<dl>
+								<dt>房产证编号</dt>
+								<dd>120090009</dd>
+							</dl>
+							<dl>
+								<dt>房产当前关系</dt>
+								<dd>{{data.houseDetail.salerenTable}}</dd>
+							</dl>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="features-container">
+					<div class="project-details-feature box-shadow-1 border-radius-2">
+
+						<tabset justified="true">
+							<tab heading="交易动态" select="setHeight()">
+								
+								<div class="project-details-content project-details-dynamic">
+									<h2>交易历史</h2>
+									
+
+									<div class="track-list-container">
+										<div class="client-track-list">
+											<dl class="clearfix" ng-repeat="f in data.tradeFollow">
+												<dt><i class="icon{{f.followType}}"></i></dt>
+												<dd>
+													<p class="time">{{f.createTime|date:'yyyy-MM-dd HH:mm'}}</p>
+													<p class="person"><a ui-sref="app.client.details({'cstGUID': '{{f.cstGUID}}'})">{{f.cstName}}</a></p>
+													<p class="track-tip">{{f.followContent}}，互动关联人：置业顾问   {{f.consultantName}}</p>
+												</dd>
+											</dl>
+											<!-- 
+											<dl class="clearfix">
+												<dt><i class="icon7"></i></dt>
+												<dd>
+													<p class="time">2015-05-04 15:00</p>
+													<p class="person"><a ui-sref="app.client.details({'clientId': '11'})">刘继承</a></p>
+													<p class="track-tip">继承，互动关联人：置业顾问 王XX</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon8"></i></dt>
+												<dd>
+													<p class="time">2015-05-04 14:30</p>
+													<p class="person"><a ui-sref="app.client.details({'clientId': '11'})">王丽丽</a></p>
+													<p class="track-tip">过户，互动关联人：置业顾问 张小明</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon1"></i></dt>
+												<dd>
+													<p class="time">2015-05-04 11:30</p>
+													<p class="person"><a ui-sref="app.client.details({'clientId': '11'})">刘宇华</a></p>
+													<p class="track-tip">收楼，互动关联人：置业顾问 张小明</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon2"></i></dt>
+												<dd>
+													<p class="time">2015-05-04 11:30</p>
+													<p class="person"><a ui-sref="app.client.details({'clientId': '11'})">刘宇华</a></p>
+													<p class="track-tip">签约，互动关联人：置业顾问 李XX</p>
+												</dd>
+											</dl>
+											<dl class="last clearfix">
+												<dt><i class="icon3"></i></dt>
+												<dd>
+													<p class="time">2015-05-04 11:00</p>
+													<p class="person"><a ui-sref="app.client.details({'clientId': '11'})">刘宇华</a></p>
+													<p class="track-tip">认购，互动关联人：置业顾问 王XX</p>
+												</dd>
+											</dl>
+											 -->
+										</div>
+									</div>
+
+								</div>
+								
+							</tab>
+							<tab heading="维修记录" select="setHeight()">
+								<div class="project-details-content project-details-dynamic">
+									<h2>维修记录</h2>
+									
+
+									<div class="track-list-container">
+										<div class="client-track-list">
+											<dl class="clearfix" ng-repeat="r in data.repairFollow">
+												<dt><i class="icon{{r.repairType}}"></i></dt>
+												<dd>
+													<p class="time">{{r.repairTime|date:'yyyy-MM-dd HH:mm'}}</p>
+													<p class="person">{{r.repairXm}}</p>
+													<p class="track-tip">{{r.repairCd}}  维修人员：{{r.repairRy}} | 缴费：{{r.repairFy}}元，互动关联人：{{r.repairSlrLx}}  {{r.repairSlr}}</p>
+												</dd>
+											</dl>
+											<!-- 
+											<dl class="clearfix">
+												<dt><i class="icon9"></i></dt>
+												<dd>
+													<p class="time">2015-05-04 15:00</p>
+													<p class="person">地板维修</p>
+													<p class="track-tip">中度维修，维修人员：刘大庆，缴费：100元，互动关联人：客服  工号1980</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon9"></i></dt>
+												<dd>
+													<p class="time">2015-05-04 14:30</p>
+													<p class="person">水管堵塞</p>
+													<p class="track-tip">轻度维修，维修人员：刘大庆，缴费：20元，互动关联人：客服  工号1980</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon10"></i></dt>
+												<dd>
+													<p class="time">2015-05-04 11:30</p>
+													<p class="person">地板维修</p>
+													<p class="track-tip">例行维保，维修团队：开发商，互动关联人：客服  工号3202</p>
+												</dd>
+											</dl>
+											<dl class="clearfix">
+												<dt><i class="icon10"></i></dt>
+												<dd>
+													<p class="time">2015-05-04 11:30</p>
+													<p class="person">渗水</p>
+													<p class="track-tip">轻度损坏，维修团队：开发商，互动关联人：客服  工号3202</p>
+												</dd>
+											</dl>
+											<dl class="last clearfix">
+												<dt><i class="icon10"></i></dt>
+												<dd>
+													<p class="time">2015-05-04 11:00</p>
+													<p class="person">墙体维修</p>
+													<p class="track-tip">中度损坏，维修团队：开发商，互动关联人：客服  工号3202</p>
+												</dd>
+											</dl>
+											 -->
+										</div>
+									</div>
+
+								</div>
+							</tab>
+						</tabset>
+
+					</div>
+				</div>
+				
+			</div>
+
+			
+
+
+			<div class="margin-top-30 box-shadow-1 border-radius-3 relational-info">
+				<h2>户型图</h2>
+				<div class="house-photos">
+					<img src="images/house-type.png" alt="">
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+	
+
+</div>
